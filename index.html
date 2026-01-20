@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Poppy | Mood Bot</title>
+  <title>POPPY | TAMAGOTCHI</title>
   <style>
     :root{
       --bg1:#0b1020;
@@ -25,7 +25,7 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-weight: 800;           /* ALL TEXT BOLD */
+      font-weight: 900;
       color: var(--text);
       background:
         radial-gradient(900px 600px at 15% 10%, rgba(122,249,184,.16), transparent 55%),
@@ -33,18 +33,19 @@
         linear-gradient(160deg, var(--bg1), var(--bg2));
       padding:22px;
       overflow-x:hidden;
+      text-transform: uppercase;
+      letter-spacing:.2px;
     }
 
-    /* FIX: prevent "missing content" by avoiding vertical centering + forcing scroll */
     .wrap{
-      width:min(1100px, 100%);
+      width:min(1120px, 100%);
       margin:0 auto;
       display:grid;
-      grid-template-columns: 1.12fr .88fr;
+      grid-template-columns: 1.15fr .85fr;
       gap:18px;
       align-items:start;
     }
-    @media (max-width: 900px){ .wrap{ grid-template-columns:1fr; } }
+    @media (max-width: 960px){ .wrap{ grid-template-columns:1fr; } }
 
     .card{
       background: var(--card);
@@ -66,8 +67,8 @@
     }
 
     .title{ display:flex; flex-direction:column; gap:6px; }
-    h1{ margin:0; font-size: clamp(18px, 2.6vw, 26px); letter-spacing:.4px; }
-    .sub{ margin:0; color: var(--muted); font-size: 13px; letter-spacing:.2px; }
+    h1{ margin:0; font-size: clamp(18px, 2.6vw, 26px); }
+    .sub{ margin:0; color: var(--muted); font-size: 13px; }
 
     .badge{
       display:inline-flex;
@@ -94,58 +95,48 @@
       gap:14px;
     }
 
-    .plantArea{
+    .screen{
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.16), transparent 60%),
+        radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.14), transparent 60%),
         radial-gradient(560px 260px at 50% 60%, rgba(138,164,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.10));
-      height: 420px;                /* FIX: consistent stage height */
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.12));
+      height: 440px;
       position:relative;
       overflow:hidden;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding: 10px;
+      padding: 14px;
     }
 
-    .floorGlow{
+    .hud{
       position:absolute;
-      bottom:-80px;
-      width: 620px;
-      height: 260px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 50% 35%, rgba(124,247,178,.25), transparent 62%);
-      filter: blur(2px);
-      opacity:.85;
-      pointer-events:none;
-    }
-
-    .speech{
-      position:absolute;
-      top: 14px;
-      left: 14px;
-      right: 14px;
+      inset: 12px 12px auto 12px;
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
       gap:12px;
       pointer-events:none;
     }
-    .bubble{
-      max-width: 72%;
+
+    .statusBox{
+      pointer-events:none;
+      max-width: 62%;
       padding: 10px 12px;
       border-radius: 14px;
       background: rgba(0,0,0,.22);
       border:1px solid rgba(255,255,255,.12);
       backdrop-filter: blur(6px);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.25;
       box-shadow: 0 12px 26px rgba(0,0,0,.35);
-      white-space: pre-line;         /* MULTI-LINE RESPONSES */
+      white-space: pre-line;
     }
-    .chip{
+
+    .pill{
+      pointer-events:none;
       padding: 9px 10px;
       border-radius: 999px;
       font-size: 12px;
@@ -157,12 +148,24 @@
       gap:8px;
       white-space:nowrap;
     }
-    .chip b{ color:var(--text); }
+    .pill b{ color: var(--text); }
 
-    /* ===== POPPY: GREEN SQUARE CHARACTER ===== */
+    .floorGlow{
+      position:absolute;
+      bottom:-90px;
+      width: 720px;
+      height: 300px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 50% 35%, rgba(124,247,178,.22), transparent 62%);
+      filter: blur(2px);
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    /* POPPY CHARACTER */
     .poppyWrap{
       position:relative;
-      width: 280px;
+      width: 300px;
       height: 320px;
       display:flex;
       align-items:flex-end;
@@ -172,7 +175,7 @@
 
     .nameTag{
       position:absolute;
-      top: 10px;
+      top: 4px;
       left: 50%;
       transform: translateX(-50%);
       padding: 8px 14px;
@@ -181,43 +184,39 @@
       background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(0,0,0,.18));
       box-shadow: 0 14px 30px rgba(0,0,0,.35);
       letter-spacing: .9px;
-      text-transform: uppercase;
       user-select:none;
       font-size: 12px;
     }
 
     .square{
-      width: 170px;
-      height: 170px;
+      width: 180px;
+      height: 180px;
       border-radius: 22px;
       background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,.28), transparent 55%),
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.26), transparent 55%),
         linear-gradient(180deg, rgba(185,255,217,1), rgba(47,228,138,1));
       border: 1px solid rgba(0,0,0,.10);
-      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      box-shadow: 0 18px 44px rgba(0,0,0,.36);
       position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
     }
 
     .face{
-      width: 120px;
-      height: 78px;
+      width: 132px;
+      height: 88px;
       border-radius: 22px;
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.16);
       backdrop-filter: blur(10px);
       box-shadow: 0 16px 26px rgba(0,0,0,.20);
       position:absolute;
-      bottom: 32px;
+      bottom: 34px;
       left: 50%;
       transform: translateX(-50%);
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:18px;
-      padding-top:10px;
+      gap:20px;
+      padding-top:12px;
     }
 
     .eye{
@@ -262,57 +261,47 @@
     .brow.left{ left: 22px; transform: rotate(-10deg); }
     .brow.right{ right: 22px; transform: rotate(10deg); }
 
-    /* Mood faces */
+    /* FACE STATES */
     .mood-happy .mouth{ width: 46px; height: 22px; border-radius: 0 0 30px 30px; }
     .mood-sad .mouth{
-      bottom: 18px;
-      width: 46px; height: 18px;
+      bottom: 18px; width: 46px; height: 18px;
       border-top: 3px solid rgba(11,16,32,.92);
-      border-bottom:none;
-      border-radius: 30px 30px 0 0;
+      border-bottom:none; border-radius: 30px 30px 0 0;
     }
-    .mood-silly .mouth{
-      width: 18px; height: 18px;
-      border: 3px solid rgba(11,16,32,.92);
-      border-radius: 999px;
-    }
-    .mood-tired .mouth{
-      width: 34px; height: 7px;
-      border: none;
-      background: rgba(11,16,32,.92);
-      border-radius: 999px;
-    }
-    .mood-tired .eye{ height: 11px; }
     .mood-angry .mouth{
       width: 38px; height: 16px;
       border-top: 3px solid rgba(11,16,32,.92);
-      border-bottom:none;
-      border-radius: 22px 22px 0 0;
+      border-bottom:none; border-radius: 22px 22px 0 0;
     }
     .mood-angry .brow{ opacity:1; }
     .mood-angry .brow.left{ transform: rotate(18deg); }
     .mood-angry .brow.right{ transform: rotate(-18deg); }
 
-    /* Confetti */
-    .spark{
-      position:absolute;
-      width: 10px;height: 10px;
-      border-radius: 3px;
-      background: rgba(255,255,255,.95);
-      opacity:0;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-      pointer-events:none;
+    .mood-hungry .mouth{
+      width: 18px; height: 18px;
+      border: 3px solid rgba(11,16,32,.92);
+      border-radius: 999px;
     }
 
-    /* Controls */
+    .mood-sick .mouth{
+      width: 34px; height: 7px;
+      border:none; background: rgba(11,16,32,.92); border-radius: 999px;
+    }
+    .mood-sick .eye{ height: 11px; }
+
+    .mood-bored .mouth{
+      width: 30px; height: 6px;
+      border:none; background: rgba(11,16,32,.92); border-radius: 999px;
+      opacity:.85;
+    }
+
+    /* CONSOLE */
     .controls{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    @media (max-width: 560px){ .controls{ grid-template-columns:1fr; } }
+    @media (max-width: 620px){ .controls{ grid-template-columns:1fr; } }
 
     .panel{
       padding: 14px 14px 16px;
@@ -321,104 +310,74 @@
       background: rgba(255,255,255,.04);
     }
 
-    label{
-      display:block;
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 7px;
-      letter-spacing:.2px;
-    }
+    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    @media (max-width: 620px){ .grid2{ grid-template-columns:1fr; } }
 
-    select, input[type="range"], button, textarea{
+    button{
       width:100%;
       font: inherit;
-      font-weight: 900;
+      font-weight: 950;
       color: var(--text);
       background: rgba(0,0,0,.18);
       border:1px solid rgba(255,255,255,.12);
       border-radius: 12px;
       padding: 10px 12px;
       outline:none;
-    }
-
-    textarea{ resize: vertical; min-height: 82px; }
-
-    select:focus, button:focus, textarea:focus{
-      border-color: rgba(124,247,178,.38);
-      box-shadow: 0 0 0 4px rgba(124,247,178,.12);
-    }
-
-    .row{ display:flex; gap:10px; align-items:center; }
-    .row > *{ flex:1; }
-
-    .btn{
       cursor:pointer;
-      border:1px solid rgba(255,255,255,.14);
-      background: linear-gradient(180deg, rgba(124,247,178,.24), rgba(124,247,178,.08));
-      transition: transform .08s ease, filter .2s ease, border-color .2s ease;
       letter-spacing:.3px;
+      transition: transform .08s ease, filter .2s ease, border-color .2s ease;
     }
-    .btn:hover{ filter: brightness(1.06); border-color: rgba(124,247,178,.40); }
-    .btn:active{ transform: translateY(1px) scale(.99); }
-    .btn.secondary{
+    button:hover{ filter: brightness(1.06); border-color: rgba(124,247,178,.42); }
+    button:active{ transform: translateY(1px) scale(.99); }
+
+    .btnMain{
+      background: linear-gradient(180deg, rgba(124,247,178,.24), rgba(124,247,178,.08));
+      border-color: rgba(124,247,178,.22);
+    }
+    .btnAlt{
       background: linear-gradient(180deg, rgba(138,164,255,.20), rgba(138,164,255,.06));
+      border-color: rgba(138,164,255,.22);
+    }
+    .btnWarn{
+      background: linear-gradient(180deg, rgba(255,209,138,.22), rgba(255,209,138,.07));
+      border-color: rgba(255,209,138,.22);
+    }
+    .btnDanger{
+      background: linear-gradient(180deg, rgba(255,138,161,.22), rgba(255,138,161,.07));
+      border-color: rgba(255,138,161,.22);
     }
 
-    .readout{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    .bars{
+      display:grid;
       gap:10px;
-      margin-top: 10px;
+    }
+    .barRow{
+      display:grid;
+      grid-template-columns: 120px 1fr 54px;
+      gap:10px;
+      align-items:center;
       font-size: 12px;
       color: var(--muted);
     }
+    @media (max-width: 420px){
+      .barRow{ grid-template-columns: 1fr; }
+    }
+
     .meter{
-      height: 10px;
+      height: 12px;
       border-radius: 999px;
       background: rgba(255,255,255,.07);
       border:1px solid rgba(255,255,255,.10);
       overflow:hidden;
-      flex:1;
     }
-    .meter > span{
-      display:block;
+    .fill{
       height:100%;
-      width: 55%;
+      width: 50%;
       background: linear-gradient(90deg, rgba(124,247,178,.85), rgba(138,164,255,.85));
     }
 
-    .hint{
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px dashed rgba(255,255,255,.18);
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.35;
-      background: rgba(255,255,255,.03);
-      letter-spacing:.2px;
-    }
-    .kbd{
-      display:inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      font-weight: 900;
-      font-size: 11px;
-      transform: translateY(-1px);
-      letter-spacing:.3px;
-    }
-
-    /* Right */
-    .side{ padding: 16px 16px 18px; }
-    .side h2{ margin:0 0 6px; font-size: 16px; letter-spacing:.3px; }
-    .side p{ margin:0 0 14px; color: var(--muted); font-size: 13px; line-height: 1.4; letter-spacing:.2px; }
-
     .log{
-      height: 230px;
+      height: 260px;
       overflow:auto;
       padding: 12px;
       border-radius: 14px;
@@ -427,12 +386,11 @@
       font-size: 12px;
       color: var(--muted);
       line-height: 1.45;
-      letter-spacing:.2px;
     }
     .log b{ color: var(--text); }
     .log .item{ margin-bottom:10px; }
 
-    /* Animations */
+    /* ANIMATIONS */
     @keyframes wiggle {
       0%{ transform: rotate(0deg) translateY(0) }
       15%{ transform: rotate(-10deg) translateY(-1px) }
@@ -447,18 +405,6 @@
       55%{ transform: translateY(0) }
       75%{ transform: translateY(-8px) }
     }
-    @keyframes discoSpin { 0%{ transform: rotate(0deg) } 100%{ transform: rotate(360deg) } }
-    @keyframes headBob {
-      0%,100%{ transform: translateX(-50%) translateY(0) }
-      25%{ transform: translateX(-50%) translateY(-3px) }
-      50%{ transform: translateX(-50%) translateY(2px) }
-      75%{ transform: translateX(-50%) translateY(-2px) }
-    }
-    @keyframes sparkPop {
-      0%{ opacity:0; transform: translate(-50%,-50%) scale(.3) rotate(0deg) }
-      20%{ opacity:1 }
-      100%{ opacity:0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(220deg) }
-    }
     @keyframes panicShake {
       0%{ transform: translateX(0) rotate(0deg) }
       10%{ transform: translateX(-6px) rotate(-3deg) }
@@ -472,30 +418,32 @@
       90%{ transform: translateX(-2px) rotate(0deg) }
       100%{ transform: translateX(0) rotate(0deg) }
     }
+    @keyframes headBob {
+      0%,100%{ transform: translateX(-50%) translateY(0) }
+      25%{ transform: translateX(-50%) translateY(-3px) }
+      50%{ transform: translateX(-50%) translateY(2px) }
+      75%{ transform: translateX(-50%) translateY(-2px) }
+    }
 
-    .dance-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
-    .dance-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
-    .dance-disco .poppyWrap{ animation: wiggle 720ms ease-in-out infinite; }
-    .dance-disco .disco{ opacity:1; animation: discoSpin 2.2s linear infinite; }
-    .dance-panic .poppyWrap{ animation: panicShake 520ms linear infinite; }
+    .anim-idle .poppyWrap{ animation: none; }
+    .anim-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
+    .anim-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
+    .anim-shake .poppyWrap{ animation: panicShake 520ms linear infinite; }
 
-    .dance-wiggle .face,
-    .dance-bounce .face,
-    .dance-disco .face,
-    .dance-panic .face{
+    .anim-wiggle .face,
+    .anim-bounce .face,
+    .anim-shake .face{
       animation: headBob 700ms ease-in-out infinite;
     }
 
     @media (prefers-reduced-motion: reduce){
-      .dance-wiggle .poppyWrap,
-      .dance-bounce .poppyWrap,
-      .dance-disco .poppyWrap,
-      .dance-panic .poppyWrap,
-      .dance-wiggle .face,
-      .dance-bounce .face,
-      .dance-disco .face,
-      .dance-panic .face,
-      .dance-disco .disco{ animation:none !important; }
+      .anim-idle .poppyWrap,
+      .anim-wiggle .poppyWrap,
+      .anim-bounce .poppyWrap,
+      .anim-shake .poppyWrap,
+      .anim-wiggle .face,
+      .anim-bounce .face,
+      .anim-shake .face{ animation:none !important; }
     }
   </style>
 </head>
@@ -506,28 +454,27 @@
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">A VIRTUAL CHARACTER THAT RESPONDS TO YOUR MOOD WITH SILLY DANCE ANIMATIONS</p>
+          <p class="sub">A FULL TAMAGOTCHI STYLE PET WITH NEEDS, MOODS, AND UPGRADES</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
-          <span id="statusText">READY</span>
+          <span id="statusText">ALIVE</span>
         </div>
       </header>
 
       <div class="stage">
-        <div class="plantArea" id="plantArea">
-          <div class="speech">
-            <div class="bubble" id="bubble">TYPE A MESSAGE AND PICK A MOOD. POPPY WILL RESPOND WITH MULTIPLE LINES.</div>
-            <div class="chip">MOOD <b id="moodChip">HAPPY</b> ENERGY <b id="energyChip">55</b></div>
+        <div class="screen" id="screen">
+          <div class="hud">
+            <div class="statusBox" id="statusBox">POPPY IS IDLE. TAKE CARE OF NEEDS.</div>
+            <div class="pill">MOOD <b id="moodPill">HAPPY</b> AGE <b id="agePill">0</b></div>
           </div>
 
-          <div class="disco" id="disco"></div>
           <div class="floorGlow"></div>
 
           <div class="poppyWrap" id="poppyWrap" aria-label="Poppy">
             <div class="nameTag">POPPY</div>
 
-            <div class="square">
+            <div class="square" id="square">
               <div class="face" id="face">
                 <div class="brow left"></div>
                 <div class="brow right"></div>
@@ -537,283 +484,513 @@
               </div>
             </div>
           </div>
-
-          <div class="spark" id="spark1"></div>
-          <div class="spark" id="spark2"></div>
-          <div class="spark" id="spark3"></div>
         </div>
 
         <div class="controls">
           <div class="panel">
-            <label for="moodSelect">MOOD</label>
-            <select id="moodSelect">
-              <option value="happy">HAPPY</option>
-              <option value="sad">SAD</option>
-              <option value="stressed">STRESSED</option>
-              <option value="silly">SILLY</option>
-              <option value="angry">ANGRY</option>
-              <option value="tired">TIRED</option>
-              <option value="excited">EXCITED</option>
-            </select>
-
-            <div class="readout">
-              <span>ENERGY</span>
-              <div class="meter"><span id="energyBar"></span></div>
-              <span id="energyLabel">55</span>
+            <div class="bars">
+              <div class="barRow"><span>HUNGER</span><div class="meter"><div class="fill" id="hungerFill"></div></div><span id="hungerVal">50</span></div>
+              <div class="barRow"><span>HAPPINESS</span><div class="meter"><div class="fill" id="happyFill"></div></div><span id="happyVal">70</span></div>
+              <div class="barRow"><span>ENERGY</span><div class="meter"><div class="fill" id="energyFill"></div></div><span id="energyVal">70</span></div>
+              <div class="barRow"><span>CLEANLINESS</span><div class="meter"><div class="fill" id="cleanFill"></div></div><span id="cleanVal">60</span></div>
+              <div class="barRow"><span>HEALTH</span><div class="meter"><div class="fill" id="healthFill"></div></div><span id="healthVal">90</span></div>
             </div>
-
-            <label for="energyRange" style="margin-top:10px;">ENERGY SLIDER</label>
-            <input id="energyRange" type="range" min="0" max="100" value="55" />
           </div>
 
           <div class="panel">
-            <label for="userText">YOUR MESSAGE</label>
-            <textarea id="userText" rows="3" placeholder="TYPE HERE"></textarea>
-
-            <div class="row" style="margin-top:10px;">
-              <button class="btn" id="btnReact" type="button">SEND AND DANCE</button>
-              <button class="btn secondary" id="btnRandom" type="button">RANDOM MOOD</button>
+            <div class="grid2">
+              <button class="btnMain" id="btnFeed" type="button">FEED</button>
+              <button class="btnMain" id="btnPlay" type="button">PLAY</button>
+              <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
+              <button class="btnMain" id="btnClean" type="button">CLEAN</button>
+              <button class="btnWarn" id="btnMed" type="button">MEDICINE</button>
+              <button class="btnAlt" id="btnWork" type="button">WORK</button>
             </div>
 
-            <div class="row" style="margin-top:10px;">
-              <button class="btn secondary" id="btnSpark" type="button">CONFETTI</button>
-              <button class="btn secondary" id="btnStop" type="button">STOP</button>
+            <div class="grid2" style="margin-top:10px;">
+              <button class="btnAlt" id="btnShop" type="button">SHOP</button>
+              <button class="btnAlt" id="btnToggleAuto" type="button">AUTO CARE OFF</button>
             </div>
 
-            <div class="hint">
-              SHORTCUTS <span class="kbd">R</span> SEND <span class="kbd">C</span> CONFETTI <span class="kbd">S</span> STOP
+            <div class="grid2" style="margin-top:10px;">
+              <button class="btnDanger" id="btnReset" type="button">RESET SAVE</button>
+              <button class="btnAlt" id="btnPause" type="button">PAUSE</button>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <aside class="card side">
-      <h2>WHAT IT DOES</h2>
-      <p>
-        PICK A MOOD AND TYPE A MESSAGE. POPPY RESPONDS WITH MULTIPLE LINES AND CHOOSES A DANCE.
-        ENERGY MAKES THE DANCE CALMER OR MORE INTENSE.
-      </p>
+    <aside class="card" style="padding:16px 16px 18px;">
+      <h2 style="margin:0 0 10px; font-size:16px;">EVENT LOG</h2>
+      <div class="log" id="log"></div>
 
-      <div class="log" id="log" aria-live="polite"></div>
-
-      <div class="hint">
-        EXTENSIONS: SENTIMENT FROM TEXT, MOOD HISTORY, UNLOCK DANCES, FRIENDSHIP LEVEL.
+      <div class="panel" style="margin-top:12px;">
+        <h2 style="margin:0 0 10px; font-size:16px;">MODS</h2>
+        <div class="grid2">
+          <button class="btnAlt" id="modSnack" type="button">SNACK DISPENSER</button>
+          <button class="btnAlt" id="modToy" type="button">TOY BOX</button>
+          <button class="btnAlt" id="modBlanket" type="button">SOFT BLANKET</button>
+          <button class="btnAlt" id="modSoap" type="button">SOAP KIT</button>
+        </div>
+        <div class="panel" style="margin-top:10px;">
+          <div style="font-size:12px; color:var(--muted); line-height:1.35;">
+            MODS CHANGE STATS PASSIVELY. THEY COST COINS. WORK EARNS COINS.
+            YOUR PET WILL GET HUNGRY, TIRED, DIRTY, SAD, OR ANGRY IF NEGLECTED.
+          </div>
+        </div>
       </div>
     </aside>
   </main>
 
   <script>
-    const app = document.getElementById("app");
-    const face = document.getElementById("face");
-    const bubble = document.getElementById("bubble");
-    const moodChip = document.getElementById("moodChip");
-    const energyChip = document.getElementById("energyChip");
-    const moodSelect = document.getElementById("moodSelect");
-    const energyRange = document.getElementById("energyRange");
-    const energyLabel = document.getElementById("energyLabel");
-    const energyBar = document.getElementById("energyBar");
-    const userText = document.getElementById("userText");
-    const log = document.getElementById("log");
-    const statusDot = document.getElementById("statusDot");
-    const statusText = document.getElementById("statusText");
-    const plantArea = document.getElementById("plantArea");
+    const $ = (id)=>document.getElementById(id);
 
-    const sparks = [
-      document.getElementById("spark1"),
-      document.getElementById("spark2"),
-      document.getElementById("spark3")
-    ];
+    const app = $("app");
+    const face = $("face");
+    const statusBox = $("statusBox");
+    const moodPill = $("moodPill");
+    const agePill = $("agePill");
+    const statusDot = $("statusDot");
+    const statusText = $("statusText");
+    const logEl = $("log");
+    const poppyWrap = $("poppyWrap");
 
-    const moods = ["happy","sad","stressed","silly","angry","tired","excited"];
+    const fills = {
+      hunger: $("hungerFill"),
+      happy: $("happyFill"),
+      energy: $("energyFill"),
+      clean: $("cleanFill"),
+      health: $("healthFill")
+    };
+    const vals = {
+      hunger: $("hungerVal"),
+      happy: $("happyVal"),
+      energy: $("energyVal"),
+      clean: $("cleanVal"),
+      health: $("healthVal")
+    };
 
+    // SAVE KEY
+    const KEY = "POPPY_TAMA_SAVE_V1";
+
+    // GAME STATE
+    let S = {
+      alive: true,
+      paused: false,
+      ageMin: 0,
+      coins: 0,
+
+      hunger: 50,     // 0 worst, 100 best
+      happy: 70,
+      energy: 70,
+      clean: 60,
+      health: 90,
+
+      mood: "HAPPY",  // derived
+      anim: "IDLE",
+
+      autoCare: false,
+
+      mods: {
+        snack: false,
+        toy: false,
+        blanket: false,
+        soap: false
+      }
+    };
+
+    // UTILS
     function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
+    function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
 
-    function setEnergy(val){
-      const v = clamp(Number(val), 0, 100);
-      energyRange.value = v;
-      energyLabel.textContent = String(v);
-      energyChip.textContent = String(v);
-      energyBar.style.width = v + "%";
-    }
-
-    function clearDance(){
-      app.classList.remove("dance-wiggle","dance-bounce","dance-disco","dance-panic");
-      statusDot.style.background = "var(--accent)";
-      statusText.textContent = "READY";
-    }
-
-    function setMood(mood){
-      face.classList.remove("mood-happy","mood-sad","mood-silly","mood-angry","mood-tired");
-      const map = {
-        happy:"mood-happy",
-        excited:"mood-happy",
-        stressed:"mood-tired",
-        silly:"mood-silly",
-        sad:"mood-sad",
-        angry:"mood-angry",
-        tired:"mood-tired"
-      };
-      face.classList.add(map[mood] || "mood-happy");
-      moodChip.textContent = mood.toUpperCase();
-      moodSelect.value = mood;
-    }
-
-    function pickDance(mood, energy){
-      if (mood === "sad") return energy > 55 ? "dance-wiggle" : "dance-bounce";
-      if (mood === "tired") return energy > 65 ? "dance-panic" : "dance-bounce";
-      if (mood === "angry") return energy > 50 ? "dance-panic" : "dance-wiggle";
-      if (mood === "stressed") return energy > 60 ? "dance-panic" : "dance-bounce";
-      if (mood === "silly") return energy > 45 ? "dance-disco" : "dance-wiggle";
-      if (mood === "excited") return energy > 35 ? "dance-disco" : "dance-bounce";
-      return energy > 50 ? "dance-bounce" : "dance-wiggle";
-    }
-
-    function respondLines(mood, energy, userMsg){
-      const msg = (userMsg || "").trim();
-      const hasMsg = msg.length > 0;
-
-      const opener = {
-        happy:["I AM POPPY. I AM FEELING LIGHT.", "I AM POPPY. I AM READY.", "I AM POPPY. I CAN MATCH THIS."],
-        sad:["I AM POPPY. WE CAN GO SLOW.", "I AM POPPY. I AM HERE.", "I AM POPPY. SMALL STEPS."],
-        stressed:["I AM POPPY. LET US RESET.", "I AM POPPY. WE CAN BREATHE.", "I AM POPPY. ONE THING AT A TIME."],
-        silly:["I AM POPPY. I WILL BE RIDICULOUS.", "I AM POPPY. THIS WILL BE WEIRD.", "I AM POPPY. I AM IN GOOFY MODE."],
-        angry:["I AM POPPY. I WILL SHAKE IT OUT.", "I AM POPPY. I WILL TURN THIS INTO MOTION.", "I AM POPPY. I AM FOCUSED."],
-        tired:["I AM POPPY. I AM LOW ENERGY.", "I AM POPPY. KEEP IT SIMPLE.", "I AM POPPY. SLOW SWAY."],
-        excited:["I AM POPPY. HIGH ENERGY.", "I AM POPPY. TURNING IT UP.", "I AM POPPY. LET US MOVE."]
-      }[mood] || ["I AM POPPY. READY."];
-
-      const guidance = {
-        happy:["KEEP IT GOING.", "I WILL MATCH YOUR VIBE.", "LET US KEEP IT LIGHT."],
-        sad:["GENTLE MOVE.", "SLOW AND STEADY.", "WE CAN TAKE A BEAT."],
-        stressed:["RESET MODE.", "BREATHE AND MOVE.", "SMALL RESET DANCE."],
-        silly:["EXPECT CHAOS.", "THIS IS A STRANGE DANCE.", "DO NOT ASK WHY."],
-        angry:["POWER MOVE.", "SHAKE THE TENSION.", "TURN IT INTO ENERGY."],
-        tired:["CALM MOVE.", "LOW MOTION.", "SLOW MODE."],
-        excited:["FULL MODE.", "BIG MOVES.", "TURN IT UP."]
-      }[mood] || ["READY."];
-
-      const lines = [];
-      lines.push(opener[Math.floor(Math.random()*opener.length)]);
-
-      if (hasMsg){
-        lines.push("I HEARD YOU.");
-        lines.push("YOU SAID: " + msg.slice(0, 160) + (msg.length > 160 ? "..." : ""));
-      } else {
-        lines.push("TYPE A MESSAGE ANY TIME.");
-      }
-
-      lines.push(guidance[Math.floor(Math.random()*guidance.length)]);
-
-      if (energy >= 80) lines.push("ENERGY IS HIGH. INTENSE DANCE.");
-      if (energy <= 20) lines.push("ENERGY IS LOW. CALM DANCE.");
-
-      return lines.join("\n");
-    }
-
-    function setStatus(dance){
-      if (dance === "dance-panic"){
-        statusDot.style.background = "var(--danger)";
-        statusText.textContent = "INTENSE";
-        return;
-      }
-      if (dance === "dance-disco"){
-        statusDot.style.background = "var(--accent2)";
-        statusText.textContent = "PARTY";
-        return;
-      }
-      statusDot.style.background = "var(--accent)";
-      statusText.textContent = "DANCING";
-    }
-
-    function logEvent(mood, dance, energy, msg){
-      const time = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
-      const danceName = {
-        "dance-wiggle":"WIGGLE",
-        "dance-bounce":"BOUNCE",
-        "dance-disco":"DISCO",
-        "dance-panic":"SHAKE"
-      }[dance] || dance.toUpperCase();
-
-      const safe = (msg || "").trim();
-      const snippet = safe ? (" | MSG " + safe.slice(0, 60) + (safe.length > 60 ? "..." : "")) : "";
-
+    function log(msg){
+      const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
       const div = document.createElement("div");
       div.className = "item";
-      div.innerHTML =
-        "<b>" + time + "</b> | MOOD <b>" + mood.toUpperCase() + "</b> | DANCE <b>" + danceName + "</b> | ENERGY <b>" + energy + "</b>" + snippet;
-      log.prepend(div);
+      div.innerHTML = "<b>" + t + "</b> | " + msg;
+      logEl.prepend(div);
     }
 
-    function sparkPop(){
-      const rect = plantArea.getBoundingClientRect();
-      const cx = rect.width/2;
-      const cy = rect.height/2;
+    function setAnim(name){
+      app.classList.remove("anim-idle","anim-wiggle","anim-bounce","anim-shake");
+      const map = { IDLE:"anim-idle", WIGGLE:"anim-wiggle", BOUNCE:"anim-bounce", SHAKE:"anim-shake" };
+      app.classList.add(map[name] || "anim-idle");
+      S.anim = name;
+    }
 
-      sparks.forEach((s,i)=>{
-        const dx = (Math.random()*220 - 110) + "px";
-        const dy = (Math.random()*220 - 110) + "px";
-        s.style.setProperty("--dx", dx);
-        s.style.setProperty("--dy", dy);
+    function setFaceMood(m){
+      face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored");
+      const map = {
+        HAPPY:"mood-happy",
+        SAD:"mood-sad",
+        ANGRY:"mood-angry",
+        HUNGRY:"mood-hungry",
+        SICK:"mood-sick",
+        BORED:"mood-bored"
+      };
+      face.classList.add(map[m] || "mood-happy");
+    }
 
-        s.style.opacity = 0;
-        s.style.left = (cx + (Math.random()*40-20)) + "px";
-        s.style.top  = (cy + (Math.random()*40-20)) + "px";
-
-        s.style.animation = "none";
-        void s.offsetWidth;
-        s.style.animation = "sparkPop 700ms ease-out " + (i*70) + "ms 1";
+    function updateBars(){
+      const items = ["hunger","happy","energy","clean","health"];
+      items.forEach(k=>{
+        const v = clamp(S[k], 0, 100);
+        fills[k].style.width = v + "%";
+        vals[k].textContent = String(Math.round(v));
       });
     }
 
-    function react(){
-      const mood = moodSelect.value;
-      const energy = Number(energyRange.value);
-      const msg = userText.value;
-
-      clearDance();
-      setMood(mood);
-
-      const dance = pickDance(mood, energy);
-      app.classList.add(dance);
-      setStatus(dance);
-
-      bubble.textContent = respondLines(mood, energy, msg);
-      logEvent(mood, dance, energy, msg);
-
-      if (dance === "dance-disco" || energy >= 85) sparkPop();
+    function computeMood(){
+      if (!S.alive) return "DEAD";
+      if (S.health <= 20) return "SICK";
+      if (S.hunger <= 25) return "HUNGRY";
+      if (S.clean <= 20) return "ANGRY";
+      if (S.happy <= 25) return "SAD";
+      if (S.energy <= 20) return "BORED";
+      return "HAPPY";
     }
 
-    function randomMood(){
-      const mood = moods[Math.floor(Math.random()*moods.length)];
-      moodSelect.value = mood;
-      const e = clamp(Number(energyRange.value) + (Math.random()*30 - 15), 0, 100);
-      setEnergy(Math.round(e));
-      react();
+    function updateHUD(){
+      const mood = computeMood();
+      S.mood = mood;
+      moodPill.textContent = mood;
+      agePill.textContent = String(S.ageMin);
+      setFaceMood(mood);
+
+      // status badge color
+      if (!S.alive){
+        statusDot.style.background = "var(--danger)";
+        statusText.textContent = "DEAD";
+      } else if (mood === "SICK"){
+        statusDot.style.background = "var(--danger)";
+        statusText.textContent = "SICK";
+      } else if (mood === "HUNGRY"){
+        statusDot.style.background = "var(--warn)";
+        statusText.textContent = "HUNGRY";
+      } else if (mood === "ANGRY"){
+        statusDot.style.background = "var(--danger)";
+        statusText.textContent = "ANGRY";
+      } else if (mood === "SAD"){
+        statusDot.style.background = "var(--warn)";
+        statusText.textContent = "SAD";
+      } else {
+        statusDot.style.background = "var(--accent)";
+        statusText.textContent = "ALIVE";
+      }
+
+      // status text lines (no chat)
+      const lines = [];
+      lines.push("POPPY STATUS");
+      lines.push("MOOD " + mood);
+      lines.push("COINS " + S.coins);
+      lines.push("MODS " + activeModsLabel());
+      statusBox.textContent = lines.join("\n");
+
+      // auto animation by mood
+      if (!S.paused && S.alive){
+        if (mood === "HAPPY") setAnim("WIGGLE");
+        else if (mood === "BORED") setAnim("BOUNCE");
+        else if (mood === "HUNGRY" || mood === "SAD") setAnim("IDLE");
+        else if (mood === "ANGRY" || mood === "SICK") setAnim("SHAKE");
+      } else {
+        setAnim("IDLE");
+      }
+
+      updateBars();
+      save();
     }
 
-    document.getElementById("btnReact").addEventListener("click", react);
-    document.getElementById("btnRandom").addEventListener("click", randomMood);
-    document.getElementById("btnSpark").addEventListener("click", sparkPop);
-    document.getElementById("btnStop").addEventListener("click", ()=>{
-      clearDance();
-      bubble.textContent = "POPPY IS PAUSED. PICK A MOOD AND SEND A MESSAGE.";
+    function activeModsLabel(){
+      const a = [];
+      if (S.mods.snack) a.push("SNACK");
+      if (S.mods.toy) a.push("TOY");
+      if (S.mods.blanket) a.push("BLANKET");
+      if (S.mods.soap) a.push("SOAP");
+      return a.length ? a.join(",") : "NONE";
+    }
+
+    // PASSIVE TICK: NEEDS DECAY + MOD EFFECTS
+    function tick(){
+      if (!S.alive || S.paused) return;
+
+      S.ageMin += 1;
+
+      // Base decay (per minute)
+      S.hunger -= 4;     // gets hungry
+      S.energy -= 3;     // gets tired
+      S.clean  -= 2;     // gets dirty
+
+      // Happiness depends on other needs
+      let sadPush = 0;
+      if (S.hunger < 40) sadPush += 2;
+      if (S.energy < 35) sadPush += 2;
+      if (S.clean  < 35) sadPush += 2;
+      S.happy -= (1 + sadPush);
+
+      // Health depends on neglect
+      let dmg = 0;
+      if (S.hunger <= 15) dmg += 6;
+      if (S.clean  <= 15) dmg += 5;
+      if (S.energy <= 10) dmg += 4;
+      if (S.happy  <= 10) dmg += 4;
+      S.health -= dmg;
+
+      // Mods (passive buffs)
+      if (S.mods.snack) S.hunger += 2;
+      if (S.mods.toy) S.happy += 2;
+      if (S.mods.blanket) S.energy += 2;
+      if (S.mods.soap) S.clean += 2;
+
+      // Auto care
+      if (S.autoCare){
+        autoCareLogic();
+      }
+
+      // Clamp
+      S.hunger = clamp(S.hunger, 0, 100);
+      S.happy  = clamp(S.happy, 0, 100);
+      S.energy = clamp(S.energy, 0, 100);
+      S.clean  = clamp(S.clean, 0, 100);
+      S.health = clamp(S.health, 0, 100);
+
+      // Death
+      if (S.health <= 0){
+        S.alive = false;
+        S.health = 0;
+        log("POPPY HAS DIED");
+      } else {
+        // occasional events
+        if (Math.random() < 0.12){
+          randomEvent();
+        }
+      }
+
+      updateHUD();
+    }
+
+    function autoCareLogic(){
+      // Cheap simple rules
+      if (S.hunger < 35 && S.coins >= 1){ actionFeed(true); }
+      if (S.clean < 35){ actionClean(true); }
+      if (S.energy < 30){ actionSleep(true); }
+      if (S.happy < 35){ actionPlay(true); }
+      if (S.health < 40){ actionMed(true); }
+    }
+
+    // ACTIONS (no chat)
+    function actionFeed(isAuto=false){
+      if (!S.alive || S.paused) return;
+      const cost = 1;
+      if (!isAuto && S.coins < cost){
+        log("NOT ENOUGH COINS TO FEED");
+        return;
+      }
+      if (!isAuto) S.coins -= cost;
+
+      S.hunger += 28;
+      S.clean  -= 3;
+      S.happy  += 5;
+
+      S.hunger = clamp(S.hunger, 0, 100);
+      S.clean  = clamp(S.clean, 0, 100);
+      S.happy  = clamp(S.happy, 0, 100);
+
+      log(isAuto ? "AUTO FEED" : "FEED");
+      setAnim("BOUNCE");
+      updateHUD();
+    }
+
+    function actionPlay(isAuto=false){
+      if (!S.alive || S.paused) return;
+      S.happy += 22;
+      S.energy -= 6;
+      S.clean  -= 2;
+      S.happy  = clamp(S.happy, 0, 100);
+      S.energy = clamp(S.energy, 0, 100);
+      S.clean  = clamp(S.clean, 0, 100);
+      log(isAuto ? "AUTO PLAY" : "PLAY");
+      setAnim("WIGGLE");
+      updateHUD();
+    }
+
+    function actionSleep(isAuto=false){
+      if (!S.alive || S.paused) return;
+      S.energy += 30;
+      S.hunger -= 6;
+      S.energy = clamp(S.energy, 0, 100);
+      S.hunger = clamp(S.hunger, 0, 100);
+      log(isAuto ? "AUTO SLEEP" : "SLEEP");
+      setAnim("IDLE");
+      updateHUD();
+    }
+
+    function actionClean(isAuto=false){
+      if (!S.alive || S.paused) return;
+      S.clean += 34;
+      S.happy += 3;
+      S.clean = clamp(S.clean, 0, 100);
+      S.happy = clamp(S.happy, 0, 100);
+      log(isAuto ? "AUTO CLEAN" : "CLEAN");
+      setAnim("WIGGLE");
+      updateHUD();
+    }
+
+    function actionMed(isAuto=false){
+      if (!S.alive || S.paused) return;
+      const cost = 2;
+      if (!isAuto && S.coins < cost){
+        log("NOT ENOUGH COINS FOR MEDICINE");
+        return;
+      }
+      if (!isAuto) S.coins -= cost;
+
+      S.health += 28;
+      S.happy -= 3;
+      S.clean -= 2;
+
+      S.health = clamp(S.health, 0, 100);
+      S.happy  = clamp(S.happy, 0, 100);
+      S.clean  = clamp(S.clean, 0, 100);
+
+      log(isAuto ? "AUTO MEDICINE" : "MEDICINE");
+      setAnim("IDLE");
+      updateHUD();
+    }
+
+    function actionWork(){
+      if (!S.alive || S.paused) return;
+      const earned = rint(2,5);
+      S.coins += earned;
+      S.energy -= 8;
+      S.hunger -= 6;
+      S.happy  -= 3;
+      S.energy = clamp(S.energy, 0, 100);
+      S.hunger = clamp(S.hunger, 0, 100);
+      S.happy  = clamp(S.happy, 0, 100);
+      log("WORK EARNED " + earned + " COINS");
+      setAnim("BOUNCE");
+      updateHUD();
+    }
+
+    // SHOP + MODS
+    function buyMod(key, cost, label){
+      if (!S.alive || S.paused) return;
+      if (S.mods[key]){
+        log("ALREADY OWNS " + label);
+        return;
+      }
+      if (S.coins < cost){
+        log("NOT ENOUGH COINS FOR " + label);
+        return;
+      }
+      S.coins -= cost;
+      S.mods[key] = true;
+      log("PURCHASED " + label);
+      updateHUD();
+    }
+
+    // RANDOM EVENTS
+    function randomEvent(){
+      const roll = Math.random();
+      if (roll < 0.33){
+        // bonus coins
+        const c = rint(1,4);
+        S.coins += c;
+        log("FOUND " + c + " COINS");
+      } else if (roll < 0.66){
+        // mess
+        const d = rint(4,10);
+        S.clean -= d;
+        log("ACCIDENT. CLEANLINESS DOWN " + d);
+      } else {
+        // mood swing
+        const d = rint(4,10);
+        S.happy -= d;
+        log("MOOD DROP. HAPPINESS DOWN " + d);
+      }
+    }
+
+    // SAVE / LOAD
+    function save(){
+      try{
+        localStorage.setItem(KEY, JSON.stringify(S));
+      } catch(e){}
+    }
+    function load(){
+      try{
+        const raw = localStorage.getItem(KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (!data || typeof data !== "object") return;
+        S = Object.assign(S, data);
+      } catch(e){}
+    }
+
+    function resetSave(){
+      localStorage.removeItem(KEY);
+      location.reload();
+    }
+
+    // UI WIRING
+    $("btnFeed").addEventListener("click", ()=>actionFeed(false));
+    $("btnPlay").addEventListener("click", ()=>actionPlay(false));
+    $("btnSleep").addEventListener("click", ()=>actionSleep(false));
+    $("btnClean").addEventListener("click", ()=>actionClean(false));
+    $("btnMed").addEventListener("click", ()=>actionMed(false));
+    $("btnWork").addEventListener("click", ()=>actionWork());
+
+    $("btnToggleAuto").addEventListener("click", (e)=>{
+      S.autoCare = !S.autoCare;
+      e.target.textContent = "AUTO CARE " + (S.autoCare ? "ON" : "OFF");
+      log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
+      updateHUD();
     });
 
-    moodSelect.addEventListener("change", ()=> setMood(moodSelect.value));
-    energyRange.addEventListener("input", (e)=> setEnergy(e.target.value));
+    $("btnPause").addEventListener("click", (e)=>{
+      S.paused = !S.paused;
+      e.target.textContent = S.paused ? "RESUME" : "PAUSE";
+      log(S.paused ? "PAUSED" : "RESUMED");
+      updateHUD();
+    });
 
+    $("btnReset").addEventListener("click", resetSave);
+
+    // MOD BUTTONS
+    $("modSnack").addEventListener("click", ()=>buyMod("snack", 8, "SNACK DISPENSER"));
+    $("modToy").addEventListener("click", ()=>buyMod("toy", 10, "TOY BOX"));
+    $("modBlanket").addEventListener("click", ()=>buyMod("blanket", 10, "SOFT BLANKET"));
+    $("modSoap").addEventListener("click", ()=>buyMod("soap", 8, "SOAP KIT"));
+
+    // SHOP BUTTON JUST OPENS LOG MESSAGE (SIMPLE)
+    $("btnShop").addEventListener("click", ()=>{
+      log("SHOP: BUY MODS ON THE RIGHT PANEL");
+    });
+
+    // KEYBOARD SHORTCUTS
     window.addEventListener("keydown", (e)=>{
       const k = e.key.toLowerCase();
-      if (k === "r") react();
-      if (k === "c") sparkPop();
-      if (k === "s") clearDance();
-      if (k === "enter" && (e.ctrlKey || e.metaKey)) react();
+      if (k === "f") actionFeed(false);
+      if (k === "p") actionPlay(false);
+      if (k === "s") actionSleep(false);
+      if (k === "c") actionClean(false);
+      if (k === "m") actionMed(false);
+      if (k === "w") actionWork();
+      if (k === " "){ S.paused = !S.paused; log(S.paused ? "PAUSED" : "RESUMED"); updateHUD(); }
     });
 
-    setMood("happy");
-    setEnergy(55);
-    log.innerHTML = '<div class="item"><b>WELCOME</b> | POPPY IS READY. PICK A MOOD AND CLICK SEND AND DANCE.</div>';
+    // STARTUP
+    load();
+    logEl.innerHTML = '<div class="item"><b>WELCOME</b> | USE BUTTONS TO CARE FOR POPPY. KEYS F P S C M W. SPACE TO PAUSE.</div>';
+    updateHUD();
+
+    // TICK LOOP: 1 MINUTE REAL TIME. CHANGE TO 10 SECONDS IF YOU WANT IT FASTER.
+    let timer = setInterval(tick, 60000);
+
+    // OPTIONAL: FAST MODE FOR DEMOS (UNCOMMENT)
+    // clearInterval(timer);
+    // timer = setInterval(tick, 10000);
+
   </script>
 </body>
 </html>
