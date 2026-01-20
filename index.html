@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Poppy | Mood Plant</title>
+  <title>Poppy | Mood Bot</title>
   <style>
     :root{
       --bg1:#0b1020;
       --bg2:#101a33;
-      --card:rgba(15,23,48,.82);
+      --card:rgba(15,23,48,.86);
       --text:#eef2ff;
       --muted:#c7d2ff;
       --accent:#7cf7b2;
       --accent2:#8aa4ff;
       --warn:#ffd18a;
       --danger:#ff8aa1;
-      --border:rgba(255,255,255,.12);
+      --border:rgba(255,255,255,.14);
       --shadow:0 18px 60px rgba(0,0,0,.45);
       --radius:18px;
     }
@@ -25,31 +25,32 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-weight: 800;
+      font-weight: 800;           /* ALL TEXT BOLD */
       color: var(--text);
       background:
         radial-gradient(900px 600px at 15% 10%, rgba(122,249,184,.16), transparent 55%),
         radial-gradient(900px 600px at 85% 20%, rgba(138,164,255,.18), transparent 60%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
-      display:flex;
-      align-items:center;
-      justify-content:center;
       padding:22px;
+      overflow-x:hidden;
     }
 
+    /* FIX: prevent "missing content" by avoiding vertical centering + forcing scroll */
     .wrap{
-      width:min(1020px, 100%);
+      width:min(1100px, 100%);
+      margin:0 auto;
       display:grid;
       grid-template-columns: 1.12fr .88fr;
       gap:18px;
+      align-items:start;
     }
     @media (max-width: 900px){ .wrap{ grid-template-columns:1fr; } }
 
     .card{
       background: var(--card);
       border:1px solid rgba(255,255,255,.08);
-      border-color: rgba(124,247,178,.14);
-      border-top-color: rgba(138,164,255,.18);
+      border-color: rgba(124,247,178,.16);
+      border-top-color: rgba(138,164,255,.20);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -82,9 +83,7 @@
       user-select:none;
     }
     .badge .dot{
-      width:10px;
-      height:10px;
-      border-radius:999px;
+      width:10px;height:10px;border-radius:999px;
       background: var(--accent);
       box-shadow: 0 0 0 6px rgba(124,247,178,.10);
     }
@@ -99,10 +98,10 @@
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(480px 260px at 50% 35%, rgba(124,247,178,.16), transparent 60%),
-        radial-gradient(520px 260px at 50% 55%, rgba(138,164,255,.10), transparent 60%),
+        radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.16), transparent 60%),
+        radial-gradient(560px 260px at 50% 60%, rgba(138,164,255,.10), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.10));
-      height: 410px;
+      height: 420px;                /* FIX: consistent stage height */
       position:relative;
       overflow:hidden;
       display:flex;
@@ -113,9 +112,9 @@
 
     .floorGlow{
       position:absolute;
-      bottom:-70px;
-      width: 600px;
-      height: 250px;
+      bottom:-80px;
+      width: 620px;
+      height: 260px;
       border-radius: 999px;
       background: radial-gradient(circle at 50% 35%, rgba(124,247,178,.25), transparent 62%);
       filter: blur(2px);
@@ -144,7 +143,7 @@
       font-size: 13px;
       line-height: 1.25;
       box-shadow: 0 12px 26px rgba(0,0,0,.35);
-      white-space: pre-line;
+      white-space: pre-line;         /* MULTI-LINE RESPONSES */
     }
     .chip{
       padding: 9px 10px;
@@ -160,28 +159,15 @@
     }
     .chip b{ color:var(--text); }
 
-    .disco{
-      position:absolute;
-      inset:-20px;
-      opacity:0;
-      pointer-events:none;
-      background:
-        radial-gradient(280px 200px at 20% 10%, rgba(255,255,255,.10), transparent 60%),
-        radial-gradient(240px 200px at 80% 25%, rgba(124,247,178,.18), transparent 60%),
-        radial-gradient(260px 220px at 50% 80%, rgba(138,164,255,.16), transparent 60%);
-      mix-blend-mode: screen;
-      transform: rotate(0deg);
-    }
-
-    /* ===== POPPY (cleaner plant that always renders correctly) ===== */
-    .plantWrap{
+    /* ===== POPPY: GREEN SQUARE CHARACTER ===== */
+    .poppyWrap{
       position:relative;
-      width: 320px;
-      height: 340px;
+      width: 280px;
+      height: 320px;
       display:flex;
       align-items:flex-end;
       justify-content:center;
-      transform-origin: 50% 95%;
+      transform-origin: 50% 90%;
     }
 
     .nameTag{
@@ -200,108 +186,43 @@
       font-size: 12px;
     }
 
-    .plantTop{
-      position:absolute;
-      bottom: 128px;
-      width: 260px;
-      height: 210px;
-      transform-origin: 50% 100%;
-    }
-
-    .stem{
-      position:absolute;
-      left: 50%;
-      bottom: 6px;
-      transform: translateX(-50%);
-      width: 18px;
-      height: 140px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #caffea, #2fe48a);
-      box-shadow: 0 12px 30px rgba(47,228,138,.18);
-    }
-
-    .stem::after{
-      content:"";
-      position:absolute;
-      left: 50%;
-      top: 18px;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 104px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.08);
-      opacity:.35;
-      filter: blur(.2px);
-    }
-
-    .leaf{
-      position:absolute;
-      width: 140px;
-      height: 92px;
+    .square{
+      width: 170px;
+      height: 170px;
+      border-radius: 22px;
       background:
-        radial-gradient(circle at 25% 25%, rgba(255,255,255,.26), transparent 55%),
-        linear-gradient(180deg, #d2ffea, #3af3a2);
-      border: 1px solid rgba(0,0,0,.08);
-      filter: drop-shadow(0 16px 14px rgba(0,0,0,.22));
-      transform-origin: 20% 80%;
-      border-radius: 92px 92px 92px 22px;
-    }
-
-    .leaf::after{
-      content:"";
-      position:absolute;
-      left: 22px;
-      top: 18px;
-      width: 74px;
-      height: 52px;
-      border-left: 2px solid rgba(0,0,0,.12);
-      border-bottom: 2px solid rgba(0,0,0,.08);
-      border-radius: 0 0 0 24px;
-      transform: rotate(-14deg);
-      opacity:.6;
-    }
-
-    .leafA{
-      left: 0;
-      bottom: 40px;
-      transform: rotate(-18deg) scaleX(-1);
-    }
-    .leafB{
-      right: 0;
-      bottom: 32px;
-      transform: rotate(18deg);
-    }
-    .leafC{
-      width: 110px;
-      height: 72px;
-      left: 50%;
-      bottom: 120px;
-      transform: translateX(-50%) rotate(6deg);
-      border-radius: 72px 72px 72px 20px;
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.28), transparent 55%),
+        linear-gradient(180deg, rgba(185,255,217,1), rgba(47,228,138,1));
+      border: 1px solid rgba(0,0,0,.10);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
     .face{
-      position:absolute;
-      left: 50%;
-      bottom: 72px;
-      transform: translateX(-50%);
-      width: 130px;
-      height: 92px;
-      border-radius: 28px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.14);
+      width: 120px;
+      height: 78px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
       backdrop-filter: blur(10px);
-      box-shadow: 0 16px 26px rgba(0,0,0,.25);
+      box-shadow: 0 16px 26px rgba(0,0,0,.20);
+      position:absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
       display:flex;
       align-items:center;
       justify-content:center;
       gap:18px;
-      padding-top:12px;
+      padding-top:10px;
     }
 
     .eye{
-      width: 16px;
-      height: 16px;
+      width: 15px;
+      height: 15px;
       border-radius: 999px;
       background: #0b1020;
       box-shadow: 0 0 0 7px rgba(255,255,255,.10);
@@ -311,18 +232,15 @@
     .eye:after{
       content:"";
       position:absolute;
-      width: 7px;
-      height: 7px;
-      border-radius:999px;
-      background: rgba(255,255,255,.9);
-      top: 2px;
-      left: 2px;
+      width: 7px;height:7px;border-radius:999px;
+      background: rgba(255,255,255,.90);
+      top: 2px; left: 2px;
     }
 
     .mouth{
       position:absolute;
       left: 50%;
-      bottom: 18px;
+      bottom: 14px;
       transform: translateX(-50%);
       width: 38px;
       height: 18px;
@@ -334,43 +252,39 @@
 
     .brow{
       position:absolute;
-      top: 12px;
+      top: 10px;
       width: 24px;
       height: 6px;
       border-radius: 999px;
       background: rgba(11,16,32,.92);
       opacity:0;
     }
-    .brow.left{ left: 24px; transform: rotate(-10deg); }
-    .brow.right{ right: 24px; transform: rotate(10deg); }
+    .brow.left{ left: 22px; transform: rotate(-10deg); }
+    .brow.right{ right: 22px; transform: rotate(10deg); }
 
-    /* Mood face variants */
+    /* Mood faces */
     .mood-happy .mouth{ width: 46px; height: 22px; border-radius: 0 0 30px 30px; }
     .mood-sad .mouth{
-      bottom: 22px;
-      width: 46px;
-      height: 18px;
+      bottom: 18px;
+      width: 46px; height: 18px;
       border-top: 3px solid rgba(11,16,32,.92);
       border-bottom:none;
       border-radius: 30px 30px 0 0;
     }
     .mood-silly .mouth{
-      width: 18px;
-      height: 18px;
+      width: 18px; height: 18px;
       border: 3px solid rgba(11,16,32,.92);
       border-radius: 999px;
     }
     .mood-tired .mouth{
-      width: 34px;
-      height: 7px;
+      width: 34px; height: 7px;
       border: none;
       background: rgba(11,16,32,.92);
       border-radius: 999px;
     }
     .mood-tired .eye{ height: 11px; }
     .mood-angry .mouth{
-      width: 38px;
-      height: 16px;
+      width: 38px; height: 16px;
       border-top: 3px solid rgba(11,16,32,.92);
       border-bottom:none;
       border-radius: 22px 22px 0 0;
@@ -379,55 +293,14 @@
     .mood-angry .brow.left{ transform: rotate(18deg); }
     .mood-angry .brow.right{ transform: rotate(-18deg); }
 
-    /* Pot */
-    .pot{
-      width: 220px;
-      height: 160px;
-      position:relative;
-      filter: drop-shadow(0 24px 36px rgba(0,0,0,.42));
-    }
-    .potRim{
-      position:absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 34px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(0,0,0,.10));
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: inset 0 -10px 18px rgba(0,0,0,.22);
-    }
-    .soil{
-      position:absolute;
-      top: 10px;
-      left: 22px;
-      right: 22px;
-      height: 22px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #3b2a1f, #1d120c);
-      border: 1px solid rgba(0,0,0,.20);
-      opacity:.96;
-    }
-    .potBody{
-      position:absolute;
-      top: 18px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      border-radius: 18px 18px 30px 30px;
-      background: linear-gradient(180deg, #2b345b, #12162f);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-
-    /* Sparks */
+    /* Confetti */
     .spark{
       position:absolute;
-      width: 10px;
-      height: 10px;
+      width: 10px;height: 10px;
       border-radius: 3px;
       background: rgba(255,255,255,.95);
       opacity:0;
-      top: 40%;
+      top: 50%;
       left: 50%;
       transform: translate(-50%,-50%);
       pointer-events:none;
@@ -468,7 +341,7 @@
       outline:none;
     }
 
-    textarea{ resize: vertical; min-height: 78px; }
+    textarea{ resize: vertical; min-height: 82px; }
 
     select:focus, button:focus, textarea:focus{
       border-color: rgba(124,247,178,.38);
@@ -539,7 +412,7 @@
       letter-spacing:.3px;
     }
 
-    /* Right panel */
+    /* Right */
     .side{ padding: 16px 16px 18px; }
     .side h2{ margin:0 0 6px; font-size: 16px; letter-spacing:.3px; }
     .side p{ margin:0 0 14px; color: var(--muted); font-size: 13px; line-height: 1.4; letter-spacing:.2px; }
@@ -568,38 +441,24 @@
       75%{ transform: rotate(10deg) translateY(-2px) }
       100%{ transform: rotate(0deg) translateY(0) }
     }
-
     @keyframes bounce {
       0%,100%{ transform: translateY(0) }
       25%{ transform: translateY(-16px) }
       55%{ transform: translateY(0) }
       75%{ transform: translateY(-8px) }
     }
-
-    @keyframes discoSpin {
-      0%{ transform: rotate(0deg) }
-      100%{ transform: rotate(360deg) }
-    }
-
+    @keyframes discoSpin { 0%{ transform: rotate(0deg) } 100%{ transform: rotate(360deg) } }
     @keyframes headBob {
       0%,100%{ transform: translateX(-50%) translateY(0) }
       25%{ transform: translateX(-50%) translateY(-3px) }
       50%{ transform: translateX(-50%) translateY(2px) }
       75%{ transform: translateX(-50%) translateY(-2px) }
     }
-
     @keyframes sparkPop {
       0%{ opacity:0; transform: translate(-50%,-50%) scale(.3) rotate(0deg) }
       20%{ opacity:1 }
       100%{ opacity:0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(220deg) }
     }
-
-    @keyframes wilt {
-      0%{ transform: rotate(0deg) translateY(0) }
-      60%{ transform: rotate(-14deg) translateY(8px) }
-      100%{ transform: rotate(-10deg) translateY(6px) }
-    }
-
     @keyframes panicShake {
       0%{ transform: translateX(0) rotate(0deg) }
       10%{ transform: translateX(-6px) rotate(-3deg) }
@@ -614,12 +473,11 @@
       100%{ transform: translateX(0) rotate(0deg) }
     }
 
-    .dance-wiggle .plantWrap{ animation: wiggle 900ms ease-in-out infinite; }
-    .dance-bounce .plantWrap{ animation: bounce 900ms ease-in-out infinite; }
-    .dance-disco .plantWrap{ animation: wiggle 720ms ease-in-out infinite; }
+    .dance-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
+    .dance-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
+    .dance-disco .poppyWrap{ animation: wiggle 720ms ease-in-out infinite; }
     .dance-disco .disco{ opacity:1; animation: discoSpin 2.2s linear infinite; }
-    .dance-wilt .plantWrap{ animation: wilt 1.2s ease-in-out infinite; }
-    .dance-panic .plantWrap{ animation: panicShake 520ms linear infinite; }
+    .dance-panic .poppyWrap{ animation: panicShake 520ms linear infinite; }
 
     .dance-wiggle .face,
     .dance-bounce .face,
@@ -628,13 +486,11 @@
       animation: headBob 700ms ease-in-out infinite;
     }
 
-    /* Reduce motion */
     @media (prefers-reduced-motion: reduce){
-      .dance-wiggle .plantWrap,
-      .dance-bounce .plantWrap,
-      .dance-disco .plantWrap,
-      .dance-wilt .plantWrap,
-      .dance-panic .plantWrap,
+      .dance-wiggle .poppyWrap,
+      .dance-bounce .poppyWrap,
+      .dance-disco .poppyWrap,
+      .dance-panic .poppyWrap,
       .dance-wiggle .face,
       .dance-bounce .face,
       .dance-disco .face,
@@ -650,7 +506,7 @@
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">A VIRTUAL PLANT THAT RESPONDS TO USER MOODS WITH SILLY DANCE ANIMATIONS</p>
+          <p class="sub">A VIRTUAL CHARACTER THAT RESPONDS TO YOUR MOOD WITH SILLY DANCE ANIMATIONS</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -661,22 +517,17 @@
       <div class="stage">
         <div class="plantArea" id="plantArea">
           <div class="speech">
-            <div class="bubble" id="bubble">SAY SOMETHING TO POPPY AND PICK A MOOD. POPPY WILL RESPOND WITH MULTIPLE LINES.</div>
+            <div class="bubble" id="bubble">TYPE A MESSAGE AND PICK A MOOD. POPPY WILL RESPOND WITH MULTIPLE LINES.</div>
             <div class="chip">MOOD <b id="moodChip">HAPPY</b> ENERGY <b id="energyChip">55</b></div>
           </div>
 
           <div class="disco" id="disco"></div>
           <div class="floorGlow"></div>
 
-          <div class="plantWrap" id="plantWrap" aria-label="Poppy the plant">
+          <div class="poppyWrap" id="poppyWrap" aria-label="Poppy">
             <div class="nameTag">POPPY</div>
 
-            <div class="plantTop">
-              <div class="stem"></div>
-              <div class="leaf leafA"></div>
-              <div class="leaf leafB"></div>
-              <div class="leaf leafC"></div>
-
+            <div class="square">
               <div class="face" id="face">
                 <div class="brow left"></div>
                 <div class="brow right"></div>
@@ -684,12 +535,6 @@
                 <div class="eye"></div>
                 <div class="mouth" id="mouth"></div>
               </div>
-            </div>
-
-            <div class="pot">
-              <div class="potRim"></div>
-              <div class="soil"></div>
-              <div class="potBody"></div>
             </div>
           </div>
 
@@ -713,7 +558,7 @@
 
             <div class="readout">
               <span>ENERGY</span>
-              <div class="meter" aria-hidden="true"><span id="energyBar"></span></div>
+              <div class="meter"><span id="energyBar"></span></div>
               <span id="energyLabel">55</span>
             </div>
 
@@ -723,7 +568,7 @@
 
           <div class="panel">
             <label for="userText">YOUR MESSAGE</label>
-            <textarea id="userText" rows="3" placeholder="TYPE A MESSAGE"></textarea>
+            <textarea id="userText" rows="3" placeholder="TYPE HERE"></textarea>
 
             <div class="row" style="margin-top:10px;">
               <button class="btn" id="btnReact" type="button">SEND AND DANCE</button>
@@ -746,43 +591,43 @@
     <aside class="card side">
       <h2>WHAT IT DOES</h2>
       <p>
-        YOU PICK A MOOD AND TYPE A MESSAGE. POPPY RESPONDS WITH MULTIPLE LINES AND CHOOSES A DANCE.
+        PICK A MOOD AND TYPE A MESSAGE. POPPY RESPONDS WITH MULTIPLE LINES AND CHOOSES A DANCE.
         ENERGY MAKES THE DANCE CALMER OR MORE INTENSE.
       </p>
 
       <div class="log" id="log" aria-live="polite"></div>
 
       <div class="hint">
-        HACKATHON EXTENSIONS: TEXT SENTIMENT, SAVE A MOOD HISTORY, UNLOCK DANCES, FRIENDSHIP LEVEL.
+        EXTENSIONS: SENTIMENT FROM TEXT, MOOD HISTORY, UNLOCK DANCES, FRIENDSHIP LEVEL.
       </div>
     </aside>
   </main>
 
   <script>
-    const app = document.getElementById('app');
-    const face = document.getElementById('face');
-    const bubble = document.getElementById('bubble');
-    const moodChip = document.getElementById('moodChip');
-    const energyChip = document.getElementById('energyChip');
-    const moodSelect = document.getElementById('moodSelect');
-    const energyRange = document.getElementById('energyRange');
-    const energyLabel = document.getElementById('energyLabel');
-    const energyBar = document.getElementById('energyBar');
-    const userText = document.getElementById('userText');
-    const log = document.getElementById('log');
-    const statusDot = document.getElementById('statusDot');
-    const statusText = document.getElementById('statusText');
-    const plantArea = document.getElementById('plantArea');
+    const app = document.getElementById("app");
+    const face = document.getElementById("face");
+    const bubble = document.getElementById("bubble");
+    const moodChip = document.getElementById("moodChip");
+    const energyChip = document.getElementById("energyChip");
+    const moodSelect = document.getElementById("moodSelect");
+    const energyRange = document.getElementById("energyRange");
+    const energyLabel = document.getElementById("energyLabel");
+    const energyBar = document.getElementById("energyBar");
+    const userText = document.getElementById("userText");
+    const log = document.getElementById("log");
+    const statusDot = document.getElementById("statusDot");
+    const statusText = document.getElementById("statusText");
+    const plantArea = document.getElementById("plantArea");
 
     const sparks = [
-      document.getElementById('spark1'),
-      document.getElementById('spark2'),
-      document.getElementById('spark3')
+      document.getElementById("spark1"),
+      document.getElementById("spark2"),
+      document.getElementById("spark3")
     ];
 
     const moods = ["happy","sad","stressed","silly","angry","tired","excited"];
 
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+    function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
 
     function setEnergy(val){
       const v = clamp(Number(val), 0, 100);
@@ -793,7 +638,7 @@
     }
 
     function clearDance(){
-      app.classList.remove("dance-wiggle","dance-bounce","dance-disco","dance-wilt","dance-panic");
+      app.classList.remove("dance-wiggle","dance-bounce","dance-disco","dance-panic");
       statusDot.style.background = "var(--accent)";
       statusText.textContent = "READY";
     }
@@ -801,13 +646,13 @@
     function setMood(mood){
       face.classList.remove("mood-happy","mood-sad","mood-silly","mood-angry","mood-tired");
       const map = {
-        happy: "mood-happy",
-        excited: "mood-happy",
-        stressed: "mood-tired",
-        silly: "mood-silly",
-        sad: "mood-sad",
-        angry: "mood-angry",
-        tired: "mood-tired"
+        happy:"mood-happy",
+        excited:"mood-happy",
+        stressed:"mood-tired",
+        silly:"mood-silly",
+        sad:"mood-sad",
+        angry:"mood-angry",
+        tired:"mood-tired"
       };
       face.classList.add(map[mood] || "mood-happy");
       moodChip.textContent = mood.toUpperCase();
@@ -815,8 +660,8 @@
     }
 
     function pickDance(mood, energy){
-      if (mood === "sad") return energy > 55 ? "dance-wiggle" : "dance-wilt";
-      if (mood === "tired") return energy > 65 ? "dance-panic" : "dance-wilt";
+      if (mood === "sad") return energy > 55 ? "dance-wiggle" : "dance-bounce";
+      if (mood === "tired") return energy > 65 ? "dance-panic" : "dance-bounce";
       if (mood === "angry") return energy > 50 ? "dance-panic" : "dance-wiggle";
       if (mood === "stressed") return energy > 60 ? "dance-panic" : "dance-bounce";
       if (mood === "silly") return energy > 45 ? "dance-disco" : "dance-wiggle";
@@ -824,85 +669,70 @@
       return energy > 50 ? "dance-bounce" : "dance-wiggle";
     }
 
-    function formatMultiLine(lines){
-      return lines.join("\n");
-    }
-
-    function poppyRespond(mood, energy, userMsg){
+    function respondLines(mood, energy, userMsg){
       const msg = (userMsg || "").trim();
       const hasMsg = msg.length > 0;
 
-      const openers = {
-        happy: ["I AM POPPY. I FEEL BRIGHT TODAY.", "I AM POPPY. THIS FEELS LIKE A GOOD MOMENT.", "I AM POPPY. I AM READY TO MOVE."],
-        excited: ["I AM POPPY. I HAVE EXTRA ENERGY.", "I AM POPPY. THIS IS A BIG MOOD.", "I AM POPPY. I AM CHARGED UP."],
-        silly: ["I AM POPPY. I AM IN A GOOFY MODE.", "I AM POPPY. I AM NOT TAKING THIS SERIOUSLY.", "I AM POPPY. I AM READY FOR NONSENSE."],
-        sad: ["I AM POPPY. I CAN BE QUIET WITH YOU.", "I AM POPPY. I AM HERE WITH YOU.", "I AM POPPY. WE CAN TAKE IT SLOW."],
-        tired: ["I AM POPPY. I AM LOW ON ENERGY.", "I AM POPPY. I NEED A SLOW SWAY.", "I AM POPPY. LET US KEEP IT SIMPLE."],
-        angry: ["I AM POPPY. I WILL TURN THIS INTO MOTION.", "I AM POPPY. I AM FOCUSING THIS FEELING.", "I AM POPPY. I AM GOING TO SHAKE IT OUT."],
-        stressed: ["I AM POPPY. WE CAN RESET TOGETHER.", "I AM POPPY. LET US DO A SMALL RESET.", "I AM POPPY. I AM TRYING TO STAY GROUNDED."]
-      };
-
-      const mirrors = [
-        "I HEARD YOU.",
-        "I AM LISTENING.",
-        "I GOT YOUR MESSAGE."
-      ];
+      const opener = {
+        happy:["I AM POPPY. I AM FEELING LIGHT.", "I AM POPPY. I AM READY.", "I AM POPPY. I CAN MATCH THIS."],
+        sad:["I AM POPPY. WE CAN GO SLOW.", "I AM POPPY. I AM HERE.", "I AM POPPY. SMALL STEPS."],
+        stressed:["I AM POPPY. LET US RESET.", "I AM POPPY. WE CAN BREATHE.", "I AM POPPY. ONE THING AT A TIME."],
+        silly:["I AM POPPY. I WILL BE RIDICULOUS.", "I AM POPPY. THIS WILL BE WEIRD.", "I AM POPPY. I AM IN GOOFY MODE."],
+        angry:["I AM POPPY. I WILL SHAKE IT OUT.", "I AM POPPY. I WILL TURN THIS INTO MOTION.", "I AM POPPY. I AM FOCUSED."],
+        tired:["I AM POPPY. I AM LOW ENERGY.", "I AM POPPY. KEEP IT SIMPLE.", "I AM POPPY. SLOW SWAY."],
+        excited:["I AM POPPY. HIGH ENERGY.", "I AM POPPY. TURNING IT UP.", "I AM POPPY. LET US MOVE."]
+      }[mood] || ["I AM POPPY. READY."];
 
       const guidance = {
-        happy: ["KEEP THAT ENERGY.", "LET US KEEP THE MOMENT LIGHT.", "I WILL MATCH YOUR VIBE."],
-        excited: ["LET US MOVE WITH IT.", "I AM GOING FULL DANCE MODE.", "I AM TURNING IT UP."],
-        silly: ["I WILL DO SOMETHING RIDICULOUS.", "THIS WILL BE A WEIRD DANCE.", "EXPECT CHAOS."],
-        sad: ["SMALL STEPS ARE ENOUGH.", "WE CAN DO A GENTLE SWAY.", "IT IS OK TO FEEL THIS."],
-        tired: ["WE WILL DO A SLOW SWAY.", "REST COUNTS AS PROGRESS.", "I WILL KEEP IT SOFT."],
-        angry: ["I WILL SHAKE OUT THE TENSION.", "WE WILL USE IT AS FUEL.", "I WILL MOVE UNTIL IT PASSES."],
-        stressed: ["BREATHE IN. BREATHE OUT.", "LET US DO A RESET DANCE.", "WE WILL GO ONE STEP AT A TIME."]
-      };
+        happy:["KEEP IT GOING.", "I WILL MATCH YOUR VIBE.", "LET US KEEP IT LIGHT."],
+        sad:["GENTLE MOVE.", "SLOW AND STEADY.", "WE CAN TAKE A BEAT."],
+        stressed:["RESET MODE.", "BREATHE AND MOVE.", "SMALL RESET DANCE."],
+        silly:["EXPECT CHAOS.", "THIS IS A STRANGE DANCE.", "DO NOT ASK WHY."],
+        angry:["POWER MOVE.", "SHAKE THE TENSION.", "TURN IT INTO ENERGY."],
+        tired:["CALM MOVE.", "LOW MOTION.", "SLOW MODE."],
+        excited:["FULL MODE.", "BIG MOVES.", "TURN IT UP."]
+      }[mood] || ["READY."];
 
       const lines = [];
-      const moodKey = mood in openers ? mood : "happy";
-      const opener = openers[moodKey][Math.floor(Math.random()*openers[moodKey].length)];
-      lines.push(opener);
+      lines.push(opener[Math.floor(Math.random()*opener.length)]);
 
       if (hasMsg){
-        lines.push(mirrors[Math.floor(Math.random()*mirrors.length)]);
-        lines.push("YOU SAID: " + msg.slice(0, 140) + (msg.length > 140 ? "..." : ""));
+        lines.push("I HEARD YOU.");
+        lines.push("YOU SAID: " + msg.slice(0, 160) + (msg.length > 160 ? "..." : ""));
       } else {
-        lines.push("TYPE A MESSAGE ANY TIME. I WILL RESPOND.");
+        lines.push("TYPE A MESSAGE ANY TIME.");
       }
 
-      const g = guidance[moodKey][Math.floor(Math.random()*guidance[moodKey].length)];
-      lines.push(g);
+      lines.push(guidance[Math.floor(Math.random()*guidance.length)]);
 
-      if (energy >= 80) lines.push("ENERGY IS HIGH. THIS DANCE WILL BE INTENSE.");
-      if (energy <= 20) lines.push("ENERGY IS LOW. THIS DANCE WILL BE CALM.");
+      if (energy >= 80) lines.push("ENERGY IS HIGH. INTENSE DANCE.");
+      if (energy <= 20) lines.push("ENERGY IS LOW. CALM DANCE.");
 
-      return formatMultiLine(lines);
+      return lines.join("\n");
     }
 
     function setStatus(dance){
-      if (dance === "dance-wilt"){
-        statusDot.style.background = "var(--warn)";
-        statusText.textContent = "SLOW";
-      } else if (dance === "dance-panic"){
+      if (dance === "dance-panic"){
         statusDot.style.background = "var(--danger)";
         statusText.textContent = "INTENSE";
-      } else if (dance === "dance-disco"){
+        return;
+      }
+      if (dance === "dance-disco"){
         statusDot.style.background = "var(--accent2)";
         statusText.textContent = "PARTY";
-      } else {
-        statusDot.style.background = "var(--accent)";
-        statusText.textContent = "DANCING";
+        return;
       }
+      statusDot.style.background = "var(--accent)";
+      statusText.textContent = "DANCING";
     }
 
     function logEvent(mood, dance, energy, msg){
       const time = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
       const danceName = {
-        "dance-wiggle": "WIGGLE",
-        "dance-bounce": "BOUNCE",
-        "dance-disco": "DISCO",
-        "dance-wilt": "WILT",
-        "dance-panic": "SHAKE"
+        "dance-wiggle":"WIGGLE",
+        "dance-bounce":"BOUNCE",
+        "dance-disco":"DISCO",
+        "dance-panic":"SHAKE"
       }[dance] || dance.toUpperCase();
 
       const safe = (msg || "").trim();
@@ -910,24 +740,25 @@
 
       const div = document.createElement("div");
       div.className = "item";
-      div.innerHTML = "<b>" + time + "</b> | MOOD <b>" + mood.toUpperCase() + "</b> | DANCE <b>" + danceName + "</b> | ENERGY <b>" + energy + "</b>" + snippet;
+      div.innerHTML =
+        "<b>" + time + "</b> | MOOD <b>" + mood.toUpperCase() + "</b> | DANCE <b>" + danceName + "</b> | ENERGY <b>" + energy + "</b>" + snippet;
       log.prepend(div);
     }
 
     function sparkPop(){
       const rect = plantArea.getBoundingClientRect();
-      const centerX = rect.width/2;
-      const centerY = rect.height/2;
+      const cx = rect.width/2;
+      const cy = rect.height/2;
 
-      sparks.forEach((s, i) => {
+      sparks.forEach((s,i)=>{
         const dx = (Math.random()*220 - 110) + "px";
         const dy = (Math.random()*220 - 110) + "px";
         s.style.setProperty("--dx", dx);
         s.style.setProperty("--dy", dy);
 
         s.style.opacity = 0;
-        s.style.left = (centerX + (Math.random()*40-20)) + "px";
-        s.style.top  = (centerY + (Math.random()*40-20)) + "px";
+        s.style.left = (cx + (Math.random()*40-20)) + "px";
+        s.style.top  = (cy + (Math.random()*40-20)) + "px";
 
         s.style.animation = "none";
         void s.offsetWidth;
@@ -947,7 +778,7 @@
       app.classList.add(dance);
       setStatus(dance);
 
-      bubble.textContent = poppyRespond(mood, energy, msg);
+      bubble.textContent = respondLines(mood, energy, msg);
       logEvent(mood, dance, energy, msg);
 
       if (dance === "dance-disco" || energy >= 85) sparkPop();
@@ -964,15 +795,15 @@
     document.getElementById("btnReact").addEventListener("click", react);
     document.getElementById("btnRandom").addEventListener("click", randomMood);
     document.getElementById("btnSpark").addEventListener("click", sparkPop);
-    document.getElementById("btnStop").addEventListener("click", () => {
+    document.getElementById("btnStop").addEventListener("click", ()=>{
       clearDance();
-      bubble.textContent = "POPPY IS PAUSED. PICK A MOOD AND SEND A MESSAGE TO START AGAIN.";
+      bubble.textContent = "POPPY IS PAUSED. PICK A MOOD AND SEND A MESSAGE.";
     });
 
-    moodSelect.addEventListener("change", () => setMood(moodSelect.value));
-    energyRange.addEventListener("input", (e) => setEnergy(e.target.value));
+    moodSelect.addEventListener("change", ()=> setMood(moodSelect.value));
+    energyRange.addEventListener("input", (e)=> setEnergy(e.target.value));
 
-    window.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", (e)=>{
       const k = e.key.toLowerCase();
       if (k === "r") react();
       if (k === "c") sparkPop();
