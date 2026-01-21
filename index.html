@@ -101,7 +101,7 @@
         radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.14), transparent 60%),
         radial-gradient(560px 260px at 50% 60%, rgba(138,164,255,.10), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.12));
-      height: 440px;
+      height: 480px;
       position:relative;
       overflow:hidden;
       display:flex;
@@ -118,6 +118,7 @@
       align-items:flex-start;
       gap:12px;
       pointer-events:none;
+      z-index:5;
     }
 
     .statusBox{
@@ -159,15 +160,16 @@
       pointer-events:none;
     }
 
-    /* POPPY CHARACTER (GREEN SQUARE) */
+    /* POPPY */
     .poppyWrap{
       position:relative;
-      width: 300px;
-      height: 320px;
+      width: 320px;
+      height: 330px;
       display:flex;
       align-items:flex-end;
       justify-content:center;
       transform-origin: 50% 90%;
+      z-index:2;
     }
 
     .nameTag{
@@ -186,8 +188,8 @@
     }
 
     .square{
-      width: 180px;
-      height: 180px;
+      width: 190px;
+      height: 190px;
       border-radius: 22px;
       background:
         radial-gradient(circle at 30% 25%, rgba(255,255,255,.26), transparent 55%),
@@ -195,24 +197,25 @@
       border: 1px solid rgba(0,0,0,.10);
       box-shadow: 0 18px 44px rgba(0,0,0,.36);
       position:relative;
+      overflow:hidden;
     }
 
     .face{
-      width: 132px;
-      height: 88px;
+      width: 140px;
+      height: 92px;
       border-radius: 22px;
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.16);
       backdrop-filter: blur(10px);
       box-shadow: 0 16px 26px rgba(0,0,0,.20);
       position:absolute;
-      bottom: 34px;
+      bottom: 36px;
       left: 50%;
       transform: translateX(-50%);
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:20px;
+      gap:22px;
       padding-top:12px;
     }
 
@@ -292,6 +295,159 @@
       opacity:.85;
     }
 
+    /* ACTION OVERLAYS (EAT / CLEAN / SLEEP / MED / PLAY GAME) */
+    .overlay{
+      position:absolute;
+      inset: 0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:10;
+      background: radial-gradient(circle at 50% 40%, rgba(0,0,0,.20), rgba(0,0,0,.55));
+      backdrop-filter: blur(3px);
+    }
+    .overlay.show{ display:flex; }
+    .overlayCard{
+      width:min(520px, 92%);
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(10,14,28,.80);
+      box-shadow: 0 22px 60px rgba(0,0,0,.55);
+      padding: 14px;
+    }
+    .overlayTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .overlayTop b{ color: var(--text); }
+    .overlayBody{
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 12px;
+      min-height: 160px;
+      display:grid;
+      place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .overlayActions{
+      margin-top: 10px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 520px){ .overlayActions{ grid-template-columns:1fr; } }
+
+    /* FEED ANIMATION: FOOD ORBS */
+    .food{
+      position:absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,209,138,.9));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 12px 20px rgba(0,0,0,.25);
+      left: 18%;
+      top: 18%;
+      opacity:0;
+    }
+    @keyframes foodDrop{
+      0%{ transform: translate(0,-40px) scale(.6); opacity:0; }
+      20%{ opacity:1; }
+      60%{ transform: translate(190px, 120px) scale(1.0); opacity:1; }
+      100%{ transform: translate(240px, 170px) scale(.2); opacity:0; }
+    }
+
+    /* CLEAN ANIMATION: BUBBLES */
+    .bubble{
+      position:absolute;
+      width: 16px; height: 16px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.08);
+      left: 50%;
+      bottom: -20px;
+      opacity:0;
+    }
+    @keyframes bubbleRise{
+      0%{ transform: translate(-50%, 0) scale(.6); opacity:0; }
+      10%{ opacity:1; }
+      80%{ opacity:1; }
+      100%{ transform: translate(calc(-50% + var(--dx)), -190px) scale(1.25); opacity:0; }
+    }
+
+    /* SLEEP ANIMATION: DIM + FLOAT */
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-10px); }
+    }
+    .sleepTint{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 50% 30%, rgba(138,164,255,.16), rgba(0,0,0,.55));
+      opacity:0;
+      transition: opacity .25s ease;
+      pointer-events:none;
+      z-index:3;
+    }
+    .sleepOn .sleepTint{ opacity:1; }
+    .sleepOn .poppyWrap{ animation: floaty 1.2s ease-in-out infinite; }
+
+    /* MEDICINE ANIMATION: HEART/HEALTH PULSE */
+    .pulseRing{
+      width: 120px; height: 120px;
+      border-radius: 999px;
+      border: 2px solid rgba(124,247,178,.55);
+      box-shadow: 0 0 0 10px rgba(124,247,178,.12);
+      opacity:0;
+      position:absolute;
+    }
+    @keyframes pulse{
+      0%{ transform: scale(.7); opacity:0; }
+      20%{ opacity:1; }
+      100%{ transform: scale(1.6); opacity:0; }
+    }
+
+    /* BASIC IDLE ANIMS */
+    @keyframes wiggle {
+      0%{ transform: rotate(0deg) translateY(0) }
+      15%{ transform: rotate(-10deg) translateY(-1px) }
+      35%{ transform: rotate(12deg) translateY(-2px) }
+      55%{ transform: rotate(-8deg) translateY(-1px) }
+      75%{ transform: rotate(10deg) translateY(-2px) }
+      100%{ transform: rotate(0deg) translateY(0) }
+    }
+    @keyframes bounce {
+      0%,100%{ transform: translateY(0) }
+      25%{ transform: translateY(-16px) }
+      55%{ transform: translateY(0) }
+      75%{ transform: translateY(-8px) }
+    }
+    @keyframes shake {
+      0%{ transform: translateX(0) rotate(0deg) }
+      10%{ transform: translateX(-6px) rotate(-3deg) }
+      20%{ transform: translateX(6px) rotate(3deg) }
+      30%{ transform: translateX(-5px) rotate(-2deg) }
+      40%{ transform: translateX(5px) rotate(2deg) }
+      50%{ transform: translateX(-4px) rotate(-1deg) }
+      60%{ transform: translateX(4px) rotate(1deg) }
+      70%{ transform: translateX(-3px) rotate(-1deg) }
+      80%{ transform: translateX(3px) rotate(1deg) }
+      90%{ transform: translateX(-2px) rotate(0deg) }
+      100%{ transform: translateX(0) rotate(0deg) }
+    }
+    .anim-idle .poppyWrap{ animation:none; }
+    .anim-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
+    .anim-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
+    .anim-shake .poppyWrap{ animation: shake 520ms linear infinite; }
+
+    /* CONTROLS */
     .controls{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -370,7 +526,7 @@
     }
 
     .log{
-      height: 280px;
+      height: 300px;
       overflow:auto;
       padding: 12px;
       border-radius: 14px;
@@ -382,40 +538,6 @@
     }
     .log b{ color: var(--text); }
     .log .item{ margin-bottom:10px; }
-
-    /* ANIMATIONS */
-    @keyframes wiggle {
-      0%{ transform: rotate(0deg) translateY(0) }
-      15%{ transform: rotate(-10deg) translateY(-1px) }
-      35%{ transform: rotate(12deg) translateY(-2px) }
-      55%{ transform: rotate(-8deg) translateY(-1px) }
-      75%{ transform: rotate(10deg) translateY(-2px) }
-      100%{ transform: rotate(0deg) translateY(0) }
-    }
-    @keyframes bounce {
-      0%,100%{ transform: translateY(0) }
-      25%{ transform: translateY(-16px) }
-      55%{ transform: translateY(0) }
-      75%{ transform: translateY(-8px) }
-    }
-    @keyframes shake {
-      0%{ transform: translateX(0) rotate(0deg) }
-      10%{ transform: translateX(-6px) rotate(-3deg) }
-      20%{ transform: translateX(6px) rotate(3deg) }
-      30%{ transform: translateX(-5px) rotate(-2deg) }
-      40%{ transform: translateX(5px) rotate(2deg) }
-      50%{ transform: translateX(-4px) rotate(-1deg) }
-      60%{ transform: translateX(4px) rotate(1deg) }
-      70%{ transform: translateX(-3px) rotate(-1deg) }
-      80%{ transform: translateX(3px) rotate(1deg) }
-      90%{ transform: translateX(-2px) rotate(0deg) }
-      100%{ transform: translateX(0) rotate(0deg) }
-    }
-
-    .anim-idle .poppyWrap{ animation:none; }
-    .anim-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
-    .anim-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
-    .anim-shake .poppyWrap{ animation: shake 520ms linear infinite; }
 
     .errorBanner{
       position:fixed;
@@ -432,6 +554,46 @@
       display:none;
       white-space: pre-line;
     }
+
+    /* SIMPLE PLAY GAME (CLICK THE FALLING DOT) */
+    .gameArea{
+      width: min(460px, 92%);
+      height: 220px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .target{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      position:absolute;
+      left: 20px;
+      top: 20px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(138,164,255,.95));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 30px rgba(0,0,0,.30);
+      cursor:pointer;
+    }
+    .gameHud{
+      display:flex;
+      justify-content:space-between;
+      width: min(460px, 92%);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+    .gameHud b{ color: var(--text); }
+
+    @media (prefers-reduced-motion: reduce){
+      .anim-wiggle .poppyWrap,
+      .anim-bounce .poppyWrap,
+      .anim-shake .poppyWrap,
+      .sleepOn .poppyWrap{ animation:none !important; }
+      .overlay, .overlayCard{ backdrop-filter:none; }
+    }
   </style>
 </head>
 
@@ -443,7 +605,7 @@
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">TAMAGOTCHI STYLE PET WITH NEEDS, MOODS, AND MODS</p>
+          <p class="sub">TAMAGOTCHI STYLE PET WITH NEEDS, MOODS, MODS, AND ACTION ANIMATIONS</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -453,6 +615,8 @@
 
       <div class="stage">
         <div class="screen" id="screen">
+          <div class="sleepTint" id="sleepTint"></div>
+
           <div class="hud">
             <div class="statusBox" id="statusBox">POPPY IS IDLE. CLICK A BUTTON.</div>
             <div class="pill">MOOD <b id="moodPill">HAPPY</b> AGE <b id="agePill">0</b> COINS <b id="coinsPill">5</b></div>
@@ -472,6 +636,21 @@
               </div>
             </div>
           </div>
+
+          <!-- OVERLAY FOR ACTIONS -->
+          <div class="overlay" id="overlay">
+            <div class="overlayCard">
+              <div class="overlayTop">
+                <div>MODE <b id="overlayTitle">ACTION</b></div>
+                <div>DURATION <b id="overlayTimer">0</b></div>
+              </div>
+              <div class="overlayBody" id="overlayBody"></div>
+              <div class="overlayActions" id="overlayActions">
+                <button class="btnMain" id="overlayPrimary" type="button">OK</button>
+                <button class="btnAlt" id="overlayClose" type="button">CLOSE</button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="controls">
@@ -488,7 +667,7 @@
           <div class="panel">
             <div class="grid2">
               <button class="btnMain" id="btnFeed" type="button">FEED (COST 1)</button>
-              <button class="btnMain" id="btnPlay" type="button">PLAY</button>
+              <button class="btnMain" id="btnPlay" type="button">PLAY (MINI GAME)</button>
               <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
               <button class="btnMain" id="btnClean" type="button">CLEAN</button>
               <button class="btnWarn" id="btnMed" type="button">MEDICINE (COST 2)</button>
@@ -523,8 +702,7 @@
         </div>
         <div class="panel" style="margin-top:10px;">
           <div style="font-size:12px; color:var(--muted); line-height:1.35;">
-            MODS GIVE PASSIVE BUFFS EACH TICK. WORK EARNS COINS.
-            TICK SPEED IS SET TO 10 SECONDS FOR DEMO.
+            ACTIONS HAVE ANIMATIONS. PLAY IS A MINI GAME. TICK SPEED IS 10 SECONDS FOR DEMO.
           </div>
         </div>
       </div>
@@ -537,9 +715,8 @@
       const banner = $("errorBanner");
       function showError(msg){
         banner.style.display = "block";
-        banner.textContent = "ERROR\n" + msg + "\nOPEN DEVTOOLS CONSOLE IF NEEDED";
+        banner.textContent = "ERROR\n" + msg;
       }
-
       function need(id){
         const el = $(id);
         if (!el) throw new Error("MISSING ELEMENT ID: " + id);
@@ -547,8 +724,8 @@
       }
 
       try{
-        // Required elements
         const app = need("app");
+        const screen = need("screen");
         const face = need("face");
         const statusBox = need("statusBox");
         const moodPill = need("moodPill");
@@ -557,6 +734,7 @@
         const statusDot = need("statusDot");
         const statusText = need("statusText");
         const logEl = need("log");
+        const sleepTint = need("sleepTint");
 
         const fills = {
           hunger: need("hungerFill"),
@@ -572,6 +750,14 @@
           clean: need("cleanVal"),
           health: need("healthVal")
         };
+
+        // Overlay
+        const overlay = need("overlay");
+        const overlayTitle = need("overlayTitle");
+        const overlayTimer = need("overlayTimer");
+        const overlayBody = need("overlayBody");
+        const overlayPrimary = need("overlayPrimary");
+        const overlayClose = need("overlayClose");
 
         // Buttons
         const btnFeed = need("btnFeed");
@@ -589,14 +775,13 @@
         const modBlanket = need("modBlanket");
         const modSoap = need("modSoap");
 
-        // State (NO LOCALSTORAGE TO AVOID SURPRISE BUGS DURING HACKATHON)
         const S = {
           alive: true,
           paused: false,
           autoCare: false,
           age: 0,
           coins: 5,
-          hunger: 50,   // 0 BAD, 100 GOOD
+          hunger: 50,
           happy: 70,
           energy: 70,
           clean: 60,
@@ -604,7 +789,6 @@
           mods: { snack:false, toy:false, blanket:false, soap:false }
         };
 
-        // Helpers
         const clamp = (n,a,b)=>Math.max(a, Math.min(b, n));
         const rint = (a,b)=>Math.floor(Math.random()*(b-a+1))+a;
 
@@ -621,7 +805,7 @@
           app.classList.add("anim-" + name.toLowerCase());
         }
 
-        function setFaceMood(m){
+        function setFaceMoodClass(m){
           face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored");
           face.classList.add("mood-" + m.toLowerCase());
         }
@@ -646,14 +830,12 @@
         }
 
         function updateUI(){
-          // Clamp everything
           S.hunger = clamp(S.hunger, 0, 100);
           S.happy  = clamp(S.happy, 0, 100);
           S.energy = clamp(S.energy, 0, 100);
           S.clean  = clamp(S.clean, 0, 100);
           S.health = clamp(S.health, 0, 100);
 
-          // Bars
           for (const k of ["hunger","happy","energy","clean","health"]){
             fills[k].style.width = S[k] + "%";
             vals[k].textContent = String(Math.round(S[k]));
@@ -668,16 +850,15 @@
             statusDot.style.background = "var(--danger)";
             statusText.textContent = "DEAD";
             setAnim("idle");
-            setFaceMood("sad");
+            setFaceMoodClass("sad");
           } else {
             statusText.textContent = S.paused ? "PAUSED" : "ALIVE";
-
-            if (m === "SICK"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMood("sick"); }
-            else if (m === "ANGRY"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMood("angry"); }
-            else if (m === "HUNGRY"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMood("hungry"); }
-            else if (m === "SAD"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMood("sad"); }
-            else if (m === "BORED"){ statusDot.style.background = "var(--accent2)"; setAnim("bounce"); setFaceMood("bored"); }
-            else { statusDot.style.background = "var(--accent)"; setAnim("wiggle"); setFaceMood("happy"); }
+            if (m === "SICK"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMoodClass("sick"); }
+            else if (m === "ANGRY"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMoodClass("angry"); }
+            else if (m === "HUNGRY"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMoodClass("hungry"); }
+            else if (m === "SAD"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMoodClass("sad"); }
+            else if (m === "BORED"){ statusDot.style.background = "var(--accent2)"; setAnim("bounce"); setFaceMoodClass("bored"); }
+            else { statusDot.style.background = "var(--accent)"; setAnim("wiggle"); setFaceMoodClass("happy"); }
           }
 
           statusBox.textContent =
@@ -699,7 +880,191 @@
           }
         }
 
-        // Actions (BUTTONS)
+        // OVERLAY SYSTEM
+        let overlayInterval = null;
+        let overlayEndAt = 0;
+        let overlayMode = "NONE";
+        function closeOverlay(){
+          overlay.classList.remove("show");
+          overlayBody.innerHTML = "";
+          overlayTitle.textContent = "ACTION";
+          overlayTimer.textContent = "0";
+          overlayMode = "NONE";
+          if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
+          updateUI();
+        }
+
+        function openOverlay(mode, seconds){
+          overlayMode = mode;
+          overlayTitle.textContent = mode;
+          overlay.classList.add("show");
+          overlayEndAt = Date.now() + seconds*1000;
+
+          function tickTimer(){
+            const left = Math.max(0, Math.ceil((overlayEndAt - Date.now())/1000));
+            overlayTimer.textContent = String(left);
+            if (left <= 0){
+              if (overlayMode !== "PLAY"){
+                closeOverlay();
+              }
+            }
+          }
+          tickTimer();
+          if (overlayInterval) clearInterval(overlayInterval);
+          overlayInterval = setInterval(tickTimer, 200);
+        }
+
+        overlayClose.addEventListener("click", ()=>{
+          if (overlayMode === "PLAY") endGame(false);
+          closeOverlay();
+        });
+        overlayPrimary.addEventListener("click", ()=>{
+          if (overlayMode === "PLAY") endGame(true);
+          else closeOverlay();
+        });
+
+        // ACTION ANIMATIONS
+        function animFeed(){
+          openOverlay("FEED", 3);
+          overlayPrimary.textContent = "DONE";
+          overlayClose.textContent = "CLOSE";
+          overlayBody.innerHTML = "";
+
+          // Drop a few food orbs
+          for (let i=0;i<6;i++){
+            const f = document.createElement("div");
+            f.className = "food";
+            f.style.left = (10 + i*7) + "%";
+            f.style.top = (10 + (i%2)*8) + "%";
+            f.style.animation = "foodDrop 900ms ease-in " + (i*120) + "ms 1";
+            overlayBody.appendChild(f);
+          }
+        }
+
+        function animClean(){
+          openOverlay("CLEAN", 3);
+          overlayPrimary.textContent = "DONE";
+          overlayClose.textContent = "CLOSE";
+          overlayBody.innerHTML = "";
+
+          // Bubble rise
+          for (let i=0;i<14;i++){
+            const b = document.createElement("div");
+            b.className = "bubble";
+            b.style.left = (10 + Math.random()*80) + "%";
+            b.style.setProperty("--dx", (Math.random()*120 - 60) + "px");
+            b.style.animation = "bubbleRise 1100ms ease-out " + (i*90) + "ms 1";
+            overlayBody.appendChild(b);
+          }
+        }
+
+        function animMed(){
+          openOverlay("MEDICINE", 3);
+          overlayPrimary.textContent = "DONE";
+          overlayClose.textContent = "CLOSE";
+          overlayBody.innerHTML = "";
+
+          for (let i=0;i<4;i++){
+            const ring = document.createElement("div");
+            ring.className = "pulseRing";
+            ring.style.animation = "pulse 900ms ease-out " + (i*220) + "ms 1";
+            overlayBody.appendChild(ring);
+          }
+        }
+
+        function animSleep(){
+          // Sleep uses tint + float on main screen (not overlay heavy)
+          screen.classList.add("sleepOn");
+          openOverlay("SLEEP", 4);
+          overlayPrimary.textContent = "WAKE";
+          overlayClose.textContent = "CLOSE";
+          overlayBody.innerHTML = "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:center;'>POPPY IS RESTING\nENERGY WILL INCREASE</div>";
+
+          const stop = ()=>{
+            screen.classList.remove("sleepOn");
+          };
+          setTimeout(stop, 4200);
+        }
+
+        // MINI GAME: CLICK THE TARGET AS MANY TIMES AS YOU CAN IN 10 SECONDS
+        let game = null;
+        function startGame(){
+          openOverlay("PLAY", 10);
+          overlayPrimary.textContent = "FINISH";
+          overlayClose.textContent = "QUIT";
+          overlayBody.innerHTML = "";
+
+          const area = document.createElement("div");
+          area.className = "gameArea";
+          const target = document.createElement("div");
+          target.className = "target";
+          area.appendChild(target);
+
+          const hud = document.createElement("div");
+          hud.className = "gameHud";
+          hud.innerHTML = "<div>SCORE <b id='gScore'>0</b></div><div>BEST <b id='gBest'>0</b></div>";
+
+          overlayBody.appendChild(area);
+          overlayBody.appendChild(hud);
+
+          const gScore = overlayBody.querySelector("#gScore");
+          const gBest = overlayBody.querySelector("#gBest");
+
+          game = {
+            score: 0,
+            best: 0,
+            target,
+            area,
+            gScore,
+            gBest
+          };
+
+          function moveTarget(){
+            const w = area.clientWidth;
+            const h = area.clientHeight;
+            const x = Math.max(6, Math.min(w-24, Math.floor(Math.random()*(w-18))));
+            const y = Math.max(6, Math.min(h-24, Math.floor(Math.random()*(h-18))));
+            target.style.left = x + "px";
+            target.style.top = y + "px";
+          }
+
+          target.addEventListener("click", ()=>{
+            if (!game) return;
+            game.score += 1;
+            game.best = Math.max(game.best, game.score);
+            gScore.textContent = String(game.score);
+            gBest.textContent = String(game.best);
+            moveTarget();
+          });
+
+          // initial positions + drift
+          moveTarget();
+          game.moveTimer = setInterval(moveTarget, 650);
+        }
+
+        function endGame(applyRewards){
+          if (!game) return;
+          clearInterval(game.moveTimer);
+
+          const score = game.score;
+          game = null;
+
+          if (applyRewards){
+            // reward scale
+            const happyGain = clamp(8 + score*2, 8, 35);
+            const coinsGain = clamp(Math.floor(score/2), 0, 10);
+            S.happy += happyGain;
+            S.energy -= 6;
+            S.clean  -= 2;
+            S.coins += coinsGain;
+            log("GAME RESULT SCORE " + score + " HAPPINESS +" + happyGain + " COINS +" + coinsGain);
+          } else {
+            log("GAME QUIT");
+          }
+          closeOverlay();
+        }
+
+        // ACTIONS (STATS) + ANIMS
         function actFeed(){
           if (!S.alive || S.paused) return log("CANNOT FEED RIGHT NOW");
           if (S.coins < 1) return log("NOT ENOUGH COINS TO FEED");
@@ -708,23 +1073,25 @@
           S.clean  -= 3;
           S.happy  += 5;
           log("FEED");
+          animFeed();
           updateUI();
         }
 
         function actPlay(){
           if (!S.alive || S.paused) return log("CANNOT PLAY RIGHT NOW");
-          S.happy += 22;
-          S.energy -= 6;
-          S.clean  -= 2;
-          log("PLAY");
+          // game handles stat changes on finish
+          log("PLAY START");
+          startGame();
           updateUI();
         }
 
         function actSleep(){
           if (!S.alive || S.paused) return log("CANNOT SLEEP RIGHT NOW");
+          // Apply the stat changes now, animation is visual
           S.energy += 30;
           S.hunger -= 6;
           log("SLEEP");
+          animSleep();
           updateUI();
         }
 
@@ -733,6 +1100,7 @@
           S.clean += 34;
           S.happy += 3;
           log("CLEAN");
+          animClean();
           updateUI();
         }
 
@@ -744,6 +1112,7 @@
           S.happy  -= 3;
           S.clean  -= 2;
           log("MEDICINE");
+          animMed();
           updateUI();
         }
 
@@ -755,6 +1124,9 @@
           S.hunger -= 6;
           S.happy  -= 3;
           log("WORK EARNED " + earned);
+          // quick “work” animation: bounce on main
+          setAnim("bounce");
+          setTimeout(()=>updateUI(), 800);
           updateUI();
         }
 
@@ -768,25 +1140,22 @@
           updateUI();
         }
 
-        // Tick (DEMO SPEED: 10 SECONDS)
+        // TICK (DEMO SPEED: 10 SECONDS)
         function tick(){
           if (!S.alive || S.paused) return;
 
           S.age += 1;
 
-          // Decay
           S.hunger -= 4;
           S.energy -= 3;
           S.clean  -= 2;
 
-          // Happiness drop if needs are bad
           let sadPush = 1;
           if (S.hunger < 40) sadPush += 2;
           if (S.energy < 35) sadPush += 2;
           if (S.clean  < 35) sadPush += 2;
           S.happy -= sadPush;
 
-          // Health damage if neglected
           let dmg = 0;
           if (S.hunger <= 15) dmg += 6;
           if (S.clean  <= 15) dmg += 5;
@@ -794,34 +1163,38 @@
           if (S.happy  <= 10) dmg += 4;
           S.health -= dmg;
 
-          // Mods passive buffs
+          // mods
           if (S.mods.snack) S.hunger += 2;
           if (S.mods.toy) S.happy += 2;
           if (S.mods.blanket) S.energy += 2;
           if (S.mods.soap) S.clean += 2;
 
-          // Auto care
+          // auto care
           if (S.autoCare){
             if (S.hunger < 35 && S.coins >= 1) actFeed();
             if (S.clean < 35) actClean();
             if (S.energy < 30) actSleep();
-            if (S.happy < 35) actPlay();
-            if (S.health < 40 && S.coins >= 2) actMed();
+            if (S.happy < 35) actPlay(); // launches game; could be annoying, so skip if overlay is open
           }
 
-          // Random mini events
-          if (Math.random() < 0.12){
+          // random events
+          if (!overlay.classList.contains("show") && Math.random() < 0.10){
             const roll = Math.random();
             if (roll < 0.33){ const c = rint(1,4); S.coins += c; log("FOUND " + c + " COINS"); }
             else if (roll < 0.66){ const d = rint(4,10); S.clean -= d; log("ACCIDENT. CLEANLINESS DOWN " + d); }
             else { const d = rint(4,10); S.happy -= d; log("MOOD DROP. HAPPINESS DOWN " + d); }
           }
 
-          dieIfNeeded();
+          if (S.health <= 0 && S.alive){
+            S.alive = false;
+            S.health = 0;
+            log("POPPY HAS DIED");
+          }
+
           updateUI();
         }
 
-        // Wire buttons (THE IMPORTANT PART)
+        // Wire buttons
         btnFeed.addEventListener("click", actFeed);
         btnPlay.addEventListener("click", actPlay);
         btnSleep.addEventListener("click", actSleep);
@@ -842,11 +1215,14 @@
         });
 
         btnShopInfo.addEventListener("click", ()=>{
-          log("SHOP: BUY MODS ON RIGHT PANEL. WORK EARNS COINS.");
+          log("SHOP: BUY MODS. WORK EARNS COINS.");
         });
 
         btnReset.addEventListener("click", ()=>{
-          // Simple reset
+          // Close overlay and reset
+          closeOverlay();
+          screen.classList.remove("sleepOn");
+
           S.alive = true;
           S.paused = false;
           S.autoCare = false;
@@ -870,6 +1246,13 @@
         // Keyboard shortcuts
         window.addEventListener("keydown", (e)=>{
           const k = e.key.toLowerCase();
+          if (overlay.classList.contains("show")){
+            if (k === "escape"){
+              if (overlayMode === "PLAY") endGame(false);
+              closeOverlay();
+            }
+            return;
+          }
           if (k === "f") actFeed();
           if (k === "p") actPlay();
           if (k === "s") actSleep();
@@ -879,7 +1262,7 @@
           if (k === " "){ S.paused = !S.paused; log(S.paused ? "PAUSED" : "RESUMED"); updateUI(); }
         });
 
-        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | BUTTONS WORK. KEYS F P S C M W. SPACE PAUSE.</div>';
+        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | FEED SHOWS EATING. CLEAN SHOWS BUBBLES. MED SHOWS PULSE. PLAY OPENS MINI GAME.</div>';
         updateUI();
 
         // DEMO SPEED: 10 SECONDS
