@@ -1,3 +1,4 @@
+<!-- REPLACE YOUR ENTIRE index.html WITH THIS (APPLE MINI GAME + SLOWER / EASIER) -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -94,7 +95,6 @@
       gap:14px;
     }
 
-    /* MORE TAMAGOTCHI-LIKE: SMALLER SCREEN + LESS CONSTANT MOTION */
     .screen{
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
@@ -161,7 +161,6 @@
       pointer-events:none;
     }
 
-    /* POPPY */
     .poppyWrap{
       position:relative;
       width: 260px;
@@ -262,7 +261,6 @@
     .brow.left{ left: 20px; transform: rotate(-10deg); }
     .brow.right{ right: 20px; transform: rotate(10deg); }
 
-    /* FACE STATES */
     .mood-happy .mouth{ width: 44px; height: 20px; border-radius: 0 0 30px 30px; }
     .mood-sad .mouth{
       bottom: 18px; width: 44px; height: 16px;
@@ -296,37 +294,19 @@
       opacity:.85;
     }
 
-    /* TAMAGOTCHI-LIKE: NO CONSTANT LOOPING ANIMATIONS
-       ONLY SMALL "BLINK" SOMETIMES + SHORT ACTION BURSTS */
     @keyframes blink {
       0%, 90%, 100% { transform: scaleY(1); }
       92%, 96% { transform: scaleY(0.15); }
     }
     .blink .eye{ animation: blink 220ms linear 1; transform-origin:center; }
 
-    /* SHORT ACTION BURSTS */
-    @keyframes pop {
-      0%{ transform: scale(1); }
-      50%{ transform: scale(1.04); }
-      100%{ transform: scale(1); }
-    }
-    @keyframes nod {
-      0%{ transform: translateY(0); }
-      40%{ transform: translateY(-8px); }
-      100%{ transform: translateY(0); }
-    }
-    @keyframes wig {
-      0%{ transform: rotate(0deg); }
-      25%{ transform: rotate(-8deg); }
-      50%{ transform: rotate(10deg); }
-      75%{ transform: rotate(-6deg); }
-      100%{ transform: rotate(0deg); }
-    }
+    @keyframes pop { 0%{ transform: scale(1); } 50%{ transform: scale(1.04); } 100%{ transform: scale(1); } }
+    @keyframes nod { 0%{ transform: translateY(0); } 40%{ transform: translateY(-8px); } 100%{ transform: translateY(0); } }
+    @keyframes wig { 0%{ transform: rotate(0deg); } 25%{ transform: rotate(-8deg); } 50%{ transform: rotate(10deg); } 75%{ transform: rotate(-6deg); } 100%{ transform: rotate(0deg); } }
     .burst-pop .square{ animation: pop 380ms ease-out 1; }
     .burst-nod .poppyWrap{ animation: nod 420ms ease-out 1; }
     .burst-wig .poppyWrap{ animation: wig 520ms ease-in-out 1; }
 
-    /* SLEEP LOOK */
     .sleepTint{
       position:absolute;
       inset:0;
@@ -338,7 +318,6 @@
     }
     .sleepOn .sleepTint{ opacity:1; }
 
-    /* OVERLAY (MINI GAME / ACTIONS) */
     .overlay{
       position:absolute;
       inset: 0;
@@ -387,7 +366,6 @@
     }
     @media (max-width: 520px){ .overlayActions{ grid-template-columns:1fr; } }
 
-    /* FEED VISUAL: FOOD DOTS */
     .food{
       position:absolute;
       width: 16px;
@@ -405,7 +383,6 @@
       100%{ transform: translate(calc(var(--dx) + 40px), calc(var(--dy) + 40px)) scale(.2); opacity:0; }
     }
 
-    /* CLEAN VISUAL: BUBBLES */
     .bubble{
       position:absolute;
       width: 14px; height: 14px;
@@ -421,7 +398,6 @@
       100%{ transform: translate(var(--dx), -170px) scale(1.15); opacity:0; }
     }
 
-    /* MED VISUAL: PULSE RING */
     .pulseRing{
       width: 110px; height: 110px;
       border-radius: 999px;
@@ -436,28 +412,55 @@
       100%{ transform: scale(1.6); opacity:0; }
     }
 
-    /* MINI GAME: CLICK TARGET */
+    /* MINI GAME */
     .gameArea{
       width: min(460px, 92%);
-      height: 220px;
+      height: 240px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.18);
       position:relative;
       overflow:hidden;
     }
-    .target{
-      width: 18px;
-      height: 18px;
+
+    /* APPLE TARGET (NO EMOJI) */
+    .apple{
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
       position:absolute;
       left: 20px;
       top: 20px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(138,164,255,.95));
+      cursor:pointer;
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 18px 30px rgba(0,0,0,.30);
-      cursor:pointer;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 45%),
+        radial-gradient(circle at 50% 60%, rgba(255,120,120,.95), rgba(190,30,50,.95));
     }
+    .apple:before{
+      content:"";
+      position:absolute;
+      width: 8px; height: 12px;
+      left: 50%;
+      top: -6px;
+      transform: translateX(-50%) rotate(10deg);
+      border-radius: 6px;
+      background: linear-gradient(180deg, rgba(120,80,40,1), rgba(80,50,25,1));
+      box-shadow: 0 4px 10px rgba(0,0,0,.25);
+    }
+    .apple:after{
+      content:"";
+      position:absolute;
+      width: 14px; height: 10px;
+      left: 55%;
+      top: -2px;
+      transform: rotate(20deg);
+      border-radius: 14px 14px 14px 2px;
+      background: linear-gradient(180deg, rgba(170,255,200,1), rgba(55,220,140,1));
+      box-shadow: 0 6px 12px rgba(0,0,0,.18);
+    }
+
     .gameHud{
       display:flex;
       justify-content:space-between;
@@ -468,7 +471,6 @@
     }
     .gameHud b{ color: var(--text); }
 
-    /* CONTROLS */
     .controls{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -654,7 +656,7 @@
           <div class="panel">
             <div class="grid2">
               <button class="btnMain" id="btnFeed" type="button">FEED (COST 1)</button>
-              <button class="btnMain" id="btnPlay" type="button">PLAY (GAME)</button>
+              <button class="btnMain" id="btnPlay" type="button">PLAY (APPLE GAME)</button>
               <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
               <button class="btnMain" id="btnClean" type="button">CLEAN</button>
               <button class="btnWarn" id="btnMed" type="button">MEDICINE (COST 2)</button>
@@ -689,7 +691,7 @@
         </div>
         <div class="panel" style="margin-top:10px;">
           <div style="font-size:12px; color:var(--muted); line-height:1.35;">
-            THIS IS TAMAGOTCHI STYLE: POPPY IS MOSTLY STILL. BLINKS SOMETIMES. ONLY MOVES ON BUTTON ACTIONS.
+            PLAY GAME: CLICK THE APPLE. IT MOVES SLOWER AND IS BIGGER.
           </div>
         </div>
       </div>
@@ -714,7 +716,6 @@
         const app = need("app");
         const screen = need("screen");
         const face = need("face");
-        const square = need("square");
         const statusBox = need("statusBox");
         const moodPill = need("moodPill");
         const agePill = need("agePill");
@@ -860,7 +861,7 @@
           btnPause.textContent = S.paused ? "RESUME" : "PAUSE";
         }
 
-        // OVERLAY
+        // OVERLAY / GAME
         let overlayInterval = null;
         let overlayEndAt = 0;
         let overlayMode = "NONE";
@@ -909,88 +910,18 @@
           else closeOverlay();
         });
 
-        // ACTION VISUALS
-        function animFeed(){
-          burst("burst-pop", 380);
-          burst("burst-nod", 420);
-
-          openOverlay("FEED", 2);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = "";
-
-          for (let i=0;i<6;i++){
-            const f = document.createElement("div");
-            f.className = "food";
-            f.style.left = (10 + Math.random()*40) + "%";
-            f.style.top = (10 + Math.random()*20) + "%";
-            f.style.setProperty("--dx", (120 + Math.random()*120) + "px");
-            f.style.setProperty("--dy", (70 + Math.random()*80) + "px");
-            f.style.animation = "foodDrop 820ms ease-in " + (i*90) + "ms 1";
-            overlayBody.appendChild(f);
-          }
-        }
-
-        function animClean(){
-          burst("burst-wig", 520);
-
-          openOverlay("CLEAN", 2);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = "";
-
-          for (let i=0;i<14;i++){
-            const b = document.createElement("div");
-            b.className = "bubble";
-            b.style.left = (10 + Math.random()*80) + "%";
-            b.style.top = (140 + Math.random()*40) + "px";
-            b.style.setProperty("--dx", (Math.random()*120 - 60) + "px");
-            b.style.animation = "bubbleRise 980ms ease-out " + (i*60) + "ms 1";
-            overlayBody.appendChild(b);
-          }
-        }
-
-        function animMed(){
-          burst("burst-pop", 380);
-
-          openOverlay("MEDICINE", 2);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = "";
-
-          for (let i=0;i<4;i++){
-            const ring = document.createElement("div");
-            ring.className = "pulseRing";
-            ring.style.animation = "pulse 820ms ease-out " + (i*160) + "ms 1";
-            overlayBody.appendChild(ring);
-          }
-        }
-
-        function animSleep(){
-          screen.classList.add("sleepOn");
-          burst("burst-nod", 420);
-
-          openOverlay("SLEEP", 3);
-          overlayPrimary.textContent = "WAKE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML =
-            "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:center;'>POPPY IS RESTING\nENERGY UP</div>";
-
-          setTimeout(()=>screen.classList.remove("sleepOn"), 3200);
-        }
-
-        // MINI GAME
-        function startGame(){
-          openOverlay("PLAY", 10);
+        function startAppleGame(){
+          openOverlay("PLAY", 12);             // LONGER TIME
           overlayPrimary.textContent = "FINISH";
           overlayClose.textContent = "QUIT";
           overlayBody.innerHTML = "";
 
           const area = document.createElement("div");
           area.className = "gameArea";
-          const target = document.createElement("div");
-          target.className = "target";
-          area.appendChild(target);
+
+          const apple = document.createElement("div");
+          apple.className = "apple";
+          area.appendChild(apple);
 
           const hud = document.createElement("div");
           hud.className = "gameHud";
@@ -1002,29 +933,33 @@
           const gScore = overlayBody.querySelector("#gScore");
           const gReward = overlayBody.querySelector("#gReward");
 
-          game = { score: 0, target, area, gScore, gReward, moveTimer: null };
+          game = { score: 0, apple, area, gScore, gReward, moveTimer: null };
 
-          function moveTarget(){
+          function moveApple(){
             const w = area.clientWidth;
             const h = area.clientHeight;
-            const x = Math.max(6, Math.min(w-24, Math.floor(Math.random()*(w-18))));
-            const y = Math.max(6, Math.min(h-24, Math.floor(Math.random()*(h-18))));
-            target.style.left = x + "px";
-            target.style.top = y + "px";
+            const size = 34;
+            const x = Math.max(8, Math.min(w - size - 8, Math.floor(Math.random() * (w - size))));
+            const y = Math.max(8, Math.min(h - size - 8, Math.floor(Math.random() * (h - size))));
+            apple.style.left = x + "px";
+            apple.style.top  = y + "px";
           }
 
-          target.addEventListener("click", ()=>{
+          apple.addEventListener("click", ()=>{
             if (!game) return;
             game.score += 1;
             gScore.textContent = String(game.score);
-            const reward = Math.min(10, Math.floor(game.score/2));
+            const reward = Math.min(12, Math.floor(game.score/2));
             gReward.textContent = String(reward);
-            moveTarget();
+            moveApple();
             burst("burst-pop", 250);
           });
 
-          moveTarget();
-          game.moveTimer = setInterval(moveTarget, 650);
+          moveApple();
+
+          // SLOWER MOVEMENT (EASIER)
+          const MOVE_MS = 1200; // WAS FASTER BEFORE; NOW 1.2s
+          game.moveTimer = setInterval(moveApple, MOVE_MS);
         }
 
         function endGame(applyRewards){
@@ -1036,7 +971,7 @@
 
           if (applyRewards){
             const happyGain = clamp(10 + score*2, 10, 32);
-            const coinsGain = clamp(Math.floor(score/2), 0, 10);
+            const coinsGain = clamp(Math.floor(score/2), 0, 12);
             S.happy += happyGain;
             S.energy -= 6;
             S.clean  -= 2;
@@ -1058,14 +993,15 @@
           S.clean  -= 3;
           S.happy  += 5;
           log("FEED");
-          animFeed();
+          burst("burst-pop", 380);
+          burst("burst-nod", 420);
           updateUI();
         }
 
         function actPlay(){
           if (!S.alive || S.paused) return log("CANNOT PLAY RIGHT NOW");
           log("PLAY START");
-          startGame();
+          startAppleGame();
           updateUI();
         }
 
@@ -1074,7 +1010,9 @@
           S.energy += 30;
           S.hunger -= 6;
           log("SLEEP");
-          animSleep();
+          screen.classList.add("sleepOn");
+          setTimeout(()=>screen.classList.remove("sleepOn"), 3200);
+          burst("burst-nod", 420);
           updateUI();
         }
 
@@ -1083,7 +1021,7 @@
           S.clean += 34;
           S.happy += 3;
           log("CLEAN");
-          animClean();
+          burst("burst-wig", 520);
           updateUI();
         }
 
@@ -1095,7 +1033,7 @@
           S.happy  -= 3;
           S.clean  -= 2;
           log("MEDICINE");
-          animMed();
+          burst("burst-pop", 380);
           updateUI();
         }
 
@@ -1122,20 +1060,16 @@
           updateUI();
         }
 
-        // TICK: REAL TAMAGOTCHI FEEL (SLOWER)
-        // Change to 10_000 if you want demo-fast.
-        const TICK_MS = 30000; // 30 seconds per tick
+        // TICK (TAMAGOTCHI FEEL)
+        const TICK_MS = 30000;
 
         function tick(){
           if (!S.alive || S.paused) return;
 
-          // small chance to blink each tick
-          if (Math.random() < 0.55) blink();
+          if (!overlay.classList.contains("show") && Math.random() < 0.22) blink();
 
-          // Age counts in ticks
           S.age += 1;
 
-          // Slower decay (more tamagotchi feel)
           S.hunger -= 2;
           S.energy -= 2;
           S.clean  -= 1;
@@ -1153,13 +1087,11 @@
           if (S.happy  <= 8)  dmg += 3;
           S.health -= dmg;
 
-          // Mods are gentle
           if (S.mods.snack) S.hunger += 1;
           if (S.mods.toy) S.happy += 1;
           if (S.mods.blanket) S.energy += 1;
           if (S.mods.soap) S.clean += 1;
 
-          // Random event rarely (more like tamagotchi)
           if (!overlay.classList.contains("show") && Math.random() < 0.06){
             const roll = Math.random();
             if (roll < 0.34){ const c = rint(1,3); S.coins += c; log("FOUND " + c + " COINS"); }
@@ -1176,7 +1108,7 @@
           updateUI();
         }
 
-        // Wire buttons
+        // Buttons
         btnFeed.addEventListener("click", actFeed);
         btnPlay.addEventListener("click", actPlay);
         btnSleep.addEventListener("click", actSleep);
@@ -1224,7 +1156,6 @@
         modBlanket.addEventListener("click", ()=>buyMod("blanket", 10, "SOFT BLANKET"));
         modSoap.addEventListener("click", ()=>buyMod("soap", 8, "SOAP KIT"));
 
-        // Keyboard shortcuts (no movement unless you press)
         window.addEventListener("keydown", (e)=>{
           const k = e.key.toLowerCase();
           if (overlay.classList.contains("show")){
@@ -1243,18 +1174,15 @@
           if (k === " "){ S.paused = !S.paused; log(S.paused ? "PAUSED" : "RESUMED"); updateUI(); }
         });
 
-        // Start: minimal motion
-        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | TAMAGOTCHI STYLE. POPPY IS MOSTLY STILL. USE BUTTONS TO CARE FOR POPPY.</div>';
+        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | PLAY GAME IS APPLES. APPLE IS BIGGER AND MOVES SLOWER.</div>';
         updateUI();
 
-        // Add occasional idle blink (not constant motion)
         setInterval(()=>{
           if (S.alive && !S.paused && !overlay.classList.contains("show") && Math.random() < 0.22){
             blink();
           }
         }, 2500);
 
-        // Main tick
         setInterval(tick, TICK_MS);
 
       } catch(err){
