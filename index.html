@@ -18,7 +18,6 @@
       --shadow:0 18px 60px rgba(0,0,0,.45);
       --radius:18px;
     }
-
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
@@ -35,7 +34,6 @@
       text-transform: uppercase;
       letter-spacing:.2px;
     }
-
     .wrap{
       width:min(1180px, 100%);
       margin:0 auto;
@@ -45,7 +43,6 @@
       align-items:start;
     }
     @media (max-width: 980px){ .wrap{ grid-template-columns:1fr; } }
-
     .card{
       background: var(--card);
       border:1px solid rgba(255,255,255,.10);
@@ -56,7 +53,6 @@
       overflow:hidden;
       position:relative;
     }
-
     header{
       padding:18px 18px 10px;
       display:flex;
@@ -67,7 +63,6 @@
     .title{ display:flex; flex-direction:column; gap:6px; }
     h1{ margin:0; font-size: clamp(18px, 2.6vw, 26px); }
     .sub{ margin:0; color: var(--muted); font-size: 13px; }
-
     .badge{
       display:inline-flex;
       align-items:center;
@@ -86,9 +81,7 @@
       background: var(--accent);
       box-shadow: 0 0 0 6px rgba(124,247,178,.10);
     }
-
     .stage{ padding: 14px 18px 18px; display:grid; gap:14px; }
-
     .screen{
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
@@ -104,7 +97,6 @@
       justify-content:center;
       padding: 14px;
     }
-
     .hud{
       position:absolute;
       inset: 12px 12px auto 12px;
@@ -115,7 +107,6 @@
       z-index:5;
       pointer-events:none;
     }
-
     .statusBox{
       max-width: 66%;
       padding: 10px 12px;
@@ -130,7 +121,6 @@
       pointer-events:auto;
       user-select:none;
     }
-
     .pill{
       padding: 9px 10px;
       border-radius: 999px;
@@ -145,7 +135,6 @@
       pointer-events:none;
     }
     .pill b{ color: var(--text); }
-
     .floorGlow{
       position:absolute;
       bottom:-110px;
@@ -158,7 +147,6 @@
       pointer-events:none;
     }
 
-    /* POPPY */
     .poppyWrap{
       position:relative;
       width: 270px;
@@ -169,7 +157,6 @@
       transform-origin: 50% 90%;
       z-index:2;
     }
-
     .nameTag{
       position:absolute;
       top: 4px;
@@ -184,7 +171,6 @@
       font-size: 12px;
       letter-spacing:.9px;
     }
-
     .square{
       width: 178px;
       height: 178px;
@@ -197,7 +183,6 @@
       position:relative;
       overflow:hidden;
     }
-
     .face{
       width: 138px;
       height: 92px;
@@ -218,13 +203,7 @@
       z-index:2;
     }
 
-    /* ACCESSORY LAYER ON TOP OF FACE */
-    .accLayer{
-      position:absolute;
-      inset:0;
-      z-index:4;
-      pointer-events:none;
-    }
+    .accLayer{ position:absolute; inset:0; z-index:4; pointer-events:none; }
     .acc{ position:absolute; pointer-events:none; display:none; }
     .acc.show{ display:block; }
 
@@ -371,7 +350,6 @@
     .brow.left{ left: 20px; transform: rotate(-10deg); }
     .brow.right{ right: 20px; transform: rotate(10deg); }
 
-    /* FACE STATES */
     .mood-happy .mouth{ width: 44px; height: 20px; border-radius: 0 0 30px 30px; }
     .mood-sad .mouth{
       bottom: 18px; width: 44px; height: 16px;
@@ -431,7 +409,6 @@
     }
     .sleepOn .sleepTint{ opacity:1; }
 
-    /* OVERLAY */
     .overlay{
       position:absolute;
       inset: 0;
@@ -466,7 +443,6 @@
       user-select:none;
     }
     .overlayX:hover{ border-color: rgba(124,247,178,.42); }
-
     .overlayTop{
       display:flex;
       align-items:center;
@@ -496,7 +472,6 @@
       border-color: rgba(124,247,178,.46);
       background: rgba(124,247,178,.12);
     }
-
     .overlayBody{
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.10);
@@ -537,14 +512,12 @@
       gap: 12px;
     }
     @media (max-width: 680px){ .controls{ grid-template-columns:1fr; } }
-
     .panel{
       padding: 14px 14px 16px;
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.04);
     }
-
     .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
     @media (max-width: 680px){ .grid3{ grid-template-columns:1fr; } }
 
@@ -565,7 +538,6 @@
     button:hover{ filter: brightness(1.06); border-color: rgba(124,247,178,.42); }
     button:active{ transform: translateY(1px) scale(.99); }
     button:disabled{ opacity:.55; cursor:not-allowed; }
-
     .btnMain{
       background: linear-gradient(180deg, rgba(124,247,178,.24), rgba(124,247,178,.08));
       border-color: rgba(124,247,178,.22);
@@ -593,7 +565,6 @@
       color: var(--muted);
     }
     @media (max-width: 420px){ .barRow{ grid-template-columns: 1fr; } }
-
     .meter{
       height: 12px;
       border-radius: 999px;
@@ -649,7 +620,7 @@
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">SHOP PURCHASES SHOW ON POPPY | ACHIEVEMENTS CLOSE FIXED</p>
+          <p class="sub">SHOP HAS FOOD WATER SNACK SOAP MED | SETTINGS WORK | ACHIEVEMENTS RE-ADDED</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -667,15 +638,14 @@
               MOOD <b id="moodPill">HAPPY</b>
               LVL <b id="lvlPill">1</b>
               AGE <b id="agePill">0</b>
-              COINS <b id="coinsPill">5</b>
+              COINS <b id="coinsPill">8</b>
             </div>
           </div>
 
           <div class="floorGlow"></div>
 
-          <div class="poppyWrap" id="poppyWrap" aria-label="Poppy">
+          <div class="poppyWrap" id="poppyWrap">
             <div class="nameTag">POPPY</div>
-
             <div class="square" id="square">
               <div class="accLayer">
                 <div class="acc hat" id="accHat"></div>
@@ -694,7 +664,6 @@
             </div>
           </div>
 
-          <!-- OVERLAY -->
           <div class="overlay" id="overlay" aria-hidden="true">
             <div class="overlayCard" role="dialog" aria-modal="true">
               <div class="overlayX" id="overlayX" title="CLOSE">X</div>
@@ -705,7 +674,6 @@
               </div>
 
               <div class="overlayTabs" id="overlayTabs" style="display:none;"></div>
-
               <div class="overlayBody" id="overlayBody"></div>
 
               <div class="overlayActions">
@@ -719,7 +687,7 @@
         <div class="controls">
           <div class="panel">
             <div class="bars">
-              <div class="barRow"><span>HUNGER</span><div class="meter"><div class="fill" id="hungerFill"></div></div><span id="hungerVal">50</span></div>
+              <div class="barRow"><span>HUNGER</span><div class="meter"><div class="fill" id="hungerFill"></div></div><span id="hungerVal">55</span></div>
               <div class="barRow"><span>HAPPINESS</span><div class="meter"><div class="fill" id="happyFill"></div></div><span id="happyVal">70</span></div>
               <div class="barRow"><span>ENERGY</span><div class="meter"><div class="fill" id="energyFill"></div></div><span id="energyVal">70</span></div>
               <div class="barRow"><span>CLEANLINESS</span><div class="meter"><div class="fill" id="cleanFill"></div></div><span id="cleanVal">60</span></div>
@@ -732,21 +700,19 @@
           <div class="panel">
             <div class="grid3">
               <button class="btnMain" id="btnFeed" type="button">FEED</button>
-              <button class="btnMain" id="btnPlay" type="button">PLAY</button>
               <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
-
               <button class="btnMain" id="btnClean" type="button">CLEAN</button>
+
               <button class="btnWarn" id="btnMed" type="button">MEDICINE</button>
               <button class="btnAlt" id="btnWork" type="button">WORK</button>
+              <button class="btnAlt" id="btnTrain" type="button">TRAIN</button>
 
               <button class="btnAlt" id="btnInventory" type="button">INVENTORY</button>
               <button class="btnAlt" id="btnShop" type="button">SHOP</button>
               <button class="btnAlt" id="btnAchievements" type="button">ACHIEVEMENTS</button>
 
-              <button class="btnAlt" id="btnTrain" type="button">TRAIN</button>
               <button class="btnAlt" id="btnSettings" type="button">SETTINGS</button>
               <button class="btnAlt" id="btnPause" type="button">PAUSE</button>
-
               <button class="btnDanger" id="btnReset" type="button">RESET</button>
             </div>
           </div>
@@ -759,9 +725,10 @@
       <div class="log" id="log"></div>
 
       <div class="panel" style="margin-top:12px;">
-        <h2 style="margin:0 0 10px; font-size:16px;">CLOSE RULE</h2>
-        <div class="listItem"><b>OVERLAY CLOSE</b> CLICK CLOSE, CLICK X, PRESS ESC, OR CLICK OUTSIDE</div>
-        <div class="listItem"><b>SHOP DISPLAY</b> EQUIP ITEMS IN WARDROBE TO SHOW ON POPPY</div>
+        <h2 style="margin:0 0 10px; font-size:16px;">NOTES</h2>
+        <div class="listItem"><b>SHOP</b> BUY ITEMS FOR INVENTORY AND BUY ACCESSORIES THAT AUTO-EQUIP</div>
+        <div class="listItem"><b>FOOD RULE</b> FOOD +5 SATURATION | SNACK +1 SATURATION</div>
+        <div class="listItem"><b>CLOSE</b> CLOSE, X, ESC, OR CLICK OUTSIDE</div>
       </div>
     </aside>
   </main>
@@ -781,11 +748,13 @@
       function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
       function chance(p){ return Math.random() < p; }
 
-      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V4";
+      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V5";
 
       const defaultState = ()=>({
         alive:true,
         paused:false,
+        autoCare:false,
+        autoSave:true,
         mode:"NORMAL",
         age:0,
         coins:8,
@@ -799,16 +768,17 @@
         health:90,
         disc:50,
 
-        bestDino:0,
-
-        inv:{ FOOD:2, SNACK:2, WATER:2, SOAP:1, MED:1, TOY:1 },
+        inv:{ FOOD:2, SNACK:2, WATER:2, SOAP:1, MED:1 },
 
         ownedAccessories: { HAT:false, TIE:false, GLASSES:false, BOW:false },
         equippedAccessories: { HAT:false, TIE:false, GLASSES:false, BOW:false },
 
-        counters:{ purchases:0, feeds:0, plays:0, cleans:0, works:0, trains:0, meds:0, appleHits:0, dinoScoreBest:0 },
-        unlockedAchievements:{},
+        counters:{
+          feeds:0, snacks:0, waters:0, cleans:0, meds:0,
+          works:0, trains:0, purchases:0
+        },
 
+        unlockedAchievements:{},
         last: Date.now()
       });
 
@@ -826,7 +796,6 @@
       }
 
       let S = defaultState();
-
       function load(){
         try{
           const raw = localStorage.getItem(SAVE_KEY);
@@ -835,7 +804,8 @@
           return true;
         } catch(e){ return false; }
       }
-      function save(force){
+      function save(){
+        if (!S.autoSave) return;
         try{
           S.last = Date.now();
           localStorage.setItem(SAVE_KEY, JSON.stringify(S));
@@ -873,7 +843,6 @@
         xp: $("xpVal")
       };
 
-      // Accessories
       const accEls = {
         HAT: $("accHat"),
         TIE: $("accTie"),
@@ -893,15 +862,14 @@
 
       // Buttons
       const btnFeed = $("btnFeed");
-      const btnPlay = $("btnPlay");
       const btnSleep = $("btnSleep");
       const btnClean = $("btnClean");
       const btnMed = $("btnMed");
       const btnWork = $("btnWork");
+      const btnTrain = $("btnTrain");
       const btnInventory = $("btnInventory");
       const btnShop = $("btnShop");
       const btnAchievements = $("btnAchievements");
-      const btnTrain = $("btnTrain");
       const btnSettings = $("btnSettings");
       const btnPause = $("btnPause");
       const btnReset = $("btnReset");
@@ -950,11 +918,30 @@
         }
       }
 
+      function have(item, n=1){ return (S.inv[item] || 0) >= n; }
+      function addItem(item, n=1){ S.inv[item] = (S.inv[item] || 0) + n; }
+      function takeItem(item, n=1){
+        if (!have(item,n)) return false;
+        S.inv[item] -= n;
+        return true;
+      }
+
+      // ACHIEVEMENTS (RE-ADDED, MORE)
       const ACH = [
         { id:"FIRST_FEED", name:"FIRST FEED", desc:"FEED POPPY ONCE", check:()=>S.counters.feeds>=1 },
-        { id:"FIRST_PLAY", name:"FIRST PLAY", desc:"PLAY ANY GAME ONCE", check:()=>S.counters.plays>=1 },
-        { id:"FIRST_BUY", name:"FIRST BUY", desc:"BUY ONE ACCESSORY", check:()=>S.counters.purchases>=1 }
+        { id:"SNACK_5", name:"SNACK TIME", desc:"EAT 5 SNACKS", check:()=>S.counters.snacks>=5 },
+        { id:"WATER_5", name:"HYDRATED", desc:"DRINK 5 WATERS", check:()=>S.counters.waters>=5 },
+        { id:"CLEAN_5", name:"CLEAN MACHINE", desc:"CLEAN 5 TIMES", check:()=>S.counters.cleans>=5 },
+        { id:"WORK_5", name:"WORK ETHIC", desc:"WORK 5 TIMES", check:()=>S.counters.works>=5 },
+        { id:"LEVEL_3", name:"LEVEL 3", desc:"REACH LEVEL 3", check:()=>S.lvl>=3 },
+        { id:"FIRST_BUY", name:"FIRST BUY", desc:"BUY ANYTHING IN SHOP", check:()=>S.counters.purchases>=1 },
+        { id:"ACCESSORY_2", name:"WARDROBE", desc:"OWN 2 ACCESSORIES", check:()=>ownedCount()>=2 },
+        { id:"COINS_25", name:"SAVINGS", desc:"HOLD 25 COINS", check:()=>S.coins>=25 }
       ];
+      function ownedCount(){
+        const o = S.ownedAccessories;
+        return (o.HAT?1:0)+(o.TIE?1:0)+(o.GLASSES?1:0)+(o.BOW?1:0);
+      }
       function unlockAchievements(){
         for (const a of ACH){
           if (!S.unlockedAchievements[a.id] && a.check()){
@@ -965,9 +952,17 @@
         }
       }
 
-      const SHOP = [
+      // SHOP: SUPPLIES + ACCESSORIES
+      const SHOP_SUPPLIES = [
+        { id:"FOOD",  name:"FOOD",  cost:3,  qty:1, desc:"INVENTORY FOOD | FEED +5 SATURATION" },
+        { id:"SNACK", name:"SNACK", cost:1,  qty:1, desc:"INVENTORY SNACK | FEED +1 SATURATION" },
+        { id:"WATER", name:"WATER", cost:2,  qty:1, desc:"INVENTORY WATER | HEALTH AND ENERGY" },
+        { id:"SOAP",  name:"SOAP",  cost:2,  qty:1, desc:"INVENTORY SOAP | CLEANLINESS" },
+        { id:"MED",   name:"MED",   cost:4,  qty:1, desc:"INVENTORY MED | HEALTH" }
+      ];
+      const SHOP_ACCESSORIES = [
         { id:"HAT", name:"HAT", cost:12, desc:"TOP ACCESSORY" },
-        { id:"TIE", name:"TIE", cost:9, desc:"FRONT ACCESSORY" },
+        { id:"TIE", name:"TIE", cost:9,  desc:"FRONT ACCESSORY" },
         { id:"GLASSES", name:"GLASSES", cost:15, desc:"FACE ACCESSORY" },
         { id:"BOW", name:"BOW", cost:10, desc:"FRONT ACCESSORY" }
       ];
@@ -988,7 +983,6 @@
         S.clean  = clamp(S.clean, 0, 100);
         S.health = clamp(S.health, 0, 100);
         S.disc   = clamp(S.disc, 0, 100);
-        S.xp     = clamp(S.xp, 0, 9999);
 
         fills.hunger.style.width = S.hunger + "%";
         fills.happy.style.width  = S.happy + "%";
@@ -1014,14 +1008,10 @@
 
         setFaceMoodClass(m);
 
-        if (!S.alive){
-          statusDot.style.background = "var(--danger)";
-          statusText.textContent = "DEAD";
-        } else {
-          statusText.textContent = S.paused ? "PAUSED" : "ALIVE";
-          statusDot.style.background = (m === "SICK" || m === "ANGRY") ? "var(--danger)" :
-                                      (m === "HUNGRY" || m === "SAD") ? "var(--warn)" : "var(--accent)";
-        }
+        statusText.textContent = (!S.alive) ? "DEAD" : (S.paused ? "PAUSED" : "ALIVE");
+        statusDot.style.background = (!S.alive) ? "var(--danger)" :
+          (m === "SICK" || m === "ANGRY") ? "var(--danger)" :
+          (m === "HUNGRY" || m === "SAD") ? "var(--warn)" : "var(--accent)";
 
         statusBox.textContent =
           "POPPY STATUS\n" +
@@ -1029,23 +1019,17 @@
           "MODE " + S.mode + "\n" +
           "COINS " + S.coins + "\n" +
           "FOOD " + (S.inv.FOOD||0) + " SNACK " + (S.inv.SNACK||0) + " WATER " + (S.inv.WATER||0) + "\n" +
-          "SOAP " + (S.inv.SOAP||0) + " MED " + (S.inv.MED||0) + " TOY " + (S.inv.TOY||0);
+          "SOAP " + (S.inv.SOAP||0) + " MED " + (S.inv.MED||0);
 
         if (S.mode === "SLEEPING") screen.classList.add("sleepOn");
         else screen.classList.remove("sleepOn");
 
-        renderAccessories(); // THIS MAKES PURCHASED+EQUIPPED SHOW ON POPPY
+        renderAccessories();
         save();
       }
 
-      // OVERLAY SYSTEM
-      let overlayInterval = null;
-      let overlayMode = "NONE";
-      function clearOverlayTimers(){
-        if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
-      }
+      // OVERLAY
       function closeOverlay(){
-        clearOverlayTimers();
         overlay.classList.remove("show");
         overlay.setAttribute("aria-hidden","true");
         overlayTabs.style.display = "none";
@@ -1055,19 +1039,15 @@
         overlayTimer.textContent = "INF";
         overlayPrimary.textContent = "DONE";
         overlayClose.textContent = "CLOSE";
-        overlayMode = "NONE";
         updateUI();
       }
       function openOverlay(mode){
-        clearOverlayTimers();
-        overlayMode = mode;
         overlayTitle.textContent = mode;
         overlayTimer.textContent = "INF";
         overlay.classList.add("show");
         overlay.setAttribute("aria-hidden","false");
       }
 
-      // GUARANTEED CLOSE: X, CLOSE, ESC, OUTSIDE
       overlayX.addEventListener("click", closeOverlay);
       overlayClose.addEventListener("click", closeOverlay);
       overlayPrimary.addEventListener("click", closeOverlay);
@@ -1088,7 +1068,6 @@
                "<div style='min-width:160px;'><button class='" + btnClass + "' id='" + id + "' type='button'>" + (btnText||"USE") + "</button></div>" +
                "</div>";
       }
-
       function setTabs(tabs, activeId){
         overlayTabs.style.display = "flex";
         overlayTabs.innerHTML = "";
@@ -1102,65 +1081,149 @@
         }
       }
 
+      // MENUS
+      function openInventory(){
+        openOverlay("INVENTORY");
+        overlayTabs.style.display = "none";
+
+        const inv = S.inv;
+        overlayBody.innerHTML =
+          menuTitle("INVENTORY") +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+            row("FOOD X " + (inv.FOOD||0), "EAT FOOD | +5 SATURATION", (inv.FOOD||0) ? "btnMain" : "btnAlt", "inv_food", "USE") +
+            row("SNACK X " + (inv.SNACK||0), "EAT SNACK | +1 SATURATION", (inv.SNACK||0) ? "btnMain" : "btnAlt", "inv_snack", "USE") +
+            row("WATER X " + (inv.WATER||0), "DRINK WATER", (inv.WATER||0) ? "btnMain" : "btnAlt", "inv_water", "USE") +
+            row("SOAP X " + (inv.SOAP||0), "CLEAN POPPY", (inv.SOAP||0) ? "btnMain" : "btnAlt", "inv_soap", "USE") +
+            row("MED X " + (inv.MED||0), "USE MEDICINE", (inv.MED||0) ? "btnWarn" : "btnAlt", "inv_med", "USE") +
+          "</div>";
+
+        overlayBody.querySelector("#inv_food").onclick = ()=>{
+          if (!takeItem("FOOD",1)) return tmsg("NO FOOD");
+          S.hunger += 5; S.happy += 2; S.clean -= 1;
+          S.counters.feeds += 1; addXP(6); unlockAchievements();
+          log("ATE FOOD +5 SATURATION"); burst("burst-pop", 260);
+          updateUI(); openInventory();
+        };
+        overlayBody.querySelector("#inv_snack").onclick = ()=>{
+          if (!takeItem("SNACK",1)) return tmsg("NO SNACK");
+          S.hunger += 1; S.happy += 2;
+          S.counters.feeds += 1; S.counters.snacks += 1;
+          addXP(4); unlockAchievements();
+          log("ATE SNACK +1 SATURATION"); burst("burst-pop", 220);
+          updateUI(); openInventory();
+        };
+        overlayBody.querySelector("#inv_water").onclick = ()=>{
+          if (!takeItem("WATER",1)) return tmsg("NO WATER");
+          S.health += 6; S.energy += 5; S.happy += 1;
+          S.counters.waters += 1; addXP(4); unlockAchievements();
+          log("DRANK WATER"); burst("burst-nod", 420);
+          updateUI(); openInventory();
+        };
+        overlayBody.querySelector("#inv_soap").onclick = ()=>{
+          if (!takeItem("SOAP",1)) return tmsg("NO SOAP");
+          S.clean += 22; S.happy += 2;
+          S.counters.cleans += 1; addXP(6); unlockAchievements();
+          log("CLEANED"); burst("burst-wig", 520);
+          updateUI(); openInventory();
+        };
+        overlayBody.querySelector("#inv_med").onclick = ()=>{
+          if (!takeItem("MED",1)) return tmsg("NO MED");
+          S.health += 20; S.mode = "NORMAL";
+          S.counters.meds += 1; addXP(7); unlockAchievements();
+          log("MEDICINE USED"); burst("burst-pop", 260);
+          updateUI(); openInventory();
+        };
+      }
+
       function openShop(){
         openOverlay("SHOP");
 
-        function renderBuy(){
+        function renderSupplies(){
           setTabs([
-            {id:"BUY", label:"BUY", onClick: renderBuy},
+            {id:"SUPPLIES", label:"SUPPLIES", onClick: renderSupplies},
+            {id:"ACCESSORIES", label:"ACCESSORIES", onClick: renderAccessoriesTab},
             {id:"WARDROBE", label:"WARDROBE", onClick: renderWardrobe}
-          ], "BUY");
+          ], "SUPPLIES");
 
-          let html = menuTitle("SHOP ITEMS") + "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
-          for (const it of SHOP){
+          let html = menuTitle("SUPPLIES") + "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
+          for (const it of SHOP_SUPPLIES){
+            const canBuy = S.coins >= it.cost;
+            html += row(
+              it.name + " | OWN " + (S.inv[it.id]||0),
+              it.desc + " | COST " + it.cost,
+              canBuy ? "btnMain" : "btnAlt",
+              "buy_" + it.id,
+              "BUY"
+            );
+          }
+          html += "</div>";
+          overlayBody.innerHTML = html;
+
+          for (const it of SHOP_SUPPLIES){
+            overlayBody.querySelector("#buy_" + it.id).onclick = ()=>{
+              if (S.coins < it.cost) return tmsg("NOT ENOUGH COINS");
+              S.coins -= it.cost;
+              addItem(it.id, it.qty);
+              S.counters.purchases += 1;
+              addXP(3);
+              unlockAchievements();
+              log("BOUGHT " + it.name + " +" + it.qty);
+              burst("burst-pop", 220);
+              updateUI();
+              renderSupplies();
+            };
+          }
+        }
+
+        function renderAccessoriesTab(){
+          setTabs([
+            {id:"SUPPLIES", label:"SUPPLIES", onClick: renderSupplies},
+            {id:"ACCESSORIES", label:"ACCESSORIES", onClick: renderAccessoriesTab},
+            {id:"WARDROBE", label:"WARDROBE", onClick: renderWardrobe}
+          ], "ACCESSORIES");
+
+          let html = menuTitle("ACCESSORIES") + "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
+          for (const it of SHOP_ACCESSORIES){
             const owned = !!S.ownedAccessories[it.id];
             const canBuy = S.coins >= it.cost && !owned;
-            const desc = it.desc + " | COST " + it.cost + " COINS";
             html += row(
               it.name + (owned ? " | OWNED" : ""),
-              desc,
+              it.desc + " | COST " + it.cost,
               owned ? "btnAlt" : (canBuy ? "btnMain" : "btnAlt"),
-              "buy_" + it.id,
+              "buyacc_" + it.id,
               owned ? "OWNED" : "BUY"
             );
           }
           html += "</div>";
           overlayBody.innerHTML = html;
 
-          for (const it of SHOP){
-            const btn = overlayBody.querySelector("#buy_" + it.id);
-            btn.onclick = ()=>{
+          for (const it of SHOP_ACCESSORIES){
+            overlayBody.querySelector("#buyacc_" + it.id).onclick = ()=>{
               if (S.ownedAccessories[it.id]) return tmsg("ALREADY OWNED");
               if (S.coins < it.cost) return tmsg("NOT ENOUGH COINS");
               S.coins -= it.cost;
               S.ownedAccessories[it.id] = true;
+              S.equippedAccessories[it.id] = true; // AUTO SHOW ON POPPY
               S.counters.purchases += 1;
-
-              // IMPORTANT: AUTO-EQUIP ON PURCHASE SO IT SHOWS UP IMMEDIATELY
-              S.equippedAccessories[it.id] = true;
-
               addXP(6);
               unlockAchievements();
-              log("BOUGHT AND EQUIPPED " + it.name + " FOR " + it.cost);
-              burst("burst-pop", 260);
-
-              // MAKE IT SHOW ON POPPY RIGHT NOW
-              renderAccessories();
+              log("BOUGHT AND EQUIPPED " + it.name);
+              burst("burst-wig", 520);
               updateUI();
-
-              renderBuy();
+              renderAccessoriesTab();
             };
           }
         }
 
         function renderWardrobe(){
           setTabs([
-            {id:"BUY", label:"BUY", onClick: renderBuy},
+            {id:"SUPPLIES", label:"SUPPLIES", onClick: renderSupplies},
+            {id:"ACCESSORIES", label:"ACCESSORIES", onClick: renderAccessoriesTab},
             {id:"WARDROBE", label:"WARDROBE", onClick: renderWardrobe}
           ], "WARDROBE");
 
           let html = menuTitle("WARDROBE") + "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
-          for (const it of SHOP){
+          for (const it of SHOP_ACCESSORIES){
             const owned = !!S.ownedAccessories[it.id];
             const equipped = !!S.equippedAccessories[it.id];
             if (!owned){
@@ -1178,38 +1241,32 @@
           html += "</div>";
           overlayBody.innerHTML = html;
 
-          for (const it of SHOP){
+          for (const it of SHOP_ACCESSORIES){
             const btn = overlayBody.querySelector("#eq_" + it.id);
             if (!btn) continue;
             btn.onclick = ()=>{
-              if (!S.ownedAccessories[it.id]) return tmsg("NOT OWNED");
               S.equippedAccessories[it.id] = !S.equippedAccessories[it.id];
               log((S.equippedAccessories[it.id] ? "EQUIPPED " : "UNEQUIPPED ") + it.name);
-              burst("burst-wig", 520);
-
-              // APPLY VISUALLY
-              renderAccessories();
+              burst("burst-pop", 220);
               updateUI();
-
               renderWardrobe();
             };
           }
         }
 
-        renderBuy();
+        renderSupplies();
       }
 
       function openAchievements(){
         openOverlay("ACHIEVEMENTS");
-
+        overlayTabs.style.display = "none";
         unlockAchievements();
 
-        let unlockedCount = 0;
-        for (const a of ACH) if (S.unlockedAchievements[a.id]) unlockedCount++;
+        let unlocked = 0;
+        for (const a of ACH) if (S.unlockedAchievements[a.id]) unlocked++;
 
-        let html = menuTitle("ACHIEVEMENTS " + unlockedCount + " / " + ACH.length) +
+        let html = menuTitle("ACHIEVEMENTS " + unlocked + " / " + ACH.length) +
           "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
-
         for (const a of ACH){
           const ok = !!S.unlockedAchievements[a.id];
           html += "<div class='listItem' style='border-color:" + (ok ? "rgba(124,247,178,.35)" : "rgba(255,255,255,.10)") + ";'>" +
@@ -1220,89 +1277,96 @@
         }
         html += "</div>";
         overlayBody.innerHTML = html;
-
-        // ACHIEVEMENTS IS JUST THE SAME OVERLAY, SO IT CLOSES WITH:
-        // CLOSE BUTTON, X, ESC, OUTSIDE, OR DONE
       }
 
-      // SIMPLE ACTIONS
+      function openSettings(){
+        openOverlay("SETTINGS");
+        overlayTabs.style.display = "none";
+        overlayBody.innerHTML =
+          menuTitle("SETTINGS") +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+            row("AUTO CARE", "AUTO FEED AND CLEAN WHEN LOW (USES INVENTORY)", "btnAlt", "set_autoCare", (S.autoCare ? "ON" : "OFF")) +
+            row("AUTO SAVE", "SAVE TO BROWSER STORAGE", "btnAlt", "set_autoSave", (S.autoSave ? "ON" : "OFF")) +
+            row("CLEAR SAVE", "RESET SAVE FILE ONLY", "btnDanger", "set_clearSave", "CLEAR") +
+          "</div>";
+
+        overlayBody.querySelector("#set_autoCare").onclick = ()=>{
+          S.autoCare = !S.autoCare;
+          log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
+          tmsg("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
+          updateUI();
+          openSettings();
+        };
+        overlayBody.querySelector("#set_autoSave").onclick = ()=>{
+          S.autoSave = !S.autoSave;
+          log("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
+          tmsg("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
+          try{
+            if (S.autoSave) localStorage.setItem(SAVE_KEY, JSON.stringify(S));
+          } catch(e){}
+          openSettings();
+        };
+        overlayBody.querySelector("#set_clearSave").onclick = ()=>{
+          const ok = confirm("CLEAR SAVE FILE?");
+          if (!ok) return;
+          try{ localStorage.removeItem(SAVE_KEY); }catch(e){}
+          log("SAVE CLEARED");
+          tmsg("SAVE CLEARED");
+        };
+      }
+
+      // BASIC ACTIONS
       function actSleepToggle(){
-        if (S.mode === "SLEEPING"){
-          S.mode = "NORMAL";
-          log("WOKE UP");
-        } else {
-          S.mode = "SLEEPING";
-          log("SLEEP START");
-        }
+        if (S.mode === "SLEEPING"){ S.mode = "NORMAL"; log("WOKE UP"); }
+        else { S.mode = "SLEEPING"; log("SLEEP START"); }
         burst("burst-nod", 420);
         updateUI();
       }
 
-      // Buttons
+      // BUTTON WIRING
+      btnInventory.addEventListener("click", openInventory);
       btnShop.addEventListener("click", openShop);
       btnAchievements.addEventListener("click", openAchievements);
-      btnSleep.addEventListener("click", actSleepToggle);
+      btnSettings.addEventListener("click", openSettings);
 
       btnFeed.addEventListener("click", ()=>{
-        S.counters.feeds += 1;
-        unlockAchievements();
-        log("FEED ACTION");
-        burst("burst-pop", 260);
-        updateUI();
+        // OPEN INVENTORY DIRECTLY TO FEED
+        openInventory();
       });
 
-      btnPlay.addEventListener("click", ()=>{
-        S.counters.plays += 1;
-        unlockAchievements();
-        log("PLAY ACTION");
-        burst("burst-wig", 520);
-        updateUI();
-      });
+      btnSleep.addEventListener("click", actSleepToggle);
 
       btnClean.addEventListener("click", ()=>{
-        S.counters.cleans += 1;
-        S.clean += 10;
-        unlockAchievements();
-        log("CLEAN ACTION");
-        burst("burst-wig", 520);
+        if (!takeItem("SOAP",1)) return tmsg("NO SOAP");
+        S.clean += 22; S.happy += 2;
+        S.counters.cleans += 1; addXP(6); unlockAchievements();
+        log("CLEANED"); burst("burst-wig", 520);
         updateUI();
       });
 
       btnMed.addEventListener("click", ()=>{
-        S.counters.meds += 1;
-        S.health += 10;
-        unlockAchievements();
-        log("MEDICINE ACTION");
-        burst("burst-pop", 260);
+        if (!takeItem("MED",1)) return tmsg("NO MED");
+        S.health += 20;
+        S.counters.meds += 1; addXP(7); unlockAchievements();
+        log("MEDICINE USED"); burst("burst-pop", 260);
         updateUI();
       });
 
       btnWork.addEventListener("click", ()=>{
-        S.counters.works += 1;
-        S.coins += rint(1,4);
-        unlockAchievements();
-        log("WORK ACTION");
-        burst("burst-nod", 420);
+        const earned = rint(2,5);
+        S.coins += earned;
+        S.energy -= 8; S.hunger -= 2; S.happy -= 1;
+        S.counters.works += 1; addXP(7); unlockAchievements();
+        log("WORK EARNED " + earned); burst("burst-nod", 420);
         updateUI();
       });
 
       btnTrain.addEventListener("click", ()=>{
-        S.counters.trains += 1;
-        S.disc += 6;
-        unlockAchievements();
-        log("TRAIN ACTION");
-        burst("burst-pop", 260);
+        if (S.energy < 10) return tmsg("LOW ENERGY");
+        S.disc += 8; S.energy -= 10; S.happy -= 1;
+        S.counters.trains += 1; addXP(8); unlockAchievements();
+        log("TRAIN COMPLETE"); burst("burst-pop", 260);
         updateUI();
-      });
-
-      btnInventory.addEventListener("click", ()=>{
-        openOverlay("INVENTORY");
-        overlayBody.innerHTML = menuTitle("INVENTORY") + "<div class='listItem' style='margin-top:10px;'><b>NOTE</b><div style='margin-top:6px;'>THIS OVERLAY CLOSES WITH CLOSE, X, ESC, OR CLICK OUTSIDE</div></div>";
-      });
-
-      btnSettings.addEventListener("click", ()=>{
-        openOverlay("SETTINGS");
-        overlayBody.innerHTML = menuTitle("SETTINGS") + "<div class='listItem' style='margin-top:10px;'><b>NOTE</b><div style='margin-top:6px;'>CLOSE WITH CLOSE, X, ESC, OR CLICK OUTSIDE</div></div>";
       });
 
       btnPause.addEventListener("click", ()=>{
@@ -1322,18 +1386,84 @@
         updateUI();
       });
 
-      // LOOP
+      // TICK LOOP
       const TICK_MS = 25000;
+
+      function autoCareTick(){
+        if (!S.autoCare) return;
+        if (S.mode === "SLEEPING") return;
+
+        if (S.hunger < 28 && have("FOOD",1)){
+          takeItem("FOOD",1);
+          S.hunger += 5; S.happy += 1;
+          S.counters.feeds += 1;
+          log("AUTO CARE FED FOOD");
+        } else if (S.hunger < 28 && have("SNACK",1)){
+          takeItem("SNACK",1);
+          S.hunger += 1; S.happy += 1;
+          S.counters.feeds += 1; S.counters.snacks += 1;
+          log("AUTO CARE FED SNACK");
+        }
+
+        if (S.clean < 24 && have("SOAP",1)){
+          takeItem("SOAP",1);
+          S.clean += 22;
+          S.counters.cleans += 1;
+          log("AUTO CARE CLEANED");
+        }
+
+        if (S.health < 22 && have("MED",1)){
+          takeItem("MED",1);
+          S.health += 20;
+          S.counters.meds += 1;
+          log("AUTO CARE USED MED");
+        }
+      }
+
       function tick(){
         if (!S.alive || S.paused) return;
+
+        if (chance(0.14)) blink();
+
         S.age += 1;
-        if (!overlay.classList.contains("show") && chance(0.16)) blink();
-        S.hunger -= 1.2;
-        S.energy -= 1.2;
-        S.clean  -= 0.8;
-        S.happy  -= 0.8;
-        if (S.mode === "SLEEPING"){ S.energy += 5; S.health += 1; }
-        if (S.health <= 0){ S.alive = false; log("POPPY DIED"); }
+
+        if (S.mode === "SLEEPING"){
+          S.energy += 5;
+          S.health += 1;
+          S.hunger -= 1;
+        } else {
+          S.hunger -= 1.2;
+          S.energy -= 1.2;
+          S.clean  -= 0.8;
+          S.happy  -= 0.8;
+        }
+
+        // health damage when neglected
+        let dmg = 0;
+        if (S.hunger <= 10) dmg += 3;
+        if (S.clean  <= 10) dmg += 3;
+        if (S.energy <= 8)  dmg += 2;
+        if (S.happy  <= 8)  dmg += 2;
+        S.health -= dmg;
+
+        autoCareTick();
+
+        // passive xp
+        S.xp += 1;
+        while (S.xp >= xpToNext(S.lvl)){
+          S.xp -= xpToNext(S.lvl);
+          S.lvl += 1;
+          S.coins += 2;
+          log("LEVEL UP " + S.lvl + " COINS +2");
+        }
+
+        if (S.health <= 0){
+          S.alive = false;
+          S.health = 0;
+          log("POPPY DIED");
+          tmsg("POPPY DIED");
+        }
+
         unlockAchievements();
         updateUI();
       }
@@ -1343,7 +1473,7 @@
       logEl.innerHTML = "";
       log(loaded ? "SAVE LOADED" : "WELCOME TO POPPY");
       updateUI();
-      save();
+
       setInterval(tick, TICK_MS);
     })();
   </script>
