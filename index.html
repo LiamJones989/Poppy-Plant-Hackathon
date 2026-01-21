@@ -15,7 +15,6 @@
       --accent2:#8aa4ff;
       --warn:#ffd18a;
       --danger:#ff8aa1;
-      --border:rgba(255,255,255,.14);
       --shadow:0 18px 60px rgba(0,0,0,.45);
       --radius:18px;
     }
@@ -25,7 +24,7 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      font-weight: 900;
+      font-weight: 950;
       color: var(--text);
       background:
         radial-gradient(900px 600px at 15% 10%, rgba(122,249,184,.16), transparent 55%),
@@ -49,7 +48,7 @@
 
     .card{
       background: var(--card);
-      border:1px solid rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
       border-color: rgba(124,247,178,.16);
       border-top-color: rgba(138,164,255,.20);
       border-radius: var(--radius);
@@ -122,8 +121,7 @@
     }
 
     .statusBox{
-      pointer-events:none;
-      max-width: 62%;
+      max-width: 66%;
       padding: 10px 12px;
       border-radius: 14px;
       background: rgba(0,0,0,.22);
@@ -136,7 +134,6 @@
     }
 
     .pill{
-      pointer-events:none;
       padding: 9px 10px;
       border-radius: 999px;
       font-size: 12px;
@@ -162,7 +159,7 @@
       pointer-events:none;
     }
 
-    /* POPPY CHARACTER */
+    /* POPPY CHARACTER (GREEN SQUARE) */
     .poppyWrap{
       position:relative;
       width: 300px;
@@ -295,7 +292,6 @@
       opacity:.85;
     }
 
-    /* CONSOLE */
     .controls{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -347,10 +343,7 @@
       border-color: rgba(255,138,161,.22);
     }
 
-    .bars{
-      display:grid;
-      gap:10px;
-    }
+    .bars{ display:grid; gap:10px; }
     .barRow{
       display:grid;
       grid-template-columns: 120px 1fr 54px;
@@ -377,7 +370,7 @@
     }
 
     .log{
-      height: 260px;
+      height: 280px;
       overflow:auto;
       padding: 12px;
       border-radius: 14px;
@@ -405,7 +398,7 @@
       55%{ transform: translateY(0) }
       75%{ transform: translateY(-8px) }
     }
-    @keyframes panicShake {
+    @keyframes shake {
       0%{ transform: translateX(0) rotate(0deg) }
       10%{ transform: translateX(-6px) rotate(-3deg) }
       20%{ transform: translateX(6px) rotate(3deg) }
@@ -418,43 +411,39 @@
       90%{ transform: translateX(-2px) rotate(0deg) }
       100%{ transform: translateX(0) rotate(0deg) }
     }
-    @keyframes headBob {
-      0%,100%{ transform: translateX(-50%) translateY(0) }
-      25%{ transform: translateX(-50%) translateY(-3px) }
-      50%{ transform: translateX(-50%) translateY(2px) }
-      75%{ transform: translateX(-50%) translateY(-2px) }
-    }
 
-    .anim-idle .poppyWrap{ animation: none; }
+    .anim-idle .poppyWrap{ animation:none; }
     .anim-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
     .anim-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
-    .anim-shake .poppyWrap{ animation: panicShake 520ms linear infinite; }
+    .anim-shake .poppyWrap{ animation: shake 520ms linear infinite; }
 
-    .anim-wiggle .face,
-    .anim-bounce .face,
-    .anim-shake .face{
-      animation: headBob 700ms ease-in-out infinite;
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .anim-idle .poppyWrap,
-      .anim-wiggle .poppyWrap,
-      .anim-bounce .poppyWrap,
-      .anim-shake .poppyWrap,
-      .anim-wiggle .face,
-      .anim-bounce .face,
-      .anim-shake .face{ animation:none !important; }
+    .errorBanner{
+      position:fixed;
+      left:16px;
+      right:16px;
+      bottom:16px;
+      padding:12px 14px;
+      border-radius:14px;
+      background: rgba(255,138,161,.18);
+      border: 1px solid rgba(255,138,161,.40);
+      color: var(--text);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+      z-index:9999;
+      display:none;
+      white-space: pre-line;
     }
   </style>
 </head>
 
 <body>
+  <div class="errorBanner" id="errorBanner"></div>
+
   <main class="wrap">
     <section class="card" id="app">
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">A FULL TAMAGOTCHI STYLE PET WITH NEEDS, MOODS, AND UPGRADES</p>
+          <p class="sub">TAMAGOTCHI STYLE PET WITH NEEDS, MOODS, AND MODS</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -465,22 +454,21 @@
       <div class="stage">
         <div class="screen" id="screen">
           <div class="hud">
-            <div class="statusBox" id="statusBox">POPPY IS IDLE. TAKE CARE OF NEEDS.</div>
-            <div class="pill">MOOD <b id="moodPill">HAPPY</b> AGE <b id="agePill">0</b></div>
+            <div class="statusBox" id="statusBox">POPPY IS IDLE. CLICK A BUTTON.</div>
+            <div class="pill">MOOD <b id="moodPill">HAPPY</b> AGE <b id="agePill">0</b> COINS <b id="coinsPill">5</b></div>
           </div>
 
           <div class="floorGlow"></div>
 
           <div class="poppyWrap" id="poppyWrap" aria-label="Poppy">
             <div class="nameTag">POPPY</div>
-
-            <div class="square" id="square">
+            <div class="square">
               <div class="face" id="face">
                 <div class="brow left"></div>
                 <div class="brow right"></div>
                 <div class="eye"></div>
                 <div class="eye"></div>
-                <div class="mouth" id="mouth"></div>
+                <div class="mouth"></div>
               </div>
             </div>
           </div>
@@ -499,22 +487,22 @@
 
           <div class="panel">
             <div class="grid2">
-              <button class="btnMain" id="btnFeed" type="button">FEED</button>
+              <button class="btnMain" id="btnFeed" type="button">FEED (COST 1)</button>
               <button class="btnMain" id="btnPlay" type="button">PLAY</button>
               <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
               <button class="btnMain" id="btnClean" type="button">CLEAN</button>
-              <button class="btnWarn" id="btnMed" type="button">MEDICINE</button>
+              <button class="btnWarn" id="btnMed" type="button">MEDICINE (COST 2)</button>
               <button class="btnAlt" id="btnWork" type="button">WORK</button>
             </div>
 
             <div class="grid2" style="margin-top:10px;">
-              <button class="btnAlt" id="btnShop" type="button">SHOP</button>
               <button class="btnAlt" id="btnToggleAuto" type="button">AUTO CARE OFF</button>
+              <button class="btnAlt" id="btnPause" type="button">PAUSE</button>
             </div>
 
             <div class="grid2" style="margin-top:10px;">
-              <button class="btnDanger" id="btnReset" type="button">RESET SAVE</button>
-              <button class="btnAlt" id="btnPause" type="button">PAUSE</button>
+              <button class="btnAlt" id="btnShopInfo" type="button">SHOP INFO</button>
+              <button class="btnDanger" id="btnReset" type="button">RESET</button>
             </div>
           </div>
         </div>
@@ -528,15 +516,15 @@
       <div class="panel" style="margin-top:12px;">
         <h2 style="margin:0 0 10px; font-size:16px;">MODS</h2>
         <div class="grid2">
-          <button class="btnAlt" id="modSnack" type="button">SNACK DISPENSER</button>
-          <button class="btnAlt" id="modToy" type="button">TOY BOX</button>
-          <button class="btnAlt" id="modBlanket" type="button">SOFT BLANKET</button>
-          <button class="btnAlt" id="modSoap" type="button">SOAP KIT</button>
+          <button class="btnAlt" id="modSnack" type="button">SNACK DISPENSER (8)</button>
+          <button class="btnAlt" id="modToy" type="button">TOY BOX (10)</button>
+          <button class="btnAlt" id="modBlanket" type="button">SOFT BLANKET (10)</button>
+          <button class="btnAlt" id="modSoap" type="button">SOAP KIT (8)</button>
         </div>
         <div class="panel" style="margin-top:10px;">
           <div style="font-size:12px; color:var(--muted); line-height:1.35;">
-            MODS CHANGE STATS PASSIVELY. THEY COST COINS. WORK EARNS COINS.
-            YOUR PET WILL GET HUNGRY, TIRED, DIRTY, SAD, OR ANGRY IF NEGLECTED.
+            MODS GIVE PASSIVE BUFFS EACH TICK. WORK EARNS COINS.
+            TICK SPEED IS SET TO 10 SECONDS FOR DEMO.
           </div>
         </div>
       </div>
@@ -544,453 +532,364 @@
   </main>
 
   <script>
-    const $ = (id)=>document.getElementById(id);
-
-    const app = $("app");
-    const face = $("face");
-    const statusBox = $("statusBox");
-    const moodPill = $("moodPill");
-    const agePill = $("agePill");
-    const statusDot = $("statusDot");
-    const statusText = $("statusText");
-    const logEl = $("log");
-    const poppyWrap = $("poppyWrap");
-
-    const fills = {
-      hunger: $("hungerFill"),
-      happy: $("happyFill"),
-      energy: $("energyFill"),
-      clean: $("cleanFill"),
-      health: $("healthFill")
-    };
-    const vals = {
-      hunger: $("hungerVal"),
-      happy: $("happyVal"),
-      energy: $("energyVal"),
-      clean: $("cleanVal"),
-      health: $("healthVal")
-    };
-
-    // SAVE KEY
-    const KEY = "POPPY_TAMA_SAVE_V1";
-
-    // GAME STATE
-    let S = {
-      alive: true,
-      paused: false,
-      ageMin: 0,
-      coins: 0,
-
-      hunger: 50,     // 0 worst, 100 best
-      happy: 70,
-      energy: 70,
-      clean: 60,
-      health: 90,
-
-      mood: "HAPPY",  // derived
-      anim: "IDLE",
-
-      autoCare: false,
-
-      mods: {
-        snack: false,
-        toy: false,
-        blanket: false,
-        soap: false
-      }
-    };
-
-    // UTILS
-    function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
-    function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
-
-    function log(msg){
-      const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
-      const div = document.createElement("div");
-      div.className = "item";
-      div.innerHTML = "<b>" + t + "</b> | " + msg;
-      logEl.prepend(div);
-    }
-
-    function setAnim(name){
-      app.classList.remove("anim-idle","anim-wiggle","anim-bounce","anim-shake");
-      const map = { IDLE:"anim-idle", WIGGLE:"anim-wiggle", BOUNCE:"anim-bounce", SHAKE:"anim-shake" };
-      app.classList.add(map[name] || "anim-idle");
-      S.anim = name;
-    }
-
-    function setFaceMood(m){
-      face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored");
-      const map = {
-        HAPPY:"mood-happy",
-        SAD:"mood-sad",
-        ANGRY:"mood-angry",
-        HUNGRY:"mood-hungry",
-        SICK:"mood-sick",
-        BORED:"mood-bored"
-      };
-      face.classList.add(map[m] || "mood-happy");
-    }
-
-    function updateBars(){
-      const items = ["hunger","happy","energy","clean","health"];
-      items.forEach(k=>{
-        const v = clamp(S[k], 0, 100);
-        fills[k].style.width = v + "%";
-        vals[k].textContent = String(Math.round(v));
-      });
-    }
-
-    function computeMood(){
-      if (!S.alive) return "DEAD";
-      if (S.health <= 20) return "SICK";
-      if (S.hunger <= 25) return "HUNGRY";
-      if (S.clean <= 20) return "ANGRY";
-      if (S.happy <= 25) return "SAD";
-      if (S.energy <= 20) return "BORED";
-      return "HAPPY";
-    }
-
-    function updateHUD(){
-      const mood = computeMood();
-      S.mood = mood;
-      moodPill.textContent = mood;
-      agePill.textContent = String(S.ageMin);
-      setFaceMood(mood);
-
-      // status badge color
-      if (!S.alive){
-        statusDot.style.background = "var(--danger)";
-        statusText.textContent = "DEAD";
-      } else if (mood === "SICK"){
-        statusDot.style.background = "var(--danger)";
-        statusText.textContent = "SICK";
-      } else if (mood === "HUNGRY"){
-        statusDot.style.background = "var(--warn)";
-        statusText.textContent = "HUNGRY";
-      } else if (mood === "ANGRY"){
-        statusDot.style.background = "var(--danger)";
-        statusText.textContent = "ANGRY";
-      } else if (mood === "SAD"){
-        statusDot.style.background = "var(--warn)";
-        statusText.textContent = "SAD";
-      } else {
-        statusDot.style.background = "var(--accent)";
-        statusText.textContent = "ALIVE";
+    (function(){
+      const $ = (id)=>document.getElementById(id);
+      const banner = $("errorBanner");
+      function showError(msg){
+        banner.style.display = "block";
+        banner.textContent = "ERROR\n" + msg + "\nOPEN DEVTOOLS CONSOLE IF NEEDED";
       }
 
-      // status text lines (no chat)
-      const lines = [];
-      lines.push("POPPY STATUS");
-      lines.push("MOOD " + mood);
-      lines.push("COINS " + S.coins);
-      lines.push("MODS " + activeModsLabel());
-      statusBox.textContent = lines.join("\n");
-
-      // auto animation by mood
-      if (!S.paused && S.alive){
-        if (mood === "HAPPY") setAnim("WIGGLE");
-        else if (mood === "BORED") setAnim("BOUNCE");
-        else if (mood === "HUNGRY" || mood === "SAD") setAnim("IDLE");
-        else if (mood === "ANGRY" || mood === "SICK") setAnim("SHAKE");
-      } else {
-        setAnim("IDLE");
+      function need(id){
+        const el = $(id);
+        if (!el) throw new Error("MISSING ELEMENT ID: " + id);
+        return el;
       }
 
-      updateBars();
-      save();
-    }
+      try{
+        // Required elements
+        const app = need("app");
+        const face = need("face");
+        const statusBox = need("statusBox");
+        const moodPill = need("moodPill");
+        const agePill = need("agePill");
+        const coinsPill = need("coinsPill");
+        const statusDot = need("statusDot");
+        const statusText = need("statusText");
+        const logEl = need("log");
 
-    function activeModsLabel(){
-      const a = [];
-      if (S.mods.snack) a.push("SNACK");
-      if (S.mods.toy) a.push("TOY");
-      if (S.mods.blanket) a.push("BLANKET");
-      if (S.mods.soap) a.push("SOAP");
-      return a.length ? a.join(",") : "NONE";
-    }
+        const fills = {
+          hunger: need("hungerFill"),
+          happy: need("happyFill"),
+          energy: need("energyFill"),
+          clean: need("cleanFill"),
+          health: need("healthFill")
+        };
+        const vals = {
+          hunger: need("hungerVal"),
+          happy: need("happyVal"),
+          energy: need("energyVal"),
+          clean: need("cleanVal"),
+          health: need("healthVal")
+        };
 
-    // PASSIVE TICK: NEEDS DECAY + MOD EFFECTS
-    function tick(){
-      if (!S.alive || S.paused) return;
+        // Buttons
+        const btnFeed = need("btnFeed");
+        const btnPlay = need("btnPlay");
+        const btnSleep = need("btnSleep");
+        const btnClean = need("btnClean");
+        const btnMed = need("btnMed");
+        const btnWork = need("btnWork");
+        const btnToggleAuto = need("btnToggleAuto");
+        const btnPause = need("btnPause");
+        const btnReset = need("btnReset");
+        const btnShopInfo = need("btnShopInfo");
+        const modSnack = need("modSnack");
+        const modToy = need("modToy");
+        const modBlanket = need("modBlanket");
+        const modSoap = need("modSoap");
 
-      S.ageMin += 1;
+        // State (NO LOCALSTORAGE TO AVOID SURPRISE BUGS DURING HACKATHON)
+        const S = {
+          alive: true,
+          paused: false,
+          autoCare: false,
+          age: 0,
+          coins: 5,
+          hunger: 50,   // 0 BAD, 100 GOOD
+          happy: 70,
+          energy: 70,
+          clean: 60,
+          health: 90,
+          mods: { snack:false, toy:false, blanket:false, soap:false }
+        };
 
-      // Base decay (per minute)
-      S.hunger -= 4;     // gets hungry
-      S.energy -= 3;     // gets tired
-      S.clean  -= 2;     // gets dirty
+        // Helpers
+        const clamp = (n,a,b)=>Math.max(a, Math.min(b, n));
+        const rint = (a,b)=>Math.floor(Math.random()*(b-a+1))+a;
 
-      // Happiness depends on other needs
-      let sadPush = 0;
-      if (S.hunger < 40) sadPush += 2;
-      if (S.energy < 35) sadPush += 2;
-      if (S.clean  < 35) sadPush += 2;
-      S.happy -= (1 + sadPush);
-
-      // Health depends on neglect
-      let dmg = 0;
-      if (S.hunger <= 15) dmg += 6;
-      if (S.clean  <= 15) dmg += 5;
-      if (S.energy <= 10) dmg += 4;
-      if (S.happy  <= 10) dmg += 4;
-      S.health -= dmg;
-
-      // Mods (passive buffs)
-      if (S.mods.snack) S.hunger += 2;
-      if (S.mods.toy) S.happy += 2;
-      if (S.mods.blanket) S.energy += 2;
-      if (S.mods.soap) S.clean += 2;
-
-      // Auto care
-      if (S.autoCare){
-        autoCareLogic();
-      }
-
-      // Clamp
-      S.hunger = clamp(S.hunger, 0, 100);
-      S.happy  = clamp(S.happy, 0, 100);
-      S.energy = clamp(S.energy, 0, 100);
-      S.clean  = clamp(S.clean, 0, 100);
-      S.health = clamp(S.health, 0, 100);
-
-      // Death
-      if (S.health <= 0){
-        S.alive = false;
-        S.health = 0;
-        log("POPPY HAS DIED");
-      } else {
-        // occasional events
-        if (Math.random() < 0.12){
-          randomEvent();
+        function log(msg){
+          const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = "<b>" + t + "</b> | " + msg;
+          logEl.prepend(div);
         }
+
+        function setAnim(name){
+          app.classList.remove("anim-idle","anim-wiggle","anim-bounce","anim-shake");
+          app.classList.add("anim-" + name.toLowerCase());
+        }
+
+        function setFaceMood(m){
+          face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored");
+          face.classList.add("mood-" + m.toLowerCase());
+        }
+
+        function activeModsLabel(){
+          const a = [];
+          if (S.mods.snack) a.push("SNACK");
+          if (S.mods.toy) a.push("TOY");
+          if (S.mods.blanket) a.push("BLANKET");
+          if (S.mods.soap) a.push("SOAP");
+          return a.length ? a.join(",") : "NONE";
+        }
+
+        function mood(){
+          if (!S.alive) return "DEAD";
+          if (S.health <= 20) return "SICK";
+          if (S.hunger <= 25) return "HUNGRY";
+          if (S.clean <= 20) return "ANGRY";
+          if (S.happy <= 25) return "SAD";
+          if (S.energy <= 20) return "BORED";
+          return "HAPPY";
+        }
+
+        function updateUI(){
+          // Clamp everything
+          S.hunger = clamp(S.hunger, 0, 100);
+          S.happy  = clamp(S.happy, 0, 100);
+          S.energy = clamp(S.energy, 0, 100);
+          S.clean  = clamp(S.clean, 0, 100);
+          S.health = clamp(S.health, 0, 100);
+
+          // Bars
+          for (const k of ["hunger","happy","energy","clean","health"]){
+            fills[k].style.width = S[k] + "%";
+            vals[k].textContent = String(Math.round(S[k]));
+          }
+
+          const m = mood();
+          moodPill.textContent = m;
+          agePill.textContent = String(S.age);
+          coinsPill.textContent = String(S.coins);
+
+          if (!S.alive){
+            statusDot.style.background = "var(--danger)";
+            statusText.textContent = "DEAD";
+            setAnim("idle");
+            setFaceMood("sad");
+          } else {
+            statusText.textContent = S.paused ? "PAUSED" : "ALIVE";
+
+            if (m === "SICK"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMood("sick"); }
+            else if (m === "ANGRY"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMood("angry"); }
+            else if (m === "HUNGRY"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMood("hungry"); }
+            else if (m === "SAD"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMood("sad"); }
+            else if (m === "BORED"){ statusDot.style.background = "var(--accent2)"; setAnim("bounce"); setFaceMood("bored"); }
+            else { statusDot.style.background = "var(--accent)"; setAnim("wiggle"); setFaceMood("happy"); }
+          }
+
+          statusBox.textContent =
+            "POPPY STATUS\n" +
+            "MOOD " + m + "\n" +
+            "COINS " + S.coins + "\n" +
+            "MODS " + activeModsLabel() + "\n" +
+            "AUTO CARE " + (S.autoCare ? "ON" : "OFF");
+
+          btnToggleAuto.textContent = "AUTO CARE " + (S.autoCare ? "ON" : "OFF");
+          btnPause.textContent = S.paused ? "RESUME" : "PAUSE";
+        }
+
+        function dieIfNeeded(){
+          if (S.health <= 0 && S.alive){
+            S.alive = false;
+            S.health = 0;
+            log("POPPY HAS DIED");
+          }
+        }
+
+        // Actions (BUTTONS)
+        function actFeed(){
+          if (!S.alive || S.paused) return log("CANNOT FEED RIGHT NOW");
+          if (S.coins < 1) return log("NOT ENOUGH COINS TO FEED");
+          S.coins -= 1;
+          S.hunger += 28;
+          S.clean  -= 3;
+          S.happy  += 5;
+          log("FEED");
+          updateUI();
+        }
+
+        function actPlay(){
+          if (!S.alive || S.paused) return log("CANNOT PLAY RIGHT NOW");
+          S.happy += 22;
+          S.energy -= 6;
+          S.clean  -= 2;
+          log("PLAY");
+          updateUI();
+        }
+
+        function actSleep(){
+          if (!S.alive || S.paused) return log("CANNOT SLEEP RIGHT NOW");
+          S.energy += 30;
+          S.hunger -= 6;
+          log("SLEEP");
+          updateUI();
+        }
+
+        function actClean(){
+          if (!S.alive || S.paused) return log("CANNOT CLEAN RIGHT NOW");
+          S.clean += 34;
+          S.happy += 3;
+          log("CLEAN");
+          updateUI();
+        }
+
+        function actMed(){
+          if (!S.alive || S.paused) return log("CANNOT USE MEDICINE RIGHT NOW");
+          if (S.coins < 2) return log("NOT ENOUGH COINS FOR MEDICINE");
+          S.coins -= 2;
+          S.health += 28;
+          S.happy  -= 3;
+          S.clean  -= 2;
+          log("MEDICINE");
+          updateUI();
+        }
+
+        function actWork(){
+          if (!S.alive || S.paused) return log("CANNOT WORK RIGHT NOW");
+          const earned = rint(2,5);
+          S.coins += earned;
+          S.energy -= 8;
+          S.hunger -= 6;
+          S.happy  -= 3;
+          log("WORK EARNED " + earned);
+          updateUI();
+        }
+
+        function buyMod(key, cost, label){
+          if (!S.alive || S.paused) return log("CANNOT BUY RIGHT NOW");
+          if (S.mods[key]) return log("ALREADY OWNS " + label);
+          if (S.coins < cost) return log("NOT ENOUGH COINS FOR " + label);
+          S.coins -= cost;
+          S.mods[key] = true;
+          log("PURCHASED " + label);
+          updateUI();
+        }
+
+        // Tick (DEMO SPEED: 10 SECONDS)
+        function tick(){
+          if (!S.alive || S.paused) return;
+
+          S.age += 1;
+
+          // Decay
+          S.hunger -= 4;
+          S.energy -= 3;
+          S.clean  -= 2;
+
+          // Happiness drop if needs are bad
+          let sadPush = 1;
+          if (S.hunger < 40) sadPush += 2;
+          if (S.energy < 35) sadPush += 2;
+          if (S.clean  < 35) sadPush += 2;
+          S.happy -= sadPush;
+
+          // Health damage if neglected
+          let dmg = 0;
+          if (S.hunger <= 15) dmg += 6;
+          if (S.clean  <= 15) dmg += 5;
+          if (S.energy <= 10) dmg += 4;
+          if (S.happy  <= 10) dmg += 4;
+          S.health -= dmg;
+
+          // Mods passive buffs
+          if (S.mods.snack) S.hunger += 2;
+          if (S.mods.toy) S.happy += 2;
+          if (S.mods.blanket) S.energy += 2;
+          if (S.mods.soap) S.clean += 2;
+
+          // Auto care
+          if (S.autoCare){
+            if (S.hunger < 35 && S.coins >= 1) actFeed();
+            if (S.clean < 35) actClean();
+            if (S.energy < 30) actSleep();
+            if (S.happy < 35) actPlay();
+            if (S.health < 40 && S.coins >= 2) actMed();
+          }
+
+          // Random mini events
+          if (Math.random() < 0.12){
+            const roll = Math.random();
+            if (roll < 0.33){ const c = rint(1,4); S.coins += c; log("FOUND " + c + " COINS"); }
+            else if (roll < 0.66){ const d = rint(4,10); S.clean -= d; log("ACCIDENT. CLEANLINESS DOWN " + d); }
+            else { const d = rint(4,10); S.happy -= d; log("MOOD DROP. HAPPINESS DOWN " + d); }
+          }
+
+          dieIfNeeded();
+          updateUI();
+        }
+
+        // Wire buttons (THE IMPORTANT PART)
+        btnFeed.addEventListener("click", actFeed);
+        btnPlay.addEventListener("click", actPlay);
+        btnSleep.addEventListener("click", actSleep);
+        btnClean.addEventListener("click", actClean);
+        btnMed.addEventListener("click", actMed);
+        btnWork.addEventListener("click", actWork);
+
+        btnToggleAuto.addEventListener("click", ()=>{
+          S.autoCare = !S.autoCare;
+          log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
+          updateUI();
+        });
+
+        btnPause.addEventListener("click", ()=>{
+          S.paused = !S.paused;
+          log(S.paused ? "PAUSED" : "RESUMED");
+          updateUI();
+        });
+
+        btnShopInfo.addEventListener("click", ()=>{
+          log("SHOP: BUY MODS ON RIGHT PANEL. WORK EARNS COINS.");
+        });
+
+        btnReset.addEventListener("click", ()=>{
+          // Simple reset
+          S.alive = true;
+          S.paused = false;
+          S.autoCare = false;
+          S.age = 0;
+          S.coins = 5;
+          S.hunger = 50;
+          S.happy = 70;
+          S.energy = 70;
+          S.clean = 60;
+          S.health = 90;
+          S.mods = { snack:false, toy:false, blanket:false, soap:false };
+          log("RESET COMPLETE");
+          updateUI();
+        });
+
+        modSnack.addEventListener("click", ()=>buyMod("snack", 8, "SNACK DISPENSER"));
+        modToy.addEventListener("click", ()=>buyMod("toy", 10, "TOY BOX"));
+        modBlanket.addEventListener("click", ()=>buyMod("blanket", 10, "SOFT BLANKET"));
+        modSoap.addEventListener("click", ()=>buyMod("soap", 8, "SOAP KIT"));
+
+        // Keyboard shortcuts
+        window.addEventListener("keydown", (e)=>{
+          const k = e.key.toLowerCase();
+          if (k === "f") actFeed();
+          if (k === "p") actPlay();
+          if (k === "s") actSleep();
+          if (k === "c") actClean();
+          if (k === "m") actMed();
+          if (k === "w") actWork();
+          if (k === " "){ S.paused = !S.paused; log(S.paused ? "PAUSED" : "RESUMED"); updateUI(); }
+        });
+
+        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | BUTTONS WORK. KEYS F P S C M W. SPACE PAUSE.</div>';
+        updateUI();
+
+        // DEMO SPEED: 10 SECONDS
+        setInterval(tick, 10000);
+
+      } catch(err){
+        console.error(err);
+        showError(String(err && err.message ? err.message : err));
       }
-
-      updateHUD();
-    }
-
-    function autoCareLogic(){
-      // Cheap simple rules
-      if (S.hunger < 35 && S.coins >= 1){ actionFeed(true); }
-      if (S.clean < 35){ actionClean(true); }
-      if (S.energy < 30){ actionSleep(true); }
-      if (S.happy < 35){ actionPlay(true); }
-      if (S.health < 40){ actionMed(true); }
-    }
-
-    // ACTIONS (no chat)
-    function actionFeed(isAuto=false){
-      if (!S.alive || S.paused) return;
-      const cost = 1;
-      if (!isAuto && S.coins < cost){
-        log("NOT ENOUGH COINS TO FEED");
-        return;
-      }
-      if (!isAuto) S.coins -= cost;
-
-      S.hunger += 28;
-      S.clean  -= 3;
-      S.happy  += 5;
-
-      S.hunger = clamp(S.hunger, 0, 100);
-      S.clean  = clamp(S.clean, 0, 100);
-      S.happy  = clamp(S.happy, 0, 100);
-
-      log(isAuto ? "AUTO FEED" : "FEED");
-      setAnim("BOUNCE");
-      updateHUD();
-    }
-
-    function actionPlay(isAuto=false){
-      if (!S.alive || S.paused) return;
-      S.happy += 22;
-      S.energy -= 6;
-      S.clean  -= 2;
-      S.happy  = clamp(S.happy, 0, 100);
-      S.energy = clamp(S.energy, 0, 100);
-      S.clean  = clamp(S.clean, 0, 100);
-      log(isAuto ? "AUTO PLAY" : "PLAY");
-      setAnim("WIGGLE");
-      updateHUD();
-    }
-
-    function actionSleep(isAuto=false){
-      if (!S.alive || S.paused) return;
-      S.energy += 30;
-      S.hunger -= 6;
-      S.energy = clamp(S.energy, 0, 100);
-      S.hunger = clamp(S.hunger, 0, 100);
-      log(isAuto ? "AUTO SLEEP" : "SLEEP");
-      setAnim("IDLE");
-      updateHUD();
-    }
-
-    function actionClean(isAuto=false){
-      if (!S.alive || S.paused) return;
-      S.clean += 34;
-      S.happy += 3;
-      S.clean = clamp(S.clean, 0, 100);
-      S.happy = clamp(S.happy, 0, 100);
-      log(isAuto ? "AUTO CLEAN" : "CLEAN");
-      setAnim("WIGGLE");
-      updateHUD();
-    }
-
-    function actionMed(isAuto=false){
-      if (!S.alive || S.paused) return;
-      const cost = 2;
-      if (!isAuto && S.coins < cost){
-        log("NOT ENOUGH COINS FOR MEDICINE");
-        return;
-      }
-      if (!isAuto) S.coins -= cost;
-
-      S.health += 28;
-      S.happy -= 3;
-      S.clean -= 2;
-
-      S.health = clamp(S.health, 0, 100);
-      S.happy  = clamp(S.happy, 0, 100);
-      S.clean  = clamp(S.clean, 0, 100);
-
-      log(isAuto ? "AUTO MEDICINE" : "MEDICINE");
-      setAnim("IDLE");
-      updateHUD();
-    }
-
-    function actionWork(){
-      if (!S.alive || S.paused) return;
-      const earned = rint(2,5);
-      S.coins += earned;
-      S.energy -= 8;
-      S.hunger -= 6;
-      S.happy  -= 3;
-      S.energy = clamp(S.energy, 0, 100);
-      S.hunger = clamp(S.hunger, 0, 100);
-      S.happy  = clamp(S.happy, 0, 100);
-      log("WORK EARNED " + earned + " COINS");
-      setAnim("BOUNCE");
-      updateHUD();
-    }
-
-    // SHOP + MODS
-    function buyMod(key, cost, label){
-      if (!S.alive || S.paused) return;
-      if (S.mods[key]){
-        log("ALREADY OWNS " + label);
-        return;
-      }
-      if (S.coins < cost){
-        log("NOT ENOUGH COINS FOR " + label);
-        return;
-      }
-      S.coins -= cost;
-      S.mods[key] = true;
-      log("PURCHASED " + label);
-      updateHUD();
-    }
-
-    // RANDOM EVENTS
-    function randomEvent(){
-      const roll = Math.random();
-      if (roll < 0.33){
-        // bonus coins
-        const c = rint(1,4);
-        S.coins += c;
-        log("FOUND " + c + " COINS");
-      } else if (roll < 0.66){
-        // mess
-        const d = rint(4,10);
-        S.clean -= d;
-        log("ACCIDENT. CLEANLINESS DOWN " + d);
-      } else {
-        // mood swing
-        const d = rint(4,10);
-        S.happy -= d;
-        log("MOOD DROP. HAPPINESS DOWN " + d);
-      }
-    }
-
-    // SAVE / LOAD
-    function save(){
-      try{
-        localStorage.setItem(KEY, JSON.stringify(S));
-      } catch(e){}
-    }
-    function load(){
-      try{
-        const raw = localStorage.getItem(KEY);
-        if (!raw) return;
-        const data = JSON.parse(raw);
-        if (!data || typeof data !== "object") return;
-        S = Object.assign(S, data);
-      } catch(e){}
-    }
-
-    function resetSave(){
-      localStorage.removeItem(KEY);
-      location.reload();
-    }
-
-    // UI WIRING
-    $("btnFeed").addEventListener("click", ()=>actionFeed(false));
-    $("btnPlay").addEventListener("click", ()=>actionPlay(false));
-    $("btnSleep").addEventListener("click", ()=>actionSleep(false));
-    $("btnClean").addEventListener("click", ()=>actionClean(false));
-    $("btnMed").addEventListener("click", ()=>actionMed(false));
-    $("btnWork").addEventListener("click", ()=>actionWork());
-
-    $("btnToggleAuto").addEventListener("click", (e)=>{
-      S.autoCare = !S.autoCare;
-      e.target.textContent = "AUTO CARE " + (S.autoCare ? "ON" : "OFF");
-      log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
-      updateHUD();
-    });
-
-    $("btnPause").addEventListener("click", (e)=>{
-      S.paused = !S.paused;
-      e.target.textContent = S.paused ? "RESUME" : "PAUSE";
-      log(S.paused ? "PAUSED" : "RESUMED");
-      updateHUD();
-    });
-
-    $("btnReset").addEventListener("click", resetSave);
-
-    // MOD BUTTONS
-    $("modSnack").addEventListener("click", ()=>buyMod("snack", 8, "SNACK DISPENSER"));
-    $("modToy").addEventListener("click", ()=>buyMod("toy", 10, "TOY BOX"));
-    $("modBlanket").addEventListener("click", ()=>buyMod("blanket", 10, "SOFT BLANKET"));
-    $("modSoap").addEventListener("click", ()=>buyMod("soap", 8, "SOAP KIT"));
-
-    // SHOP BUTTON JUST OPENS LOG MESSAGE (SIMPLE)
-    $("btnShop").addEventListener("click", ()=>{
-      log("SHOP: BUY MODS ON THE RIGHT PANEL");
-    });
-
-    // KEYBOARD SHORTCUTS
-    window.addEventListener("keydown", (e)=>{
-      const k = e.key.toLowerCase();
-      if (k === "f") actionFeed(false);
-      if (k === "p") actionPlay(false);
-      if (k === "s") actionSleep(false);
-      if (k === "c") actionClean(false);
-      if (k === "m") actionMed(false);
-      if (k === "w") actionWork();
-      if (k === " "){ S.paused = !S.paused; log(S.paused ? "PAUSED" : "RESUMED"); updateHUD(); }
-    });
-
-    // STARTUP
-    load();
-    logEl.innerHTML = '<div class="item"><b>WELCOME</b> | USE BUTTONS TO CARE FOR POPPY. KEYS F P S C M W. SPACE TO PAUSE.</div>';
-    updateHUD();
-
-    // TICK LOOP: 1 MINUTE REAL TIME. CHANGE TO 10 SECONDS IF YOU WANT IT FASTER.
-    let timer = setInterval(tick, 60000);
-
-    // OPTIONAL: FAST MODE FOR DEMOS (UNCOMMENT)
-    // clearInterval(timer);
-    // timer = setInterval(tick, 10000);
-
+    })();
   </script>
 </body>
 </html>
