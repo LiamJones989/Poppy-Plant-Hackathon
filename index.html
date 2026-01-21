@@ -17,7 +17,6 @@
       --danger:#ff8aa1;
       --shadow:0 18px 60px rgba(0,0,0,.45);
       --radius:18px;
-      --ink:#0b1020;
     }
 
     *{ box-sizing:border-box; }
@@ -65,7 +64,6 @@
       gap:12px;
       align-items:flex-start;
     }
-
     .title{ display:flex; flex-direction:column; gap:6px; }
     h1{ margin:0; font-size: clamp(18px, 2.6vw, 26px); }
     .sub{ margin:0; color: var(--muted); font-size: 13px; }
@@ -89,11 +87,7 @@
       box-shadow: 0 0 0 6px rgba(124,247,178,.10);
     }
 
-    .stage{
-      padding: 14px 18px 18px;
-      display:grid;
-      gap:14px;
-    }
+    .stage{ padding: 14px 18px 18px; display:grid; gap:14px; }
 
     .screen{
       border-radius: 16px;
@@ -118,8 +112,8 @@
       justify-content:space-between;
       align-items:flex-start;
       gap:12px;
-      pointer-events:none;
       z-index:5;
+      pointer-events:none;
     }
 
     .statusBox{
@@ -133,8 +127,7 @@
       line-height: 1.25;
       box-shadow: 0 12px 26px rgba(0,0,0,.35);
       white-space: pre-line;
-      pointer-events:auto; /* for dblclick */
-      cursor: default;
+      pointer-events:auto;
       user-select:none;
     }
 
@@ -149,6 +142,7 @@
       align-items:center;
       gap:8px;
       white-space:nowrap;
+      pointer-events:none;
     }
     .pill b{ color: var(--text); }
 
@@ -186,9 +180,9 @@
       border: 1px solid rgba(255,255,255,.16);
       background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(0,0,0,.18));
       box-shadow: 0 14px 30px rgba(0,0,0,.35);
-      letter-spacing: .9px;
       user-select:none;
       font-size: 12px;
+      letter-spacing:.9px;
     }
 
     .square{
@@ -316,8 +310,7 @@
     .burst-wig .poppyWrap{ animation: wig 520ms ease-in-out 1; }
 
     .sleepTint{
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background: radial-gradient(circle at 50% 30%, rgba(138,164,255,.14), rgba(0,0,0,.62));
       opacity:0;
       transition: opacity .25s ease;
@@ -326,7 +319,112 @@
     }
     .sleepOn .sleepTint{ opacity:1; }
 
-    /* OVERLAY */
+    /* ACCESSORIES (WARDROBE) */
+    .acc{ position:absolute; pointer-events:none; display:none; }
+    .acc.show{ display:block; }
+
+    .hat{
+      width: 130px; height: 36px;
+      left: 50%; top: 38px;
+      transform: translateX(-50%);
+      border-radius: 16px 16px 10px 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.20));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 16px 30px rgba(0,0,0,.24);
+    }
+    .hat:after{
+      content:"";
+      position:absolute;
+      left: 50%; top: -14px;
+      transform: translateX(-50%);
+      width: 70px; height: 20px;
+      border-radius: 14px 14px 10px 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(0,0,0,.22));
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .tie{
+      width: 16px; height: 48px;
+      left: 50%; top: 132px;
+      transform: translateX(-50%);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.22));
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 14px 24px rgba(0,0,0,.20);
+    }
+    .tie:before{
+      content:"";
+      position:absolute;
+      left: 50%; top: -12px;
+      transform: translateX(-50%);
+      width: 22px; height: 14px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.20));
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .glasses{
+      width: 120px; height: 28px;
+      left: 50%; top: 102px;
+      transform: translateX(-50%);
+      border-radius: 18px;
+      border: 2px solid rgba(11,16,32,.88);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 12px 22px rgba(0,0,0,.22);
+    }
+    .glasses:before,.glasses:after{
+      content:"";
+      position:absolute;
+      top: 4px;
+      width: 42px; height: 18px;
+      border-radius: 14px;
+      border: 2px solid rgba(11,16,32,.88);
+      background: rgba(255,255,255,.08);
+    }
+    .glasses:before{ left: 8px; }
+    .glasses:after{ right: 8px; }
+    .glasses i{
+      position:absolute;
+      left: 50%; top: 12px;
+      transform: translateX(-50%);
+      width: 16px; height: 4px;
+      border-radius: 999px;
+      background: rgba(11,16,32,.88);
+      display:block;
+    }
+
+    .bow{
+      width: 54px; height: 24px;
+      left: 50%; top: 126px;
+      transform: translateX(-50%);
+      border-radius: 14px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 22px rgba(0,0,0,.20);
+    }
+    .bow:before,.bow:after{
+      content:"";
+      position:absolute;
+      top: 4px;
+      width: 22px; height: 16px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .bow:before{ left: 4px; }
+    .bow:after{ right: 4px; }
+    .bow i{
+      position:absolute;
+      left:50%; top: 9px;
+      transform: translateX(-50%);
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.12);
+      display:block;
+    }
+
+    /* OVERLAY (BUG-PROOF CLOSE) */
     .overlay{
       position:absolute;
       inset: 0;
@@ -334,36 +432,70 @@
       align-items:center;
       justify-content:center;
       z-index:10;
-      background: radial-gradient(circle at 50% 40%, rgba(0,0,0,.20), rgba(0,0,0,.55));
+      background: radial-gradient(circle at 50% 40%, rgba(0,0,0,.20), rgba(0,0,0,.62));
       backdrop-filter: blur(3px);
     }
     .overlay.show{ display:flex; }
     .overlayCard{
-      width:min(600px, 94%);
+      width:min(720px, 94%);
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(10,14,28,.84);
+      background: rgba(10,14,28,.90);
       box-shadow: 0 22px 60px rgba(0,0,0,.55);
       padding: 14px;
+      position:relative;
     }
+    .overlayX{
+      position:absolute;
+      right: 10px; top: 10px;
+      width: 44px; height: 40px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      user-select:none;
+    }
+    .overlayX:hover{ border-color: rgba(124,247,178,.42); }
+
     .overlayTop{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      margin-bottom: 10px;
+      margin: 2px 50px 10px 2px;
       font-size: 12px;
       color: var(--muted);
     }
     .overlayTop b{ color: var(--text); }
+    .overlayTabs{
+      display:flex;
+      gap:10px;
+      margin-bottom: 10px;
+      flex-wrap:wrap;
+    }
+    .tabBtn{
+      width:auto;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      cursor:pointer;
+    }
+    .tabBtn.active{
+      border-color: rgba(124,247,178,.46);
+      background: rgba(124,247,178,.12);
+    }
+
     .overlayBody{
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
       padding: 12px;
-      min-height: 210px;
-      display:grid;
-      place-items:center;
+      min-height: 240px;
       position:relative;
       overflow:hidden;
     }
@@ -375,23 +507,22 @@
     }
     @media (max-width: 520px){ .overlayActions{ grid-template-columns:1fr; } }
 
-    /* APPLE MINI GAME */
+    /* MINI GAME: APPLE */
     .gameArea{
-      width: min(520px, 96%);
-      height: 260px;
+      width: min(640px, 96%);
+      height: 280px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.18);
       position:relative;
       overflow:hidden;
+      margin: 0 auto;
     }
     .apple{
-      width: 40px;
-      height: 40px;
+      width: 42px; height: 42px;
       border-radius: 999px;
       position:absolute;
-      left: 20px;
-      top: 20px;
+      left: 20px; top: 20px;
       cursor:pointer;
       border:1px solid rgba(255,255,255,.18);
       box-shadow: 0 18px 30px rgba(0,0,0,.30);
@@ -422,64 +553,62 @@
       box-shadow: 0 6px 12px rgba(0,0,0,.18);
     }
     .gameHud{
+      width: min(640px, 96%);
       display:flex;
       justify-content:space-between;
-      width: min(520px, 96%);
       font-size: 12px;
       color: var(--muted);
-      margin-top: 10px;
+      margin: 10px auto 0;
     }
     .gameHud b{ color: var(--text); }
 
-    /* DINO RUNNER STYLE GAME */
+    /* MINI GAME: DINO */
     .dinoArea{
-      width: min(520px, 96%);
-      height: 260px;
+      width: min(640px, 96%);
+      height: 280px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.20));
       position:relative;
       overflow:hidden;
+      margin: 0 auto;
     }
     .groundLine{
       position:absolute;
       left:0; right:0;
       height: 3px;
-      bottom: 40px;
+      bottom: 46px;
       background: rgba(255,255,255,.14);
     }
     .dino{
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 12px;
       background: linear-gradient(180deg, rgba(185,255,217,1), rgba(47,228,138,1));
       border: 1px solid rgba(255,255,255,.12);
       position:absolute;
       left: 24px;
-      bottom: 40px;
+      bottom: 46px;
       box-shadow: 0 18px 30px rgba(0,0,0,.25);
     }
     .cactus{
-      width: 20px;
-      height: 48px;
+      width: 20px; height: 52px;
       border-radius: 10px;
       background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
       border: 1px solid rgba(255,255,255,.14);
       position:absolute;
-      bottom: 40px;
-      left: 520px;
+      bottom: 46px;
+      left: 740px;
       box-shadow: 0 18px 30px rgba(0,0,0,.25);
     }
     .cloud{
       position:absolute;
       top: 30px;
-      left: 520px;
+      left: 740px;
       width: 68px;
       height: 24px;
       border-radius: 999px;
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.10);
-      filter: blur(.2px);
       opacity:.8;
     }
     .cloud:before, .cloud:after{
@@ -493,19 +622,21 @@
     .cloud:after{ width: 32px; height: 22px; left: 26px; top:-14px; }
 
     .dinoHudRow{
-      width: min(520px, 96%);
+      width: min(640px, 96%);
       display:flex;
       justify-content:space-between;
       gap:10px;
       color: var(--muted);
       font-size: 12px;
-      margin-top: 10px;
+      margin: 10px auto 0;
+      align-items:center;
+      flex-wrap:wrap;
     }
+    .dinoHudRow b{ color: var(--text); }
 
     .toast{
       position:fixed;
-      left: 16px;
-      right: 16px;
+      left: 16px; right: 16px;
       top: 14px;
       margin:0 auto;
       width: min(900px, calc(100% - 32px));
@@ -521,8 +652,7 @@
     }
     .errorBanner{
       position:fixed;
-      left:16px;
-      right:16px;
+      left:16px; right:16px;
       bottom:16px;
       padding:12px 14px;
       border-radius:14px;
@@ -569,11 +699,7 @@
     }
     button:hover{ filter: brightness(1.06); border-color: rgba(124,247,178,.42); }
     button:active{ transform: translateY(1px) scale(.99); }
-    button:disabled{
-      opacity:.55;
-      cursor:not-allowed;
-      filter: grayscale(.2);
-    }
+    button:disabled{ opacity:.55; cursor:not-allowed; }
 
     .btnMain{
       background: linear-gradient(180deg, rgba(124,247,178,.24), rgba(124,247,178,.08));
@@ -601,9 +727,7 @@
       font-size: 12px;
       color: var(--muted);
     }
-    @media (max-width: 420px){
-      .barRow{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 420px){ .barRow{ grid-template-columns: 1fr; } }
 
     .meter{
       height: 12px;
@@ -678,12 +802,12 @@
   <div class="toast" id="toast"></div>
   <div class="errorBanner" id="errorBanner"></div>
 
-  <main class="wrap">
-    <section class="card" id="app">
+  <main class="wrap" id="app">
+    <section class="card">
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">DINO RUNNER GAME + FIXED INVENTORY + FOOD SATURATION RULES</p>
+          <p class="sub">INVENTORY CLOSE FIXED | SHOP + WARDROBE | ACHIEVEMENTS</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -709,7 +833,14 @@
 
           <div class="poppyWrap" id="poppyWrap" aria-label="Poppy">
             <div class="nameTag">POPPY</div>
+
             <div class="square" id="square">
+              <!-- ACCESSORIES RENDER ON TOP OF FACE -->
+              <div class="acc hat" id="accHat"></div>
+              <div class="acc tie" id="accTie"></div>
+              <div class="acc glasses" id="accGlasses"><i></i></div>
+              <div class="acc bow" id="accBow"><i></i></div>
+
               <div class="face" id="face">
                 <div class="brow left"></div>
                 <div class="brow right"></div>
@@ -720,15 +851,22 @@
             </div>
           </div>
 
-          <div class="overlay" id="overlay">
-            <div class="overlayCard">
+          <!-- OVERLAY -->
+          <div class="overlay" id="overlay" aria-hidden="true">
+            <div class="overlayCard" role="dialog" aria-modal="true">
+              <div class="overlayX" id="overlayX" title="CLOSE">X</div>
+
               <div class="overlayTop">
                 <div>MODE <b id="overlayTitle">ACTION</b></div>
-                <div>TIME <b id="overlayTimer">0</b></div>
+                <div>TIME <b id="overlayTimer">INF</b></div>
               </div>
+
+              <div class="overlayTabs" id="overlayTabs" style="display:none;"></div>
+
               <div class="overlayBody" id="overlayBody"></div>
-              <div class="overlayActions" id="overlayActions">
-                <button class="btnMain" id="overlayPrimary" type="button">OK</button>
+
+              <div class="overlayActions">
+                <button class="btnMain" id="overlayPrimary" type="button">DONE</button>
                 <button class="btnAlt" id="overlayClose" type="button">CLOSE</button>
               </div>
             </div>
@@ -759,14 +897,19 @@
               <button class="btnMain" id="btnFeed" type="button">FEED</button>
               <button class="btnMain" id="btnPlay" type="button">PLAY</button>
               <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
+
               <button class="btnMain" id="btnClean" type="button">CLEAN</button>
               <button class="btnWarn" id="btnMed" type="button">MEDICINE</button>
               <button class="btnAlt" id="btnWork" type="button">WORK</button>
+
               <button class="btnAlt" id="btnInventory" type="button">INVENTORY</button>
               <button class="btnAlt" id="btnShop" type="button">SHOP</button>
+              <button class="btnAlt" id="btnAchievements" type="button">ACHIEVEMENTS</button>
+
               <button class="btnAlt" id="btnTrain" type="button">TRAIN</button>
               <button class="btnAlt" id="btnSettings" type="button">SETTINGS</button>
               <button class="btnAlt" id="btnPause" type="button">PAUSE</button>
+
               <button class="btnDanger" id="btnReset" type="button">RESET</button>
             </div>
           </div>
@@ -779,10 +922,10 @@
       <div class="log" id="log"></div>
 
       <div class="panel" style="margin-top:12px;">
-        <h2 style="margin:0 0 10px; font-size:16px;">FIXES INCLUDED</h2>
-        <div class="listItem"><b>DINO RUNNER</b> SPACE TO JUMP. DUCK BUTTON INCLUDED. OBSTACLES LOOP.</div>
-        <div class="listItem"><b>INVENTORY</b> CLOSE WORKS. OVERLAY NEVER GETS STUCK.</div>
-        <div class="listItem"><b>FOOD RULES</b> FOOD +5 SATURATION. SNACK +1 SATURATION.</div>
+        <h2 style="margin:0 0 10px; font-size:16px;">CONTROLS</h2>
+        <div class="listItem"><b>OVERLAY CLOSE</b> CLICK CLOSE, CLICK X, PRESS ESC, OR CLICK OUTSIDE</div>
+        <div class="listItem"><b>DINO</b> SPACE OR JUMP BUTTON TO JUMP | HOLD DUCK BUTTON OR ARROWDOWN</div>
+        <div class="listItem"><b>FOOD RULE</b> FOOD +5 SATURATION | SNACK +1 SATURATION</div>
       </div>
     </aside>
   </main>
@@ -790,9 +933,10 @@
   <script>
     (function(){
       const $ = (id)=>document.getElementById(id);
-
       const toast = $("toast");
       const banner = $("errorBanner");
+      const app = $("app");
+
       function showError(msg){
         banner.style.display = "block";
         banner.textContent = "ERROR\n" + msg;
@@ -801,988 +945,1232 @@
         toast.style.display = "block";
         toast.textContent = msg;
         clearTimeout(tmsg._t);
-        tmsg._t = setTimeout(()=>{ toast.style.display = "none"; }, 1700);
+        tmsg._t = setTimeout(()=>{ toast.style.display = "none"; }, 1600);
       }
-      function need(id){
-        const el = $(id);
-        if (!el) throw new Error("MISSING ELEMENT ID: " + id);
-        return el;
-      }
-
-      // SAFE RANDOM
+      function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
       function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
       function chance(p){ return Math.random() < p; }
-      function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
 
-      // SAVE KEY
-      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V2";
+      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V3";
 
-      try{
-        // Elements
-        const app = need("app");
-        const screen = need("screen");
-        const face = need("face");
+      const defaultState = ()=>({
+        alive:true,
+        paused:false,
+        mode:"NORMAL",          // NORMAL | SLEEPING | SICK
+        autoCare:false,
+        autoSave:true,
 
-        const statusBox = need("statusBox");
-        const moodPill = need("moodPill");
-        const lvlPill = need("lvlPill");
-        const agePill = need("agePill");
-        const coinsPill = need("coinsPill");
+        age:0,
+        coins:8,
 
-        const statusDot = need("statusDot");
-        const statusText = need("statusText");
+        lvl:1,
+        xp:0,
 
-        const modeChip = need("modeChip");
-        const autoChip = need("autoChip");
-        const saveChip = need("saveChip");
+        hunger:55,
+        happy:70,
+        energy:70,
+        clean:60,
+        health:90,
+        disc:50,
 
-        const logEl = need("log");
+        bestDino:0,
 
-        const fills = {
-          hunger: need("hungerFill"),
-          happy: need("happyFill"),
-          energy: need("energyFill"),
-          clean: need("cleanFill"),
-          health: need("healthFill"),
-          disc: need("discFill"),
-          xp: need("xpFill")
-        };
-        const vals = {
-          hunger: need("hungerVal"),
-          happy: need("happyVal"),
-          energy: need("energyVal"),
-          clean: need("cleanVal"),
-          health: need("healthVal"),
-          disc: need("discVal"),
-          xp: need("xpVal")
-        };
+        inv:{
+          FOOD:2,
+          SNACK:2,
+          WATER:2,
+          SOAP:1,
+          MED:1,
+          TOY:1
+        },
 
-        // Overlay
-        const overlay = need("overlay");
-        const overlayTitle = need("overlayTitle");
-        const overlayTimer = need("overlayTimer");
-        const overlayBody = need("overlayBody");
-        const overlayPrimary = need("overlayPrimary");
-        const overlayClose = need("overlayClose");
+        ownedAccessories: {
+          HAT:false,
+          TIE:false,
+          GLASSES:false,
+          BOW:false
+        },
 
-        // Buttons
-        const btnFeed = need("btnFeed");
-        const btnPlay = need("btnPlay");
-        const btnSleep = need("btnSleep");
-        const btnClean = need("btnClean");
-        const btnMed = need("btnMed");
-        const btnWork = need("btnWork");
-        const btnInventory = need("btnInventory");
-        const btnShop = need("btnShop");
-        const btnTrain = need("btnTrain");
-        const btnSettings = need("btnSettings");
-        const btnPause = need("btnPause");
-        const btnReset = need("btnReset");
+        equippedAccessories: {
+          HAT:false,
+          TIE:false,
+          GLASSES:false,
+          BOW:false
+        },
 
-        // GAME STATE
-        const defaultState = ()=>({
-          alive: true,
-          paused: false,
-          mode: "NORMAL",          // NORMAL | SLEEPING | SICK
-          autoCare: false,
-          autoSave: true,
+        counters:{
+          feeds:0,
+          snacks:0,
+          waters:0,
+          cleans:0,
+          meds:0,
+          works:0,
+          trains:0,
+          plays:0,
+          appleHits:0,
+          dinoScoreBest:0,
+          purchases:0
+        },
 
-          age: 0,
-          coins: 5,
+        unlockedAchievements:{},
 
-          lvl: 1,
-          xp: 0,
+        last: Date.now()
+      });
 
-          hunger: 55,
-          happy: 70,
-          energy: 70,
-          clean: 60,
-          health: 90,
-          disc: 50,
-
-          // inventory counts
-          inv: {
-            FOOD: 2,
-            SNACK: 2,
-            WATER: 2,
-            SOAP: 1,
-            MED: 1,
-            TOY: 1,
-            BLANKET: 0
-          },
-
-          upgrades: {
-            AUTO_FEED: false,
-            AUTO_CLEAN: false,
-            AUTO_MED: false,
-            COMFY_BED: false,
-            BIG_WALLET: false,
-            XP_BOOST: false,
-            SLOW_DECAY: false
-          },
-
-          last: Date.now()
-        });
-
-        let S = defaultState();
-
-        function mergeDeep(target, source){
-          const out = Array.isArray(target) ? target.slice() : { ...target };
-          for (const k in source){
-            if (!Object.prototype.hasOwnProperty.call(source, k)) continue;
-            const sv = source[k];
-            const tv = out[k];
-            if (sv && typeof sv === "object" && !Array.isArray(sv) && tv && typeof tv === "object" && !Array.isArray(tv)){
-              out[k] = mergeDeep(tv, sv);
-            } else out[k] = sv;
-          }
-          return out;
+      function mergeDeep(target, source){
+        const out = Array.isArray(target) ? target.slice() : { ...target };
+        for (const k in source){
+          if (!Object.prototype.hasOwnProperty.call(source, k)) continue;
+          const sv = source[k];
+          const tv = out[k];
+          if (sv && typeof sv === "object" && !Array.isArray(sv) && tv && typeof tv === "object" && !Array.isArray(tv)){
+            out[k] = mergeDeep(tv, sv);
+          } else out[k] = sv;
         }
+        return out;
+      }
 
-        function load(){
-          try{
-            const raw = localStorage.getItem(SAVE_KEY);
-            if (!raw) return false;
-            const data = JSON.parse(raw);
-            const base = defaultState();
-            S = mergeDeep(base, data);
-            return true;
-          } catch(e){ return false; }
-        }
-        function save(force){
-          if (!S.autoSave && !force) return;
-          try{
-            S.last = Date.now();
-            localStorage.setItem(SAVE_KEY, JSON.stringify(S));
-          } catch(e){}
-        }
+      let S = defaultState();
 
-        function log(msg){
-          const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
-          const div = document.createElement("div");
-          div.className = "item";
-          div.innerHTML = "<b>" + t + "</b> | " + msg;
-          logEl.prepend(div);
-        }
-
-        function burst(cls, ms){
-          app.classList.add(cls);
-          setTimeout(()=>app.classList.remove(cls), ms);
-        }
-        function blink(){
-          face.classList.add("blink");
-          setTimeout(()=>face.classList.remove("blink"), 250);
-        }
-
-        function mood(){
-          if (!S.alive) return "DEAD";
-          if (S.mode === "SLEEPING") return "ASLEEP";
-          if (S.health <= 20 || S.mode === "SICK") return "SICK";
-          if (S.hunger <= 25) return "HUNGRY";
-          if (S.clean <= 20) return "ANGRY";
-          if (S.happy <= 25) return "SAD";
-          if (S.energy <= 20) return "BORED";
-          return "HAPPY";
-        }
-        function setFaceMoodClass(m){
-          face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored","mood-asleep");
-          if (m === "ASLEEP") face.classList.add("mood-asleep");
-          else if (m !== "DEAD") face.classList.add("mood-" + m.toLowerCase());
-        }
-
-        function xpToNext(lvl){ return 30 + (lvl-1)*18; }
-        function addXP(amount){
-          let a = amount;
-          if (S.upgrades.XP_BOOST) a = Math.round(a * 1.2);
-          S.xp += a;
-          while (S.xp >= xpToNext(S.lvl)){
-            S.xp -= xpToNext(S.lvl);
-            S.lvl += 1;
-            S.coins += 2;
-            log("LEVEL UP " + S.lvl + " COINS +2");
-            burst("burst-wig", 520);
-          }
-        }
-
-        // INVENTORY HELPERS
-        function have(item, n=1){ return (S.inv[item] || 0) >= n; }
-        function addItem(item, n=1){ S.inv[item] = (S.inv[item] || 0) + n; }
-        function takeItem(item, n=1){
-          if (!have(item,n)) return false;
-          S.inv[item] -= n;
+      function load(){
+        try{
+          const raw = localStorage.getItem(SAVE_KEY);
+          if (!raw) return false;
+          const data = JSON.parse(raw);
+          S = mergeDeep(defaultState(), data);
           return true;
+        } catch(e){ return false; }
+      }
+      function save(force){
+        if (!S.autoSave && !force) return;
+        try{
+          S.last = Date.now();
+          localStorage.setItem(SAVE_KEY, JSON.stringify(S));
+        } catch(e){}
+      }
+
+      // ELEMENTS
+      const screen = $("screen");
+      const face = $("face");
+
+      const statusBox = $("statusBox");
+      const moodPill = $("moodPill");
+      const lvlPill = $("lvlPill");
+      const agePill = $("agePill");
+      const coinsPill = $("coinsPill");
+      const statusDot = $("statusDot");
+      const statusText = $("statusText");
+
+      const modeChip = $("modeChip");
+      const autoChip = $("autoChip");
+      const saveChip = $("saveChip");
+
+      const logEl = $("log");
+
+      const fills = {
+        hunger: $("hungerFill"),
+        happy: $("happyFill"),
+        energy: $("energyFill"),
+        clean: $("cleanFill"),
+        health: $("healthFill"),
+        disc: $("discFill"),
+        xp: $("xpFill")
+      };
+      const vals = {
+        hunger: $("hungerVal"),
+        happy: $("happyVal"),
+        energy: $("energyVal"),
+        clean: $("cleanVal"),
+        health: $("healthVal"),
+        disc: $("discVal"),
+        xp: $("xpVal")
+      };
+
+      // Accessories elements
+      const accEls = {
+        HAT: $("accHat"),
+        TIE: $("accTie"),
+        GLASSES: $("accGlasses"),
+        BOW: $("accBow")
+      };
+
+      // Overlay elements
+      const overlay = $("overlay");
+      const overlayX = $("overlayX");
+      const overlayTitle = $("overlayTitle");
+      const overlayTimer = $("overlayTimer");
+      const overlayTabs = $("overlayTabs");
+      const overlayBody = $("overlayBody");
+      const overlayPrimary = $("overlayPrimary");
+      const overlayClose = $("overlayClose");
+
+      // Buttons
+      const btnFeed = $("btnFeed");
+      const btnPlay = $("btnPlay");
+      const btnSleep = $("btnSleep");
+      const btnClean = $("btnClean");
+      const btnMed = $("btnMed");
+      const btnWork = $("btnWork");
+      const btnInventory = $("btnInventory");
+      const btnShop = $("btnShop");
+      const btnAchievements = $("btnAchievements");
+      const btnTrain = $("btnTrain");
+      const btnSettings = $("btnSettings");
+      const btnPause = $("btnPause");
+      const btnReset = $("btnReset");
+
+      function log(msg){
+        const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = "<b>" + t + "</b> | " + msg;
+        logEl.prepend(div);
+      }
+
+      function burst(cls, ms){
+        app.classList.add(cls);
+        setTimeout(()=>app.classList.remove(cls), ms);
+      }
+      function blink(){
+        face.classList.add("blink");
+        setTimeout(()=>face.classList.remove("blink"), 250);
+      }
+
+      function mood(){
+        if (!S.alive) return "DEAD";
+        if (S.mode === "SLEEPING") return "ASLEEP";
+        if (S.health <= 20 || S.mode === "SICK") return "SICK";
+        if (S.hunger <= 25) return "HUNGRY";
+        if (S.clean <= 20) return "ANGRY";
+        if (S.happy <= 25) return "SAD";
+        if (S.energy <= 20) return "BORED";
+        return "HAPPY";
+      }
+      function setFaceMoodClass(m){
+        face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored","mood-asleep");
+        if (m === "ASLEEP") face.classList.add("mood-asleep");
+        else if (m !== "DEAD") face.classList.add("mood-" + m.toLowerCase());
+      }
+
+      function xpToNext(lvl){ return 30 + (lvl-1)*18; }
+      function addXP(amount){
+        S.xp += amount;
+        while (S.xp >= xpToNext(S.lvl)){
+          S.xp -= xpToNext(S.lvl);
+          S.lvl += 1;
+          S.coins += 2;
+          log("LEVEL UP " + S.lvl + " COINS +2");
+          burst("burst-wig", 520);
+          unlockAchievements();
         }
+      }
 
-        function updateUI(){
-          S.hunger = clamp(S.hunger, 0, 100);
-          S.happy  = clamp(S.happy, 0, 100);
-          S.energy = clamp(S.energy, 0, 100);
-          S.clean  = clamp(S.clean, 0, 100);
-          S.health = clamp(S.health, 0, 100);
-          S.disc   = clamp(S.disc, 0, 100);
-          S.xp     = clamp(S.xp, 0, 9999);
+      function have(item, n=1){ return (S.inv[item] || 0) >= n; }
+      function addItem(item, n=1){ S.inv[item] = (S.inv[item] || 0) + n; }
+      function takeItem(item, n=1){
+        if (!have(item,n)) return false;
+        S.inv[item] -= n;
+        return true;
+      }
 
-          fills.hunger.style.width = S.hunger + "%";
-          fills.happy.style.width  = S.happy + "%";
-          fills.energy.style.width = S.energy + "%";
-          fills.clean.style.width  = S.clean + "%";
-          fills.health.style.width = S.health + "%";
-          fills.disc.style.width   = S.disc + "%";
-          fills.xp.style.width     = clamp(Math.floor((S.xp / xpToNext(S.lvl)) * 100),0,100) + "%";
-
-          vals.hunger.textContent = String(Math.round(S.hunger));
-          vals.happy.textContent  = String(Math.round(S.happy));
-          vals.energy.textContent = String(Math.round(S.energy));
-          vals.clean.textContent  = String(Math.round(S.clean));
-          vals.health.textContent = String(Math.round(S.health));
-          vals.disc.textContent   = String(Math.round(S.disc));
-          vals.xp.textContent     = String(Math.round(S.xp));
-
-          const m = mood();
-          moodPill.textContent = m;
-          lvlPill.textContent  = String(S.lvl);
-          agePill.textContent  = String(S.age);
-          coinsPill.textContent= String(S.coins);
-
-          modeChip.textContent = S.mode;
-          autoChip.textContent = S.autoCare ? "ON" : "OFF";
-          saveChip.textContent = S.autoSave ? "ON" : "OFF";
-
-          setFaceMoodClass(m);
-
-          if (!S.alive){
-            statusDot.style.background = "var(--danger)";
-            statusText.textContent = "DEAD";
-          } else if (S.paused){
-            statusDot.style.background = "var(--accent2)";
-            statusText.textContent = "PAUSED";
-          } else {
-            statusText.textContent = "ALIVE";
-            if (m === "SICK" || m === "ANGRY") statusDot.style.background = "var(--danger)";
-            else if (m === "HUNGRY" || m === "SAD") statusDot.style.background = "var(--warn)";
-            else statusDot.style.background = "var(--accent)";
+      // ACHIEVEMENTS
+      const ACH = [
+        { id:"FIRST_FEED", name:"FIRST FEED", desc:"FEED POPPY ONCE", check:()=>S.counters.feeds>=1 },
+        { id:"FIRST_PLAY", name:"FIRST PLAY", desc:"PLAY ANY GAME ONCE", check:()=>S.counters.plays>=1 },
+        { id:"APPLE_10", name:"APPLE HUNTER", desc:"HIT 10 APPLES", check:()=>S.counters.appleHits>=10 },
+        { id:"DINO_10", name:"DINO RUNNER", desc:"REACH 10 SCORE IN DINO", check:()=>S.counters.dinoScoreBest>=10 },
+        { id:"CLEAN_5", name:"CLEAN MACHINE", desc:"CLEAN 5 TIMES", check:()=>S.counters.cleans>=5 },
+        { id:"WORK_5", name:"WORK ETHIC", desc:"WORK 5 TIMES", check:()=>S.counters.works>=5 },
+        { id:"LEVEL_3", name:"LEVEL 3", desc:"REACH LEVEL 3", check:()=>S.lvl>=3 },
+        { id:"COINS_30", name:"SAVINGS", desc:"HOLD 30 COINS AT ONCE", check:()=>S.coins>=30 },
+        { id:"FIRST_BUY", name:"FIRST BUY", desc:"BUY ONE ACCESSORY", check:()=>S.counters.purchases>=1 },
+        { id:"WARDROBE_2", name:"WARDROBE", desc:"OWN 2 ACCESSORIES", check:()=>ownedCount()>=2 }
+      ];
+      function ownedCount(){
+        const o = S.ownedAccessories;
+        return (o.HAT?1:0)+(o.TIE?1:0)+(o.GLASSES?1:0)+(o.BOW?1:0);
+      }
+      function unlockAchievements(){
+        let unlockedAny = false;
+        for (const a of ACH){
+          if (!S.unlockedAchievements[a.id] && a.check()){
+            S.unlockedAchievements[a.id] = true;
+            unlockedAny = true;
+            log("ACHIEVEMENT UNLOCKED " + a.name);
+            tmsg("ACHIEVEMENT UNLOCKED\n" + a.name);
           }
+        }
+        if (unlockedAny) save();
+      }
 
-          if (S.mode === "SLEEPING") screen.classList.add("sleepOn");
-          else screen.classList.remove("sleepOn");
+      // SHOP ITEMS
+      const SHOP = [
+        { id:"HAT", name:"HAT", cost:12, desc:"TOP ACCESSORY" },
+        { id:"TIE", name:"TIE", cost:9, desc:"FRONT ACCESSORY" },
+        { id:"GLASSES", name:"GLASSES", cost:15, desc:"FACE ACCESSORY" },
+        { id:"BOW", name:"BOW", cost:10, desc:"FRONT ACCESSORY" }
+      ];
 
-          statusBox.textContent =
-            "POPPY STATUS\n" +
-            "MOOD " + m + "\n" +
-            "MODE " + S.mode + "\n" +
-            "COINS " + S.coins + "\n" +
-            "FOOD " + (S.inv.FOOD||0) + " SNACK " + (S.inv.SNACK||0) + " WATER " + (S.inv.WATER||0) + "\n" +
-            "SOAP " + (S.inv.SOAP||0) + " MED " + (S.inv.MED||0) + " TOY " + (S.inv.TOY||0);
+      function renderAccessories(){
+        for (const k of ["HAT","TIE","GLASSES","BOW"]){
+          const el = accEls[k];
+          if (!el) continue;
+          if (S.equippedAccessories[k]) el.classList.add("show");
+          else el.classList.remove("show");
+        }
+      }
 
-          const disabled = !S.alive;
-          for (const b of [btnFeed,btnPlay,btnSleep,btnClean,btnMed,btnWork,btnInventory,btnShop,btnTrain,btnSettings]){
-            b.disabled = disabled;
+      function updateUI(){
+        S.hunger = clamp(S.hunger, 0, 100);
+        S.happy  = clamp(S.happy, 0, 100);
+        S.energy = clamp(S.energy, 0, 100);
+        S.clean  = clamp(S.clean, 0, 100);
+        S.health = clamp(S.health, 0, 100);
+        S.disc   = clamp(S.disc, 0, 100);
+        S.xp     = clamp(S.xp, 0, 9999);
+
+        fills.hunger.style.width = S.hunger + "%";
+        fills.happy.style.width  = S.happy + "%";
+        fills.energy.style.width = S.energy + "%";
+        fills.clean.style.width  = S.clean + "%";
+        fills.health.style.width = S.health + "%";
+        fills.disc.style.width   = S.disc + "%";
+        fills.xp.style.width     = clamp(Math.floor((S.xp / xpToNext(S.lvl)) * 100),0,100) + "%";
+
+        vals.hunger.textContent = String(Math.round(S.hunger));
+        vals.happy.textContent  = String(Math.round(S.happy));
+        vals.energy.textContent = String(Math.round(S.energy));
+        vals.clean.textContent  = String(Math.round(S.clean));
+        vals.health.textContent = String(Math.round(S.health));
+        vals.disc.textContent   = String(Math.round(S.disc));
+        vals.xp.textContent     = String(Math.round(S.xp));
+
+        const m = mood();
+        moodPill.textContent = m;
+        lvlPill.textContent  = String(S.lvl);
+        agePill.textContent  = String(S.age);
+        coinsPill.textContent= String(S.coins);
+
+        modeChip.textContent = S.mode;
+        autoChip.textContent = S.autoCare ? "ON" : "OFF";
+        saveChip.textContent = S.autoSave ? "ON" : "OFF";
+
+        setFaceMoodClass(m);
+
+        if (!S.alive){
+          statusDot.style.background = "var(--danger)";
+          statusText.textContent = "DEAD";
+        } else if (S.paused){
+          statusDot.style.background = "var(--accent2)";
+          statusText.textContent = "PAUSED";
+        } else {
+          statusText.textContent = "ALIVE";
+          if (m === "SICK" || m === "ANGRY") statusDot.style.background = "var(--danger)";
+          else if (m === "HUNGRY" || m === "SAD") statusDot.style.background = "var(--warn)";
+          else statusDot.style.background = "var(--accent)";
+        }
+
+        if (S.mode === "SLEEPING") screen.classList.add("sleepOn");
+        else screen.classList.remove("sleepOn");
+
+        statusBox.textContent =
+          "POPPY STATUS\n" +
+          "MOOD " + m + "\n" +
+          "MODE " + S.mode + "\n" +
+          "COINS " + S.coins + "\n" +
+          "FOOD " + (S.inv.FOOD||0) + " SNACK " + (S.inv.SNACK||0) + " WATER " + (S.inv.WATER||0) + "\n" +
+          "SOAP " + (S.inv.SOAP||0) + " MED " + (S.inv.MED||0) + " TOY " + (S.inv.TOY||0);
+
+        const disabled = !S.alive;
+        for (const b of [btnFeed,btnPlay,btnSleep,btnClean,btnMed,btnWork,btnInventory,btnShop,btnAchievements,btnTrain,btnSettings]){
+          b.disabled = disabled;
+        }
+        btnPause.disabled = false;
+        btnReset.disabled = false;
+
+        renderAccessories();
+      }
+
+      // OVERLAY SYSTEM (HARDENED)
+      let overlayInterval = null;
+      let overlayEndAt = 0;
+      let overlayMode = "NONE";
+      let game = null;
+
+      function stopGame(){
+        if (!game) return;
+        if (game.raf) cancelAnimationFrame(game.raf);
+        if (game.cleanup) game.cleanup();
+        game = null;
+      }
+
+      function clearOverlayTimers(){
+        if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
+        overlayEndAt = 0;
+      }
+
+      function closeOverlay(){
+        stopGame();
+        clearOverlayTimers();
+        overlay.classList.remove("show");
+        overlay.setAttribute("aria-hidden","true");
+        overlayTabs.style.display = "none";
+        overlayTabs.innerHTML = "";
+        overlayBody.innerHTML = "";
+        overlayTitle.textContent = "ACTION";
+        overlayTimer.textContent = "INF";
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
+        overlayMode = "NONE";
+        updateUI();
+        save();
+      }
+
+      function openOverlay(mode, seconds){
+        stopGame();
+        clearOverlayTimers();
+        overlayMode = mode;
+        overlayTitle.textContent = mode;
+        overlay.classList.add("show");
+        overlay.setAttribute("aria-hidden","false");
+
+        if (!seconds || seconds >= 9000){
+          overlayTimer.textContent = "INF";
+          overlayEndAt = 0;
+          return;
+        }
+        overlayEndAt = Date.now() + seconds*1000;
+
+        function tickTimer(){
+          const left = Math.max(0, Math.ceil((overlayEndAt - Date.now())/1000));
+          overlayTimer.textContent = String(left);
+          if (left <= 0){
+            if (overlayMode.startsWith("PLAY")) finishGame(true);
+            else closeOverlay();
           }
-          btnPause.disabled = false;
-          btnReset.disabled = false;
         }
+        tickTimer();
+        overlayInterval = setInterval(tickTimer, 200);
+      }
 
-        // OVERLAY STATE (FIXED CLOSE)
-        let overlayInterval = null;
-        let overlayEndAt = 0;
-        let overlayMode = "NONE";
-        let game = null;
+      // CLOSE WIRING (INVENTORY BUG FIX)
+      overlayX.addEventListener("click", ()=>{ if (overlayMode.startsWith("PLAY")) finishGame(false); closeOverlay(); });
+      overlayClose.addEventListener("click", ()=>{ if (overlayMode.startsWith("PLAY")) finishGame(false); closeOverlay(); });
+      overlayPrimary.addEventListener("click", ()=>{ if (overlayMode.startsWith("PLAY")) finishGame(true); else closeOverlay(); });
 
-        function stopGame(){
-          if (!game) return;
-          if (game.raf) cancelAnimationFrame(game.raf);
-          if (game.cleanup) game.cleanup();
-          game = null;
-        }
-
-        function closeOverlay(){
-          stopGame();
-          overlay.classList.remove("show");
-          overlayBody.innerHTML = "";
-          overlayTitle.textContent = "ACTION";
-          overlayTimer.textContent = "0";
-          overlayPrimary.textContent = "OK";
-          overlayClose.textContent = "CLOSE";
-          overlayMode = "NONE";
-          if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
-          updateUI();
-          save();
-        }
-
-        function openOverlay(mode, seconds){
-          // ALWAYS RESET FIRST SO WE NEVER GET STUCK
-          stopGame();
-          if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
-
-          overlayMode = mode;
-          overlayTitle.textContent = mode;
-          overlay.classList.add("show");
-
-          if (!seconds || seconds >= 9000){
-            overlayTimer.textContent = "INF";
-            overlayEndAt = 0;
-            return;
-          }
-
-          overlayEndAt = Date.now() + seconds*1000;
-
-          function tickTimer(){
-            const left = Math.max(0, Math.ceil((overlayEndAt - Date.now())/1000));
-            overlayTimer.textContent = String(left);
-            if (left <= 0){
-              if (overlayMode.startsWith("PLAY")) finishGame(true);
-              else closeOverlay();
-            }
-          }
-          tickTimer();
-          overlayInterval = setInterval(tickTimer, 200);
-        }
-
-        overlayClose.addEventListener("click", ()=>{
+      // CLICK OUTSIDE CARD CLOSES
+      overlay.addEventListener("click", (e)=>{
+        if (e.target === overlay){
           if (overlayMode.startsWith("PLAY")) finishGame(false);
           closeOverlay();
-        });
-        overlayPrimary.addEventListener("click", ()=>{
-          if (overlayMode.startsWith("PLAY")) finishGame(true);
-          else closeOverlay();
-        });
-
-        // MENUS
-        function menuTitle(text){
-          return "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:left; width:100%;'>" +
-                 "<b style='color:var(--text);'>" + text + "</b>" +
-                 "</div>";
         }
-        function row(title, desc, btnClass, id, btnText){
-          return "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%;'>" +
-                 "<div style='flex:1;'><b>" + title + "</b><div style='margin-top:6px;'>" + desc + "</div></div>" +
-                 "<div style='min-width:160px;'><button class='" + btnClass + "' id='" + id + "' type='button'>" + (btnText||"USE") + "</button></div>" +
-                 "</div>";
+      });
+
+      // ESC CLOSE ALWAYS
+      window.addEventListener("keydown", (e)=>{
+        if (!overlay.classList.contains("show")) return;
+        if (e.key.toLowerCase() === "escape"){
+          e.preventDefault();
+          if (overlayMode.startsWith("PLAY")) finishGame(false);
+          closeOverlay();
         }
+      }, {passive:false});
 
-        function openInventory(){
-          openOverlay("INVENTORY", 9999);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
+      function menuTitle(text){
+        return "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:left; width:100%;'>" +
+               "<b style='color:var(--text);'>" + text + "</b>" +
+               "</div>";
+      }
+      function row(title, desc, btnClass, id, btnText){
+        return "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%;'>" +
+               "<div style='flex:1;'><b>" + title + "</b><div style='margin-top:6px;'>" + desc + "</div></div>" +
+               "<div style='min-width:160px;'><button class='" + btnClass + "' id='" + id + "' type='button'>" + (btnText||"USE") + "</button></div>" +
+               "</div>";
+      }
 
-          const inv = S.inv;
-          overlayBody.innerHTML =
-            menuTitle("INVENTORY") +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              row("FOOD X " + (inv.FOOD||0), "FEED MENU: FOOD GIVES 5 SATURATION", "btnMain", "use_food", "OPEN FEED") +
-              row("SNACK X " + (inv.SNACK||0), "FEED MENU: SNACK GIVES 1 SATURATION", "btnMain", "use_snack", "OPEN FEED") +
-              row("WATER X " + (inv.WATER||0), "DRINK: SMALL HEALTH AND ENERGY", "btnMain", "use_water", "DRINK") +
-              row("SOAP X " + (inv.SOAP||0), "CLEAN: CONSUMES 1 SOAP", "btnMain", "use_soap", "CLEAN") +
-              row("MED X " + (inv.MED||0), "MEDICINE: CONSUMES 1 MED", "btnWarn", "use_med", "MEDICINE") +
-              row("TOY X " + (inv.TOY||0), "PLAY BONUS: EXTRA HAPPINESS AFTER A GAME", "btnAlt", "use_toy", "TOY INFO") +
-            "</div>" +
-            "<div style='margin-top:10px; color:var(--muted); font-size:12px; width:100%; line-height:1.35;'>" +
-              "CLOSE WITH BUTTON OR ESC" +
-            "</div>";
+      // FEED MENU
+      function openFeedMenu(){
+        openOverlay("FEED", 9999);
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
 
-          // Bind
-          overlayBody.querySelector("#use_food").onclick = ()=>{ closeOverlay(); openFeedMenu(); };
-          overlayBody.querySelector("#use_snack").onclick = ()=>{ closeOverlay(); openFeedMenu(); };
-          overlayBody.querySelector("#use_water").onclick = ()=>{ drinkWater(); };
-          overlayBody.querySelector("#use_soap").onclick = ()=>{ actClean(); };
-          overlayBody.querySelector("#use_med").onclick = ()=>{ actMed(); };
-          overlayBody.querySelector("#use_toy").onclick = ()=>{ tmsg("TOYS BOOST HAPPINESS AFTER GAMES"); };
-        }
+        overlayBody.innerHTML =
+          menuTitle("FEED MENU") +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+            row("EAT FOOD", "USES 1 FOOD | +5 SATURATION", have("FOOD") ? "btnMain" : "btnAlt", "feed_food", "EAT") +
+            row("EAT SNACK", "USES 1 SNACK | +1 SATURATION", have("SNACK") ? "btnMain" : "btnAlt", "feed_snack", "EAT") +
+            row("DRINK WATER", "USES 1 WATER | SMALL HEALTH AND ENERGY", have("WATER") ? "btnMain" : "btnAlt", "feed_water", "DRINK") +
+          "</div>";
 
-        function openFeedMenu(){
-          openOverlay("FEED", 9999);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
+        overlayBody.querySelector("#feed_food").onclick = ()=>{
+          if (!takeItem("FOOD",1)) return tmsg("NO FOOD");
+          S.hunger += 5;     // RULE
+          S.happy += 2;
+          S.clean -= 1;
+          S.counters.feeds += 1;
+          addXP(6);
+          unlockAchievements();
+          log("ATE FOOD +5 SATURATION");
+          burst("burst-pop", 380);
+          updateUI(); save();
+          closeOverlay();
+        };
 
-          overlayBody.innerHTML =
-            menuTitle("FEED MENU") +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              row("EAT FOOD", "USES 1 FOOD | +5 SATURATION", have("FOOD") ? "btnMain" : "btnAlt", "feed_food", "EAT") +
-              row("EAT SNACK", "USES 1 SNACK | +1 SATURATION", have("SNACK") ? "btnMain" : "btnAlt", "feed_snack", "EAT") +
-              row("DRINK WATER", "USES 1 WATER | SMALL HEALTH AND ENERGY", have("WATER") ? "btnMain" : "btnAlt", "feed_water", "DRINK") +
-            "</div>";
+        overlayBody.querySelector("#feed_snack").onclick = ()=>{
+          if (!takeItem("SNACK",1)) return tmsg("NO SNACK");
+          S.hunger += 1;     // RULE
+          S.happy += 2;
+          S.counters.snacks += 1;
+          S.counters.feeds += 1;
+          addXP(4);
+          unlockAchievements();
+          log("ATE SNACK +1 SATURATION");
+          burst("burst-pop", 220);
+          updateUI(); save();
+          closeOverlay();
+        };
 
-          overlayBody.querySelector("#feed_food").onclick = ()=>{
-            if (!takeItem("FOOD",1)) return tmsg("NO FOOD");
-            // FOOD RULE: +5 SATURATION
-            S.hunger += 5;
-            S.happy += 2;
-            S.clean -= 1;
-            addXP(6);
-            log("ATE FOOD +5 SATURATION");
-            burst("burst-pop", 380);
-            updateUI(); save();
-            closeOverlay();
-          };
-
-          overlayBody.querySelector("#feed_snack").onclick = ()=>{
-            if (!takeItem("SNACK",1)) return tmsg("NO SNACK");
-            // SNACK RULE: +1 SATURATION
-            S.hunger += 1;
-            S.happy += 2;
-            addXP(4);
-            log("ATE SNACK +1 SATURATION");
-            burst("burst-pop", 220);
-            updateUI(); save();
-            closeOverlay();
-          };
-
-          overlayBody.querySelector("#feed_water").onclick = ()=>{ drinkWater(); };
-        }
-
-        function drinkWater(){
+        overlayBody.querySelector("#feed_water").onclick = ()=>{
           if (!takeItem("WATER",1)) return tmsg("NO WATER");
           S.health += 6;
           S.energy += 5;
           S.happy += 1;
+          S.counters.waters += 1;
           addXP(4);
+          unlockAchievements();
           log("DRANK WATER");
           burst("burst-nod", 420);
           updateUI(); save();
           closeOverlay();
-        }
+        };
+      }
 
-        function openPlayMenu(){
-          openOverlay("PLAY", 9999);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
+      // INVENTORY (NOW ALWAYS CLOSABLE)
+      function openInventory(){
+        openOverlay("INVENTORY", 9999);
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
 
-          overlayBody.innerHTML =
-            menuTitle("PLAY MENU") +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              row("APPLE GAME", "CLICK THE APPLE. SLOW MOVEMENT", "btnMain", "play_apples", "START") +
-              row("DINO RUNNER", "SPACE TO JUMP | DUCK BUTTON | LIKE OFFLINE DINO", "btnMain", "play_dino", "START") +
-            "</div>";
+        const inv = S.inv;
+        overlayBody.innerHTML =
+          menuTitle("INVENTORY") +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+            row("FOOD X " + (inv.FOOD||0), "OPEN FEED MENU", "btnMain", "inv_feed", "FEED MENU") +
+            row("WATER X " + (inv.WATER||0), "DRINK WATER", have("WATER") ? "btnMain" : "btnAlt", "inv_water", "DRINK") +
+            row("SOAP X " + (inv.SOAP||0), "CLEAN POPPY", have("SOAP") ? "btnMain" : "btnAlt", "inv_clean", "CLEAN") +
+            row("MED X " + (inv.MED||0), "USE MEDICINE", have("MED") ? "btnWarn" : "btnAlt", "inv_med", "MEDICINE") +
+            row("TOY X " + (inv.TOY||0), "TOYS BOOST HAPPINESS AFTER GAMES", "btnAlt", "inv_toy", "INFO") +
+          "</div>" +
+          "<div style='margin-top:10px; color:var(--muted); font-size:12px; width:100%; line-height:1.35;'>" +
+            "CLOSE WITH CLOSE BUTTON, X, ESC, OR CLICK OUTSIDE" +
+          "</div>";
 
-          overlayBody.querySelector("#play_apples").onclick = ()=>{ closeOverlay(); startAppleGame(); };
-          overlayBody.querySelector("#play_dino").onclick = ()=>{ closeOverlay(); startDinoGame(); };
-        }
-
-        // ACTIONS
-        function actClean(){
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          if (!takeItem("SOAP",1)) return tmsg("NO SOAP");
-          S.clean += 22;
-          S.happy += 2;
-          addXP(6);
-          log("CLEANED");
-          burst("burst-wig", 520);
-          updateUI(); save();
-          closeOverlay();
-        }
-
-        function actMed(){
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          if (!takeItem("MED",1)) return tmsg("NO MED");
-          S.health += 20;
-          S.mode = "NORMAL";
-          addXP(7);
-          log("MEDICINE USED");
-          burst("burst-pop", 380);
-          updateUI(); save();
-          closeOverlay();
-        }
-
-        function actSleepToggle(){
-          if (!S.alive) return;
-          if (S.mode === "SLEEPING"){
-            S.mode = "NORMAL";
-            log("WOKE UP");
-          } else {
-            if (S.paused) return;
-            S.mode = "SLEEPING";
-            log("SLEEP START");
-          }
+        overlayBody.querySelector("#inv_feed").onclick = ()=>{ openFeedMenu(); };
+        overlayBody.querySelector("#inv_water").onclick = ()=>{
+          if (!takeItem("WATER",1)) return tmsg("NO WATER");
+          S.health += 6; S.energy += 5; S.happy += 1;
+          S.counters.waters += 1;
+          addXP(4);
+          unlockAchievements();
+          log("DRANK WATER");
           burst("burst-nod", 420);
           updateUI(); save();
+        };
+        overlayBody.querySelector("#inv_clean").onclick = ()=> actClean();
+        overlayBody.querySelector("#inv_med").onclick = ()=> actMed();
+        overlayBody.querySelector("#inv_toy").onclick = ()=> tmsg("TOYS GIVE BONUS HAPPINESS AFTER GAMES");
+      }
+
+      // SHOP + WARDROBE
+      function setTabs(tabs, activeId){
+        overlayTabs.style.display = "flex";
+        overlayTabs.innerHTML = "";
+        for (const t of tabs){
+          const b = document.createElement("button");
+          b.className = "tabBtn" + (t.id === activeId ? " active" : "");
+          b.type = "button";
+          b.textContent = t.label;
+          b.onclick = ()=> t.onClick();
+          overlayTabs.appendChild(b);
         }
+      }
 
-        function actWork(){
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          const earned = rint(2,5);
-          S.coins += earned;
-          S.energy -= 8;
-          S.hunger -= 3;
-          S.happy -= 1;
-          addXP(7);
-          log("WORK EARNED " + earned);
-          burst("burst-nod", 420);
-          updateUI(); save();
-        }
+      function openShop(){
+        openOverlay("SHOP", 9999);
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
 
-        function actTrain(){
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          if (S.energy < 12) return tmsg("LOW ENERGY");
-          S.disc += 8;
-          S.energy -= 10;
-          S.happy -= 1;
-          addXP(8);
-          log("TRAIN COMPLETE");
-          burst("burst-pop", 380);
-          updateUI(); save();
-        }
+        function renderBuy(){
+          setTabs([
+            {id:"BUY", label:"BUY", onClick: renderBuy},
+            {id:"WARDROBE", label:"WARDROBE", onClick: renderWardrobe}
+          ], "BUY");
 
-        // MINI GAME: APPLES
-        function startAppleGame(){
-          openOverlay("PLAY APPLES", 14);
-          overlayPrimary.textContent = "FINISH";
-          overlayClose.textContent = "QUIT";
-          overlayBody.innerHTML = "";
-
-          const area = document.createElement("div");
-          area.className = "gameArea";
-          const apple = document.createElement("div");
-          apple.className = "apple";
-          area.appendChild(apple);
-
-          const hud = document.createElement("div");
-          hud.className = "gameHud";
-          hud.innerHTML = "<div>SCORE <b id='gScore'>0</b></div><div>REWARD <b id='gReward'>0</b></div>";
-
-          overlayBody.appendChild(area);
-          overlayBody.appendChild(hud);
-
-          const gScore = overlayBody.querySelector("#gScore");
-          const gReward = overlayBody.querySelector("#gReward");
-
-          game = { type:"APPLE", score:0, raf:0 };
-
-          function move(){
-            const w = area.clientWidth;
-            const h = area.clientHeight;
-            const size = 40;
-            const pad = 10;
-            const x = clamp(rint(0, w - size), pad, w - size - pad);
-            const y = clamp(rint(0, h - size), pad, h - size - pad);
-            apple.style.left = x + "px";
-            apple.style.top = y + "px";
+          let html = menuTitle("SHOP ITEMS") + "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
+          for (const it of SHOP){
+            const owned = !!S.ownedAccessories[it.id];
+            const canBuy = S.coins >= it.cost && !owned;
+            const desc = it.desc + " | COST " + it.cost + " COINS";
+            html += row(
+              it.name + (owned ? " | OWNED" : ""),
+              desc,
+              owned ? "btnAlt" : (canBuy ? "btnMain" : "btnAlt"),
+              "buy_" + it.id,
+              owned ? "OWNED" : "BUY"
+            );
           }
+          html += "</div>";
+          overlayBody.innerHTML = html;
 
-          let nextMove = performance.now() + 1400;
+          for (const it of SHOP){
+            const btn = overlayBody.querySelector("#buy_" + it.id);
+            btn.onclick = ()=>{
+              const owned = !!S.ownedAccessories[it.id];
+              if (owned) return tmsg("ALREADY OWNED");
+              if (S.coins < it.cost) return tmsg("NOT ENOUGH COINS");
+              S.coins -= it.cost;
+              S.ownedAccessories[it.id] = true;
+              S.counters.purchases += 1;
+              addXP(6);
+              unlockAchievements();
+              log("BOUGHT " + it.name + " FOR " + it.cost);
+              burst("burst-pop", 260);
+              updateUI(); save();
+              renderBuy();
+            };
+          }
+        }
 
-          apple.addEventListener("click", ()=>{
-            if (!game) return;
-            game.score += 1;
-            gScore.textContent = String(game.score);
-            gReward.textContent = String(Math.min(14, Math.floor(game.score/2)));
-            move();
-            burst("burst-pop", 240);
-          });
+        function renderWardrobe(){
+          setTabs([
+            {id:"BUY", label:"BUY", onClick: renderBuy},
+            {id:"WARDROBE", label:"WARDROBE", onClick: renderWardrobe}
+          ], "WARDROBE");
 
-          move();
-
-          function loop(now){
-            if (!game) return;
-            if (now >= nextMove){
-              move();
-              nextMove = now + 1400;
+          let html = menuTitle("WARDROBE") + "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
+          for (const it of SHOP){
+            const owned = !!S.ownedAccessories[it.id];
+            const equipped = !!S.equippedAccessories[it.id];
+            if (!owned){
+              html += "<div class='listItem'><b>" + it.name + "</b><div style='margin-top:6px;'>NOT OWNED</div></div>";
+              continue;
             }
-            game.raf = requestAnimationFrame(loop);
+            html += row(
+              it.name + (equipped ? " | EQUIPPED" : ""),
+              "TOGGLE EQUIP",
+              equipped ? "btnMain" : "btnAlt",
+              "eq_" + it.id,
+              equipped ? "UNEQUIP" : "EQUIP"
+            );
+          }
+          html += "</div>";
+          overlayBody.innerHTML = html;
+
+          for (const it of SHOP){
+            const btn = overlayBody.querySelector("#eq_" + it.id);
+            if (!btn) continue;
+            btn.onclick = ()=>{
+              const owned = !!S.ownedAccessories[it.id];
+              if (!owned) return tmsg("NOT OWNED");
+              S.equippedAccessories[it.id] = !S.equippedAccessories[it.id];
+              log((S.equippedAccessories[it.id] ? "EQUIPPED " : "UNEQUIPPED ") + it.name);
+              burst("burst-wig", 520);
+              updateUI(); save();
+              renderWardrobe();
+            };
+          }
+        }
+
+        renderBuy();
+      }
+
+      // ACHIEVEMENTS
+      function openAchievements(){
+        openOverlay("ACHIEVEMENTS", 9999);
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
+
+        overlayTabs.style.display = "none";
+        overlayTabs.innerHTML = "";
+
+        unlockAchievements();
+
+        let unlockedCount = 0;
+        for (const a of ACH) if (S.unlockedAchievements[a.id]) unlockedCount++;
+
+        let html = menuTitle("ACHIEVEMENTS " + unlockedCount + " / " + ACH.length) +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>";
+
+        for (const a of ACH){
+          const ok = !!S.unlockedAchievements[a.id];
+          html += "<div class='listItem' style='border-color:" + (ok ? "rgba(124,247,178,.35)" : "rgba(255,255,255,.10)") + ";'>" +
+                  "<b>" + a.name + "</b>" +
+                  "<div style='margin-top:6px;'>" + a.desc + "</div>" +
+                  "<div style='margin-top:6px; color:var(--muted);'>" + (ok ? "UNLOCKED" : "LOCKED") + "</div>" +
+                  "</div>";
+        }
+        html += "</div>";
+        overlayBody.innerHTML = html;
+      }
+
+      // PLAY MENU
+      function openPlayMenu(){
+        openOverlay("PLAY", 9999);
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
+        overlayTabs.style.display = "none";
+        overlayTabs.innerHTML = "";
+
+        overlayBody.innerHTML =
+          menuTitle("PLAY MENU") +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+            row("APPLE GAME", "CLICK THE APPLE | SLOW MOVEMENT", "btnMain", "play_apples", "START") +
+            row("DINO RUNNER", "SPACE TO JUMP | ARROWDOWN TO DUCK", "btnMain", "play_dino", "START") +
+          "</div>";
+
+        overlayBody.querySelector("#play_apples").onclick = ()=>{ startAppleGame(); };
+        overlayBody.querySelector("#play_dino").onclick = ()=>{ startDinoGame(); };
+      }
+
+      function actClean(){
+        if (!S.alive || S.paused) return;
+        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+        if (!takeItem("SOAP",1)) return tmsg("NO SOAP");
+        S.clean += 22;
+        S.happy += 2;
+        S.counters.cleans += 1;
+        addXP(6);
+        unlockAchievements();
+        log("CLEANED");
+        burst("burst-wig", 520);
+        updateUI(); save();
+      }
+
+      function actMed(){
+        if (!S.alive || S.paused) return;
+        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+        if (!takeItem("MED",1)) return tmsg("NO MED");
+        S.health += 20;
+        S.mode = "NORMAL";
+        S.counters.meds += 1;
+        addXP(7);
+        unlockAchievements();
+        log("MEDICINE USED");
+        burst("burst-pop", 380);
+        updateUI(); save();
+      }
+
+      function actSleepToggle(){
+        if (!S.alive) return;
+        if (S.mode === "SLEEPING"){
+          S.mode = "NORMAL";
+          log("WOKE UP");
+        } else {
+          if (S.paused) return;
+          S.mode = "SLEEPING";
+          log("SLEEP START");
+        }
+        burst("burst-nod", 420);
+        updateUI(); save();
+      }
+
+      function actWork(){
+        if (!S.alive || S.paused) return;
+        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+        const earned = rint(2,5);
+        S.coins += earned;
+        S.energy -= 8;
+        S.hunger -= 3;
+        S.happy -= 1;
+        S.counters.works += 1;
+        addXP(7);
+        unlockAchievements();
+        log("WORK EARNED " + earned);
+        burst("burst-nod", 420);
+        updateUI(); save();
+      }
+
+      function actTrain(){
+        if (!S.alive || S.paused) return;
+        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+        if (S.energy < 12) return tmsg("LOW ENERGY");
+        S.disc += 8;
+        S.energy -= 10;
+        S.happy -= 1;
+        S.counters.trains += 1;
+        addXP(8);
+        unlockAchievements();
+        log("TRAIN COMPLETE");
+        burst("burst-pop", 380);
+        updateUI(); save();
+      }
+
+      // MINI GAME: APPLES
+      function startAppleGame(){
+        openOverlay("PLAY APPLES", 14);
+        overlayPrimary.textContent = "FINISH";
+        overlayClose.textContent = "QUIT";
+        overlayTabs.style.display = "none";
+        overlayTabs.innerHTML = "";
+        overlayBody.innerHTML = "";
+
+        const area = document.createElement("div");
+        area.className = "gameArea";
+        const apple = document.createElement("div");
+        apple.className = "apple";
+        area.appendChild(apple);
+
+        const hud = document.createElement("div");
+        hud.className = "gameHud";
+        hud.innerHTML = "<div>SCORE <b id='gScore'>0</b></div><div>REWARD <b id='gReward'>0</b></div>";
+
+        overlayBody.appendChild(area);
+        overlayBody.appendChild(hud);
+
+        const gScore = overlayBody.querySelector("#gScore");
+        const gReward = overlayBody.querySelector("#gReward");
+
+        game = { type:"APPLE", _score:0, raf:0 };
+
+        function move(){
+          const w = area.clientWidth;
+          const h = area.clientHeight;
+          const size = 42;
+          const pad = 12;
+          const x = clamp(rint(0, w - size), pad, w - size - pad);
+          const y = clamp(rint(0, h - size), pad, h - size - pad);
+          apple.style.left = x + "px";
+          apple.style.top = y + "px";
+        }
+
+        let nextMove = performance.now() + 1400;
+
+        apple.addEventListener("click", ()=>{
+          if (!game) return;
+          game._score += 1;
+          S.counters.appleHits += 1;
+          gScore.textContent = String(game._score);
+          gReward.textContent = String(Math.min(14, Math.floor(game._score/2)));
+          move();
+          burst("burst-pop", 240);
+        });
+
+        move();
+
+        function loop(now){
+          if (!game) return;
+          if (now >= nextMove){
+            move();
+            nextMove = now + 1400;
           }
           game.raf = requestAnimationFrame(loop);
         }
+        game.raf = requestAnimationFrame(loop);
 
-        // MINI GAME: DINO RUNNER (CHROME OFFLINE STYLE)
-        function startDinoGame(){
-          openOverlay("PLAY DINO", 18);
-          overlayPrimary.textContent = "FINISH";
-          overlayClose.textContent = "QUIT";
-          overlayBody.innerHTML = "";
+        Object.defineProperty(game, "score", { get(){ return game._score; } });
+      }
 
-          const area = document.createElement("div");
-          area.className = "dinoArea";
+      // MINI GAME: DINO
+      function startDinoGame(){
+        openOverlay("PLAY DINO", 18);
+        overlayPrimary.textContent = "FINISH";
+        overlayClose.textContent = "QUIT";
+        overlayTabs.style.display = "none";
+        overlayTabs.innerHTML = "";
+        overlayBody.innerHTML = "";
 
-          const ground = document.createElement("div");
-          ground.className = "groundLine";
+        const area = document.createElement("div");
+        area.className = "dinoArea";
 
-          const dino = document.createElement("div");
-          dino.className = "dino";
+        const cloud = document.createElement("div");
+        cloud.className = "cloud";
 
-          const cactus = document.createElement("div");
-          cactus.className = "cactus";
+        const ground = document.createElement("div");
+        ground.className = "groundLine";
 
-          const cloud = document.createElement("div");
-          cloud.className = "cloud";
+        const dino = document.createElement("div");
+        dino.className = "dino";
 
-          area.appendChild(cloud);
-          area.appendChild(ground);
-          area.appendChild(dino);
-          area.appendChild(cactus);
+        const cactus = document.createElement("div");
+        cactus.className = "cactus";
 
-          overlayBody.appendChild(area);
+        area.appendChild(cloud);
+        area.appendChild(ground);
+        area.appendChild(dino);
+        area.appendChild(cactus);
+        overlayBody.appendChild(area);
 
-          const hud = document.createElement("div");
-          hud.className = "dinoHudRow";
-          hud.innerHTML =
-            "<div>SCORE <b id='dScore'>0</b></div>" +
-            "<div>BEST <b id='dBest'>0</b></div>" +
-            "<div style='display:flex; gap:10px;'>" +
-              "<button class='btnAlt' id='dDuck' type='button' style='width:auto; padding:10px 12px;'>DUCK</button>" +
-              "<button class='btnAlt' id='dJump' type='button' style='width:auto; padding:10px 12px;'>JUMP</button>" +
-            "</div>";
-          overlayBody.appendChild(hud);
+        const hud = document.createElement("div");
+        hud.className = "dinoHudRow";
+        hud.innerHTML =
+          "<div>SCORE <b id='dScore'>0</b></div>" +
+          "<div>BEST <b id='dBest'>" + String(S.bestDino||0) + "</b></div>" +
+          "<div style='display:flex; gap:10px; flex-wrap:wrap;'>" +
+            "<button class='btnAlt' id='dDuck' type='button' style='width:auto; padding:10px 12px;'>DUCK</button>" +
+            "<button class='btnAlt' id='dJump' type='button' style='width:auto; padding:10px 12px;'>JUMP</button>" +
+          "</div>";
+        overlayBody.appendChild(hud);
 
-          const dScore = hud.querySelector("#dScore");
-          const dBest  = hud.querySelector("#dBest");
-          const dDuck  = hud.querySelector("#dDuck");
-          const dJump  = hud.querySelector("#dJump");
+        const dScore = hud.querySelector("#dScore");
+        const dBest  = hud.querySelector("#dBest");
+        const dDuck  = hud.querySelector("#dDuck");
+        const dJump  = hud.querySelector("#dJump");
 
-          // best score from save
-          S.bestDino = S.bestDino || 0;
-          dBest.textContent = String(S.bestDino);
+        let y = 0;
+        let vy = 0;
+        const GRAV = 0.9;
+        const JUMP_V = 14;
+        let ducking = false;
 
-          // physics
-          let y = 0;              // vertical offset from ground
-          let vy = 0;             // velocity
-          const GRAV = 0.9;       // gravity
-          const JUMP_V = 14;      // jump strength
-          let ducking = false;
+        let cx = area.clientWidth + 80;
+        let speed = 6.2;
+        let score = 0;
+
+        let clx = area.clientWidth + 160;
+        let alive = true;
+        let last = performance.now();
+
+        function setDinoStyle(){
+          const baseBottom = 46;
+          dino.style.bottom = (baseBottom + y) + "px";
+          if (ducking && y === 0){
+            dino.style.height = "28px";
+            dino.style.width = "52px";
+            dino.style.bottom = baseBottom + "px";
+          } else {
+            dino.style.height = "44px";
+            dino.style.width = "44px";
+          }
+        }
+
+        function jump(){
+          if (!alive) return;
+          if (ducking) return;
+          if (y === 0){
+            vy = JUMP_V;
+            burst("burst-pop", 220);
+          }
+        }
+
+        function setDuck(on){
+          if (!alive) return;
+          ducking = on && (y === 0);
+          setDinoStyle();
+        }
+
+        dJump.addEventListener("click", jump);
+        dDuck.addEventListener("mousedown", ()=>setDuck(true));
+        dDuck.addEventListener("mouseup", ()=>setDuck(false));
+        dDuck.addEventListener("mouseleave", ()=>setDuck(false));
+        dDuck.addEventListener("touchstart", (e)=>{ e.preventDefault(); setDuck(true); }, {passive:false});
+        dDuck.addEventListener("touchend", ()=>setDuck(false), {passive:true});
+
+        function onKeyDown(e){
+          const k = e.key.toLowerCase();
+          if (k === " " || k === "arrowup" || k === "w"){
+            e.preventDefault();
+            jump();
+          }
+          if (k === "arrowdown" || k === "s"){
+            e.preventDefault();
+            setDuck(true);
+          }
+        }
+        function onKeyUp(e){
+          const k = e.key.toLowerCase();
+          if (k === "arrowdown" || k === "s"){
+            e.preventDefault();
+            setDuck(false);
+          }
+        }
+        window.addEventListener("keydown", onKeyDown, {passive:false});
+        window.addEventListener("keyup", onKeyUp, {passive:false});
+
+        function collide(){
+          const r = dino.getBoundingClientRect();
+          const o = cactus.getBoundingClientRect();
+          const pad = 6;
+          return !(r.right - pad < o.left || r.left + pad > o.right || r.bottom - pad < o.top || r.top + pad > o.bottom);
+        }
+
+        function resetCactus(){
+          cx = area.clientWidth + rint(60, 260);
+          cactus.style.height = rint(40, 56) + "px";
+          cactus.style.width = rint(18, 26) + "px";
+        }
+
+        function loop(now){
+          if (!game) return;
+          const dt = Math.min(40, now - last);
+          last = now;
+          if (!alive) return;
+
+          // gravity
+          vy -= GRAV;
+          y += vy;
+          if (y < 0){ y = 0; vy = 0; }
+
+          // speed ramps
+          speed = 6.2 + Math.min(5, score / 60);
 
           // obstacle
-          let cx = area.clientWidth + 60;
-          let speed = 6.2;        // base speed
-          let score = 0;
+          cx -= speed;
+          if (cx < -80){
+            resetCactus();
+            score += 1;
+            dScore.textContent = String(score);
+          }
+          cactus.style.left = cx + "px";
 
           // cloud
-          let clx = area.clientWidth + 120;
-
-          // game running
-          let alive = true;
-          let last = performance.now();
-
-          function setDinoStyle(){
-            const baseBottom = 40;
-            dino.style.bottom = (baseBottom + y) + "px";
-            if (ducking){
-              dino.style.height = "28px";
-              dino.style.width = "52px";
-              dino.style.bottom = baseBottom + "px";
-              dino.style.borderRadius = "12px";
-            } else {
-              dino.style.height = "44px";
-              dino.style.width = "44px";
-              dino.style.borderRadius = "12px";
-            }
+          clx -= (speed * 0.35);
+          if (clx < -120){
+            clx = area.clientWidth + rint(120, 320);
+            cloud.style.top = rint(18, 80) + "px";
           }
+          cloud.style.left = clx + "px";
 
-          function jump(){
-            if (!alive) return;
-            if (ducking) return;
-            if (y === 0){
-              vy = JUMP_V;
-              burst("burst-pop", 220);
-            }
-          }
-
-          function setDuck(on){
-            if (!alive) return;
-            ducking = on;
-            if (ducking && y > 0){
-              // cancel duck mid-air
-              ducking = false;
-            }
-            setDinoStyle();
-          }
-
-          dJump.addEventListener("click", jump);
-          dDuck.addEventListener("mousedown", ()=>setDuck(true));
-          dDuck.addEventListener("mouseup", ()=>setDuck(false));
-          dDuck.addEventListener("mouseleave", ()=>setDuck(false));
-          dDuck.addEventListener("touchstart", (e)=>{ e.preventDefault(); setDuck(true); }, {passive:false});
-          dDuck.addEventListener("touchend", ()=>setDuck(false), {passive:true});
-
-          function onKeyDown(e){
-            const k = e.key.toLowerCase();
-            if (k === " " || k === "arrowup" || k === "w"){
-              e.preventDefault();
-              jump();
-            }
-            if (k === "arrowdown" || k === "s"){
-              e.preventDefault();
-              setDuck(true);
-            }
-          }
-          function onKeyUp(e){
-            const k = e.key.toLowerCase();
-            if (k === "arrowdown" || k === "s"){
-              e.preventDefault();
-              setDuck(false);
-            }
-          }
-          window.addEventListener("keydown", onKeyDown, {passive:false});
-          window.addEventListener("keyup", onKeyUp, {passive:false});
-
-          function collide(){
-            const r = dino.getBoundingClientRect();
-            const o = cactus.getBoundingClientRect();
-            // small forgiveness
-            const pad = 6;
-            return !(r.right - pad < o.left || r.left + pad > o.right || r.bottom - pad < o.top || r.top + pad > o.bottom);
-          }
-
-          function resetCactus(){
-            cx = area.clientWidth + rint(40, 220);
-            // random cactus height/width a bit
-            const h = rint(38, 56);
-            cactus.style.height = h + "px";
-            cactus.style.width = rint(18, 26) + "px";
-            cactus.style.borderRadius = "10px";
-          }
-
-          function loop(now){
-            if (!game) return; // stopped
-            const dt = Math.min(40, now - last);
-            last = now;
-
-            if (!alive) return;
-
-            // gravity
-            if (!ducking){
-              vy -= GRAV;
-              y += vy;
-              if (y < 0){ y = 0; vy = 0; }
-            } else {
-              // still apply gravity if in air (duck cancels)
-              vy -= GRAV;
-              y += vy;
-              if (y < 0){ y = 0; vy = 0; }
-            }
-
-            // speed ramps slowly with score
-            speed = 6.2 + Math.min(5, score / 60);
-
-            // obstacle move
-            cx -= speed;
-            if (cx < -60){
-              resetCactus();
-              score += 1;
-              dScore.textContent = String(score);
-            }
-            cactus.style.left = cx + "px";
-
-            // cloud move
-            clx -= (speed * 0.35);
-            if (clx < -100){
-              clx = area.clientWidth + rint(80, 240);
-              cloud.style.top = rint(18, 80) + "px";
-            }
-            cloud.style.left = clx + "px";
-
-            // render dino
-            setDinoStyle();
-
-            // collision
-            if (collide()){
-              alive = false;
-              // end game immediately as if timer hit 0
-              // reward based on score
-              S.bestDino = Math.max(S.bestDino || 0, score);
-              log("DINO CRASH SCORE " + score);
-              finishGame(true, {type:"DINO", score});
-              return;
-            }
-
-            game.raf = requestAnimationFrame(loop);
-          }
-
-          // attach game state and cleanup
-          game = {
-            type:"DINO",
-            score:0,
-            raf:0,
-            cleanup: ()=>{
-              window.removeEventListener("keydown", onKeyDown);
-              window.removeEventListener("keyup", onKeyUp);
-            }
-          };
-
-          resetCactus();
           setDinoStyle();
+
+          if (collide()){
+            alive = false;
+            // finalize
+            S.bestDino = Math.max(S.bestDino||0, score);
+            S.counters.dinoScoreBest = Math.max(S.counters.dinoScoreBest||0, score);
+            dBest.textContent = String(S.bestDino);
+            log("DINO CRASH SCORE " + score);
+            finishGame(true, {type:"DINO", score});
+            return;
+          }
+
           game.raf = requestAnimationFrame(loop);
-
-          // store live score via getter
-          Object.defineProperty(game, "score", { get(){ return score; } });
         }
 
-        // finish game (supports optional override)
-        function finishGame(applyRewards, override){
-          const g = override || game;
-          if (!g) return;
+        game = {
+          type:"DINO",
+          raf:0,
+          cleanup: ()=>{
+            window.removeEventListener("keydown", onKeyDown);
+            window.removeEventListener("keyup", onKeyUp);
+          }
+        };
+        Object.defineProperty(game, "score", { get(){ return score; } });
 
-          const type = g.type;
-          const score = g.score || 0;
+        resetCactus();
+        setDinoStyle();
+        game.raf = requestAnimationFrame(loop);
+      }
 
-          if (applyRewards){
-            let coinsGain = 0;
-            let xpGain = 0;
-            let happyGain = 0;
+      function finishGame(applyRewards, override){
+        const g = override || game;
+        if (!g) return;
 
-            if (type === "APPLE"){
-              coinsGain = clamp(Math.floor(score/2), 0, 14);
-              xpGain = clamp(8 + score*2, 8, 36);
-              happyGain = clamp(8 + score*2, 8, 30);
-            } else if (type === "DINO"){
-              coinsGain = clamp(score, 0, 22);
-              xpGain = clamp(10 + score*3, 10, 50);
-              happyGain = clamp(8 + score*2, 8, 28);
-            }
+        const type = g.type;
+        const score = g.score || 0;
 
-            // toy bonus
-            if ((S.inv.TOY||0) > 0){
-              happyGain += 2;
-            }
+        if (applyRewards){
+          let coinsGain = 0;
+          let xpGain = 0;
+          let happyGain = 0;
 
-            S.coins += coinsGain;
-            S.happy += happyGain;
-            S.energy -= 6;
-            S.clean -= 1;
-            addXP(xpGain);
-
-            log("GAME " + type + " SCORE " + score + " COINS +" + coinsGain + " HAPPINESS +" + happyGain);
-            burst("burst-wig", 520);
-          } else {
-            log("GAME QUIT");
+          if (type === "APPLE"){
+            coinsGain = clamp(Math.floor(score/2), 0, 14);
+            xpGain = clamp(8 + score*2, 8, 36);
+            happyGain = clamp(8 + score*2, 8, 30);
+          } else if (type === "DINO"){
+            coinsGain = clamp(score, 0, 22);
+            xpGain = clamp(10 + score*3, 10, 50);
+            happyGain = clamp(8 + score*2, 8, 28);
           }
 
-          stopGame();
-          closeOverlay();
+          if ((S.inv.TOY||0) > 0) happyGain += 2;
+
+          S.coins += coinsGain;
+          S.happy += happyGain;
+          S.energy -= 6;
+          S.clean -= 1;
+
+          S.counters.plays += 1;
+          addXP(xpGain);
+          unlockAchievements();
+
+          log("GAME " + type + " SCORE " + score + " COINS +" + coinsGain + " HAPPINESS +" + happyGain);
+          burst("burst-wig", 520);
+        } else {
+          log("GAME QUIT");
+        }
+
+        stopGame();
+        closeOverlay();
+        updateUI(); save();
+      }
+
+      // BUTTONS
+      btnFeed.addEventListener("click", ()=>{
+        if (!S.alive || S.paused) return;
+        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+        openFeedMenu();
+      });
+
+      btnPlay.addEventListener("click", ()=>{
+        if (!S.alive || S.paused) return;
+        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+        openPlayMenu();
+      });
+
+      btnSleep.addEventListener("click", actSleepToggle);
+      btnClean.addEventListener("click", actClean);
+      btnMed.addEventListener("click", actMed);
+      btnWork.addEventListener("click", actWork);
+      btnInventory.addEventListener("click", openInventory);
+      btnShop.addEventListener("click", openShop);
+      btnAchievements.addEventListener("click", openAchievements);
+      btnTrain.addEventListener("click", actTrain);
+
+      btnSettings.addEventListener("click", ()=>{
+        openOverlay("SETTINGS", 9999);
+        overlayPrimary.textContent = "DONE";
+        overlayClose.textContent = "CLOSE";
+        overlayTabs.style.display = "none";
+        overlayTabs.innerHTML = "";
+
+        overlayBody.innerHTML =
+          menuTitle("SETTINGS") +
+          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+            row("AUTO CARE", "TOGGLE AUTO CARE", "btnAlt", "set_auto", (S.autoCare ? "ON" : "OFF")) +
+            row("AUTO SAVE", "TOGGLE AUTO SAVE", "btnAlt", "set_save", (S.autoSave ? "ON" : "OFF")) +
+          "</div>";
+
+        overlayBody.querySelector("#set_auto").onclick = ()=>{
+          S.autoCare = !S.autoCare;
+          log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
+          tmsg("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
           updateUI(); save();
+          btnSettings.click();
+        };
+        overlayBody.querySelector("#set_save").onclick = ()=>{
+          S.autoSave = !S.autoSave;
+          log("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
+          tmsg("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
+          updateUI(); save(true);
+          btnSettings.click();
+        };
+      });
+
+      btnPause.addEventListener("click", ()=>{
+        S.paused = !S.paused;
+        log(S.paused ? "PAUSED" : "RESUMED");
+        tmsg(S.paused ? "PAUSED" : "RESUMED");
+        updateUI(); save();
+      });
+
+      btnReset.addEventListener("click", ()=>{
+        const ok = confirm("RESET POPPY?");
+        if (!ok) return;
+        stopGame();
+        closeOverlay();
+        S = defaultState();
+        logEl.innerHTML = "";
+        log("RESET COMPLETE");
+        tmsg("RESET");
+        updateUI();
+        save(true);
+      });
+
+      // TICK LOOP
+      const TICK_MS = 25000;
+
+      function internalTick(){
+        if (!S.alive) return;
+        if (S.paused) return;
+
+        if (!overlay.classList.contains("show") && chance(0.16)) blink();
+
+        S.age += 1;
+
+        if (S.mode === "SLEEPING"){
+          S.energy += 5;
+          S.health += 1;
+          S.hunger -= 1;
+        } else {
+          // passive decay
+          let decay = 1;
+          S.hunger -= (1.2 * decay);
+          S.energy -= (1.2 * decay);
+          S.clean  -= (0.8 * decay);
+          let penalty = 0;
+          if (S.hunger < 35) penalty += 2;
+          if (S.energy < 25) penalty += 2;
+          if (S.clean  < 25) penalty += 2;
+          if (S.health < 35) penalty += 2;
+          S.happy -= (0.8 + penalty * 0.5);
         }
 
-        // BUTTON WIRING
-        btnFeed.addEventListener("click", ()=>{
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          openFeedMenu();
-        });
-        btnPlay.addEventListener("click", ()=>{
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          openPlayMenu();
-        });
-        btnSleep.addEventListener("click", actSleepToggle);
-        btnClean.addEventListener("click", actClean);
-        btnMed.addEventListener("click", actMed);
-        btnWork.addEventListener("click", actWork);
-        btnInventory.addEventListener("click", openInventory);
-        btnShop.addEventListener("click", ()=>{ tmsg("SHOP STILL IN OTHER VERSION. TELL ME IF YOU WANT IT MERGED HERE."); });
-        btnTrain.addEventListener("click", actTrain);
-        btnSettings.addEventListener("click", ()=>{ tmsg("SETTINGS STILL IN OTHER VERSION. TELL ME IF YOU WANT IT MERGED HERE."); });
+        // health damage at extremes
+        let dmg = 0;
+        if (S.hunger <= 10) dmg += 3;
+        if (S.clean  <= 10) dmg += 3;
+        if (S.energy <= 8)  dmg += 2;
+        if (S.happy  <= 8)  dmg += 2;
+        S.health -= dmg;
 
-        btnPause.addEventListener("click", ()=>{
-          S.paused = !S.paused;
-          log(S.paused ? "PAUSED" : "RESUMED");
-          tmsg(S.paused ? "PAUSED" : "RESUMED");
-          updateUI(); save();
-        });
-
-        btnReset.addEventListener("click", ()=>{
-          const ok = confirm("RESET POPPY?");
-          if (!ok) return;
-          stopGame();
-          closeOverlay();
-          S = defaultState();
-          logEl.innerHTML = "";
-          log("RESET COMPLETE");
-          tmsg("RESET");
-          updateUI();
-          save(true);
-        });
-
-        // CLOSE OVERLAY WITH ESC ALWAYS
-        window.addEventListener("keydown", (e)=>{
-          const k = e.key.toLowerCase();
-          if (overlay.classList.contains("show") && k === "escape"){
-            e.preventDefault();
-            if (overlayMode.startsWith("PLAY")) finishGame(false);
-            closeOverlay();
+        // auto care
+        if (S.autoCare && S.mode !== "SLEEPING"){
+          if (S.hunger < 30 && have("FOOD",1)){
+            takeItem("FOOD",1);
+            S.hunger += 5;
+            S.happy += 1;
+            S.counters.feeds += 1;
+            log("AUTO CARE FED FOOD");
           }
-        }, { passive:false });
-
-        // SIMPLE SHORTCUTS OUTSIDE OVERLAY
-        window.addEventListener("keydown", (e)=>{
-          if (overlay.classList.contains("show")) return;
-          const k = e.key.toLowerCase();
-          if (k === "f") btnFeed.click();
-          if (k === "p") btnPlay.click();
-          if (k === "s") btnSleep.click();
-          if (k === "c") btnClean.click();
-          if (k === "m") btnMed.click();
-          if (k === "w") btnWork.click();
-          if (k === "i") btnInventory.click();
-          if (k === "t") btnTrain.click();
-          if (k === " ") btnPause.click();
-        }, { passive:true });
-
-        // TICK LOOP
-        const TICK_MS = 25000;
-        function internalTick(){
-          if (!S.alive) return;
-          if (S.paused) return;
-
-          if (!overlay.classList.contains("show") && chance(0.16)) blink();
-
-          S.age += 1;
-
-          if (S.mode === "SLEEPING"){
-            S.energy += 5;
-            S.health += 1;
-            S.hunger -= 1;
-          } else {
-            S.hunger -= 1.2;
-            S.energy -= 1.2;
-            S.clean  -= 0.8;
-            let penalty = 0;
-            if (S.hunger < 35) penalty += 2;
-            if (S.energy < 25) penalty += 2;
-            if (S.clean  < 25) penalty += 2;
-            if (S.health < 35) penalty += 2;
-            S.happy -= (0.8 + penalty * 0.5);
+          if (S.clean < 25 && have("SOAP",1)){
+            takeItem("SOAP",1);
+            S.clean += 22;
+            S.counters.cleans += 1;
+            log("AUTO CARE CLEANED");
           }
-
-          let dmg = 0;
-          if (S.hunger <= 10) dmg += 3;
-          if (S.clean  <= 10) dmg += 3;
-          if (S.energy <= 8)  dmg += 2;
-          if (S.happy  <= 8)  dmg += 2;
-          S.health -= dmg;
-
-          if (S.health <= 0){
-            S.alive = false;
-            S.health = 0;
-            log("POPPY HAS DIED");
-            tmsg("POPPY DIED");
-          }
-
-          // passive xp
-          if (S.alive && S.mode !== "SICK") S.xp += 1;
-          while (S.xp >= xpToNext(S.lvl)){
-            S.xp -= xpToNext(S.lvl);
-            S.lvl += 1;
-            S.coins += 2;
-            log("LEVEL UP " + S.lvl + " COINS +2");
-          }
-
-          updateUI();
-          save();
-        }
-
-        // offline progress (simple)
-        function applyOffline(){
-          const now = Date.now();
-          const diffMs = Math.max(0, now - (S.last || now));
-          const ticks = Math.min(80, Math.floor(diffMs / TICK_MS));
-          if (ticks > 0){
-            log("OFFLINE TICKS " + ticks);
-            for (let i=0;i<ticks;i++) internalTick();
+          if (S.health < 25 && have("MED",1)){
+            takeItem("MED",1);
+            S.health += 20;
+            S.mode = "NORMAL";
+            S.counters.meds += 1;
+            log("AUTO CARE USED MEDICINE");
           }
         }
 
-        // STARTUP
+        if (S.health <= 0){
+          S.alive = false;
+          S.health = 0;
+          log("POPPY HAS DIED");
+          tmsg("POPPY DIED");
+        }
+
+        // passive xp
+        if (S.alive && S.mode !== "SICK") S.xp += 1;
+        while (S.xp >= xpToNext(S.lvl)){
+          S.xp -= xpToNext(S.lvl);
+          S.lvl += 1;
+          S.coins += 2;
+          log("LEVEL UP " + S.lvl + " COINS +2");
+        }
+
+        unlockAchievements();
+        updateUI();
+        save();
+      }
+
+      function applyOffline(){
+        const now = Date.now();
+        const diffMs = Math.max(0, now - (S.last || now));
+        const ticks = Math.min(80, Math.floor(diffMs / TICK_MS));
+        if (ticks > 0){
+          log("OFFLINE TICKS " + ticks);
+          for (let i=0;i<ticks;i++) internalTick();
+        }
+      }
+
+      // START
+      try{
         const loaded = load();
         logEl.innerHTML = "";
         if (loaded){
@@ -1790,25 +2178,16 @@
           applyOffline();
         } else {
           log("WELCOME TO POPPY");
-          log("TIP: PLAY DINO RUNNER WITH SPACE TO JUMP");
+          log("OPEN INVENTORY OR SHOP AND CLOSE WITH CLOSE, X, ESC, OR CLICK OUTSIDE");
         }
-
-        // dblclick status = toggle auto care
-        statusBox.addEventListener("dblclick", ()=>{
-          S.autoCare = !S.autoCare;
-          log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
-          tmsg("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
-          updateUI(); save();
-        });
-
         updateUI();
-        save();
+        save(true);
         setInterval(internalTick, TICK_MS);
-
       } catch(err){
         console.error(err);
         showError(String(err && err.message ? err.message : err));
       }
+
     })();
   </script>
 </body>
