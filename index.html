@@ -18,14 +18,6 @@
       --shadow:0 18px 60px rgba(0,0,0,.45);
       --radius:18px;
       --ink:#0b1020;
-      --good:rgba(124,247,178,.22);
-      --goodB:rgba(124,247,178,.30);
-      --blue:rgba(138,164,255,.22);
-      --blueB:rgba(138,164,255,.30);
-      --warnA:rgba(255,209,138,.22);
-      --warnB:rgba(255,209,138,.30);
-      --badA:rgba(255,138,161,.22);
-      --badB:rgba(255,138,161,.30);
     }
 
     *{ box-sizing:border-box; }
@@ -110,7 +102,7 @@
         radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.10), transparent 60%),
         radial-gradient(560px 260px at 50% 60%, rgba(138,164,255,.07), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.16));
-      height: 448px;
+      height: 468px;
       position:relative;
       overflow:hidden;
       display:flex;
@@ -141,6 +133,9 @@
       line-height: 1.25;
       box-shadow: 0 12px 26px rgba(0,0,0,.35);
       white-space: pre-line;
+      pointer-events:auto; /* for dblclick */
+      cursor: default;
+      user-select:none;
     }
 
     .pill{
@@ -307,14 +302,12 @@
     }
     .mood-asleep .eye{ transform: scaleY(.25); }
 
-    /* NO CONSTANT MOTION: ONLY BLINK SOMETIMES */
     @keyframes blink {
       0%, 90%, 100% { transform: scaleY(1); }
       92%, 96% { transform: scaleY(0.15); }
     }
     .blink .eye{ animation: blink 220ms linear 1; transform-origin:center; }
 
-    /* SHORT ACTION BURSTS */
     @keyframes pop { 0%{ transform: scale(1); } 50%{ transform: scale(1.05); } 100%{ transform: scale(1); } }
     @keyframes nod { 0%{ transform: translateY(0); } 40%{ transform: translateY(-8px); } 100%{ transform: translateY(0); } }
     @keyframes wig { 0%{ transform: rotate(0deg); } 25%{ transform: rotate(-8deg); } 50%{ transform: rotate(10deg); } 75%{ transform: rotate(-6deg); } 100%{ transform: rotate(0deg); } }
@@ -346,7 +339,7 @@
     }
     .overlay.show{ display:flex; }
     .overlayCard{
-      width:min(560px, 94%);
+      width:min(600px, 94%);
       border-radius: 18px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(10,14,28,.84);
@@ -368,7 +361,7 @@
       border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
       padding: 12px;
-      min-height: 190px;
+      min-height: 210px;
       display:grid;
       place-items:center;
       position:relative;
@@ -384,8 +377,8 @@
 
     /* APPLE MINI GAME */
     .gameArea{
-      width: min(500px, 96%);
-      height: 250px;
+      width: min(520px, 96%);
+      height: 260px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.18);
@@ -431,73 +424,82 @@
     .gameHud{
       display:flex;
       justify-content:space-between;
-      width: min(500px, 96%);
+      width: min(520px, 96%);
       font-size: 12px;
       color: var(--muted);
       margin-top: 10px;
     }
     .gameHud b{ color: var(--text); }
 
-    /* SIMPLE DODGE GAME */
-    .dodgeArea{
-      width: min(500px, 96%);
-      height: 250px;
+    /* DINO RUNNER STYLE GAME */
+    .dinoArea{
+      width: min(520px, 96%);
+      height: 260px;
       border-radius: 14px;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.20));
       position:relative;
       overflow:hidden;
     }
-    .runner{
-      width: 36px;
-      height: 36px;
+    .groundLine{
+      position:absolute;
+      left:0; right:0;
+      height: 3px;
+      bottom: 40px;
+      background: rgba(255,255,255,.14);
+    }
+    .dino{
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
       background: linear-gradient(180deg, rgba(185,255,217,1), rgba(47,228,138,1));
       border: 1px solid rgba(255,255,255,.12);
       position:absolute;
-      bottom: 12px;
-      left: 14px;
+      left: 24px;
+      bottom: 40px;
       box-shadow: 0 18px 30px rgba(0,0,0,.25);
     }
-    .rock{
-      width: 30px;
-      height: 30px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+    .cactus{
+      width: 20px;
+      height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
       border: 1px solid rgba(255,255,255,.14);
       position:absolute;
-      bottom: 12px;
-      left: 460px;
+      bottom: 40px;
+      left: 520px;
       box-shadow: 0 18px 30px rgba(0,0,0,.25);
     }
+    .cloud{
+      position:absolute;
+      top: 30px;
+      left: 520px;
+      width: 68px;
+      height: 24px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.10);
+      filter: blur(.2px);
+      opacity:.8;
+    }
+    .cloud:before, .cloud:after{
+      content:"";
+      position:absolute;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 999px;
+    }
+    .cloud:before{ width: 26px; height: 18px; left: 8px; top:-10px; }
+    .cloud:after{ width: 32px; height: 22px; left: 26px; top:-14px; }
 
-    /* VISUALS FOR ACTIONS */
-    .bubble{
-      position:absolute;
-      width: 14px; height: 14px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.25);
-      background: rgba(255,255,255,.08);
-      opacity:0;
-    }
-    @keyframes bubbleRise{
-      0%{ transform: translate(0, 20px) scale(.6); opacity:0; }
-      10%{ opacity:1; }
-      80%{ opacity:1; }
-      100%{ transform: translate(var(--dx), -190px) scale(1.15); opacity:0; }
-    }
-    .pulseRing{
-      width: 120px; height: 120px;
-      border-radius: 999px;
-      border: 2px solid rgba(124,247,178,.55);
-      box-shadow: 0 0 0 10px rgba(124,247,178,.12);
-      opacity:0;
-      position:absolute;
-    }
-    @keyframes pulse{
-      0%{ transform: scale(.7); opacity:0; }
-      18%{ opacity:1; }
-      100%{ transform: scale(1.7); opacity:0; }
+    .dinoHudRow{
+      width: min(520px, 96%);
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
     }
 
     .toast{
@@ -652,11 +654,6 @@
       white-space:nowrap;
     }
 
-    .list{
-      display:grid;
-      gap:10px;
-      margin-top: 10px;
-    }
     .listItem{
       padding: 10px 12px;
       border-radius: 14px;
@@ -686,7 +683,7 @@
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">FULLY FLEDGED: STATS, INVENTORY, SHOP, AUTO CARE, RANDOM EVENTS, SAVE</p>
+          <p class="sub">DINO RUNNER GAME + FIXED INVENTORY + FOOD SATURATION RULES</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -782,15 +779,10 @@
       <div class="log" id="log"></div>
 
       <div class="panel" style="margin-top:12px;">
-        <h2 style="margin:0 0 10px; font-size:16px;">QUICK HELP</h2>
-
-        <div class="list">
-          <div class="listItem"><b>FEED</b> USES FOOD ITEMS. IF NONE, YOU CAN BUY IN SHOP.</div>
-          <div class="listItem"><b>PLAY</b> CHOOSE APPLE CLICK GAME OR DODGE GAME.</div>
-          <div class="listItem"><b>TRAIN</b> INCREASES DISCIPLINE BUT COSTS ENERGY.</div>
-          <div class="listItem"><b>AUTO CARE</b> CAN USE ITEMS AUTOMATICALLY IF YOU OWN THEM.</div>
-          <div class="listItem"><b>SAVING</b> AUTO SAVES TO LOCAL STORAGE. SETTINGS CAN TURN IT OFF.</div>
-        </div>
+        <h2 style="margin:0 0 10px; font-size:16px;">FIXES INCLUDED</h2>
+        <div class="listItem"><b>DINO RUNNER</b> SPACE TO JUMP. DUCK BUTTON INCLUDED. OBSTACLES LOOP.</div>
+        <div class="listItem"><b>INVENTORY</b> CLOSE WORKS. OVERLAY NEVER GETS STUCK.</div>
+        <div class="listItem"><b>FOOD RULES</b> FOOD +5 SATURATION. SNACK +1 SATURATION.</div>
       </div>
     </aside>
   </main>
@@ -823,7 +815,7 @@
       function clamp(n,a,b){ return Math.max(a, Math.min(b, n)); }
 
       // SAVE KEY
-      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V1";
+      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V2";
 
       try{
         // Elements
@@ -919,7 +911,6 @@
             BLANKET: 0
           },
 
-          // flags/upgrades
           upgrades: {
             AUTO_FEED: false,
             AUTO_CLEAN: false,
@@ -930,39 +921,10 @@
             SLOW_DECAY: false
           },
 
-          // achievements
-          ach: {
-            FIRST_FEED: false,
-            FIRST_GAME: false,
-            FIRST_SHOP: false,
-            LVL_3: false,
-            LVL_5: false,
-            RICH_50: false,
-            CLEAN_FREAK: false,
-            FULL_HEALTH: false
-          },
-
-          // last tick timestamp (for offline progress)
           last: Date.now()
         });
 
         let S = defaultState();
-
-        // LOAD
-        function load(){
-          try{
-            const raw = localStorage.getItem(SAVE_KEY);
-            if (!raw) return false;
-            const data = JSON.parse(raw);
-            if (!data || typeof data !== "object") return false;
-            // shallow merge with defaults to keep new fields
-            const base = defaultState();
-            S = mergeDeep(base, data);
-            return true;
-          } catch(e){
-            return false;
-          }
-        }
 
         function mergeDeep(target, source){
           const out = Array.isArray(target) ? target.slice() : { ...target };
@@ -972,24 +934,29 @@
             const tv = out[k];
             if (sv && typeof sv === "object" && !Array.isArray(sv) && tv && typeof tv === "object" && !Array.isArray(tv)){
               out[k] = mergeDeep(tv, sv);
-            } else {
-              out[k] = sv;
-            }
+            } else out[k] = sv;
           }
           return out;
         }
 
+        function load(){
+          try{
+            const raw = localStorage.getItem(SAVE_KEY);
+            if (!raw) return false;
+            const data = JSON.parse(raw);
+            const base = defaultState();
+            S = mergeDeep(base, data);
+            return true;
+          } catch(e){ return false; }
+        }
         function save(force){
           if (!S.autoSave && !force) return;
           try{
             S.last = Date.now();
             localStorage.setItem(SAVE_KEY, JSON.stringify(S));
-          } catch(e){
-            // ignore
-          }
+          } catch(e){}
         }
 
-        // LOG
         function log(msg){
           const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
           const div = document.createElement("div");
@@ -998,7 +965,6 @@
           logEl.prepend(div);
         }
 
-        // MOTION BURSTS
         function burst(cls, ms){
           app.classList.add(cls);
           setTimeout(()=>app.classList.remove(cls), ms);
@@ -1008,7 +974,6 @@
           setTimeout(()=>face.classList.remove("blink"), 250);
         }
 
-        // MOOD + FACE
         function mood(){
           if (!S.alive) return "DEAD";
           if (S.mode === "SLEEPING") return "ASLEEP";
@@ -1020,58 +985,35 @@
           return "HAPPY";
         }
         function setFaceMoodClass(m){
-          face.classList.remove(
-            "mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored","mood-asleep"
-          );
+          face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored","mood-asleep");
           if (m === "ASLEEP") face.classList.add("mood-asleep");
           else if (m !== "DEAD") face.classList.add("mood-" + m.toLowerCase());
         }
 
-        // XP / LEVEL
-        function xpToNext(lvl){
-          return 30 + (lvl-1)*18;
-        }
-        function addXP(amount, reason){
-          if (!S.alive) return;
+        function xpToNext(lvl){ return 30 + (lvl-1)*18; }
+        function addXP(amount){
           let a = amount;
           if (S.upgrades.XP_BOOST) a = Math.round(a * 1.2);
           S.xp += a;
-          if (reason) log("XP +" + a + " " + reason);
           while (S.xp >= xpToNext(S.lvl)){
             S.xp -= xpToNext(S.lvl);
             S.lvl += 1;
             S.coins += 2;
-            log("LEVEL UP TO " + S.lvl + " COINS +2");
+            log("LEVEL UP " + S.lvl + " COINS +2");
             burst("burst-wig", 520);
           }
-          // achievements
-          if (S.lvl >= 3 && !S.ach.LVL_3){ S.ach.LVL_3 = true; log("ACHIEVEMENT LEVEL 3"); }
-          if (S.lvl >= 5 && !S.ach.LVL_5){ S.ach.LVL_5 = true; log("ACHIEVEMENT LEVEL 5"); }
-          updateUI();
-          save();
         }
 
         // INVENTORY HELPERS
         function have(item, n=1){ return (S.inv[item] || 0) >= n; }
-        function addItem(item, n=1){
-          S.inv[item] = (S.inv[item] || 0) + n;
-        }
+        function addItem(item, n=1){ S.inv[item] = (S.inv[item] || 0) + n; }
         function takeItem(item, n=1){
           if (!have(item,n)) return false;
           S.inv[item] -= n;
           return true;
         }
 
-        // ACHIEVEMENTS CHECK
-        function checkAchievements(){
-          if (S.coins >= 50 && !S.ach.RICH_50){ S.ach.RICH_50 = true; log("ACHIEVEMENT 50 COINS"); }
-          if (S.clean >= 95 && !S.ach.CLEAN_FREAK){ S.ach.CLEAN_FREAK = true; log("ACHIEVEMENT CLEAN FREAK"); }
-          if (S.health >= 100 && !S.ach.FULL_HEALTH){ S.ach.FULL_HEALTH = true; log("ACHIEVEMENT FULL HEALTH"); }
-        }
-
-        // UI UPDATE
         function updateUI(){
-          // clamp
           S.hunger = clamp(S.hunger, 0, 100);
           S.happy  = clamp(S.happy, 0, 100);
           S.energy = clamp(S.energy, 0, 100);
@@ -1080,15 +1022,13 @@
           S.disc   = clamp(S.disc, 0, 100);
           S.xp     = clamp(S.xp, 0, 9999);
 
-          // fills
           fills.hunger.style.width = S.hunger + "%";
           fills.happy.style.width  = S.happy + "%";
           fills.energy.style.width = S.energy + "%";
           fills.clean.style.width  = S.clean + "%";
           fills.health.style.width = S.health + "%";
           fills.disc.style.width   = S.disc + "%";
-          const xpPct = Math.floor((S.xp / xpToNext(S.lvl)) * 100);
-          fills.xp.style.width = clamp(xpPct,0,100) + "%";
+          fills.xp.style.width     = clamp(Math.floor((S.xp / xpToNext(S.lvl)) * 100),0,100) + "%";
 
           vals.hunger.textContent = String(Math.round(S.hunger));
           vals.happy.textContent  = String(Math.round(S.happy));
@@ -1098,21 +1038,18 @@
           vals.disc.textContent   = String(Math.round(S.disc));
           vals.xp.textContent     = String(Math.round(S.xp));
 
-          // pills
           const m = mood();
           moodPill.textContent = m;
           lvlPill.textContent  = String(S.lvl);
           agePill.textContent  = String(S.age);
           coinsPill.textContent= String(S.coins);
 
-          // mode chips
           modeChip.textContent = S.mode;
           autoChip.textContent = S.autoCare ? "ON" : "OFF";
           saveChip.textContent = S.autoSave ? "ON" : "OFF";
 
           setFaceMoodClass(m);
 
-          // status dot
           if (!S.alive){
             statusDot.style.background = "var(--danger)";
             statusText.textContent = "DEAD";
@@ -1126,53 +1063,67 @@
             else statusDot.style.background = "var(--accent)";
           }
 
-          // sleeping tint
           if (S.mode === "SLEEPING") screen.classList.add("sleepOn");
           else screen.classList.remove("sleepOn");
 
-          // status text block
           statusBox.textContent =
             "POPPY STATUS\n" +
             "MOOD " + m + "\n" +
             "MODE " + S.mode + "\n" +
             "COINS " + S.coins + "\n" +
-            "AUTO CARE " + (S.autoCare ? "ON" : "OFF") + "\n" +
             "FOOD " + (S.inv.FOOD||0) + " SNACK " + (S.inv.SNACK||0) + " WATER " + (S.inv.WATER||0) + "\n" +
             "SOAP " + (S.inv.SOAP||0) + " MED " + (S.inv.MED||0) + " TOY " + (S.inv.TOY||0);
 
-          // disable buttons when dead
           const disabled = !S.alive;
           for (const b of [btnFeed,btnPlay,btnSleep,btnClean,btnMed,btnWork,btnInventory,btnShop,btnTrain,btnSettings]){
             b.disabled = disabled;
           }
           btnPause.disabled = false;
           btnReset.disabled = false;
-
-          checkAchievements();
         }
 
-        // OVERLAY
+        // OVERLAY STATE (FIXED CLOSE)
         let overlayInterval = null;
         let overlayEndAt = 0;
         let overlayMode = "NONE";
         let game = null;
 
+        function stopGame(){
+          if (!game) return;
+          if (game.raf) cancelAnimationFrame(game.raf);
+          if (game.cleanup) game.cleanup();
+          game = null;
+        }
+
         function closeOverlay(){
+          stopGame();
           overlay.classList.remove("show");
           overlayBody.innerHTML = "";
           overlayTitle.textContent = "ACTION";
           overlayTimer.textContent = "0";
+          overlayPrimary.textContent = "OK";
+          overlayClose.textContent = "CLOSE";
           overlayMode = "NONE";
           if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
-          stopGame();
           updateUI();
           save();
         }
 
         function openOverlay(mode, seconds){
+          // ALWAYS RESET FIRST SO WE NEVER GET STUCK
+          stopGame();
+          if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
+
           overlayMode = mode;
           overlayTitle.textContent = mode;
           overlay.classList.add("show");
+
+          if (!seconds || seconds >= 9000){
+            overlayTimer.textContent = "INF";
+            overlayEndAt = 0;
+            return;
+          }
+
           overlayEndAt = Date.now() + seconds*1000;
 
           function tickTimer(){
@@ -1184,7 +1135,6 @@
             }
           }
           tickTimer();
-          if (overlayInterval) clearInterval(overlayInterval);
           overlayInterval = setInterval(tickTimer, 200);
         }
 
@@ -1197,71 +1147,186 @@
           else closeOverlay();
         });
 
-        // VISUAL ACTIONS
-        function animClean(){
-          openOverlay("CLEAN", 2);
+        // MENUS
+        function menuTitle(text){
+          return "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:left; width:100%;'>" +
+                 "<b style='color:var(--text);'>" + text + "</b>" +
+                 "</div>";
+        }
+        function row(title, desc, btnClass, id, btnText){
+          return "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px; width:100%;'>" +
+                 "<div style='flex:1;'><b>" + title + "</b><div style='margin-top:6px;'>" + desc + "</div></div>" +
+                 "<div style='min-width:160px;'><button class='" + btnClass + "' id='" + id + "' type='button'>" + (btnText||"USE") + "</button></div>" +
+                 "</div>";
+        }
+
+        function openInventory(){
+          openOverlay("INVENTORY", 9999);
           overlayPrimary.textContent = "DONE";
           overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = "";
 
-          for (let i=0;i<14;i++){
-            const b = document.createElement("div");
-            b.className = "bubble";
-            b.style.left = (10 + Math.random()*80) + "%";
-            b.style.top = (150 + Math.random()*40) + "px";
-            b.style.setProperty("--dx", (Math.random()*140 - 70) + "px");
-            b.style.animation = "bubbleRise 980ms ease-out " + (i*60) + "ms 1";
-            overlayBody.appendChild(b);
-          }
+          const inv = S.inv;
+          overlayBody.innerHTML =
+            menuTitle("INVENTORY") +
+            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+              row("FOOD X " + (inv.FOOD||0), "FEED MENU: FOOD GIVES 5 SATURATION", "btnMain", "use_food", "OPEN FEED") +
+              row("SNACK X " + (inv.SNACK||0), "FEED MENU: SNACK GIVES 1 SATURATION", "btnMain", "use_snack", "OPEN FEED") +
+              row("WATER X " + (inv.WATER||0), "DRINK: SMALL HEALTH AND ENERGY", "btnMain", "use_water", "DRINK") +
+              row("SOAP X " + (inv.SOAP||0), "CLEAN: CONSUMES 1 SOAP", "btnMain", "use_soap", "CLEAN") +
+              row("MED X " + (inv.MED||0), "MEDICINE: CONSUMES 1 MED", "btnWarn", "use_med", "MEDICINE") +
+              row("TOY X " + (inv.TOY||0), "PLAY BONUS: EXTRA HAPPINESS AFTER A GAME", "btnAlt", "use_toy", "TOY INFO") +
+            "</div>" +
+            "<div style='margin-top:10px; color:var(--muted); font-size:12px; width:100%; line-height:1.35;'>" +
+              "CLOSE WITH BUTTON OR ESC" +
+            "</div>";
+
+          // Bind
+          overlayBody.querySelector("#use_food").onclick = ()=>{ closeOverlay(); openFeedMenu(); };
+          overlayBody.querySelector("#use_snack").onclick = ()=>{ closeOverlay(); openFeedMenu(); };
+          overlayBody.querySelector("#use_water").onclick = ()=>{ drinkWater(); };
+          overlayBody.querySelector("#use_soap").onclick = ()=>{ actClean(); };
+          overlayBody.querySelector("#use_med").onclick = ()=>{ actMed(); };
+          overlayBody.querySelector("#use_toy").onclick = ()=>{ tmsg("TOYS BOOST HAPPINESS AFTER GAMES"); };
+        }
+
+        function openFeedMenu(){
+          openOverlay("FEED", 9999);
+          overlayPrimary.textContent = "DONE";
+          overlayClose.textContent = "CLOSE";
+
+          overlayBody.innerHTML =
+            menuTitle("FEED MENU") +
+            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+              row("EAT FOOD", "USES 1 FOOD | +5 SATURATION", have("FOOD") ? "btnMain" : "btnAlt", "feed_food", "EAT") +
+              row("EAT SNACK", "USES 1 SNACK | +1 SATURATION", have("SNACK") ? "btnMain" : "btnAlt", "feed_snack", "EAT") +
+              row("DRINK WATER", "USES 1 WATER | SMALL HEALTH AND ENERGY", have("WATER") ? "btnMain" : "btnAlt", "feed_water", "DRINK") +
+            "</div>";
+
+          overlayBody.querySelector("#feed_food").onclick = ()=>{
+            if (!takeItem("FOOD",1)) return tmsg("NO FOOD");
+            // FOOD RULE: +5 SATURATION
+            S.hunger += 5;
+            S.happy += 2;
+            S.clean -= 1;
+            addXP(6);
+            log("ATE FOOD +5 SATURATION");
+            burst("burst-pop", 380);
+            updateUI(); save();
+            closeOverlay();
+          };
+
+          overlayBody.querySelector("#feed_snack").onclick = ()=>{
+            if (!takeItem("SNACK",1)) return tmsg("NO SNACK");
+            // SNACK RULE: +1 SATURATION
+            S.hunger += 1;
+            S.happy += 2;
+            addXP(4);
+            log("ATE SNACK +1 SATURATION");
+            burst("burst-pop", 220);
+            updateUI(); save();
+            closeOverlay();
+          };
+
+          overlayBody.querySelector("#feed_water").onclick = ()=>{ drinkWater(); };
+        }
+
+        function drinkWater(){
+          if (!takeItem("WATER",1)) return tmsg("NO WATER");
+          S.health += 6;
+          S.energy += 5;
+          S.happy += 1;
+          addXP(4);
+          log("DRANK WATER");
+          burst("burst-nod", 420);
+          updateUI(); save();
+          closeOverlay();
+        }
+
+        function openPlayMenu(){
+          openOverlay("PLAY", 9999);
+          overlayPrimary.textContent = "DONE";
+          overlayClose.textContent = "CLOSE";
+
+          overlayBody.innerHTML =
+            menuTitle("PLAY MENU") +
+            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
+              row("APPLE GAME", "CLICK THE APPLE. SLOW MOVEMENT", "btnMain", "play_apples", "START") +
+              row("DINO RUNNER", "SPACE TO JUMP | DUCK BUTTON | LIKE OFFLINE DINO", "btnMain", "play_dino", "START") +
+            "</div>";
+
+          overlayBody.querySelector("#play_apples").onclick = ()=>{ closeOverlay(); startAppleGame(); };
+          overlayBody.querySelector("#play_dino").onclick = ()=>{ closeOverlay(); startDinoGame(); };
+        }
+
+        // ACTIONS
+        function actClean(){
+          if (!S.alive || S.paused) return;
+          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+          if (!takeItem("SOAP",1)) return tmsg("NO SOAP");
+          S.clean += 22;
+          S.happy += 2;
+          addXP(6);
+          log("CLEANED");
           burst("burst-wig", 520);
+          updateUI(); save();
+          closeOverlay();
         }
 
-        function animMed(){
-          openOverlay("MEDICINE", 2);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = "";
-          for (let i=0;i<4;i++){
-            const ring = document.createElement("div");
-            ring.className = "pulseRing";
-            ring.style.animation = "pulse 820ms ease-out " + (i*160) + "ms 1";
-            overlayBody.appendChild(ring);
-          }
+        function actMed(){
+          if (!S.alive || S.paused) return;
+          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+          if (!takeItem("MED",1)) return tmsg("NO MED");
+          S.health += 20;
+          S.mode = "NORMAL";
+          addXP(7);
+          log("MEDICINE USED");
           burst("burst-pop", 380);
+          updateUI(); save();
+          closeOverlay();
         }
 
-        function animFeed(msg){
-          openOverlay("FEED", 2);
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML =
-            "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:center;'>" +
-            msg +
-            "</div>";
-          burst("burst-pop", 380);
-          burst("burst-nod", 420);
-        }
-
-        function animSleep(){
-          openOverlay("SLEEP", 3);
-          overlayPrimary.textContent = "WAKE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML =
-            "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:center;'>" +
-            "POPPY IS RESTING\nENERGY RECOVERS FASTER" +
-            "</div>";
-          burst("burst-nod", 420);
-        }
-
-        // MINI GAMES
-        function stopGame(){
-          if (!game) return;
-          if (game.timers){
-            for (const t of game.timers) clearInterval(t);
+        function actSleepToggle(){
+          if (!S.alive) return;
+          if (S.mode === "SLEEPING"){
+            S.mode = "NORMAL";
+            log("WOKE UP");
+          } else {
+            if (S.paused) return;
+            S.mode = "SLEEPING";
+            log("SLEEP START");
           }
-          game = null;
+          burst("burst-nod", 420);
+          updateUI(); save();
         }
 
+        function actWork(){
+          if (!S.alive || S.paused) return;
+          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+          const earned = rint(2,5);
+          S.coins += earned;
+          S.energy -= 8;
+          S.hunger -= 3;
+          S.happy -= 1;
+          addXP(7);
+          log("WORK EARNED " + earned);
+          burst("burst-nod", 420);
+          updateUI(); save();
+        }
+
+        function actTrain(){
+          if (!S.alive || S.paused) return;
+          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
+          if (S.energy < 12) return tmsg("LOW ENERGY");
+          S.disc += 8;
+          S.energy -= 10;
+          S.happy -= 1;
+          addXP(8);
+          log("TRAIN COMPLETE");
+          burst("burst-pop", 380);
+          updateUI(); save();
+        }
+
+        // MINI GAME: APPLES
         function startAppleGame(){
           openOverlay("PLAY APPLES", 14);
           overlayPrimary.textContent = "FINISH";
@@ -1284,768 +1349,308 @@
           const gScore = overlayBody.querySelector("#gScore");
           const gReward = overlayBody.querySelector("#gReward");
 
-          game = { type:"APPLE", score:0, timers:[], apple, area, gScore, gReward };
+          game = { type:"APPLE", score:0, raf:0 };
 
           function move(){
             const w = area.clientWidth;
             const h = area.clientHeight;
             const size = 40;
             const pad = 10;
-            const x = Math.max(pad, Math.min(w - size - pad, rint(0, w - size)));
-            const y = Math.max(pad, Math.min(h - size - pad, rint(0, h - size)));
+            const x = clamp(rint(0, w - size), pad, w - size - pad);
+            const y = clamp(rint(0, h - size), pad, h - size - pad);
             apple.style.left = x + "px";
             apple.style.top = y + "px";
           }
+
+          let nextMove = performance.now() + 1400;
 
           apple.addEventListener("click", ()=>{
             if (!game) return;
             game.score += 1;
             gScore.textContent = String(game.score);
-            const reward = Math.min(14, Math.floor(game.score/2));
-            gReward.textContent = String(reward);
+            gReward.textContent = String(Math.min(14, Math.floor(game.score/2)));
             move();
             burst("burst-pop", 240);
           });
 
           move();
 
-          // SLOW AND EASY
-          const MOVE_MS = 1400; // SLOWER THAN BEFORE
-          game.timers.push(setInterval(move, MOVE_MS));
+          function loop(now){
+            if (!game) return;
+            if (now >= nextMove){
+              move();
+              nextMove = now + 1400;
+            }
+            game.raf = requestAnimationFrame(loop);
+          }
+          game.raf = requestAnimationFrame(loop);
         }
 
-        function startDodgeGame(){
-          openOverlay("PLAY DODGE", 16);
+        // MINI GAME: DINO RUNNER (CHROME OFFLINE STYLE)
+        function startDinoGame(){
+          openOverlay("PLAY DINO", 18);
           overlayPrimary.textContent = "FINISH";
           overlayClose.textContent = "QUIT";
           overlayBody.innerHTML = "";
 
           const area = document.createElement("div");
-          area.className = "dodgeArea";
-          const runner = document.createElement("div");
-          runner.className = "runner";
-          const rock = document.createElement("div");
-          rock.className = "rock";
-          area.appendChild(runner);
-          area.appendChild(rock);
+          area.className = "dinoArea";
+
+          const ground = document.createElement("div");
+          ground.className = "groundLine";
+
+          const dino = document.createElement("div");
+          dino.className = "dino";
+
+          const cactus = document.createElement("div");
+          cactus.className = "cactus";
+
+          const cloud = document.createElement("div");
+          cloud.className = "cloud";
+
+          area.appendChild(cloud);
+          area.appendChild(ground);
+          area.appendChild(dino);
+          area.appendChild(cactus);
+
+          overlayBody.appendChild(area);
 
           const hud = document.createElement("div");
-          hud.className = "gameHud";
-          hud.innerHTML = "<div>SURVIVE <b id='gTime'>0</b></div><div>REWARD <b id='gReward'>0</b></div>";
-          overlayBody.appendChild(area);
+          hud.className = "dinoHudRow";
+          hud.innerHTML =
+            "<div>SCORE <b id='dScore'>0</b></div>" +
+            "<div>BEST <b id='dBest'>0</b></div>" +
+            "<div style='display:flex; gap:10px;'>" +
+              "<button class='btnAlt' id='dDuck' type='button' style='width:auto; padding:10px 12px;'>DUCK</button>" +
+              "<button class='btnAlt' id='dJump' type='button' style='width:auto; padding:10px 12px;'>JUMP</button>" +
+            "</div>";
           overlayBody.appendChild(hud);
 
-          const gTime = overlayBody.querySelector("#gTime");
-          const gReward = overlayBody.querySelector("#gReward");
+          const dScore = hud.querySelector("#dScore");
+          const dBest  = hud.querySelector("#dBest");
+          const dDuck  = hud.querySelector("#dDuck");
+          const dJump  = hud.querySelector("#dJump");
 
-          game = { type:"DODGE", score:0, timers:[], area, runner, rock, gTime, gReward, alive:true };
+          // best score from save
+          S.bestDino = S.bestDino || 0;
+          dBest.textContent = String(S.bestDino);
 
-          let runnerX = 14;
-          let rockX = area.clientWidth + 20;
-          let speed = 5; // easy
-          let ticks = 0;
+          // physics
+          let y = 0;              // vertical offset from ground
+          let vy = 0;             // velocity
+          const GRAV = 0.9;       // gravity
+          const JUMP_V = 14;      // jump strength
+          let ducking = false;
 
-          function resetRock(){
-            rockX = area.clientWidth + rint(0, 90);
-            speed = clamp(5 + Math.floor(S.lvl/2), 5, 9);
+          // obstacle
+          let cx = area.clientWidth + 60;
+          let speed = 6.2;        // base speed
+          let score = 0;
+
+          // cloud
+          let clx = area.clientWidth + 120;
+
+          // game running
+          let alive = true;
+          let last = performance.now();
+
+          function setDinoStyle(){
+            const baseBottom = 40;
+            dino.style.bottom = (baseBottom + y) + "px";
+            if (ducking){
+              dino.style.height = "28px";
+              dino.style.width = "52px";
+              dino.style.bottom = baseBottom + "px";
+              dino.style.borderRadius = "12px";
+            } else {
+              dino.style.height = "44px";
+              dino.style.width = "44px";
+              dino.style.borderRadius = "12px";
+            }
           }
 
-          function draw(){
-            runner.style.left = runnerX + "px";
-            rock.style.left = rockX + "px";
+          function jump(){
+            if (!alive) return;
+            if (ducking) return;
+            if (y === 0){
+              vy = JUMP_V;
+              burst("burst-pop", 220);
+            }
           }
 
-          function step(){
-            if (!game || !game.alive) return;
-            ticks += 1;
-            rockX -= speed;
+          function setDuck(on){
+            if (!alive) return;
+            ducking = on;
+            if (ducking && y > 0){
+              // cancel duck mid-air
+              ducking = false;
+            }
+            setDinoStyle();
+          }
 
-            if (rockX < -40){
-              resetRock();
-              game.score += 1;
+          dJump.addEventListener("click", jump);
+          dDuck.addEventListener("mousedown", ()=>setDuck(true));
+          dDuck.addEventListener("mouseup", ()=>setDuck(false));
+          dDuck.addEventListener("mouseleave", ()=>setDuck(false));
+          dDuck.addEventListener("touchstart", (e)=>{ e.preventDefault(); setDuck(true); }, {passive:false});
+          dDuck.addEventListener("touchend", ()=>setDuck(false), {passive:true});
+
+          function onKeyDown(e){
+            const k = e.key.toLowerCase();
+            if (k === " " || k === "arrowup" || k === "w"){
+              e.preventDefault();
+              jump();
+            }
+            if (k === "arrowdown" || k === "s"){
+              e.preventDefault();
+              setDuck(true);
+            }
+          }
+          function onKeyUp(e){
+            const k = e.key.toLowerCase();
+            if (k === "arrowdown" || k === "s"){
+              e.preventDefault();
+              setDuck(false);
+            }
+          }
+          window.addEventListener("keydown", onKeyDown, {passive:false});
+          window.addEventListener("keyup", onKeyUp, {passive:false});
+
+          function collide(){
+            const r = dino.getBoundingClientRect();
+            const o = cactus.getBoundingClientRect();
+            // small forgiveness
+            const pad = 6;
+            return !(r.right - pad < o.left || r.left + pad > o.right || r.bottom - pad < o.top || r.top + pad > o.bottom);
+          }
+
+          function resetCactus(){
+            cx = area.clientWidth + rint(40, 220);
+            // random cactus height/width a bit
+            const h = rint(38, 56);
+            cactus.style.height = h + "px";
+            cactus.style.width = rint(18, 26) + "px";
+            cactus.style.borderRadius = "10px";
+          }
+
+          function loop(now){
+            if (!game) return; // stopped
+            const dt = Math.min(40, now - last);
+            last = now;
+
+            if (!alive) return;
+
+            // gravity
+            if (!ducking){
+              vy -= GRAV;
+              y += vy;
+              if (y < 0){ y = 0; vy = 0; }
+            } else {
+              // still apply gravity if in air (duck cancels)
+              vy -= GRAV;
+              y += vy;
+              if (y < 0){ y = 0; vy = 0; }
             }
 
+            // speed ramps slowly with score
+            speed = 6.2 + Math.min(5, score / 60);
+
+            // obstacle move
+            cx -= speed;
+            if (cx < -60){
+              resetCactus();
+              score += 1;
+              dScore.textContent = String(score);
+            }
+            cactus.style.left = cx + "px";
+
+            // cloud move
+            clx -= (speed * 0.35);
+            if (clx < -100){
+              clx = area.clientWidth + rint(80, 240);
+              cloud.style.top = rint(18, 80) + "px";
+            }
+            cloud.style.left = clx + "px";
+
+            // render dino
+            setDinoStyle();
+
             // collision
-            const rRect = runner.getBoundingClientRect();
-            const oRect = rock.getBoundingClientRect();
-            const hit = !(rRect.right < oRect.left || rRect.left > oRect.right || rRect.bottom < oRect.top || rRect.top > oRect.bottom);
-            if (hit){
-              game.alive = false;
-              overlayTimer.textContent = "0";
-              finishGame(true);
+            if (collide()){
+              alive = false;
+              // end game immediately as if timer hit 0
+              // reward based on score
+              S.bestDino = Math.max(S.bestDino || 0, score);
+              log("DINO CRASH SCORE " + score);
+              finishGame(true, {type:"DINO", score});
               return;
             }
 
-            gTime.textContent = String(game.score);
-            const reward = Math.min(16, game.score);
-            gReward.textContent = String(reward);
-
-            draw();
+            game.raf = requestAnimationFrame(loop);
           }
 
-          function moveLeft(){ runnerX = clamp(runnerX - 22, 10, area.clientWidth - 46); draw(); }
-          function moveRight(){ runnerX = clamp(runnerX + 22, 10, area.clientWidth - 46); draw(); }
+          // attach game state and cleanup
+          game = {
+            type:"DINO",
+            score:0,
+            raf:0,
+            cleanup: ()=>{
+              window.removeEventListener("keydown", onKeyDown);
+              window.removeEventListener("keyup", onKeyUp);
+            }
+          };
 
-          // controls inside overlay
-          const controlRow = document.createElement("div");
-          controlRow.style.marginTop = "10px";
-          controlRow.innerHTML =
-            "<div style='display:grid; grid-template-columns:1fr 1fr; gap:10px; width:min(500px,96%);'>" +
-            "<button class='btnAlt' id='dgLeft' type='button'>LEFT</button>" +
-            "<button class='btnAlt' id='dgRight' type='button'>RIGHT</button>" +
-            "</div>";
-          overlayBody.appendChild(controlRow);
+          resetCactus();
+          setDinoStyle();
+          game.raf = requestAnimationFrame(loop);
 
-          overlayBody.querySelector("#dgLeft").addEventListener("click", ()=>{ moveLeft(); });
-          overlayBody.querySelector("#dgRight").addEventListener("click", ()=>{ moveRight(); });
-
-          function keyHandler(e){
-            if (!overlay.classList.contains("show")) return;
-            if (!game || game.type !== "DODGE") return;
-            const k = e.key.toLowerCase();
-            if (k === "a" || k === "arrowleft") moveLeft();
-            if (k === "d" || k === "arrowright") moveRight();
-          }
-          window.addEventListener("keydown", keyHandler, { passive:true });
-
-          // cleanup hook
-          game.cleanup = ()=>window.removeEventListener("keydown", keyHandler);
-
-          resetRock();
-          draw();
-          game.timers.push(setInterval(step, 110)); // easy speed
+          // store live score via getter
+          Object.defineProperty(game, "score", { get(){ return score; } });
         }
 
-        function finishGame(applyRewards){
-          if (!game) return;
+        // finish game (supports optional override)
+        function finishGame(applyRewards, override){
+          const g = override || game;
+          if (!g) return;
 
-          let score = game.score;
-          let coinsGain = 0;
-          let xpGain = 0;
-          let happyGain = 0;
+          const type = g.type;
+          const score = g.score || 0;
 
           if (applyRewards){
-            if (game.type === "APPLE"){
+            let coinsGain = 0;
+            let xpGain = 0;
+            let happyGain = 0;
+
+            if (type === "APPLE"){
               coinsGain = clamp(Math.floor(score/2), 0, 14);
               xpGain = clamp(8 + score*2, 8, 36);
-              happyGain = clamp(10 + score*2, 10, 30);
-            } else if (game.type === "DODGE"){
-              coinsGain = clamp(score, 0, 16);
-              xpGain = clamp(10 + score*3, 10, 40);
-              happyGain = clamp(8 + score*2, 8, 26);
+              happyGain = clamp(8 + score*2, 8, 30);
+            } else if (type === "DINO"){
+              coinsGain = clamp(score, 0, 22);
+              xpGain = clamp(10 + score*3, 10, 50);
+              happyGain = clamp(8 + score*2, 8, 28);
             }
+
+            // toy bonus
+            if ((S.inv.TOY||0) > 0){
+              happyGain += 2;
+            }
+
             S.coins += coinsGain;
             S.happy += happyGain;
             S.energy -= 6;
             S.clean -= 1;
+            addXP(xpGain);
 
-            log("GAME " + game.type + " SCORE " + score + " COINS +" + coinsGain + " HAPPINESS +" + happyGain);
-            if (!S.ach.FIRST_GAME){ S.ach.FIRST_GAME = true; log("ACHIEVEMENT FIRST GAME"); }
-            addXP(xpGain, "FROM GAME");
+            log("GAME " + type + " SCORE " + score + " COINS +" + coinsGain + " HAPPINESS +" + happyGain);
             burst("burst-wig", 520);
           } else {
             log("GAME QUIT");
           }
 
-          if (game.cleanup) game.cleanup();
           stopGame();
           closeOverlay();
-        }
-
-        // MENUS (INVENTORY / SHOP / SETTINGS / FEED PICKER / PLAY PICKER)
-        function menuTitle(text){
-          return "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:left; width:100%;'>" +
-                 "<b style='color:var(--text);'>" + text + "</b>" +
-                 "</div>";
-        }
-
-        function openInfo(title, html, seconds){
-          openOverlay(title, seconds || 9999);
-          overlayTimer.textContent = "INF";
-          overlayPrimary.textContent = "OK";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = html;
-        }
-
-        function openInventory(){
-          const inv = S.inv;
-          const html =
-            menuTitle("INVENTORY") +
-            "<div style='width:100%; display:grid; gap:10px; margin-top:10px;'>" +
-            itemRow("FOOD", inv.FOOD||0, "MAIN MEAL. BIG HUNGER UP.") +
-            itemRow("SNACK", inv.SNACK||0, "SMALL HUNGER UP. SMALL HAPPINESS UP.") +
-            itemRow("WATER", inv.WATER||0, "SMALL HEALTH UP. SMALL ENERGY UP.") +
-            itemRow("SOAP", inv.SOAP||0, "USED BY CLEAN.") +
-            itemRow("MED", inv.MED||0, "USED BY MEDICINE.") +
-            itemRow("TOY", inv.TOY||0, "USED BY PLAY BOOST.") +
-            itemRow("BLANKET", inv.BLANKET||0, "USED BY SLEEP BOOST.") +
-            "</div>";
-          openInfo("INVENTORY", html);
-        }
-
-        function itemRow(name, count, desc){
-          return "<div style='padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,.10); background:rgba(0,0,0,.14); color:var(--muted); font-size:12px; line-height:1.35;'>" +
-                 "<div style='display:flex; justify-content:space-between; gap:12px; align-items:center;'>" +
-                 "<span><b style='color:var(--text);'>" + name + "</b> X " + count + "</span>" +
-                 "</div>" +
-                 "<div style='margin-top:6px;'>" + desc + "</div>" +
-                 "</div>";
-        }
-
-        function openShop(){
-          if (!S.ach.FIRST_SHOP){ S.ach.FIRST_SHOP = true; log("ACHIEVEMENT FIRST SHOP"); }
-          const html =
-            menuTitle("SHOP") +
-            "<div style='color:var(--muted); font-size:12px; margin-top:8px;'>COINS " +
-            "<b style='color:var(--text);'>" + S.coins + "</b></div>" +
-
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              shopRow("BUY FOOD", "COST 2", "FOOD", 2, 1) +
-              shopRow("BUY SNACK", "COST 1", "SNACK", 1, 1) +
-              shopRow("BUY WATER", "COST 1", "WATER", 1, 1) +
-              shopRow("BUY SOAP", "COST 2", "SOAP", 2, 1) +
-              shopRow("BUY MED", "COST 3", "MED", 3, 1) +
-              shopRow("BUY TOY", "COST 4", "TOY", 4, 1) +
-              shopRow("BUY BLANKET", "COST 4", "BLANKET", 4, 1) +
-            "</div>" +
-
-            "<div style='margin-top:12px; width:100%;'>" + menuTitle("UPGRADES") + "</div>" +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              upgRow("AUTO FEED", "COST 12", "AUTOMATICALLY USES FOOD OR SNACK WHEN HUNGER LOW", "AUTO_FEED", 12) +
-              upgRow("AUTO CLEAN", "COST 12", "AUTOMATICALLY USES SOAP WHEN CLEANLINESS LOW", "AUTO_CLEAN", 12) +
-              upgRow("AUTO MED", "COST 14", "AUTOMATICALLY USES MED WHEN HEALTH LOW", "AUTO_MED", 14) +
-              upgRow("COMFY BED", "COST 10", "SLEEP RECOVERS MORE ENERGY", "COMFY_BED", 10) +
-              upgRow("BIG WALLET", "COST 10", "WORK PAYS MORE COINS", "BIG_WALLET", 10) +
-              upgRow("XP BOOST", "COST 14", "ALL XP GAINS INCREASED", "XP_BOOST", 14) +
-              upgRow("SLOW DECAY", "COST 16", "STATS DECAY SLOWER OVER TIME", "SLOW_DECAY", 16) +
-            "</div>";
-
-          openOverlay("SHOP", 9999);
-          overlayTimer.textContent = "INF";
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = html;
-
-          // bind buttons
-          bindShopButtons();
-          updateUI();
-          save();
-        }
-
-        function shopRow(label, costLabel, item, cost, qty){
-          const id = "shop_" + item;
-          return "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                 "<div><b>" + label + "</b><div style='margin-top:4px;'>" + costLabel + " | +" + qty + " " + item + "</div></div>" +
-                 "<div style='min-width:140px;'><button class='btnMain' id='" + id + "' type='button'>BUY</button></div>" +
-                 "</div>";
-        }
-
-        function upgRow(name, costLabel, desc, key, cost){
-          const id = "upg_" + key;
-          const owned = S.upgrades[key] ? "OWNED" : "BUY";
-          const cls = S.upgrades[key] ? "btnAlt" : "btnWarn";
-          return "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                 "<div><b>" + name + "</b><div style='margin-top:4px;'>" + costLabel + "</div><div style='margin-top:6px;'>" + desc + "</div></div>" +
-                 "<div style='min-width:140px;'><button class='" + cls + "' id='" + id + "' type='button'>" + owned + "</button></div>" +
-                 "</div>";
-        }
-
-        function bindShopButtons(){
-          // item buys
-          const items = [
-            ["FOOD",2,1],["SNACK",1,1],["WATER",1,1],["SOAP",2,1],["MED",3,1],["TOY",4,1],["BLANKET",4,1]
-          ];
-          for (const [item,cost,qty] of items){
-            const el = overlayBody.querySelector("#shop_" + item);
-            if (!el) continue;
-            el.onclick = ()=>{
-              if (!S.alive) return;
-              if (S.coins < cost) return tmsg("NOT ENOUGH COINS");
-              S.coins -= cost;
-              addItem(item, qty);
-              log("BOUGHT " + item + " X" + qty);
-              addXP(3, "FROM SHOP");
-              tmsg("PURCHASED");
-              updateUI();
-              openShop(); // refresh
-            };
-          }
-
-          // upgrades
-          const upgs = [
-            ["AUTO_FEED",12],["AUTO_CLEAN",12],["AUTO_MED",14],["COMFY_BED",10],["BIG_WALLET",10],["XP_BOOST",14],["SLOW_DECAY",16]
-          ];
-          for (const [key,cost] of upgs){
-            const el = overlayBody.querySelector("#upg_" + key);
-            if (!el) continue;
-            el.onclick = ()=>{
-              if (S.upgrades[key]) return tmsg("ALREADY OWNED");
-              if (S.coins < cost) return tmsg("NOT ENOUGH COINS");
-              S.coins -= cost;
-              S.upgrades[key] = true;
-              log("UPGRADE PURCHASED " + key);
-              addXP(8, "FROM UPGRADE");
-              tmsg("UPGRADE ACTIVE");
-              updateUI();
-              openShop(); // refresh
-            };
-          }
-        }
-
-        function openSettings(){
-          const html =
-            menuTitle("SETTINGS") +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                "<div><b>AUTO CARE</b><div style='margin-top:6px;'>WHEN ON, POPPY CAN AUTO FEED/CLEAN/MED IF YOU OWN UPGRADES AND ITEMS.</div></div>" +
-                "<div style='min-width:160px;'><button class='btnAlt' id='set_auto' type='button'>" + (S.autoCare ? "ON" : "OFF") + "</button></div>" +
-              "</div>" +
-              "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                "<div><b>AUTO SAVE</b><div style='margin-top:6px;'>SAVES TO LOCAL STORAGE AUTOMATICALLY.</div></div>" +
-                "<div style='min-width:160px;'><button class='btnAlt' id='set_save' type='button'>" + (S.autoSave ? "ON" : "OFF") + "</button></div>" +
-              "</div>" +
-              "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                "<div><b>EXPORT SAVE</b><div style='margin-top:6px;'>COPIES YOUR SAVE DATA TO CLIPBOARD.</div></div>" +
-                "<div style='min-width:160px;'><button class='btnMain' id='set_export' type='button'>COPY</button></div>" +
-              "</div>" +
-              "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                "<div><b>IMPORT SAVE</b><div style='margin-top:6px;'>PASTE JSON IN PROMPT TO IMPORT.</div></div>" +
-                "<div style='min-width:160px;'><button class='btnWarn' id='set_import' type='button'>IMPORT</button></div>" +
-              "</div>" +
-            "</div>";
-
-          openOverlay("SETTINGS", 9999);
-          overlayTimer.textContent = "INF";
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = html;
-
-          const autoBtn = overlayBody.querySelector("#set_auto");
-          const saveBtn = overlayBody.querySelector("#set_save");
-          const expBtn  = overlayBody.querySelector("#set_export");
-          const impBtn  = overlayBody.querySelector("#set_import");
-
-          autoBtn.onclick = ()=>{
-            S.autoCare = !S.autoCare;
-            log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
-            tmsg("UPDATED");
-            openSettings();
-            updateUI();
-            save();
-          };
-          saveBtn.onclick = ()=>{
-            S.autoSave = !S.autoSave;
-            log("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
-            tmsg("UPDATED");
-            openSettings();
-            updateUI();
-            save(true);
-          };
-          expBtn.onclick = async ()=>{
-            try{
-              save(true);
-              const txt = JSON.stringify(S);
-              await navigator.clipboard.writeText(txt);
-              tmsg("COPIED");
-              log("SAVE EXPORTED");
-            } catch(e){
-              tmsg("COPY FAILED");
-            }
-          };
-          impBtn.onclick = ()=>{
-            const pasted = prompt("PASTE SAVE JSON HERE");
-            if (!pasted) return;
-            try{
-              const data = JSON.parse(pasted);
-              const base = defaultState();
-              S = mergeDeep(base, data);
-              log("SAVE IMPORTED");
-              tmsg("IMPORTED");
-              closeOverlay();
-              updateUI();
-              save(true);
-            } catch(e){
-              tmsg("INVALID JSON");
-            }
-          };
-        }
-
-        function openFeedMenu(){
-          const html =
-            menuTitle("FEED MENU") +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              actionRow("EAT FOOD", "USES 1 FOOD", have("FOOD") ? "btnMain" : "btnAlt", "feed_food") +
-              actionRow("EAT SNACK", "USES 1 SNACK", have("SNACK") ? "btnMain" : "btnAlt", "feed_snack") +
-              actionRow("DRINK WATER", "USES 1 WATER", have("WATER") ? "btnMain" : "btnAlt", "feed_water") +
-            "</div>";
-          openOverlay("FEED", 9999);
-          overlayTimer.textContent = "INF";
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = html;
-
-          bindFeedMenu();
-        }
-
-        function actionRow(title, sub, btnClass, id){
-          return "<div class='listItem' style='display:flex; justify-content:space-between; align-items:center; gap:12px;'>" +
-                 "<div><b>" + title + "</b><div style='margin-top:6px;'>" + sub + "</div></div>" +
-                 "<div style='min-width:160px;'><button class='" + btnClass + "' id='" + id + "' type='button'>USE</button></div>" +
-                 "</div>";
-        }
-
-        function bindFeedMenu(){
-          const b1 = overlayBody.querySelector("#feed_food");
-          const b2 = overlayBody.querySelector("#feed_snack");
-          const b3 = overlayBody.querySelector("#feed_water");
-
-          b1.onclick = ()=>{
-            if (!takeItem("FOOD",1)) return tmsg("NO FOOD");
-            S.hunger += 30;
-            S.happy += 4;
-            S.clean -= 2;
-            S.disc += 1;
-            log("ATE FOOD");
-            if (!S.ach.FIRST_FEED){ S.ach.FIRST_FEED = true; log("ACHIEVEMENT FIRST FEED"); }
-            addXP(8, "FROM FEED");
-            animFeed("POPPY ATE FOOD");
-            closeOverlay();
-            updateUI(); save();
-          };
-
-          b2.onclick = ()=>{
-            if (!takeItem("SNACK",1)) return tmsg("NO SNACK");
-            S.hunger += 16;
-            S.happy += 7;
-            S.clean -= 1;
-            log("ATE SNACK");
-            addXP(6, "FROM SNACK");
-            animFeed("POPPY ATE SNACK");
-            closeOverlay();
-            updateUI(); save();
-          };
-
-          b3.onclick = ()=>{
-            if (!takeItem("WATER",1)) return tmsg("NO WATER");
-            S.health += 7;
-            S.energy += 6;
-            S.happy += 2;
-            log("DRANK WATER");
-            addXP(5, "FROM WATER");
-            animFeed("POPPY DRANK WATER");
-            closeOverlay();
-            updateUI(); save();
-          };
-        }
-
-        function openPlayMenu(){
-          const html =
-            menuTitle("PLAY MENU") +
-            "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-              actionRow("APPLE GAME", "CLICK THE APPLE. IT MOVES SLOW AND IS BIG", "btnMain", "play_apples") +
-              actionRow("DODGE GAME", "MOVE LEFT AND RIGHT. AVOID THE BLOCK", "btnMain", "play_dodge") +
-            "</div>" +
-            "<div style='margin-top:10px; color:var(--muted); font-size:12px; width:100%; line-height:1.35;'>" +
-              "TIP: TOY ITEMS INCREASE HAPPINESS BONUS AFTER A GAME." +
-            "</div>";
-
-          openOverlay("PLAY", 9999);
-          overlayTimer.textContent = "INF";
-          overlayPrimary.textContent = "DONE";
-          overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = html;
-
-          overlayBody.querySelector("#play_apples").onclick = ()=>{
-            closeOverlay();
-            startAppleGame();
-          };
-          overlayBody.querySelector("#play_dodge").onclick = ()=>{
-            closeOverlay();
-            startDodgeGame();
-          };
-        }
-
-        // CORE ACTIONS
-        function actClean(){
-          if (!S.alive || S.paused) return log("CANNOT CLEAN RIGHT NOW");
-          if (!takeItem("SOAP",1)){
-            log("NO SOAP FOR CLEAN");
-            return tmsg("NO SOAP");
-          }
-          S.clean += 40;
-          S.happy += 3;
-          S.disc += 2;
-          log("CLEANED");
-          addXP(9, "FROM CLEAN");
-          animClean();
-          closeOverlay();
           updateUI(); save();
-        }
-
-        function actMed(){
-          if (!S.alive || S.paused) return log("CANNOT USE MEDICINE RIGHT NOW");
-          if (!takeItem("MED",1)){
-            log("NO MEDICINE");
-            return tmsg("NO MED");
-          }
-          S.health += 34;
-          S.happy -= 2;
-          S.clean -= 1;
-          S.mode = "NORMAL";
-          log("MEDICINE USED");
-          addXP(10, "FROM MED");
-          animMed();
-          closeOverlay();
-          updateUI(); save();
-        }
-
-        function actSleepToggle(){
-          if (!S.alive) return;
-          if (S.mode === "SLEEPING"){
-            S.mode = "NORMAL";
-            log("WOKE UP");
-            addXP(4, "FROM WAKE");
-            updateUI(); save();
-            return;
-          }
-          if (S.paused) return log("CANNOT SLEEP WHILE PAUSED");
-          S.mode = "SLEEPING";
-          log("SLEEP START");
-          animSleep();
-          updateUI(); save();
-        }
-
-        function actWork(){
-          if (!S.alive || S.paused) return log("CANNOT WORK RIGHT NOW");
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          const base = rint(2,5);
-          const bonus = S.upgrades.BIG_WALLET ? 2 : 0;
-          const earned = base + bonus;
-          S.coins += earned;
-          S.energy -= 10;
-          S.hunger -= 7;
-          S.happy -= 2;
-          S.disc += 1;
-          log("WORK EARNED " + earned);
-          addXP(10, "FROM WORK");
-          burst("burst-nod", 420);
-          updateUI(); save();
-        }
-
-        function actTrain(){
-          if (!S.alive || S.paused) return log("CANNOT TRAIN RIGHT NOW");
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          if (S.energy < 18) return tmsg("LOW ENERGY");
-          S.disc += 10;
-          S.happy -= 3;
-          S.energy -= 14;
-          S.hunger -= 4;
-          log("TRAIN COMPLETE DISCIPLINE +10");
-          addXP(14, "FROM TRAIN");
-          burst("burst-pop", 380);
-          updateUI(); save();
-        }
-
-        // AUTO CARE: uses items + upgrades
-        function runAutoCare(){
-          if (!S.autoCare) return;
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return;
-
-          // auto feed
-          if (S.upgrades.AUTO_FEED && S.hunger <= 22){
-            if (have("FOOD",1)){ takeItem("FOOD",1); S.hunger += 26; S.happy += 2; log("AUTO FEED FOOD"); addXP(2, "AUTO"); }
-            else if (have("SNACK",1)){ takeItem("SNACK",1); S.hunger += 14; S.happy += 3; log("AUTO FEED SNACK"); addXP(2, "AUTO"); }
-          }
-          // auto clean
-          if (S.upgrades.AUTO_CLEAN && S.clean <= 18){
-            if (have("SOAP",1)){ takeItem("SOAP",1); S.clean += 30; log("AUTO CLEAN"); addXP(2, "AUTO"); }
-          }
-          // auto med
-          if (S.upgrades.AUTO_MED && S.health <= 22){
-            if (have("MED",1)){ takeItem("MED",1); S.health += 26; S.mode = "NORMAL"; log("AUTO MED"); addXP(2, "AUTO"); }
-          }
-        }
-
-        // OFFLINE PROGRESS
-        function applyOfflineProgress(){
-          const now = Date.now();
-          const diffMs = Math.max(0, now - (S.last || now));
-          const ticks = Math.min(120, Math.floor(diffMs / TICK_MS)); // cap offline to 120 ticks
-          if (ticks <= 0) return;
-          log("OFFLINE TICKS " + ticks);
-          for (let i=0;i<ticks;i++){
-            internalTick(true);
-          }
-        }
-
-        // TICK LOOP
-        const TICK_MS = 25000; // SLOWER AND EASIER TO MANAGE
-        let tickTimer = null;
-
-        function internalTick(isOffline){
-          if (!S.alive) return;
-          if (S.paused) return;
-
-          // tiny idle blink sometimes (skip if overlay shown)
-          if (!overlay.classList.contains("show") && chance(0.18)) blink();
-
-          // age increases per tick
-          S.age += 1;
-
-          // decay rates
-          let hungerD = 2;
-          let energyD = 2;
-          let cleanD  = 1;
-          let happyD  = 1;
-
-          if (S.upgrades.SLOW_DECAY){
-            hungerD = 1.6;
-            energyD = 1.6;
-            cleanD  = 0.8;
-            happyD  = 0.8;
-          }
-
-          // sleeping recovery
-          if (S.mode === "SLEEPING"){
-            const bed = S.upgrades.COMFY_BED ? 2 : 0;
-            S.energy += 5 + bed;
-            S.health += 1;
-            S.hunger -= 1;
-            S.clean  -= 0.4;
-            S.happy  -= 0.2;
-
-            // blanket item bonus if present
-            if (S.inv.BLANKET > 0 && chance(0.18)){
-              // do not consume: it is a comfort item; if you want consumable, change this.
-              S.energy += 1;
-              S.happy += 1;
-            }
-
-            // auto wake if energy high
-            if (S.energy >= 92 && !isOffline){
-              S.mode = "NORMAL";
-              log("AUTO WAKE");
-              addXP(4, "FROM REST");
-            }
-          } else {
-            S.hunger -= hungerD;
-            S.energy -= energyD;
-            S.clean  -= cleanD;
-
-            // happiness depends on problems
-            let penalty = 0;
-            if (S.hunger < 35) penalty += 2;
-            if (S.energy < 25) penalty += 2;
-            if (S.clean  < 25) penalty += 2;
-            if (S.health < 35) penalty += 2;
-            if (S.disc  < 25) penalty += 1;
-
-            S.happy -= (happyD + penalty * 0.55);
-
-            // discipline drifts down if unhappy or messy
-            if (S.happy < 30 || S.clean < 25) S.disc -= 1;
-            else if (S.happy > 70 && S.clean > 70) S.disc += 0.5;
-          }
-
-          // health damage if extreme
-          let dmg = 0;
-          if (S.hunger <= 10) dmg += 4;
-          if (S.clean  <= 10) dmg += 4;
-          if (S.energy <= 8)  dmg += 3;
-          if (S.happy  <= 8)  dmg += 3;
-          if (S.disc   <= 8)  dmg += 2;
-          S.health -= dmg;
-
-          // becoming sick
-          if (S.health <= 25 && S.mode !== "SLEEPING" && chance(0.18)){
-            S.mode = "SICK";
-          }
-          if (S.mode === "SICK"){
-            S.health -= 1;
-            S.energy -= 1;
-            S.happy -= 1;
-            if (S.health > 45) S.mode = "NORMAL";
-          }
-
-          // random events (rare)
-          if (!overlay.classList.contains("show") && chance(0.06)){
-            randomEvent();
-          }
-
-          // toy passive benefit
-          if ((S.inv.TOY||0) > 0 && chance(0.08) && S.mode !== "SLEEPING"){
-            S.happy += 1;
-          }
-
-          // clamp + death
-          S.hunger = clamp(S.hunger, 0, 100);
-          S.happy  = clamp(S.happy, 0, 100);
-          S.energy = clamp(S.energy, 0, 100);
-          S.clean  = clamp(S.clean, 0, 100);
-          S.health = clamp(S.health, 0, 100);
-          S.disc   = clamp(S.disc, 0, 100);
-
-          if (S.health <= 0){
-            S.alive = false;
-            S.health = 0;
-            log("POPPY HAS DIED");
-            tmsg("POPPY DIED");
-          }
-
-          // auto care each tick
-          runAutoCare();
-
-          // tiny passive xp for keeping stable
-          if (S.alive && S.mode !== "SICK"){
-            const stable = (S.hunger>40 && S.happy>40 && S.energy>40 && S.clean>40 && S.health>40);
-            if (stable) S.xp += 1;
-          }
-
-          // level up if needed
-          while (S.xp >= xpToNext(S.lvl)){
-            S.xp -= xpToNext(S.lvl);
-            S.lvl += 1;
-            S.coins += 2;
-            log("LEVEL UP TO " + S.lvl + " COINS +2");
-          }
-
-          updateUI();
-          save();
-        }
-
-        function randomEvent(){
-          // choose event type
-          const roll = Math.random();
-          if (roll < 0.20){
-            const c = rint(1,4);
-            S.coins += c;
-            log("FOUND COINS +" + c);
-          } else if (roll < 0.40){
-            const item = ["FOOD","SNACK","WATER","SOAP"][rint(0,3)];
-            addItem(item, 1);
-            log("FOUND ITEM " + item);
-          } else if (roll < 0.58){
-            S.clean -= rint(4,9);
-            log("MESS EVENT CLEANLINESS DOWN");
-          } else if (roll < 0.76){
-            S.happy -= rint(4,9);
-            log("MOOD DROP EVENT HAPPINESS DOWN");
-          } else if (roll < 0.90){
-            S.energy -= rint(4,9);
-            log("TIRED EVENT ENERGY DOWN");
-          } else {
-            S.health -= rint(4,9);
-            S.mode = "SICK";
-            log("SICK EVENT HEALTH DOWN");
-          }
-          addXP(2, "FROM EVENT");
-          updateUI();
-        }
-
-        function startTick(){
-          if (tickTimer) clearInterval(tickTimer);
-          tickTimer = setInterval(()=>internalTick(false), TICK_MS);
         }
 
         // BUTTON WIRING
@@ -2054,39 +1659,25 @@
           if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
           openFeedMenu();
         });
-
         btnPlay.addEventListener("click", ()=>{
           if (!S.alive || S.paused) return;
           if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
           openPlayMenu();
         });
-
         btnSleep.addEventListener("click", actSleepToggle);
-
-        btnClean.addEventListener("click", ()=>{
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          actClean();
-        });
-
-        btnMed.addEventListener("click", ()=>{
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-          actMed();
-        });
-
+        btnClean.addEventListener("click", actClean);
+        btnMed.addEventListener("click", actMed);
         btnWork.addEventListener("click", actWork);
         btnInventory.addEventListener("click", openInventory);
-        btnShop.addEventListener("click", openShop);
+        btnShop.addEventListener("click", ()=>{ tmsg("SHOP STILL IN OTHER VERSION. TELL ME IF YOU WANT IT MERGED HERE."); });
         btnTrain.addEventListener("click", actTrain);
-        btnSettings.addEventListener("click", openSettings);
+        btnSettings.addEventListener("click", ()=>{ tmsg("SETTINGS STILL IN OTHER VERSION. TELL ME IF YOU WANT IT MERGED HERE."); });
 
         btnPause.addEventListener("click", ()=>{
           S.paused = !S.paused;
           log(S.paused ? "PAUSED" : "RESUMED");
           tmsg(S.paused ? "PAUSED" : "RESUMED");
-          updateUI();
-          save();
+          updateUI(); save();
         });
 
         btnReset.addEventListener("click", ()=>{
@@ -2102,14 +1693,15 @@
           save(true);
         });
 
-        // OVERLAY CLOSE ESC
+        // CLOSE OVERLAY WITH ESC ALWAYS
         window.addEventListener("keydown", (e)=>{
           const k = e.key.toLowerCase();
           if (overlay.classList.contains("show") && k === "escape"){
+            e.preventDefault();
             if (overlayMode.startsWith("PLAY")) finishGame(false);
             closeOverlay();
           }
-        }, { passive:true });
+        }, { passive:false });
 
         // SIMPLE SHORTCUTS OUTSIDE OVERLAY
         window.addEventListener("keydown", (e)=>{
@@ -2122,59 +1714,96 @@
           if (k === "m") btnMed.click();
           if (k === "w") btnWork.click();
           if (k === "i") btnInventory.click();
-          if (k === "b") btnShop.click();
           if (k === "t") btnTrain.click();
           if (k === " ") btnPause.click();
         }, { passive:true });
+
+        // TICK LOOP
+        const TICK_MS = 25000;
+        function internalTick(){
+          if (!S.alive) return;
+          if (S.paused) return;
+
+          if (!overlay.classList.contains("show") && chance(0.16)) blink();
+
+          S.age += 1;
+
+          if (S.mode === "SLEEPING"){
+            S.energy += 5;
+            S.health += 1;
+            S.hunger -= 1;
+          } else {
+            S.hunger -= 1.2;
+            S.energy -= 1.2;
+            S.clean  -= 0.8;
+            let penalty = 0;
+            if (S.hunger < 35) penalty += 2;
+            if (S.energy < 25) penalty += 2;
+            if (S.clean  < 25) penalty += 2;
+            if (S.health < 35) penalty += 2;
+            S.happy -= (0.8 + penalty * 0.5);
+          }
+
+          let dmg = 0;
+          if (S.hunger <= 10) dmg += 3;
+          if (S.clean  <= 10) dmg += 3;
+          if (S.energy <= 8)  dmg += 2;
+          if (S.happy  <= 8)  dmg += 2;
+          S.health -= dmg;
+
+          if (S.health <= 0){
+            S.alive = false;
+            S.health = 0;
+            log("POPPY HAS DIED");
+            tmsg("POPPY DIED");
+          }
+
+          // passive xp
+          if (S.alive && S.mode !== "SICK") S.xp += 1;
+          while (S.xp >= xpToNext(S.lvl)){
+            S.xp -= xpToNext(S.lvl);
+            S.lvl += 1;
+            S.coins += 2;
+            log("LEVEL UP " + S.lvl + " COINS +2");
+          }
+
+          updateUI();
+          save();
+        }
+
+        // offline progress (simple)
+        function applyOffline(){
+          const now = Date.now();
+          const diffMs = Math.max(0, now - (S.last || now));
+          const ticks = Math.min(80, Math.floor(diffMs / TICK_MS));
+          if (ticks > 0){
+            log("OFFLINE TICKS " + ticks);
+            for (let i=0;i<ticks;i++) internalTick();
+          }
+        }
 
         // STARTUP
         const loaded = load();
         logEl.innerHTML = "";
         if (loaded){
           log("SAVE LOADED");
-          applyOfflineProgress();
+          applyOffline();
         } else {
           log("WELCOME TO POPPY");
-          log("TIP: BUY ITEMS IN SHOP");
-          log("TIP: PLAY GAMES TO EARN COINS AND XP");
+          log("TIP: PLAY DINO RUNNER WITH SPACE TO JUMP");
         }
 
-        // occasional blink (no constant motion)
-        setInterval(()=>{
-          if (!S.alive || S.paused) return;
-          if (overlay.classList.contains("show")) return;
-          if (chance(0.16)) blink();
-        }, 2600);
-
-        // check coin achievement and more
-        updateUI();
-        save();
-
-        // begin ticking
-        startTick();
-
-        // EXTRA: SOFT AUTO-CARE WITHOUT UPGRADES IF USER ENABLES AUTO CARE
-        // DOES NOT CONSUME ITEMS. IT IS A VERY SMALL HELP.
-        setInterval(()=>{
-          if (!S.autoCare) return;
-          if (!S.alive || S.paused) return;
-          if (S.mode === "SLEEPING") return;
-          // tiny stabilizers so it feels alive without breaking balance
-          if (S.happy < 25) S.disc = clamp(S.disc + 1, 0, 100);
-          if (S.clean < 20) S.happy = clamp(S.happy + 1, 0, 100);
-          if (S.energy < 18) S.happy = clamp(S.happy - 1, 0, 100);
-          updateUI();
-          save();
-        }, 12000);
-
-        // UI: AUTO CARE TOGGLE ALSO AVAILABLE VIA SETTINGS ONLY, BUT QUICK TOGGLE HERE
-        // DOUBLE CLICK STATUS BOX TO TOGGLE AUTO CARE FAST
+        // dblclick status = toggle auto care
         statusBox.addEventListener("dblclick", ()=>{
           S.autoCare = !S.autoCare;
           log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
           tmsg("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
           updateUI(); save();
         });
+
+        updateUI();
+        save();
+        setInterval(internalTick, TICK_MS);
 
       } catch(err){
         console.error(err);
