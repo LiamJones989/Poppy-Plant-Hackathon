@@ -94,14 +94,15 @@
       gap:14px;
     }
 
+    /* MORE TAMAGOTCHI-LIKE: SMALLER SCREEN + LESS CONSTANT MOTION */
     .screen{
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
       background:
-        radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.14), transparent 60%),
-        radial-gradient(560px 260px at 50% 60%, rgba(138,164,255,.10), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.12));
-      height: 480px;
+        radial-gradient(520px 260px at 50% 35%, rgba(124,247,178,.10), transparent 60%),
+        radial-gradient(560px 260px at 50% 60%, rgba(138,164,255,.07), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.16));
+      height: 420px;
       position:relative;
       overflow:hidden;
       display:flex;
@@ -150,21 +151,21 @@
 
     .floorGlow{
       position:absolute;
-      bottom:-90px;
-      width: 720px;
-      height: 300px;
+      bottom:-100px;
+      width: 560px;
+      height: 260px;
       border-radius: 999px;
-      background: radial-gradient(circle at 50% 35%, rgba(124,247,178,.22), transparent 62%);
+      background: radial-gradient(circle at 50% 35%, rgba(124,247,178,.14), transparent 62%);
       filter: blur(2px);
-      opacity:.85;
+      opacity:.8;
       pointer-events:none;
     }
 
     /* POPPY */
     .poppyWrap{
       position:relative;
-      width: 320px;
-      height: 330px;
+      width: 260px;
+      height: 280px;
       display:flex;
       align-items:flex-end;
       justify-content:center;
@@ -188,11 +189,11 @@
     }
 
     .square{
-      width: 190px;
-      height: 190px;
+      width: 170px;
+      height: 170px;
       border-radius: 22px;
       background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,.26), transparent 55%),
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.22), transparent 55%),
         linear-gradient(180deg, rgba(185,255,217,1), rgba(47,228,138,1));
       border: 1px solid rgba(0,0,0,.10);
       box-shadow: 0 18px 44px rgba(0,0,0,.36);
@@ -201,15 +202,15 @@
     }
 
     .face{
-      width: 140px;
-      height: 92px;
+      width: 132px;
+      height: 88px;
       border-radius: 22px;
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.16);
       backdrop-filter: blur(10px);
       box-shadow: 0 16px 26px rgba(0,0,0,.20);
       position:absolute;
-      bottom: 36px;
+      bottom: 32px;
       left: 50%;
       transform: translateX(-50%);
       display:flex;
@@ -220,8 +221,8 @@
     }
 
     .eye{
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       border-radius: 999px;
       background: #0b1020;
       box-shadow: 0 0 0 7px rgba(255,255,255,.10);
@@ -231,7 +232,7 @@
     .eye:after{
       content:"";
       position:absolute;
-      width: 7px;height:7px;border-radius:999px;
+      width: 6px;height:6px;border-radius:999px;
       background: rgba(255,255,255,.90);
       top: 2px; left: 2px;
     }
@@ -241,8 +242,8 @@
       left: 50%;
       bottom: 14px;
       transform: translateX(-50%);
-      width: 38px;
-      height: 18px;
+      width: 36px;
+      height: 16px;
       border: 3px solid rgba(11,16,32,.92);
       border-top: none;
       border-radius: 0 0 28px 28px;
@@ -258,18 +259,18 @@
       background: rgba(11,16,32,.92);
       opacity:0;
     }
-    .brow.left{ left: 22px; transform: rotate(-10deg); }
-    .brow.right{ right: 22px; transform: rotate(10deg); }
+    .brow.left{ left: 20px; transform: rotate(-10deg); }
+    .brow.right{ right: 20px; transform: rotate(10deg); }
 
     /* FACE STATES */
-    .mood-happy .mouth{ width: 46px; height: 22px; border-radius: 0 0 30px 30px; }
+    .mood-happy .mouth{ width: 44px; height: 20px; border-radius: 0 0 30px 30px; }
     .mood-sad .mouth{
-      bottom: 18px; width: 46px; height: 18px;
+      bottom: 18px; width: 44px; height: 16px;
       border-top: 3px solid rgba(11,16,32,.92);
       border-bottom:none; border-radius: 30px 30px 0 0;
     }
     .mood-angry .mouth{
-      width: 38px; height: 16px;
+      width: 36px; height: 14px;
       border-top: 3px solid rgba(11,16,32,.92);
       border-bottom:none; border-radius: 22px 22px 0 0;
     }
@@ -295,7 +296,49 @@
       opacity:.85;
     }
 
-    /* ACTION OVERLAYS (EAT / CLEAN / SLEEP / MED / PLAY GAME) */
+    /* TAMAGOTCHI-LIKE: NO CONSTANT LOOPING ANIMATIONS
+       ONLY SMALL "BLINK" SOMETIMES + SHORT ACTION BURSTS */
+    @keyframes blink {
+      0%, 90%, 100% { transform: scaleY(1); }
+      92%, 96% { transform: scaleY(0.15); }
+    }
+    .blink .eye{ animation: blink 220ms linear 1; transform-origin:center; }
+
+    /* SHORT ACTION BURSTS */
+    @keyframes pop {
+      0%{ transform: scale(1); }
+      50%{ transform: scale(1.04); }
+      100%{ transform: scale(1); }
+    }
+    @keyframes nod {
+      0%{ transform: translateY(0); }
+      40%{ transform: translateY(-8px); }
+      100%{ transform: translateY(0); }
+    }
+    @keyframes wig {
+      0%{ transform: rotate(0deg); }
+      25%{ transform: rotate(-8deg); }
+      50%{ transform: rotate(10deg); }
+      75%{ transform: rotate(-6deg); }
+      100%{ transform: rotate(0deg); }
+    }
+    .burst-pop .square{ animation: pop 380ms ease-out 1; }
+    .burst-nod .poppyWrap{ animation: nod 420ms ease-out 1; }
+    .burst-wig .poppyWrap{ animation: wig 520ms ease-in-out 1; }
+
+    /* SLEEP LOOK */
+    .sleepTint{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(circle at 50% 30%, rgba(138,164,255,.14), rgba(0,0,0,.62));
+      opacity:0;
+      transition: opacity .25s ease;
+      pointer-events:none;
+      z-index:3;
+    }
+    .sleepOn .sleepTint{ opacity:1; }
+
+    /* OVERLAY (MINI GAME / ACTIONS) */
     .overlay{
       position:absolute;
       inset: 0;
@@ -344,64 +387,43 @@
     }
     @media (max-width: 520px){ .overlayActions{ grid-template-columns:1fr; } }
 
-    /* FEED ANIMATION: FOOD ORBS */
+    /* FEED VISUAL: FOOD DOTS */
     .food{
       position:absolute;
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       border-radius: 999px;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,209,138,.9));
       border:1px solid rgba(255,255,255,.14);
       box-shadow: 0 12px 20px rgba(0,0,0,.25);
-      left: 18%;
-      top: 18%;
       opacity:0;
     }
     @keyframes foodDrop{
       0%{ transform: translate(0,-40px) scale(.6); opacity:0; }
-      20%{ opacity:1; }
-      60%{ transform: translate(190px, 120px) scale(1.0); opacity:1; }
-      100%{ transform: translate(240px, 170px) scale(.2); opacity:0; }
+      15%{ opacity:1; }
+      65%{ transform: translate(var(--dx), var(--dy)) scale(1.0); opacity:1; }
+      100%{ transform: translate(calc(var(--dx) + 40px), calc(var(--dy) + 40px)) scale(.2); opacity:0; }
     }
 
-    /* CLEAN ANIMATION: BUBBLES */
+    /* CLEAN VISUAL: BUBBLES */
     .bubble{
       position:absolute;
-      width: 16px; height: 16px;
+      width: 14px; height: 14px;
       border-radius: 999px;
       border:1px solid rgba(255,255,255,.25);
       background: rgba(255,255,255,.08);
-      left: 50%;
-      bottom: -20px;
       opacity:0;
     }
     @keyframes bubbleRise{
-      0%{ transform: translate(-50%, 0) scale(.6); opacity:0; }
+      0%{ transform: translate(0, 20px) scale(.6); opacity:0; }
       10%{ opacity:1; }
       80%{ opacity:1; }
-      100%{ transform: translate(calc(-50% + var(--dx)), -190px) scale(1.25); opacity:0; }
+      100%{ transform: translate(var(--dx), -170px) scale(1.15); opacity:0; }
     }
 
-    /* SLEEP ANIMATION: DIM + FLOAT */
-    @keyframes floaty{
-      0%,100%{ transform: translateY(0); }
-      50%{ transform: translateY(-10px); }
-    }
-    .sleepTint{
-      position:absolute;
-      inset:0;
-      background: radial-gradient(circle at 50% 30%, rgba(138,164,255,.16), rgba(0,0,0,.55));
-      opacity:0;
-      transition: opacity .25s ease;
-      pointer-events:none;
-      z-index:3;
-    }
-    .sleepOn .sleepTint{ opacity:1; }
-    .sleepOn .poppyWrap{ animation: floaty 1.2s ease-in-out infinite; }
-
-    /* MEDICINE ANIMATION: HEART/HEALTH PULSE */
+    /* MED VISUAL: PULSE RING */
     .pulseRing{
-      width: 120px; height: 120px;
+      width: 110px; height: 110px;
       border-radius: 999px;
       border: 2px solid rgba(124,247,178,.55);
       box-shadow: 0 0 0 10px rgba(124,247,178,.12);
@@ -410,42 +432,41 @@
     }
     @keyframes pulse{
       0%{ transform: scale(.7); opacity:0; }
-      20%{ opacity:1; }
+      18%{ opacity:1; }
       100%{ transform: scale(1.6); opacity:0; }
     }
 
-    /* BASIC IDLE ANIMS */
-    @keyframes wiggle {
-      0%{ transform: rotate(0deg) translateY(0) }
-      15%{ transform: rotate(-10deg) translateY(-1px) }
-      35%{ transform: rotate(12deg) translateY(-2px) }
-      55%{ transform: rotate(-8deg) translateY(-1px) }
-      75%{ transform: rotate(10deg) translateY(-2px) }
-      100%{ transform: rotate(0deg) translateY(0) }
+    /* MINI GAME: CLICK TARGET */
+    .gameArea{
+      width: min(460px, 92%);
+      height: 220px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+      position:relative;
+      overflow:hidden;
     }
-    @keyframes bounce {
-      0%,100%{ transform: translateY(0) }
-      25%{ transform: translateY(-16px) }
-      55%{ transform: translateY(0) }
-      75%{ transform: translateY(-8px) }
+    .target{
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      position:absolute;
+      left: 20px;
+      top: 20px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(138,164,255,.95));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow: 0 18px 30px rgba(0,0,0,.30);
+      cursor:pointer;
     }
-    @keyframes shake {
-      0%{ transform: translateX(0) rotate(0deg) }
-      10%{ transform: translateX(-6px) rotate(-3deg) }
-      20%{ transform: translateX(6px) rotate(3deg) }
-      30%{ transform: translateX(-5px) rotate(-2deg) }
-      40%{ transform: translateX(5px) rotate(2deg) }
-      50%{ transform: translateX(-4px) rotate(-1deg) }
-      60%{ transform: translateX(4px) rotate(1deg) }
-      70%{ transform: translateX(-3px) rotate(-1deg) }
-      80%{ transform: translateX(3px) rotate(1deg) }
-      90%{ transform: translateX(-2px) rotate(0deg) }
-      100%{ transform: translateX(0) rotate(0deg) }
+    .gameHud{
+      display:flex;
+      justify-content:space-between;
+      width: min(460px, 92%);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
     }
-    .anim-idle .poppyWrap{ animation:none; }
-    .anim-wiggle .poppyWrap{ animation: wiggle 900ms ease-in-out infinite; }
-    .anim-bounce .poppyWrap{ animation: bounce 900ms ease-in-out infinite; }
-    .anim-shake .poppyWrap{ animation: shake 520ms linear infinite; }
+    .gameHud b{ color: var(--text); }
 
     /* CONTROLS */
     .controls{
@@ -555,43 +576,10 @@
       white-space: pre-line;
     }
 
-    /* SIMPLE PLAY GAME (CLICK THE FALLING DOT) */
-    .gameArea{
-      width: min(460px, 92%);
-      height: 220px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      position:relative;
-      overflow:hidden;
-    }
-    .target{
-      width: 18px;
-      height: 18px;
-      border-radius: 999px;
-      position:absolute;
-      left: 20px;
-      top: 20px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(138,164,255,.95));
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 18px 30px rgba(0,0,0,.30);
-      cursor:pointer;
-    }
-    .gameHud{
-      display:flex;
-      justify-content:space-between;
-      width: min(460px, 92%);
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 10px;
-    }
-    .gameHud b{ color: var(--text); }
-
     @media (prefers-reduced-motion: reduce){
-      .anim-wiggle .poppyWrap,
-      .anim-bounce .poppyWrap,
-      .anim-shake .poppyWrap,
-      .sleepOn .poppyWrap{ animation:none !important; }
+      .burst-pop .square,
+      .burst-nod .poppyWrap,
+      .burst-wig .poppyWrap{ animation:none !important; }
       .overlay, .overlayCard{ backdrop-filter:none; }
     }
   </style>
@@ -605,7 +593,7 @@
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">TAMAGOTCHI STYLE PET WITH NEEDS, MOODS, MODS, AND ACTION ANIMATIONS</p>
+          <p class="sub">TAMAGOTCHI STYLE: MOSTLY STILL, ONLY MOVES ON EVENTS</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -626,7 +614,7 @@
 
           <div class="poppyWrap" id="poppyWrap" aria-label="Poppy">
             <div class="nameTag">POPPY</div>
-            <div class="square">
+            <div class="square" id="square">
               <div class="face" id="face">
                 <div class="brow left"></div>
                 <div class="brow right"></div>
@@ -637,12 +625,11 @@
             </div>
           </div>
 
-          <!-- OVERLAY FOR ACTIONS -->
           <div class="overlay" id="overlay">
             <div class="overlayCard">
               <div class="overlayTop">
                 <div>MODE <b id="overlayTitle">ACTION</b></div>
-                <div>DURATION <b id="overlayTimer">0</b></div>
+                <div>TIME <b id="overlayTimer">0</b></div>
               </div>
               <div class="overlayBody" id="overlayBody"></div>
               <div class="overlayActions" id="overlayActions">
@@ -667,7 +654,7 @@
           <div class="panel">
             <div class="grid2">
               <button class="btnMain" id="btnFeed" type="button">FEED (COST 1)</button>
-              <button class="btnMain" id="btnPlay" type="button">PLAY (MINI GAME)</button>
+              <button class="btnMain" id="btnPlay" type="button">PLAY (GAME)</button>
               <button class="btnMain" id="btnSleep" type="button">SLEEP</button>
               <button class="btnMain" id="btnClean" type="button">CLEAN</button>
               <button class="btnWarn" id="btnMed" type="button">MEDICINE (COST 2)</button>
@@ -702,7 +689,7 @@
         </div>
         <div class="panel" style="margin-top:10px;">
           <div style="font-size:12px; color:var(--muted); line-height:1.35;">
-            ACTIONS HAVE ANIMATIONS. PLAY IS A MINI GAME. TICK SPEED IS 10 SECONDS FOR DEMO.
+            THIS IS TAMAGOTCHI STYLE: POPPY IS MOSTLY STILL. BLINKS SOMETIMES. ONLY MOVES ON BUTTON ACTIONS.
           </div>
         </div>
       </div>
@@ -727,6 +714,7 @@
         const app = need("app");
         const screen = need("screen");
         const face = need("face");
+        const square = need("square");
         const statusBox = need("statusBox");
         const moodPill = need("moodPill");
         const agePill = need("agePill");
@@ -734,7 +722,6 @@
         const statusDot = need("statusDot");
         const statusText = need("statusText");
         const logEl = need("log");
-        const sleepTint = need("sleepTint");
 
         const fills = {
           hunger: need("hungerFill"),
@@ -800,14 +787,14 @@
           logEl.prepend(div);
         }
 
-        function setAnim(name){
-          app.classList.remove("anim-idle","anim-wiggle","anim-bounce","anim-shake");
-          app.classList.add("anim-" + name.toLowerCase());
+        function burst(cls, ms){
+          app.classList.add(cls);
+          setTimeout(()=>app.classList.remove(cls), ms);
         }
 
-        function setFaceMoodClass(m){
-          face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored");
-          face.classList.add("mood-" + m.toLowerCase());
+        function blink(){
+          face.classList.add("blink");
+          setTimeout(()=>face.classList.remove("blink"), 250);
         }
 
         function activeModsLabel(){
@@ -829,6 +816,11 @@
           return "HAPPY";
         }
 
+        function setFaceMoodClass(m){
+          face.classList.remove("mood-happy","mood-sad","mood-angry","mood-hungry","mood-sick","mood-bored");
+          if (m !== "DEAD") face.classList.add("mood-" + m.toLowerCase());
+        }
+
         function updateUI(){
           S.hunger = clamp(S.hunger, 0, 100);
           S.happy  = clamp(S.happy, 0, 100);
@@ -845,20 +837,16 @@
           moodPill.textContent = m;
           agePill.textContent = String(S.age);
           coinsPill.textContent = String(S.coins);
+          setFaceMoodClass(m);
 
           if (!S.alive){
             statusDot.style.background = "var(--danger)";
             statusText.textContent = "DEAD";
-            setAnim("idle");
-            setFaceMoodClass("sad");
           } else {
             statusText.textContent = S.paused ? "PAUSED" : "ALIVE";
-            if (m === "SICK"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMoodClass("sick"); }
-            else if (m === "ANGRY"){ statusDot.style.background = "var(--danger)"; setAnim("shake"); setFaceMoodClass("angry"); }
-            else if (m === "HUNGRY"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMoodClass("hungry"); }
-            else if (m === "SAD"){ statusDot.style.background = "var(--warn)"; setAnim("idle"); setFaceMoodClass("sad"); }
-            else if (m === "BORED"){ statusDot.style.background = "var(--accent2)"; setAnim("bounce"); setFaceMoodClass("bored"); }
-            else { statusDot.style.background = "var(--accent)"; setAnim("wiggle"); setFaceMoodClass("happy"); }
+            if (m === "SICK" || m === "ANGRY") statusDot.style.background = "var(--danger)";
+            else if (m === "HUNGRY" || m === "SAD") statusDot.style.background = "var(--warn)";
+            else statusDot.style.background = "var(--accent)";
           }
 
           statusBox.textContent =
@@ -872,18 +860,12 @@
           btnPause.textContent = S.paused ? "RESUME" : "PAUSE";
         }
 
-        function dieIfNeeded(){
-          if (S.health <= 0 && S.alive){
-            S.alive = false;
-            S.health = 0;
-            log("POPPY HAS DIED");
-          }
-        }
-
-        // OVERLAY SYSTEM
+        // OVERLAY
         let overlayInterval = null;
         let overlayEndAt = 0;
         let overlayMode = "NONE";
+        let game = null;
+
         function closeOverlay(){
           overlay.classList.remove("show");
           overlayBody.innerHTML = "";
@@ -891,6 +873,8 @@
           overlayTimer.textContent = "0";
           overlayMode = "NONE";
           if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
+          if (game && game.moveTimer) clearInterval(game.moveTimer);
+          game = null;
           updateUI();
         }
 
@@ -904,7 +888,9 @@
             const left = Math.max(0, Math.ceil((overlayEndAt - Date.now())/1000));
             overlayTimer.textContent = String(left);
             if (left <= 0){
-              if (overlayMode !== "PLAY"){
+              if (overlayMode === "PLAY"){
+                endGame(true);
+              } else {
                 closeOverlay();
               }
             }
@@ -923,43 +909,51 @@
           else closeOverlay();
         });
 
-        // ACTION ANIMATIONS
+        // ACTION VISUALS
         function animFeed(){
-          openOverlay("FEED", 3);
+          burst("burst-pop", 380);
+          burst("burst-nod", 420);
+
+          openOverlay("FEED", 2);
           overlayPrimary.textContent = "DONE";
           overlayClose.textContent = "CLOSE";
           overlayBody.innerHTML = "";
 
-          // Drop a few food orbs
           for (let i=0;i<6;i++){
             const f = document.createElement("div");
             f.className = "food";
-            f.style.left = (10 + i*7) + "%";
-            f.style.top = (10 + (i%2)*8) + "%";
-            f.style.animation = "foodDrop 900ms ease-in " + (i*120) + "ms 1";
+            f.style.left = (10 + Math.random()*40) + "%";
+            f.style.top = (10 + Math.random()*20) + "%";
+            f.style.setProperty("--dx", (120 + Math.random()*120) + "px");
+            f.style.setProperty("--dy", (70 + Math.random()*80) + "px");
+            f.style.animation = "foodDrop 820ms ease-in " + (i*90) + "ms 1";
             overlayBody.appendChild(f);
           }
         }
 
         function animClean(){
-          openOverlay("CLEAN", 3);
+          burst("burst-wig", 520);
+
+          openOverlay("CLEAN", 2);
           overlayPrimary.textContent = "DONE";
           overlayClose.textContent = "CLOSE";
           overlayBody.innerHTML = "";
 
-          // Bubble rise
           for (let i=0;i<14;i++){
             const b = document.createElement("div");
             b.className = "bubble";
             b.style.left = (10 + Math.random()*80) + "%";
+            b.style.top = (140 + Math.random()*40) + "px";
             b.style.setProperty("--dx", (Math.random()*120 - 60) + "px");
-            b.style.animation = "bubbleRise 1100ms ease-out " + (i*90) + "ms 1";
+            b.style.animation = "bubbleRise 980ms ease-out " + (i*60) + "ms 1";
             overlayBody.appendChild(b);
           }
         }
 
         function animMed(){
-          openOverlay("MEDICINE", 3);
+          burst("burst-pop", 380);
+
+          openOverlay("MEDICINE", 2);
           overlayPrimary.textContent = "DONE";
           overlayClose.textContent = "CLOSE";
           overlayBody.innerHTML = "";
@@ -967,27 +961,25 @@
           for (let i=0;i<4;i++){
             const ring = document.createElement("div");
             ring.className = "pulseRing";
-            ring.style.animation = "pulse 900ms ease-out " + (i*220) + "ms 1";
+            ring.style.animation = "pulse 820ms ease-out " + (i*160) + "ms 1";
             overlayBody.appendChild(ring);
           }
         }
 
         function animSleep(){
-          // Sleep uses tint + float on main screen (not overlay heavy)
           screen.classList.add("sleepOn");
-          openOverlay("SLEEP", 4);
+          burst("burst-nod", 420);
+
+          openOverlay("SLEEP", 3);
           overlayPrimary.textContent = "WAKE";
           overlayClose.textContent = "CLOSE";
-          overlayBody.innerHTML = "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:center;'>POPPY IS RESTING\nENERGY WILL INCREASE</div>";
+          overlayBody.innerHTML =
+            "<div style='color:var(--muted); font-size:12px; line-height:1.35; text-align:center;'>POPPY IS RESTING\nENERGY UP</div>";
 
-          const stop = ()=>{
-            screen.classList.remove("sleepOn");
-          };
-          setTimeout(stop, 4200);
+          setTimeout(()=>screen.classList.remove("sleepOn"), 3200);
         }
 
-        // MINI GAME: CLICK THE TARGET AS MANY TIMES AS YOU CAN IN 10 SECONDS
-        let game = null;
+        // MINI GAME
         function startGame(){
           openOverlay("PLAY", 10);
           overlayPrimary.textContent = "FINISH";
@@ -1002,22 +994,15 @@
 
           const hud = document.createElement("div");
           hud.className = "gameHud";
-          hud.innerHTML = "<div>SCORE <b id='gScore'>0</b></div><div>BEST <b id='gBest'>0</b></div>";
+          hud.innerHTML = "<div>SCORE <b id='gScore'>0</b></div><div>REWARD <b id='gReward'>0</b></div>";
 
           overlayBody.appendChild(area);
           overlayBody.appendChild(hud);
 
           const gScore = overlayBody.querySelector("#gScore");
-          const gBest = overlayBody.querySelector("#gBest");
+          const gReward = overlayBody.querySelector("#gReward");
 
-          game = {
-            score: 0,
-            best: 0,
-            target,
-            area,
-            gScore,
-            gBest
-          };
+          game = { score: 0, target, area, gScore, gReward, moveTimer: null };
 
           function moveTarget(){
             const w = area.clientWidth;
@@ -1031,13 +1016,13 @@
           target.addEventListener("click", ()=>{
             if (!game) return;
             game.score += 1;
-            game.best = Math.max(game.best, game.score);
             gScore.textContent = String(game.score);
-            gBest.textContent = String(game.best);
+            const reward = Math.min(10, Math.floor(game.score/2));
+            gReward.textContent = String(reward);
             moveTarget();
+            burst("burst-pop", 250);
           });
 
-          // initial positions + drift
           moveTarget();
           game.moveTimer = setInterval(moveTarget, 650);
         }
@@ -1050,21 +1035,21 @@
           game = null;
 
           if (applyRewards){
-            // reward scale
-            const happyGain = clamp(8 + score*2, 8, 35);
+            const happyGain = clamp(10 + score*2, 10, 32);
             const coinsGain = clamp(Math.floor(score/2), 0, 10);
             S.happy += happyGain;
             S.energy -= 6;
             S.clean  -= 2;
             S.coins += coinsGain;
-            log("GAME RESULT SCORE " + score + " HAPPINESS +" + happyGain + " COINS +" + coinsGain);
+            log("PLAY SCORE " + score + " HAPPINESS +" + happyGain + " COINS +" + coinsGain);
+            burst("burst-wig", 520);
           } else {
-            log("GAME QUIT");
+            log("PLAY QUIT");
           }
           closeOverlay();
         }
 
-        // ACTIONS (STATS) + ANIMS
+        // ACTIONS
         function actFeed(){
           if (!S.alive || S.paused) return log("CANNOT FEED RIGHT NOW");
           if (S.coins < 1) return log("NOT ENOUGH COINS TO FEED");
@@ -1079,7 +1064,6 @@
 
         function actPlay(){
           if (!S.alive || S.paused) return log("CANNOT PLAY RIGHT NOW");
-          // game handles stat changes on finish
           log("PLAY START");
           startGame();
           updateUI();
@@ -1087,7 +1071,6 @@
 
         function actSleep(){
           if (!S.alive || S.paused) return log("CANNOT SLEEP RIGHT NOW");
-          // Apply the stat changes now, animation is visual
           S.energy += 30;
           S.hunger -= 6;
           log("SLEEP");
@@ -1124,9 +1107,7 @@
           S.hunger -= 6;
           S.happy  -= 3;
           log("WORK EARNED " + earned);
-          // quick “work” animation: bounce on main
-          setAnim("bounce");
-          setTimeout(()=>updateUI(), 800);
+          burst("burst-nod", 420);
           updateUI();
         }
 
@@ -1137,52 +1118,53 @@
           S.coins -= cost;
           S.mods[key] = true;
           log("PURCHASED " + label);
+          burst("burst-pop", 380);
           updateUI();
         }
 
-        // TICK (DEMO SPEED: 10 SECONDS)
+        // TICK: REAL TAMAGOTCHI FEEL (SLOWER)
+        // Change to 10_000 if you want demo-fast.
+        const TICK_MS = 30000; // 30 seconds per tick
+
         function tick(){
           if (!S.alive || S.paused) return;
 
+          // small chance to blink each tick
+          if (Math.random() < 0.55) blink();
+
+          // Age counts in ticks
           S.age += 1;
 
-          S.hunger -= 4;
-          S.energy -= 3;
-          S.clean  -= 2;
+          // Slower decay (more tamagotchi feel)
+          S.hunger -= 2;
+          S.energy -= 2;
+          S.clean  -= 1;
 
-          let sadPush = 1;
-          if (S.hunger < 40) sadPush += 2;
-          if (S.energy < 35) sadPush += 2;
-          if (S.clean  < 35) sadPush += 2;
-          S.happy -= sadPush;
+          let sadPush = 0;
+          if (S.hunger < 35) sadPush += 2;
+          if (S.energy < 25) sadPush += 2;
+          if (S.clean  < 25) sadPush += 2;
+          S.happy -= (1 + sadPush);
 
           let dmg = 0;
-          if (S.hunger <= 15) dmg += 6;
-          if (S.clean  <= 15) dmg += 5;
-          if (S.energy <= 10) dmg += 4;
-          if (S.happy  <= 10) dmg += 4;
+          if (S.hunger <= 10) dmg += 4;
+          if (S.clean  <= 10) dmg += 4;
+          if (S.energy <= 8)  dmg += 3;
+          if (S.happy  <= 8)  dmg += 3;
           S.health -= dmg;
 
-          // mods
-          if (S.mods.snack) S.hunger += 2;
-          if (S.mods.toy) S.happy += 2;
-          if (S.mods.blanket) S.energy += 2;
-          if (S.mods.soap) S.clean += 2;
+          // Mods are gentle
+          if (S.mods.snack) S.hunger += 1;
+          if (S.mods.toy) S.happy += 1;
+          if (S.mods.blanket) S.energy += 1;
+          if (S.mods.soap) S.clean += 1;
 
-          // auto care
-          if (S.autoCare){
-            if (S.hunger < 35 && S.coins >= 1) actFeed();
-            if (S.clean < 35) actClean();
-            if (S.energy < 30) actSleep();
-            if (S.happy < 35) actPlay(); // launches game; could be annoying, so skip if overlay is open
-          }
-
-          // random events
-          if (!overlay.classList.contains("show") && Math.random() < 0.10){
+          // Random event rarely (more like tamagotchi)
+          if (!overlay.classList.contains("show") && Math.random() < 0.06){
             const roll = Math.random();
-            if (roll < 0.33){ const c = rint(1,4); S.coins += c; log("FOUND " + c + " COINS"); }
-            else if (roll < 0.66){ const d = rint(4,10); S.clean -= d; log("ACCIDENT. CLEANLINESS DOWN " + d); }
-            else { const d = rint(4,10); S.happy -= d; log("MOOD DROP. HAPPINESS DOWN " + d); }
+            if (roll < 0.34){ const c = rint(1,3); S.coins += c; log("FOUND " + c + " COINS"); }
+            else if (roll < 0.67){ const d = rint(2,6); S.clean -= d; log("MESS. CLEANLINESS DOWN " + d); }
+            else { const d = rint(2,6); S.happy -= d; log("MOOD DROP. HAPPINESS DOWN " + d); }
           }
 
           if (S.health <= 0 && S.alive){
@@ -1219,7 +1201,6 @@
         });
 
         btnReset.addEventListener("click", ()=>{
-          // Close overlay and reset
           closeOverlay();
           screen.classList.remove("sleepOn");
 
@@ -1243,7 +1224,7 @@
         modBlanket.addEventListener("click", ()=>buyMod("blanket", 10, "SOFT BLANKET"));
         modSoap.addEventListener("click", ()=>buyMod("soap", 8, "SOAP KIT"));
 
-        // Keyboard shortcuts
+        // Keyboard shortcuts (no movement unless you press)
         window.addEventListener("keydown", (e)=>{
           const k = e.key.toLowerCase();
           if (overlay.classList.contains("show")){
@@ -1262,11 +1243,19 @@
           if (k === " "){ S.paused = !S.paused; log(S.paused ? "PAUSED" : "RESUMED"); updateUI(); }
         });
 
-        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | FEED SHOWS EATING. CLEAN SHOWS BUBBLES. MED SHOWS PULSE. PLAY OPENS MINI GAME.</div>';
+        // Start: minimal motion
+        logEl.innerHTML = '<div class="item"><b>WELCOME</b> | TAMAGOTCHI STYLE. POPPY IS MOSTLY STILL. USE BUTTONS TO CARE FOR POPPY.</div>';
         updateUI();
 
-        // DEMO SPEED: 10 SECONDS
-        setInterval(tick, 10000);
+        // Add occasional idle blink (not constant motion)
+        setInterval(()=>{
+          if (S.alive && !S.paused && !overlay.classList.contains("show") && Math.random() < 0.22){
+            blink();
+          }
+        }, 2500);
+
+        // Main tick
+        setInterval(tick, TICK_MS);
 
       } catch(err){
         console.error(err);
