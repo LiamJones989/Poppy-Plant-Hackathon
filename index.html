@@ -215,6 +215,118 @@
       justify-content:center;
       gap:24px;
       padding-top:12px;
+      z-index:2;
+    }
+
+    /* ACCESSORY LAYER ON TOP OF FACE */
+    .accLayer{
+      position:absolute;
+      inset:0;
+      z-index:4;
+      pointer-events:none;
+    }
+    .acc{ position:absolute; pointer-events:none; display:none; }
+    .acc.show{ display:block; }
+
+    .hat{
+      width: 130px; height: 36px;
+      left: 50%; top: 22px;
+      transform: translateX(-50%);
+      border-radius: 16px 16px 10px 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.20));
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 16px 30px rgba(0,0,0,.24);
+    }
+    .hat:after{
+      content:"";
+      position:absolute;
+      left: 50%; top: -14px;
+      transform: translateX(-50%);
+      width: 70px; height: 20px;
+      border-radius: 14px 14px 10px 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(0,0,0,.22));
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .tie{
+      width: 16px; height: 48px;
+      left: 50%; top: 118px;
+      transform: translateX(-50%);
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.22));
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 14px 24px rgba(0,0,0,.20);
+    }
+    .tie:before{
+      content:"";
+      position:absolute;
+      left: 50%; top: -12px;
+      transform: translateX(-50%);
+      width: 22px; height: 14px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.20));
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .glasses{
+      width: 120px; height: 28px;
+      left: 50%; top: 88px;
+      transform: translateX(-50%);
+      border-radius: 18px;
+      border: 2px solid rgba(11,16,32,.88);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 12px 22px rgba(0,0,0,.22);
+    }
+    .glasses:before,.glasses:after{
+      content:"";
+      position:absolute;
+      top: 4px;
+      width: 42px; height: 18px;
+      border-radius: 14px;
+      border: 2px solid rgba(11,16,32,.88);
+      background: rgba(255,255,255,.08);
+    }
+    .glasses:before{ left: 8px; }
+    .glasses:after{ right: 8px; }
+    .glasses i{
+      position:absolute;
+      left: 50%; top: 12px;
+      transform: translateX(-50%);
+      width: 16px; height: 4px;
+      border-radius: 999px;
+      background: rgba(11,16,32,.88);
+      display:block;
+    }
+
+    .bow{
+      width: 54px; height: 24px;
+      left: 50%; top: 112px;
+      transform: translateX(-50%);
+      border-radius: 14px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 14px 22px rgba(0,0,0,.20);
+    }
+    .bow:before,.bow:after{
+      content:"";
+      position:absolute;
+      top: 4px;
+      width: 22px; height: 16px;
+      border-radius: 14px;
+      background: rgba(0,0,0,.18);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .bow:before{ left: 4px; }
+    .bow:after{ right: 4px; }
+    .bow i{
+      position:absolute;
+      left:50%; top: 9px;
+      transform: translateX(-50%);
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.12);
+      display:block;
     }
 
     .eye{
@@ -319,112 +431,7 @@
     }
     .sleepOn .sleepTint{ opacity:1; }
 
-    /* ACCESSORIES (WARDROBE) */
-    .acc{ position:absolute; pointer-events:none; display:none; }
-    .acc.show{ display:block; }
-
-    .hat{
-      width: 130px; height: 36px;
-      left: 50%; top: 38px;
-      transform: translateX(-50%);
-      border-radius: 16px 16px 10px 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.20));
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 16px 30px rgba(0,0,0,.24);
-    }
-    .hat:after{
-      content:"";
-      position:absolute;
-      left: 50%; top: -14px;
-      transform: translateX(-50%);
-      width: 70px; height: 20px;
-      border-radius: 14px 14px 10px 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(0,0,0,.22));
-      border: 1px solid rgba(255,255,255,.14);
-    }
-
-    .tie{
-      width: 16px; height: 48px;
-      left: 50%; top: 132px;
-      transform: translateX(-50%);
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.22));
-      border:1px solid rgba(255,255,255,.16);
-      box-shadow: 0 14px 24px rgba(0,0,0,.20);
-    }
-    .tie:before{
-      content:"";
-      position:absolute;
-      left: 50%; top: -12px;
-      transform: translateX(-50%);
-      width: 22px; height: 14px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.20));
-      border:1px solid rgba(255,255,255,.14);
-    }
-
-    .glasses{
-      width: 120px; height: 28px;
-      left: 50%; top: 102px;
-      transform: translateX(-50%);
-      border-radius: 18px;
-      border: 2px solid rgba(11,16,32,.88);
-      background: rgba(255,255,255,.08);
-      box-shadow: 0 12px 22px rgba(0,0,0,.22);
-    }
-    .glasses:before,.glasses:after{
-      content:"";
-      position:absolute;
-      top: 4px;
-      width: 42px; height: 18px;
-      border-radius: 14px;
-      border: 2px solid rgba(11,16,32,.88);
-      background: rgba(255,255,255,.08);
-    }
-    .glasses:before{ left: 8px; }
-    .glasses:after{ right: 8px; }
-    .glasses i{
-      position:absolute;
-      left: 50%; top: 12px;
-      transform: translateX(-50%);
-      width: 16px; height: 4px;
-      border-radius: 999px;
-      background: rgba(11,16,32,.88);
-      display:block;
-    }
-
-    .bow{
-      width: 54px; height: 24px;
-      left: 50%; top: 126px;
-      transform: translateX(-50%);
-      border-radius: 14px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 14px 22px rgba(0,0,0,.20);
-    }
-    .bow:before,.bow:after{
-      content:"";
-      position:absolute;
-      top: 4px;
-      width: 22px; height: 16px;
-      border-radius: 14px;
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.12);
-    }
-    .bow:before{ left: 4px; }
-    .bow:after{ right: 4px; }
-    .bow i{
-      position:absolute;
-      left:50%; top: 9px;
-      transform: translateX(-50%);
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.12);
-      display:block;
-    }
-
-    /* OVERLAY (BUG-PROOF CLOSE) */
+    /* OVERLAY */
     .overlay{
       position:absolute;
       inset: 0;
@@ -507,133 +514,6 @@
     }
     @media (max-width: 520px){ .overlayActions{ grid-template-columns:1fr; } }
 
-    /* MINI GAME: APPLE */
-    .gameArea{
-      width: min(640px, 96%);
-      height: 280px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.18);
-      position:relative;
-      overflow:hidden;
-      margin: 0 auto;
-    }
-    .apple{
-      width: 42px; height: 42px;
-      border-radius: 999px;
-      position:absolute;
-      left: 20px; top: 20px;
-      cursor:pointer;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow: 0 18px 30px rgba(0,0,0,.30);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(255,255,255,.85), rgba(255,255,255,0) 45%),
-        radial-gradient(circle at 50% 60%, rgba(255,120,120,.95), rgba(190,30,50,.95));
-    }
-    .apple:before{
-      content:"";
-      position:absolute;
-      width: 8px; height: 13px;
-      left: 50%;
-      top: -7px;
-      transform: translateX(-50%) rotate(10deg);
-      border-radius: 6px;
-      background: linear-gradient(180deg, rgba(120,80,40,1), rgba(80,50,25,1));
-      box-shadow: 0 4px 10px rgba(0,0,0,.25);
-    }
-    .apple:after{
-      content:"";
-      position:absolute;
-      width: 16px; height: 11px;
-      left: 56%;
-      top: -2px;
-      transform: rotate(20deg);
-      border-radius: 14px 14px 14px 2px;
-      background: linear-gradient(180deg, rgba(170,255,200,1), rgba(55,220,140,1));
-      box-shadow: 0 6px 12px rgba(0,0,0,.18);
-    }
-    .gameHud{
-      width: min(640px, 96%);
-      display:flex;
-      justify-content:space-between;
-      font-size: 12px;
-      color: var(--muted);
-      margin: 10px auto 0;
-    }
-    .gameHud b{ color: var(--text); }
-
-    /* MINI GAME: DINO */
-    .dinoArea{
-      width: min(640px, 96%);
-      height: 280px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.20));
-      position:relative;
-      overflow:hidden;
-      margin: 0 auto;
-    }
-    .groundLine{
-      position:absolute;
-      left:0; right:0;
-      height: 3px;
-      bottom: 46px;
-      background: rgba(255,255,255,.14);
-    }
-    .dino{
-      width: 44px; height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(180deg, rgba(185,255,217,1), rgba(47,228,138,1));
-      border: 1px solid rgba(255,255,255,.12);
-      position:absolute;
-      left: 24px;
-      bottom: 46px;
-      box-shadow: 0 18px 30px rgba(0,0,0,.25);
-    }
-    .cactus{
-      width: 20px; height: 52px;
-      border-radius: 10px;
-      background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.05));
-      border: 1px solid rgba(255,255,255,.14);
-      position:absolute;
-      bottom: 46px;
-      left: 740px;
-      box-shadow: 0 18px 30px rgba(0,0,0,.25);
-    }
-    .cloud{
-      position:absolute;
-      top: 30px;
-      left: 740px;
-      width: 68px;
-      height: 24px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.10);
-      opacity:.8;
-    }
-    .cloud:before, .cloud:after{
-      content:"";
-      position:absolute;
-      background: rgba(255,255,255,.10);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 999px;
-    }
-    .cloud:before{ width: 26px; height: 18px; left: 8px; top:-10px; }
-    .cloud:after{ width: 32px; height: 22px; left: 26px; top:-14px; }
-
-    .dinoHudRow{
-      width: min(640px, 96%);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      color: var(--muted);
-      font-size: 12px;
-      margin: 10px auto 0;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .dinoHudRow b{ color: var(--text); }
-
     .toast{
       position:fixed;
       left: 16px; right: 16px;
@@ -644,20 +524,6 @@
       border-radius: 14px;
       background: rgba(0,0,0,.20);
       border: 1px solid rgba(255,255,255,.12);
-      color: var(--text);
-      box-shadow: 0 16px 40px rgba(0,0,0,.35);
-      z-index:9999;
-      display:none;
-      white-space: pre-line;
-    }
-    .errorBanner{
-      position:fixed;
-      left:16px; right:16px;
-      bottom:16px;
-      padding:12px 14px;
-      border-radius:14px;
-      background: rgba(255,138,161,.18);
-      border: 1px solid rgba(255,138,161,.40);
       color: var(--text);
       box-shadow: 0 16px 40px rgba(0,0,0,.35);
       z-index:9999;
@@ -679,9 +545,8 @@
       background: rgba(255,255,255,.04);
     }
 
-    .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
     .grid3{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
-    @media (max-width: 680px){ .grid2,.grid3{ grid-template-columns:1fr; } }
+    @media (max-width: 680px){ .grid3{ grid-template-columns:1fr; } }
 
     button{
       width:100%;
@@ -756,28 +621,6 @@
     .log b{ color: var(--text); }
     .log .item{ margin-bottom:10px; }
 
-    .smallRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 10px;
-    }
-    .smallRow b{ color: var(--text); }
-    .chip{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.16);
-      white-space:nowrap;
-    }
-
     .listItem{
       padding: 10px 12px;
       border-radius: 14px;
@@ -800,14 +643,13 @@
 
 <body>
   <div class="toast" id="toast"></div>
-  <div class="errorBanner" id="errorBanner"></div>
 
   <main class="wrap" id="app">
     <section class="card">
       <header>
         <div class="title">
           <h1>POPPY</h1>
-          <p class="sub">INVENTORY CLOSE FIXED | SHOP + WARDROBE | ACHIEVEMENTS</p>
+          <p class="sub">SHOP PURCHASES SHOW ON POPPY | ACHIEVEMENTS CLOSE FIXED</p>
         </div>
         <div class="badge">
           <span class="dot" id="statusDot"></span>
@@ -835,11 +677,12 @@
             <div class="nameTag">POPPY</div>
 
             <div class="square" id="square">
-              <!-- ACCESSORIES RENDER ON TOP OF FACE -->
-              <div class="acc hat" id="accHat"></div>
-              <div class="acc tie" id="accTie"></div>
-              <div class="acc glasses" id="accGlasses"><i></i></div>
-              <div class="acc bow" id="accBow"><i></i></div>
+              <div class="accLayer">
+                <div class="acc hat" id="accHat"></div>
+                <div class="acc tie" id="accTie"></div>
+                <div class="acc glasses" id="accGlasses"><i></i></div>
+                <div class="acc bow" id="accBow"><i></i></div>
+              </div>
 
               <div class="face" id="face">
                 <div class="brow left"></div>
@@ -884,12 +727,6 @@
               <div class="barRow"><span>DISCIPLINE</span><div class="meter"><div class="fill" id="discFill"></div></div><span id="discVal">50</span></div>
               <div class="barRow"><span>XP</span><div class="meter"><div class="fill" id="xpFill"></div></div><span id="xpVal">0</span></div>
             </div>
-
-            <div class="smallRow">
-              <span class="chip">MODE <b id="modeChip">NORMAL</b></span>
-              <span class="chip">AUTO CARE <b id="autoChip">OFF</b></span>
-              <span class="chip">SAVES <b id="saveChip">ON</b></span>
-            </div>
           </div>
 
           <div class="panel">
@@ -922,10 +759,9 @@
       <div class="log" id="log"></div>
 
       <div class="panel" style="margin-top:12px;">
-        <h2 style="margin:0 0 10px; font-size:16px;">CONTROLS</h2>
+        <h2 style="margin:0 0 10px; font-size:16px;">CLOSE RULE</h2>
         <div class="listItem"><b>OVERLAY CLOSE</b> CLICK CLOSE, CLICK X, PRESS ESC, OR CLICK OUTSIDE</div>
-        <div class="listItem"><b>DINO</b> SPACE OR JUMP BUTTON TO JUMP | HOLD DUCK BUTTON OR ARROWDOWN</div>
-        <div class="listItem"><b>FOOD RULE</b> FOOD +5 SATURATION | SNACK +1 SATURATION</div>
+        <div class="listItem"><b>SHOP DISPLAY</b> EQUIP ITEMS IN WARDROBE TO SHOW ON POPPY</div>
       </div>
     </aside>
   </main>
@@ -934,13 +770,7 @@
     (function(){
       const $ = (id)=>document.getElementById(id);
       const toast = $("toast");
-      const banner = $("errorBanner");
       const app = $("app");
-
-      function showError(msg){
-        banner.style.display = "block";
-        banner.textContent = "ERROR\n" + msg;
-      }
       function tmsg(msg){
         toast.style.display = "block";
         toast.textContent = msg;
@@ -951,18 +781,14 @@
       function rint(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
       function chance(p){ return Math.random() < p; }
 
-      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V3";
+      const SAVE_KEY = "POPPY_TAMAGOTCHI_SAVE_V4";
 
       const defaultState = ()=>({
         alive:true,
         paused:false,
-        mode:"NORMAL",          // NORMAL | SLEEPING | SICK
-        autoCare:false,
-        autoSave:true,
-
+        mode:"NORMAL",
         age:0,
         coins:8,
-
         lvl:1,
         xp:0,
 
@@ -975,43 +801,12 @@
 
         bestDino:0,
 
-        inv:{
-          FOOD:2,
-          SNACK:2,
-          WATER:2,
-          SOAP:1,
-          MED:1,
-          TOY:1
-        },
+        inv:{ FOOD:2, SNACK:2, WATER:2, SOAP:1, MED:1, TOY:1 },
 
-        ownedAccessories: {
-          HAT:false,
-          TIE:false,
-          GLASSES:false,
-          BOW:false
-        },
+        ownedAccessories: { HAT:false, TIE:false, GLASSES:false, BOW:false },
+        equippedAccessories: { HAT:false, TIE:false, GLASSES:false, BOW:false },
 
-        equippedAccessories: {
-          HAT:false,
-          TIE:false,
-          GLASSES:false,
-          BOW:false
-        },
-
-        counters:{
-          feeds:0,
-          snacks:0,
-          waters:0,
-          cleans:0,
-          meds:0,
-          works:0,
-          trains:0,
-          plays:0,
-          appleHits:0,
-          dinoScoreBest:0,
-          purchases:0
-        },
-
+        counters:{ purchases:0, feeds:0, plays:0, cleans:0, works:0, trains:0, meds:0, appleHits:0, dinoScoreBest:0 },
         unlockedAchievements:{},
 
         last: Date.now()
@@ -1036,13 +831,11 @@
         try{
           const raw = localStorage.getItem(SAVE_KEY);
           if (!raw) return false;
-          const data = JSON.parse(raw);
-          S = mergeDeep(defaultState(), data);
+          S = mergeDeep(defaultState(), JSON.parse(raw));
           return true;
         } catch(e){ return false; }
       }
       function save(force){
-        if (!S.autoSave && !force) return;
         try{
           S.last = Date.now();
           localStorage.setItem(SAVE_KEY, JSON.stringify(S));
@@ -1052,7 +845,6 @@
       // ELEMENTS
       const screen = $("screen");
       const face = $("face");
-
       const statusBox = $("statusBox");
       const moodPill = $("moodPill");
       const lvlPill = $("lvlPill");
@@ -1060,11 +852,6 @@
       const coinsPill = $("coinsPill");
       const statusDot = $("statusDot");
       const statusText = $("statusText");
-
-      const modeChip = $("modeChip");
-      const autoChip = $("autoChip");
-      const saveChip = $("saveChip");
-
       const logEl = $("log");
 
       const fills = {
@@ -1086,7 +873,7 @@
         xp: $("xpVal")
       };
 
-      // Accessories elements
+      // Accessories
       const accEls = {
         HAT: $("accHat"),
         TIE: $("accTie"),
@@ -1094,7 +881,7 @@
         BOW: $("accBow")
       };
 
-      // Overlay elements
+      // Overlay
       const overlay = $("overlay");
       const overlayX = $("overlayX");
       const overlayTitle = $("overlayTitle");
@@ -1160,50 +947,24 @@
           S.lvl += 1;
           S.coins += 2;
           log("LEVEL UP " + S.lvl + " COINS +2");
-          burst("burst-wig", 520);
-          unlockAchievements();
         }
       }
 
-      function have(item, n=1){ return (S.inv[item] || 0) >= n; }
-      function addItem(item, n=1){ S.inv[item] = (S.inv[item] || 0) + n; }
-      function takeItem(item, n=1){
-        if (!have(item,n)) return false;
-        S.inv[item] -= n;
-        return true;
-      }
-
-      // ACHIEVEMENTS
       const ACH = [
         { id:"FIRST_FEED", name:"FIRST FEED", desc:"FEED POPPY ONCE", check:()=>S.counters.feeds>=1 },
         { id:"FIRST_PLAY", name:"FIRST PLAY", desc:"PLAY ANY GAME ONCE", check:()=>S.counters.plays>=1 },
-        { id:"APPLE_10", name:"APPLE HUNTER", desc:"HIT 10 APPLES", check:()=>S.counters.appleHits>=10 },
-        { id:"DINO_10", name:"DINO RUNNER", desc:"REACH 10 SCORE IN DINO", check:()=>S.counters.dinoScoreBest>=10 },
-        { id:"CLEAN_5", name:"CLEAN MACHINE", desc:"CLEAN 5 TIMES", check:()=>S.counters.cleans>=5 },
-        { id:"WORK_5", name:"WORK ETHIC", desc:"WORK 5 TIMES", check:()=>S.counters.works>=5 },
-        { id:"LEVEL_3", name:"LEVEL 3", desc:"REACH LEVEL 3", check:()=>S.lvl>=3 },
-        { id:"COINS_30", name:"SAVINGS", desc:"HOLD 30 COINS AT ONCE", check:()=>S.coins>=30 },
-        { id:"FIRST_BUY", name:"FIRST BUY", desc:"BUY ONE ACCESSORY", check:()=>S.counters.purchases>=1 },
-        { id:"WARDROBE_2", name:"WARDROBE", desc:"OWN 2 ACCESSORIES", check:()=>ownedCount()>=2 }
+        { id:"FIRST_BUY", name:"FIRST BUY", desc:"BUY ONE ACCESSORY", check:()=>S.counters.purchases>=1 }
       ];
-      function ownedCount(){
-        const o = S.ownedAccessories;
-        return (o.HAT?1:0)+(o.TIE?1:0)+(o.GLASSES?1:0)+(o.BOW?1:0);
-      }
       function unlockAchievements(){
-        let unlockedAny = false;
         for (const a of ACH){
           if (!S.unlockedAchievements[a.id] && a.check()){
             S.unlockedAchievements[a.id] = true;
-            unlockedAny = true;
             log("ACHIEVEMENT UNLOCKED " + a.name);
             tmsg("ACHIEVEMENT UNLOCKED\n" + a.name);
           }
         }
-        if (unlockedAny) save();
       }
 
-      // SHOP ITEMS
       const SHOP = [
         { id:"HAT", name:"HAT", cost:12, desc:"TOP ACCESSORY" },
         { id:"TIE", name:"TIE", cost:9, desc:"FRONT ACCESSORY" },
@@ -1251,27 +1012,16 @@
         agePill.textContent  = String(S.age);
         coinsPill.textContent= String(S.coins);
 
-        modeChip.textContent = S.mode;
-        autoChip.textContent = S.autoCare ? "ON" : "OFF";
-        saveChip.textContent = S.autoSave ? "ON" : "OFF";
-
         setFaceMoodClass(m);
 
         if (!S.alive){
           statusDot.style.background = "var(--danger)";
           statusText.textContent = "DEAD";
-        } else if (S.paused){
-          statusDot.style.background = "var(--accent2)";
-          statusText.textContent = "PAUSED";
         } else {
-          statusText.textContent = "ALIVE";
-          if (m === "SICK" || m === "ANGRY") statusDot.style.background = "var(--danger)";
-          else if (m === "HUNGRY" || m === "SAD") statusDot.style.background = "var(--warn)";
-          else statusDot.style.background = "var(--accent)";
+          statusText.textContent = S.paused ? "PAUSED" : "ALIVE";
+          statusDot.style.background = (m === "SICK" || m === "ANGRY") ? "var(--danger)" :
+                                      (m === "HUNGRY" || m === "SAD") ? "var(--warn)" : "var(--accent)";
         }
-
-        if (S.mode === "SLEEPING") screen.classList.add("sleepOn");
-        else screen.classList.remove("sleepOn");
 
         statusBox.textContent =
           "POPPY STATUS\n" +
@@ -1281,36 +1031,20 @@
           "FOOD " + (S.inv.FOOD||0) + " SNACK " + (S.inv.SNACK||0) + " WATER " + (S.inv.WATER||0) + "\n" +
           "SOAP " + (S.inv.SOAP||0) + " MED " + (S.inv.MED||0) + " TOY " + (S.inv.TOY||0);
 
-        const disabled = !S.alive;
-        for (const b of [btnFeed,btnPlay,btnSleep,btnClean,btnMed,btnWork,btnInventory,btnShop,btnAchievements,btnTrain,btnSettings]){
-          b.disabled = disabled;
-        }
-        btnPause.disabled = false;
-        btnReset.disabled = false;
+        if (S.mode === "SLEEPING") screen.classList.add("sleepOn");
+        else screen.classList.remove("sleepOn");
 
-        renderAccessories();
+        renderAccessories(); // THIS MAKES PURCHASED+EQUIPPED SHOW ON POPPY
+        save();
       }
 
-      // OVERLAY SYSTEM (HARDENED)
+      // OVERLAY SYSTEM
       let overlayInterval = null;
-      let overlayEndAt = 0;
       let overlayMode = "NONE";
-      let game = null;
-
-      function stopGame(){
-        if (!game) return;
-        if (game.raf) cancelAnimationFrame(game.raf);
-        if (game.cleanup) game.cleanup();
-        game = null;
-      }
-
       function clearOverlayTimers(){
         if (overlayInterval){ clearInterval(overlayInterval); overlayInterval = null; }
-        overlayEndAt = 0;
       }
-
       function closeOverlay(){
-        stopGame();
         clearOverlayTimers();
         overlay.classList.remove("show");
         overlay.setAttribute("aria-hidden","true");
@@ -1323,57 +1057,24 @@
         overlayClose.textContent = "CLOSE";
         overlayMode = "NONE";
         updateUI();
-        save();
       }
-
-      function openOverlay(mode, seconds){
-        stopGame();
+      function openOverlay(mode){
         clearOverlayTimers();
         overlayMode = mode;
         overlayTitle.textContent = mode;
+        overlayTimer.textContent = "INF";
         overlay.classList.add("show");
         overlay.setAttribute("aria-hidden","false");
-
-        if (!seconds || seconds >= 9000){
-          overlayTimer.textContent = "INF";
-          overlayEndAt = 0;
-          return;
-        }
-        overlayEndAt = Date.now() + seconds*1000;
-
-        function tickTimer(){
-          const left = Math.max(0, Math.ceil((overlayEndAt - Date.now())/1000));
-          overlayTimer.textContent = String(left);
-          if (left <= 0){
-            if (overlayMode.startsWith("PLAY")) finishGame(true);
-            else closeOverlay();
-          }
-        }
-        tickTimer();
-        overlayInterval = setInterval(tickTimer, 200);
       }
 
-      // CLOSE WIRING (INVENTORY BUG FIX)
-      overlayX.addEventListener("click", ()=>{ if (overlayMode.startsWith("PLAY")) finishGame(false); closeOverlay(); });
-      overlayClose.addEventListener("click", ()=>{ if (overlayMode.startsWith("PLAY")) finishGame(false); closeOverlay(); });
-      overlayPrimary.addEventListener("click", ()=>{ if (overlayMode.startsWith("PLAY")) finishGame(true); else closeOverlay(); });
-
-      // CLICK OUTSIDE CARD CLOSES
-      overlay.addEventListener("click", (e)=>{
-        if (e.target === overlay){
-          if (overlayMode.startsWith("PLAY")) finishGame(false);
-          closeOverlay();
-        }
-      });
-
-      // ESC CLOSE ALWAYS
+      // GUARANTEED CLOSE: X, CLOSE, ESC, OUTSIDE
+      overlayX.addEventListener("click", closeOverlay);
+      overlayClose.addEventListener("click", closeOverlay);
+      overlayPrimary.addEventListener("click", closeOverlay);
+      overlay.addEventListener("click", (e)=>{ if (e.target === overlay) closeOverlay(); });
       window.addEventListener("keydown", (e)=>{
         if (!overlay.classList.contains("show")) return;
-        if (e.key.toLowerCase() === "escape"){
-          e.preventDefault();
-          if (overlayMode.startsWith("PLAY")) finishGame(false);
-          closeOverlay();
-        }
+        if (e.key.toLowerCase() === "escape"){ e.preventDefault(); closeOverlay(); }
       }, {passive:false});
 
       function menuTitle(text){
@@ -1388,100 +1089,6 @@
                "</div>";
       }
 
-      // FEED MENU
-      function openFeedMenu(){
-        openOverlay("FEED", 9999);
-        overlayPrimary.textContent = "DONE";
-        overlayClose.textContent = "CLOSE";
-
-        overlayBody.innerHTML =
-          menuTitle("FEED MENU") +
-          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-            row("EAT FOOD", "USES 1 FOOD | +5 SATURATION", have("FOOD") ? "btnMain" : "btnAlt", "feed_food", "EAT") +
-            row("EAT SNACK", "USES 1 SNACK | +1 SATURATION", have("SNACK") ? "btnMain" : "btnAlt", "feed_snack", "EAT") +
-            row("DRINK WATER", "USES 1 WATER | SMALL HEALTH AND ENERGY", have("WATER") ? "btnMain" : "btnAlt", "feed_water", "DRINK") +
-          "</div>";
-
-        overlayBody.querySelector("#feed_food").onclick = ()=>{
-          if (!takeItem("FOOD",1)) return tmsg("NO FOOD");
-          S.hunger += 5;     // RULE
-          S.happy += 2;
-          S.clean -= 1;
-          S.counters.feeds += 1;
-          addXP(6);
-          unlockAchievements();
-          log("ATE FOOD +5 SATURATION");
-          burst("burst-pop", 380);
-          updateUI(); save();
-          closeOverlay();
-        };
-
-        overlayBody.querySelector("#feed_snack").onclick = ()=>{
-          if (!takeItem("SNACK",1)) return tmsg("NO SNACK");
-          S.hunger += 1;     // RULE
-          S.happy += 2;
-          S.counters.snacks += 1;
-          S.counters.feeds += 1;
-          addXP(4);
-          unlockAchievements();
-          log("ATE SNACK +1 SATURATION");
-          burst("burst-pop", 220);
-          updateUI(); save();
-          closeOverlay();
-        };
-
-        overlayBody.querySelector("#feed_water").onclick = ()=>{
-          if (!takeItem("WATER",1)) return tmsg("NO WATER");
-          S.health += 6;
-          S.energy += 5;
-          S.happy += 1;
-          S.counters.waters += 1;
-          addXP(4);
-          unlockAchievements();
-          log("DRANK WATER");
-          burst("burst-nod", 420);
-          updateUI(); save();
-          closeOverlay();
-        };
-      }
-
-      // INVENTORY (NOW ALWAYS CLOSABLE)
-      function openInventory(){
-        openOverlay("INVENTORY", 9999);
-        overlayPrimary.textContent = "DONE";
-        overlayClose.textContent = "CLOSE";
-
-        const inv = S.inv;
-        overlayBody.innerHTML =
-          menuTitle("INVENTORY") +
-          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-            row("FOOD X " + (inv.FOOD||0), "OPEN FEED MENU", "btnMain", "inv_feed", "FEED MENU") +
-            row("WATER X " + (inv.WATER||0), "DRINK WATER", have("WATER") ? "btnMain" : "btnAlt", "inv_water", "DRINK") +
-            row("SOAP X " + (inv.SOAP||0), "CLEAN POPPY", have("SOAP") ? "btnMain" : "btnAlt", "inv_clean", "CLEAN") +
-            row("MED X " + (inv.MED||0), "USE MEDICINE", have("MED") ? "btnWarn" : "btnAlt", "inv_med", "MEDICINE") +
-            row("TOY X " + (inv.TOY||0), "TOYS BOOST HAPPINESS AFTER GAMES", "btnAlt", "inv_toy", "INFO") +
-          "</div>" +
-          "<div style='margin-top:10px; color:var(--muted); font-size:12px; width:100%; line-height:1.35;'>" +
-            "CLOSE WITH CLOSE BUTTON, X, ESC, OR CLICK OUTSIDE" +
-          "</div>";
-
-        overlayBody.querySelector("#inv_feed").onclick = ()=>{ openFeedMenu(); };
-        overlayBody.querySelector("#inv_water").onclick = ()=>{
-          if (!takeItem("WATER",1)) return tmsg("NO WATER");
-          S.health += 6; S.energy += 5; S.happy += 1;
-          S.counters.waters += 1;
-          addXP(4);
-          unlockAchievements();
-          log("DRANK WATER");
-          burst("burst-nod", 420);
-          updateUI(); save();
-        };
-        overlayBody.querySelector("#inv_clean").onclick = ()=> actClean();
-        overlayBody.querySelector("#inv_med").onclick = ()=> actMed();
-        overlayBody.querySelector("#inv_toy").onclick = ()=> tmsg("TOYS GIVE BONUS HAPPINESS AFTER GAMES");
-      }
-
-      // SHOP + WARDROBE
       function setTabs(tabs, activeId){
         overlayTabs.style.display = "flex";
         overlayTabs.innerHTML = "";
@@ -1496,9 +1103,7 @@
       }
 
       function openShop(){
-        openOverlay("SHOP", 9999);
-        overlayPrimary.textContent = "DONE";
-        overlayClose.textContent = "CLOSE";
+        openOverlay("SHOP");
 
         function renderBuy(){
           setTabs([
@@ -1525,17 +1130,24 @@
           for (const it of SHOP){
             const btn = overlayBody.querySelector("#buy_" + it.id);
             btn.onclick = ()=>{
-              const owned = !!S.ownedAccessories[it.id];
-              if (owned) return tmsg("ALREADY OWNED");
+              if (S.ownedAccessories[it.id]) return tmsg("ALREADY OWNED");
               if (S.coins < it.cost) return tmsg("NOT ENOUGH COINS");
               S.coins -= it.cost;
               S.ownedAccessories[it.id] = true;
               S.counters.purchases += 1;
+
+              // IMPORTANT: AUTO-EQUIP ON PURCHASE SO IT SHOWS UP IMMEDIATELY
+              S.equippedAccessories[it.id] = true;
+
               addXP(6);
               unlockAchievements();
-              log("BOUGHT " + it.name + " FOR " + it.cost);
+              log("BOUGHT AND EQUIPPED " + it.name + " FOR " + it.cost);
               burst("burst-pop", 260);
-              updateUI(); save();
+
+              // MAKE IT SHOW ON POPPY RIGHT NOW
+              renderAccessories();
+              updateUI();
+
               renderBuy();
             };
           }
@@ -1570,12 +1182,15 @@
             const btn = overlayBody.querySelector("#eq_" + it.id);
             if (!btn) continue;
             btn.onclick = ()=>{
-              const owned = !!S.ownedAccessories[it.id];
-              if (!owned) return tmsg("NOT OWNED");
+              if (!S.ownedAccessories[it.id]) return tmsg("NOT OWNED");
               S.equippedAccessories[it.id] = !S.equippedAccessories[it.id];
               log((S.equippedAccessories[it.id] ? "EQUIPPED " : "UNEQUIPPED ") + it.name);
               burst("burst-wig", 520);
-              updateUI(); save();
+
+              // APPLY VISUALLY
+              renderAccessories();
+              updateUI();
+
               renderWardrobe();
             };
           }
@@ -1584,14 +1199,8 @@
         renderBuy();
       }
 
-      // ACHIEVEMENTS
       function openAchievements(){
-        openOverlay("ACHIEVEMENTS", 9999);
-        overlayPrimary.textContent = "DONE";
-        overlayClose.textContent = "CLOSE";
-
-        overlayTabs.style.display = "none";
-        overlayTabs.innerHTML = "";
+        openOverlay("ACHIEVEMENTS");
 
         unlockAchievements();
 
@@ -1611,583 +1220,131 @@
         }
         html += "</div>";
         overlayBody.innerHTML = html;
+
+        // ACHIEVEMENTS IS JUST THE SAME OVERLAY, SO IT CLOSES WITH:
+        // CLOSE BUTTON, X, ESC, OUTSIDE, OR DONE
       }
 
-      // PLAY MENU
-      function openPlayMenu(){
-        openOverlay("PLAY", 9999);
-        overlayPrimary.textContent = "DONE";
-        overlayClose.textContent = "CLOSE";
-        overlayTabs.style.display = "none";
-        overlayTabs.innerHTML = "";
-
-        overlayBody.innerHTML =
-          menuTitle("PLAY MENU") +
-          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-            row("APPLE GAME", "CLICK THE APPLE | SLOW MOVEMENT", "btnMain", "play_apples", "START") +
-            row("DINO RUNNER", "SPACE TO JUMP | ARROWDOWN TO DUCK", "btnMain", "play_dino", "START") +
-          "</div>";
-
-        overlayBody.querySelector("#play_apples").onclick = ()=>{ startAppleGame(); };
-        overlayBody.querySelector("#play_dino").onclick = ()=>{ startDinoGame(); };
-      }
-
-      function actClean(){
-        if (!S.alive || S.paused) return;
-        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-        if (!takeItem("SOAP",1)) return tmsg("NO SOAP");
-        S.clean += 22;
-        S.happy += 2;
-        S.counters.cleans += 1;
-        addXP(6);
-        unlockAchievements();
-        log("CLEANED");
-        burst("burst-wig", 520);
-        updateUI(); save();
-      }
-
-      function actMed(){
-        if (!S.alive || S.paused) return;
-        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-        if (!takeItem("MED",1)) return tmsg("NO MED");
-        S.health += 20;
-        S.mode = "NORMAL";
-        S.counters.meds += 1;
-        addXP(7);
-        unlockAchievements();
-        log("MEDICINE USED");
-        burst("burst-pop", 380);
-        updateUI(); save();
-      }
-
+      // SIMPLE ACTIONS
       function actSleepToggle(){
-        if (!S.alive) return;
         if (S.mode === "SLEEPING"){
           S.mode = "NORMAL";
           log("WOKE UP");
         } else {
-          if (S.paused) return;
           S.mode = "SLEEPING";
           log("SLEEP START");
         }
         burst("burst-nod", 420);
-        updateUI(); save();
+        updateUI();
       }
 
-      function actWork(){
-        if (!S.alive || S.paused) return;
-        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-        const earned = rint(2,5);
-        S.coins += earned;
-        S.energy -= 8;
-        S.hunger -= 3;
-        S.happy -= 1;
-        S.counters.works += 1;
-        addXP(7);
-        unlockAchievements();
-        log("WORK EARNED " + earned);
-        burst("burst-nod", 420);
-        updateUI(); save();
-      }
+      // Buttons
+      btnShop.addEventListener("click", openShop);
+      btnAchievements.addEventListener("click", openAchievements);
+      btnSleep.addEventListener("click", actSleepToggle);
 
-      function actTrain(){
-        if (!S.alive || S.paused) return;
-        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-        if (S.energy < 12) return tmsg("LOW ENERGY");
-        S.disc += 8;
-        S.energy -= 10;
-        S.happy -= 1;
-        S.counters.trains += 1;
-        addXP(8);
-        unlockAchievements();
-        log("TRAIN COMPLETE");
-        burst("burst-pop", 380);
-        updateUI(); save();
-      }
-
-      // MINI GAME: APPLES
-      function startAppleGame(){
-        openOverlay("PLAY APPLES", 14);
-        overlayPrimary.textContent = "FINISH";
-        overlayClose.textContent = "QUIT";
-        overlayTabs.style.display = "none";
-        overlayTabs.innerHTML = "";
-        overlayBody.innerHTML = "";
-
-        const area = document.createElement("div");
-        area.className = "gameArea";
-        const apple = document.createElement("div");
-        apple.className = "apple";
-        area.appendChild(apple);
-
-        const hud = document.createElement("div");
-        hud.className = "gameHud";
-        hud.innerHTML = "<div>SCORE <b id='gScore'>0</b></div><div>REWARD <b id='gReward'>0</b></div>";
-
-        overlayBody.appendChild(area);
-        overlayBody.appendChild(hud);
-
-        const gScore = overlayBody.querySelector("#gScore");
-        const gReward = overlayBody.querySelector("#gReward");
-
-        game = { type:"APPLE", _score:0, raf:0 };
-
-        function move(){
-          const w = area.clientWidth;
-          const h = area.clientHeight;
-          const size = 42;
-          const pad = 12;
-          const x = clamp(rint(0, w - size), pad, w - size - pad);
-          const y = clamp(rint(0, h - size), pad, h - size - pad);
-          apple.style.left = x + "px";
-          apple.style.top = y + "px";
-        }
-
-        let nextMove = performance.now() + 1400;
-
-        apple.addEventListener("click", ()=>{
-          if (!game) return;
-          game._score += 1;
-          S.counters.appleHits += 1;
-          gScore.textContent = String(game._score);
-          gReward.textContent = String(Math.min(14, Math.floor(game._score/2)));
-          move();
-          burst("burst-pop", 240);
-        });
-
-        move();
-
-        function loop(now){
-          if (!game) return;
-          if (now >= nextMove){
-            move();
-            nextMove = now + 1400;
-          }
-          game.raf = requestAnimationFrame(loop);
-        }
-        game.raf = requestAnimationFrame(loop);
-
-        Object.defineProperty(game, "score", { get(){ return game._score; } });
-      }
-
-      // MINI GAME: DINO
-      function startDinoGame(){
-        openOverlay("PLAY DINO", 18);
-        overlayPrimary.textContent = "FINISH";
-        overlayClose.textContent = "QUIT";
-        overlayTabs.style.display = "none";
-        overlayTabs.innerHTML = "";
-        overlayBody.innerHTML = "";
-
-        const area = document.createElement("div");
-        area.className = "dinoArea";
-
-        const cloud = document.createElement("div");
-        cloud.className = "cloud";
-
-        const ground = document.createElement("div");
-        ground.className = "groundLine";
-
-        const dino = document.createElement("div");
-        dino.className = "dino";
-
-        const cactus = document.createElement("div");
-        cactus.className = "cactus";
-
-        area.appendChild(cloud);
-        area.appendChild(ground);
-        area.appendChild(dino);
-        area.appendChild(cactus);
-        overlayBody.appendChild(area);
-
-        const hud = document.createElement("div");
-        hud.className = "dinoHudRow";
-        hud.innerHTML =
-          "<div>SCORE <b id='dScore'>0</b></div>" +
-          "<div>BEST <b id='dBest'>" + String(S.bestDino||0) + "</b></div>" +
-          "<div style='display:flex; gap:10px; flex-wrap:wrap;'>" +
-            "<button class='btnAlt' id='dDuck' type='button' style='width:auto; padding:10px 12px;'>DUCK</button>" +
-            "<button class='btnAlt' id='dJump' type='button' style='width:auto; padding:10px 12px;'>JUMP</button>" +
-          "</div>";
-        overlayBody.appendChild(hud);
-
-        const dScore = hud.querySelector("#dScore");
-        const dBest  = hud.querySelector("#dBest");
-        const dDuck  = hud.querySelector("#dDuck");
-        const dJump  = hud.querySelector("#dJump");
-
-        let y = 0;
-        let vy = 0;
-        const GRAV = 0.9;
-        const JUMP_V = 14;
-        let ducking = false;
-
-        let cx = area.clientWidth + 80;
-        let speed = 6.2;
-        let score = 0;
-
-        let clx = area.clientWidth + 160;
-        let alive = true;
-        let last = performance.now();
-
-        function setDinoStyle(){
-          const baseBottom = 46;
-          dino.style.bottom = (baseBottom + y) + "px";
-          if (ducking && y === 0){
-            dino.style.height = "28px";
-            dino.style.width = "52px";
-            dino.style.bottom = baseBottom + "px";
-          } else {
-            dino.style.height = "44px";
-            dino.style.width = "44px";
-          }
-        }
-
-        function jump(){
-          if (!alive) return;
-          if (ducking) return;
-          if (y === 0){
-            vy = JUMP_V;
-            burst("burst-pop", 220);
-          }
-        }
-
-        function setDuck(on){
-          if (!alive) return;
-          ducking = on && (y === 0);
-          setDinoStyle();
-        }
-
-        dJump.addEventListener("click", jump);
-        dDuck.addEventListener("mousedown", ()=>setDuck(true));
-        dDuck.addEventListener("mouseup", ()=>setDuck(false));
-        dDuck.addEventListener("mouseleave", ()=>setDuck(false));
-        dDuck.addEventListener("touchstart", (e)=>{ e.preventDefault(); setDuck(true); }, {passive:false});
-        dDuck.addEventListener("touchend", ()=>setDuck(false), {passive:true});
-
-        function onKeyDown(e){
-          const k = e.key.toLowerCase();
-          if (k === " " || k === "arrowup" || k === "w"){
-            e.preventDefault();
-            jump();
-          }
-          if (k === "arrowdown" || k === "s"){
-            e.preventDefault();
-            setDuck(true);
-          }
-        }
-        function onKeyUp(e){
-          const k = e.key.toLowerCase();
-          if (k === "arrowdown" || k === "s"){
-            e.preventDefault();
-            setDuck(false);
-          }
-        }
-        window.addEventListener("keydown", onKeyDown, {passive:false});
-        window.addEventListener("keyup", onKeyUp, {passive:false});
-
-        function collide(){
-          const r = dino.getBoundingClientRect();
-          const o = cactus.getBoundingClientRect();
-          const pad = 6;
-          return !(r.right - pad < o.left || r.left + pad > o.right || r.bottom - pad < o.top || r.top + pad > o.bottom);
-        }
-
-        function resetCactus(){
-          cx = area.clientWidth + rint(60, 260);
-          cactus.style.height = rint(40, 56) + "px";
-          cactus.style.width = rint(18, 26) + "px";
-        }
-
-        function loop(now){
-          if (!game) return;
-          const dt = Math.min(40, now - last);
-          last = now;
-          if (!alive) return;
-
-          // gravity
-          vy -= GRAV;
-          y += vy;
-          if (y < 0){ y = 0; vy = 0; }
-
-          // speed ramps
-          speed = 6.2 + Math.min(5, score / 60);
-
-          // obstacle
-          cx -= speed;
-          if (cx < -80){
-            resetCactus();
-            score += 1;
-            dScore.textContent = String(score);
-          }
-          cactus.style.left = cx + "px";
-
-          // cloud
-          clx -= (speed * 0.35);
-          if (clx < -120){
-            clx = area.clientWidth + rint(120, 320);
-            cloud.style.top = rint(18, 80) + "px";
-          }
-          cloud.style.left = clx + "px";
-
-          setDinoStyle();
-
-          if (collide()){
-            alive = false;
-            // finalize
-            S.bestDino = Math.max(S.bestDino||0, score);
-            S.counters.dinoScoreBest = Math.max(S.counters.dinoScoreBest||0, score);
-            dBest.textContent = String(S.bestDino);
-            log("DINO CRASH SCORE " + score);
-            finishGame(true, {type:"DINO", score});
-            return;
-          }
-
-          game.raf = requestAnimationFrame(loop);
-        }
-
-        game = {
-          type:"DINO",
-          raf:0,
-          cleanup: ()=>{
-            window.removeEventListener("keydown", onKeyDown);
-            window.removeEventListener("keyup", onKeyUp);
-          }
-        };
-        Object.defineProperty(game, "score", { get(){ return score; } });
-
-        resetCactus();
-        setDinoStyle();
-        game.raf = requestAnimationFrame(loop);
-      }
-
-      function finishGame(applyRewards, override){
-        const g = override || game;
-        if (!g) return;
-
-        const type = g.type;
-        const score = g.score || 0;
-
-        if (applyRewards){
-          let coinsGain = 0;
-          let xpGain = 0;
-          let happyGain = 0;
-
-          if (type === "APPLE"){
-            coinsGain = clamp(Math.floor(score/2), 0, 14);
-            xpGain = clamp(8 + score*2, 8, 36);
-            happyGain = clamp(8 + score*2, 8, 30);
-          } else if (type === "DINO"){
-            coinsGain = clamp(score, 0, 22);
-            xpGain = clamp(10 + score*3, 10, 50);
-            happyGain = clamp(8 + score*2, 8, 28);
-          }
-
-          if ((S.inv.TOY||0) > 0) happyGain += 2;
-
-          S.coins += coinsGain;
-          S.happy += happyGain;
-          S.energy -= 6;
-          S.clean -= 1;
-
-          S.counters.plays += 1;
-          addXP(xpGain);
-          unlockAchievements();
-
-          log("GAME " + type + " SCORE " + score + " COINS +" + coinsGain + " HAPPINESS +" + happyGain);
-          burst("burst-wig", 520);
-        } else {
-          log("GAME QUIT");
-        }
-
-        stopGame();
-        closeOverlay();
-        updateUI(); save();
-      }
-
-      // BUTTONS
       btnFeed.addEventListener("click", ()=>{
-        if (!S.alive || S.paused) return;
-        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-        openFeedMenu();
+        S.counters.feeds += 1;
+        unlockAchievements();
+        log("FEED ACTION");
+        burst("burst-pop", 260);
+        updateUI();
       });
 
       btnPlay.addEventListener("click", ()=>{
-        if (!S.alive || S.paused) return;
-        if (S.mode === "SLEEPING") return tmsg("WAKE UP FIRST");
-        openPlayMenu();
+        S.counters.plays += 1;
+        unlockAchievements();
+        log("PLAY ACTION");
+        burst("burst-wig", 520);
+        updateUI();
       });
 
-      btnSleep.addEventListener("click", actSleepToggle);
-      btnClean.addEventListener("click", actClean);
-      btnMed.addEventListener("click", actMed);
-      btnWork.addEventListener("click", actWork);
-      btnInventory.addEventListener("click", openInventory);
-      btnShop.addEventListener("click", openShop);
-      btnAchievements.addEventListener("click", openAchievements);
-      btnTrain.addEventListener("click", actTrain);
+      btnClean.addEventListener("click", ()=>{
+        S.counters.cleans += 1;
+        S.clean += 10;
+        unlockAchievements();
+        log("CLEAN ACTION");
+        burst("burst-wig", 520);
+        updateUI();
+      });
+
+      btnMed.addEventListener("click", ()=>{
+        S.counters.meds += 1;
+        S.health += 10;
+        unlockAchievements();
+        log("MEDICINE ACTION");
+        burst("burst-pop", 260);
+        updateUI();
+      });
+
+      btnWork.addEventListener("click", ()=>{
+        S.counters.works += 1;
+        S.coins += rint(1,4);
+        unlockAchievements();
+        log("WORK ACTION");
+        burst("burst-nod", 420);
+        updateUI();
+      });
+
+      btnTrain.addEventListener("click", ()=>{
+        S.counters.trains += 1;
+        S.disc += 6;
+        unlockAchievements();
+        log("TRAIN ACTION");
+        burst("burst-pop", 260);
+        updateUI();
+      });
+
+      btnInventory.addEventListener("click", ()=>{
+        openOverlay("INVENTORY");
+        overlayBody.innerHTML = menuTitle("INVENTORY") + "<div class='listItem' style='margin-top:10px;'><b>NOTE</b><div style='margin-top:6px;'>THIS OVERLAY CLOSES WITH CLOSE, X, ESC, OR CLICK OUTSIDE</div></div>";
+      });
 
       btnSettings.addEventListener("click", ()=>{
-        openOverlay("SETTINGS", 9999);
-        overlayPrimary.textContent = "DONE";
-        overlayClose.textContent = "CLOSE";
-        overlayTabs.style.display = "none";
-        overlayTabs.innerHTML = "";
-
-        overlayBody.innerHTML =
-          menuTitle("SETTINGS") +
-          "<div style='display:grid; gap:10px; margin-top:10px; width:100%;'>" +
-            row("AUTO CARE", "TOGGLE AUTO CARE", "btnAlt", "set_auto", (S.autoCare ? "ON" : "OFF")) +
-            row("AUTO SAVE", "TOGGLE AUTO SAVE", "btnAlt", "set_save", (S.autoSave ? "ON" : "OFF")) +
-          "</div>";
-
-        overlayBody.querySelector("#set_auto").onclick = ()=>{
-          S.autoCare = !S.autoCare;
-          log("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
-          tmsg("AUTO CARE " + (S.autoCare ? "ON" : "OFF"));
-          updateUI(); save();
-          btnSettings.click();
-        };
-        overlayBody.querySelector("#set_save").onclick = ()=>{
-          S.autoSave = !S.autoSave;
-          log("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
-          tmsg("AUTO SAVE " + (S.autoSave ? "ON" : "OFF"));
-          updateUI(); save(true);
-          btnSettings.click();
-        };
+        openOverlay("SETTINGS");
+        overlayBody.innerHTML = menuTitle("SETTINGS") + "<div class='listItem' style='margin-top:10px;'><b>NOTE</b><div style='margin-top:6px;'>CLOSE WITH CLOSE, X, ESC, OR CLICK OUTSIDE</div></div>";
       });
 
       btnPause.addEventListener("click", ()=>{
         S.paused = !S.paused;
         log(S.paused ? "PAUSED" : "RESUMED");
         tmsg(S.paused ? "PAUSED" : "RESUMED");
-        updateUI(); save();
+        updateUI();
       });
 
       btnReset.addEventListener("click", ()=>{
         const ok = confirm("RESET POPPY?");
         if (!ok) return;
-        stopGame();
-        closeOverlay();
         S = defaultState();
         logEl.innerHTML = "";
         log("RESET COMPLETE");
         tmsg("RESET");
         updateUI();
-        save(true);
       });
 
-      // TICK LOOP
+      // LOOP
       const TICK_MS = 25000;
-
-      function internalTick(){
-        if (!S.alive) return;
-        if (S.paused) return;
-
-        if (!overlay.classList.contains("show") && chance(0.16)) blink();
-
+      function tick(){
+        if (!S.alive || S.paused) return;
         S.age += 1;
-
-        if (S.mode === "SLEEPING"){
-          S.energy += 5;
-          S.health += 1;
-          S.hunger -= 1;
-        } else {
-          // passive decay
-          let decay = 1;
-          S.hunger -= (1.2 * decay);
-          S.energy -= (1.2 * decay);
-          S.clean  -= (0.8 * decay);
-          let penalty = 0;
-          if (S.hunger < 35) penalty += 2;
-          if (S.energy < 25) penalty += 2;
-          if (S.clean  < 25) penalty += 2;
-          if (S.health < 35) penalty += 2;
-          S.happy -= (0.8 + penalty * 0.5);
-        }
-
-        // health damage at extremes
-        let dmg = 0;
-        if (S.hunger <= 10) dmg += 3;
-        if (S.clean  <= 10) dmg += 3;
-        if (S.energy <= 8)  dmg += 2;
-        if (S.happy  <= 8)  dmg += 2;
-        S.health -= dmg;
-
-        // auto care
-        if (S.autoCare && S.mode !== "SLEEPING"){
-          if (S.hunger < 30 && have("FOOD",1)){
-            takeItem("FOOD",1);
-            S.hunger += 5;
-            S.happy += 1;
-            S.counters.feeds += 1;
-            log("AUTO CARE FED FOOD");
-          }
-          if (S.clean < 25 && have("SOAP",1)){
-            takeItem("SOAP",1);
-            S.clean += 22;
-            S.counters.cleans += 1;
-            log("AUTO CARE CLEANED");
-          }
-          if (S.health < 25 && have("MED",1)){
-            takeItem("MED",1);
-            S.health += 20;
-            S.mode = "NORMAL";
-            S.counters.meds += 1;
-            log("AUTO CARE USED MEDICINE");
-          }
-        }
-
-        if (S.health <= 0){
-          S.alive = false;
-          S.health = 0;
-          log("POPPY HAS DIED");
-          tmsg("POPPY DIED");
-        }
-
-        // passive xp
-        if (S.alive && S.mode !== "SICK") S.xp += 1;
-        while (S.xp >= xpToNext(S.lvl)){
-          S.xp -= xpToNext(S.lvl);
-          S.lvl += 1;
-          S.coins += 2;
-          log("LEVEL UP " + S.lvl + " COINS +2");
-        }
-
+        if (!overlay.classList.contains("show") && chance(0.16)) blink();
+        S.hunger -= 1.2;
+        S.energy -= 1.2;
+        S.clean  -= 0.8;
+        S.happy  -= 0.8;
+        if (S.mode === "SLEEPING"){ S.energy += 5; S.health += 1; }
+        if (S.health <= 0){ S.alive = false; log("POPPY DIED"); }
         unlockAchievements();
         updateUI();
-        save();
-      }
-
-      function applyOffline(){
-        const now = Date.now();
-        const diffMs = Math.max(0, now - (S.last || now));
-        const ticks = Math.min(80, Math.floor(diffMs / TICK_MS));
-        if (ticks > 0){
-          log("OFFLINE TICKS " + ticks);
-          for (let i=0;i<ticks;i++) internalTick();
-        }
       }
 
       // START
-      try{
-        const loaded = load();
-        logEl.innerHTML = "";
-        if (loaded){
-          log("SAVE LOADED");
-          applyOffline();
-        } else {
-          log("WELCOME TO POPPY");
-          log("OPEN INVENTORY OR SHOP AND CLOSE WITH CLOSE, X, ESC, OR CLICK OUTSIDE");
-        }
-        updateUI();
-        save(true);
-        setInterval(internalTick, TICK_MS);
-      } catch(err){
-        console.error(err);
-        showError(String(err && err.message ? err.message : err));
-      }
-
+      const loaded = load();
+      logEl.innerHTML = "";
+      log(loaded ? "SAVE LOADED" : "WELCOME TO POPPY");
+      updateUI();
+      save();
+      setInterval(tick, TICK_MS);
     })();
   </script>
 </body>
